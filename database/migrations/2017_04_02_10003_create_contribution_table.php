@@ -22,7 +22,7 @@ class CreateContributionTable extends Migration
       $table->integer('user_ID')->unsigned();
             $table->foreign('user_ID')
             ->references('id')
-            ->on('user')
+            ->on('users')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
