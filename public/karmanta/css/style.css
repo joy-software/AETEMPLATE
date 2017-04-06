@@ -4059,4 +4059,16 @@ span.customSelect.changed {
     color: #0b97c4;
 }
 
+#header-signup{
+    text-align: center;
+}
+
+#form-signup-title{
+    margin-left: 30px;
+    size: 2em;
+}
+
+#signup-submit > button,#signup-submit > a{
+    border-radius: 0px;
+}
 
