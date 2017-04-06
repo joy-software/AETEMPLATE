@@ -9,11 +9,22 @@ Website: http://geekslabs.com/
 @import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
 @import url(line-icons.css);
 
+
 #accueil, #groupes, #annuaire, #bibliotheque, #comptabilite, #administration{
     margin-top: 7px;
 }
 
+.login-form input[type="email"] {
+    border: none;
+    box-shadow: none;
+    font-size: 16px;
+    border-radius: 0;
+}
 
+.login-form a{
+
+    color: white;
+}
 
 .btnViewGroup{
     margin-top: 20px;
@@ -30,8 +41,9 @@ Website: http://geekslabs.com/
 #top_menu{
     display: none;
 }
-aside{
-    display: none;
+#sidebar{
+
+    left: -250px;
 }
 
 body {
@@ -40,13 +52,13 @@ body {
     font-family: 'Lato', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size:14px !important;    
+    font-size:14px !important;
 }
 h1,h2,h3,h4,h5{
     font-weight: 300;
 }
 label{
-    font-weight: 300;   
+    font-weight: 300;
 }
 ul li {
     list-style: none;
@@ -98,31 +110,31 @@ table tr th { color: #007AFF;}
     background-color: #f1f2f7;
 }
 .login-img-body{
-  background: url('../img/backgrounds/bg-1.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url('../img/backgrounds/bg-1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .login-img2-body{
-  background: url('../img/backgrounds/bg-6.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url('../img/backgrounds/bg-6.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .login-img3-body{
-  background: url('../img/backgrounds/bg-11.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url('../img/backgrounds/bg-11.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .login-form {
     max-width: 350px;
     margin: 200px auto 0;
-    background: #d5d7de;    
+    background: #d5d7de;
 }
 .login-img-body .login-form{
     max-width: 350px;
@@ -159,7 +171,7 @@ table tr th { color: #007AFF;}
     margin-bottom: 14px;
 }
 .login-form .checkbox {
-    font-weight: normal;    
+    font-weight: normal;
     font-weight: 300;
     font-family: 'Lato', sans-serif;
 }
@@ -177,7 +189,7 @@ table tr th { color: #007AFF;}
 }
 .login-form .login-img{
     font-size: 50px;
-    font-weight: 300;    
+    font-weight: 300;
 }
 .login-form .input-group{
     padding-bottom: 15px;
@@ -193,11 +205,11 @@ table tr th { color: #007AFF;}
     border: none;
     border-radius: 0;
 }
-.login-form input[type="text"], .login-form input[type="password"] {    
+.login-form input[type="text"], .login-form input[type="password"] {
     border: none;
     box-shadow: none;
     font-size: 16px;
-    border-radius: 0; 
+    border-radius: 0;
 }
 .login-form .btn{
     border-radius: 0;
@@ -262,13 +274,13 @@ table tr th { color: #007AFF;}
     background: #5193ea;
     margin-right: 22px;
     box-shadow: 0 4px #2775e2;
-	float:left;
+    float:left;
 }
 
 .login-social-link a.twitter {
     background: #44ccfe;
     box-shadow: 0 4px #2bb4e8;
-	float:left;
+    float:left;
 }
 /*Modal Content*/
 .modal-content{
@@ -351,7 +363,7 @@ ul.sidebar-menu li{
     /*margin-bottom: 5px;
     margin-left:10px;
     margin-right:10px;*/
-    
+
 }
 /*ul.sidebar-menu li:hover{
     border-bottom: 1px solid #007AFF;
@@ -395,14 +407,14 @@ ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;        
+    transition: all 0.3s ease;
 }
 ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
     border-bottom: 1px solid #007AFF;
 }
 /*ul.sidebar-menu li.active a,*/ ul.sidebar-menu .sub-menu li.active a{
-    border-bottom: 1px solid #007AFF;   
-}
+                                     border-bottom: 1px solid #007AFF;
+                                 }
 
 ul.sidebar-menu li a i {
     font-size: 18px;
@@ -429,10 +441,10 @@ ul.sidebar-menu li.active a i {
     margin-top: 6px;
     width: 0;
 }
-#sidebar ul > li > a .menu-arrow { 
-    float: right;    
+#sidebar ul > li > a .menu-arrow {
+    float: right;
     margin-right: 8px;
-    margin-top: 6px;    
+    margin-top: 6px;
 }
 #sidebar > ul > li > a .arrow.open {
     border-left: 4px solid transparent;
@@ -478,7 +490,7 @@ ul.sidebar-menu li.active a i {
     top: -10px;
 }
 .online-profile li a span i {
-    position: relative;    
+    position: relative;
     top: 10px;
 }
 /*chat-*/
@@ -489,7 +501,7 @@ ul.sidebar-menu li.active a i {
     top: -10px;
 }
 .chat-online-profile li a span i {
-    position: relative;    
+    position: relative;
     top: 10px;
 }
 .chat-online-profile li a{
@@ -534,7 +546,7 @@ ul.sidebar-menu li.active a i {
     z-index: 1002;
 }
 
-.white-bg {    
+.white-bg {
     background: rgba(255,255,255,0.9);
     border-bottom: 1px solid #f1f2f7;
 }
@@ -589,12 +601,12 @@ a.logo span {
 
 ul.top-menu > li > a {
     color: #8E8E93;
-    font-size: 18px;    
+    font-size: 18px;
     padding: 2px 6px;
     margin-right: 15px;
 }
 
-ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {    
+ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     background: transparent !important;
     color: #007AFF  !important;
 }
@@ -612,7 +624,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     background: #FF2D55;
     font-weight: 400;
 }
-.badge {    
+.badge {
     border-radius: 9px;
     min-width: 18px;
     height: 18px;
@@ -634,7 +646,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 .navbar-form{
     padding: 0px;
-    margin: 0 0 0 10px;    
+    margin: 0 0 0 10px;
 }
 
 .navbar-form .form-control{
@@ -642,7 +654,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     height: 30px;
     background: white url('../img/icons/search-line-icon.png') no-repeat 3px;
     padding-left: 24px;
-    margin-top: 1px;    
+    margin-top: 1px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -652,15 +664,15 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     };
 }
 /* bootstrape editor*/
- #editor {
+#editor {
     max-height: 250px;
     height: 250px;
     background-color: white;
-    border-collapse: separate; 
-    border: 1px solid rgb(204, 204, 204); 
-    padding: 4px; 
-    box-sizing: content-box; 
-    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+    border-collapse: separate;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 4px;
+    box-sizing: content-box;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
     box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
     border-top-right-radius: 3px; border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px; border-top-left-radius: 3px;
@@ -668,29 +680,29 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     outline: none;
 }
 #voiceBtn {
-  width: 20px;
-  color: transparent;
-  background-color: transparent;
-  transform: scale(2.0, 2.0);
-  -webkit-transform: scale(2.0, 2.0);
-  -moz-transform: scale(2.0, 2.0);
-  border: transparent;
-  cursor: pointer;
-  box-shadow: none;
-  -webkit-box-shadow: none;
+    width: 20px;
+    color: transparent;
+    background-color: transparent;
+    transform: scale(2.0, 2.0);
+    -webkit-transform: scale(2.0, 2.0);
+    -moz-transform: scale(2.0, 2.0);
+    border: transparent;
+    cursor: pointer;
+    box-shadow: none;
+    -webkit-box-shadow: none;
 }
 
 div[data-role="editor-toolbar"] {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .dropdown-menu.extended li p {
     background-color: #F1F2F7;
     color: #666666;
     margin: 0;
-    padding: 10px;    
+    padding: 10px;
 }
 
 .dropdown-menu.extended li p.green {
@@ -800,13 +812,13 @@ div[data-role="editor-toolbar"] {
     width: 100%;
 }
 .dropdown-menu.extended.logout > li.eborder-top {
-    border-top: 2px solid #007AFF !important;    
+    border-top: 2px solid #007AFF !important;
 }
 .dropdown-menu.extended.logout > li:last-child {
     float: left;
     text-align: left;
     width: 100%;
-    background: #007AFF;    
+    background: #007AFF;
 }
 
 .dropdown-menu.extended.logout > li:last-child > a, .dropdown-menu.extended.logout > li:last-child > a:hover {
@@ -864,7 +876,7 @@ div[data-role="editor-toolbar"] {
     margin-left: 10px;
 }
 
-.top-nav ul.top-menu > li > a:hover, .top-nav ul.top-menu > li > a:focus {    
+.top-nav ul.top-menu > li > a:hover, .top-nav ul.top-menu > li > a:focus {
     background: #F1F2F7;
 
 }
@@ -1023,7 +1035,7 @@ div[data-role="editor-toolbar"] {
 
 .state-overview .symbol {
     width: 30%;
-    padding: 25px 15px;    
+    padding: 25px 15px;
 }
 
 .state-overview .value {
@@ -1171,7 +1183,7 @@ div[data-role="editor-toolbar"] {
 /*---revenue----*/
 
 .revenue-head {
-    background: #007AFF;    
+    background: #007AFF;
     color: #fff;
     line-height: 50px;
     text-align: center;
@@ -1182,7 +1194,7 @@ div[data-role="editor-toolbar"] {
     text-align: left;
     line-height: normal;
     padding: 16px;
-    font-weight: 300;    
+    font-weight: 300;
 }
 
 .revenue-head span i {
@@ -1207,8 +1219,8 @@ div[data-role="editor-toolbar"] {
 /*easy pie chart*/
 
 .easy-pie-chart {
-   display: inline-block;
-   padding: 30px 0;
+    display: inline-block;
+    padding: 30px 0;
 }
 
 .chart-info, .chart-info .increase, .chart-info .decrease {
@@ -1255,7 +1267,7 @@ div[data-role="editor-toolbar"] {
     .panel-footer.revenue-foot {
         margin-bottom: -4px;
     };
-    }
+}
 
 
 .panel-footer.revenue-foot ul  {
@@ -1310,7 +1322,7 @@ div[data-role="editor-toolbar"] {
 /*Karmanta carousel model*/
 
 .flat-carousal {
-    background: #FF2D55;    
+    background: #FF2D55;
     padding: 10px;
     color: #fff;
     position: relative;
@@ -1464,11 +1476,11 @@ ul.ft-link li a i {
 }
 
 .post-highlight.yellow {
-    background: #FCB322;    
+    background: #FCB322;
 }
 
 .post-highlight.terques {
-    background: #007AFF;    
+    background: #007AFF;
 }
 
 .post-info h1 {
@@ -1602,14 +1614,14 @@ ul.ft-link li a i {
 
 /*profile-widget*/
 
-.profile-widget {    
+.profile-widget {
     color: #fff;
-    text-align: center;    
+    text-align: center;
 }
 
 /*profile-widget image bg*/
 .profile-widget-img{
-    background: url('../img/backgrounds/bg-11-small.jpg') no-repeat !important;    
+    background: url('../img/backgrounds/bg-11-small.jpg') no-repeat !important;
 }
 .profile-nav .profile-widget-img .bg-layer {
     background: rgba(0,0,0,0.5) !important;
@@ -1646,7 +1658,7 @@ ul.ft-link li a i {
 .follow-task a{
     color: #ffffff;
     width: 15%;
-    display: inline-block;            
+    display: inline-block;
 }
 .follow-task a span.badge{
     top: -12px;
@@ -1662,7 +1674,7 @@ ul.ft-link li a i {
 .profile-widget-foot {
     padding: 8px 5px 5px 5px;
     background: rgba(0,0,0,0.1);
-    color: #757575;    
+    color: #757575;
     font-weight: 300;
 }
 .profile-foot {
@@ -1725,7 +1737,7 @@ ul.ft-link li a i {
 }
 .profile-ava img.simple{
     border-radius: 50%;
-    -webkit-border-radius: 50%;    
+    -webkit-border-radius: 50%;
     border: 2px solid rgba(0,112,255,0.4);
     display: inline-block;
 }
@@ -1751,13 +1763,13 @@ ul.ft-link li a i {
 }
 .timeline-ava img{
     border-radius: 50%;
-   -webkit-border-radius: 50%;
+    -webkit-border-radius: 50%;
     width: 50px;
     height: 50px;
 }
 .profile-widget img {
-   border-radius: 50%;
-   -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
     width: 62px;
     height: 62px;
     /*display: inline-block;*/
@@ -1767,7 +1779,7 @@ ul.ft-link li a i {
 /*weather*/
 
 .weather-bg {
-    background: #34AADC;    
+    background: #34AADC;
     color: #fff;
     text-align: center;
     font-size: 16px;
@@ -1789,7 +1801,7 @@ ul.ft-link li a i {
 
 .weather-category {
     padding: 15px 0;
-    color: #ffffff;    
+    color: #ffffff;
 }
 .weather-info{
     background: #34AADC;
@@ -1818,7 +1830,7 @@ ul.ft-link li a i {
     font-weight: 300;
 }
 
-.weather-days{    
+.weather-days{
     color: #ffffff;
     background: #34AADC;
 }
@@ -1872,7 +1884,7 @@ ul.ft-link li a i {
 }
 /*weather widget 2*/
 .weather-bg-img {
-    background: url(../img/backgrounds/bg-14-small.jpg) no-repeat center center;    
+    background: url(../img/backgrounds/bg-14-small.jpg) no-repeat center center;
     color: #fff;
     text-shadow: 0px 1px 5px #8E8E93;
     text-align: center;
@@ -1978,15 +1990,15 @@ ul.ft-link li a i {
 
 .inbox-wrapper .inbox-left {
     width: 20%;
-    background: #e5e8ef;    
+    background: #e5e8ef;
 }
 .inbox-wrapper .inbox-middle {
     width: 25%;
-    background: #fff;    
+    background: #fff;
 }
 .inbox-wrapper .inbox-right {
     width: 65%;
-    background: #f5f5f5;    
+    background: #f5f5f5;
 }
 .inbox-wrapper .inbox-left .inbox-left-menu {
     background: #007AFF;
@@ -1996,13 +2008,13 @@ ul.ft-link li a i {
     color: #FCB322;
 }
 .inbox-wrapper .inbox-left .user-head {
-    background: rgba(0,0,0,0.2);    
+    background: rgba(0,0,0,0.2);
     padding: 10px;
     color: #fff;
     min-height: 80px;
 }
 .inbox-wrapper .inbox-middle .inbox-mail {
-    background: #007AFF;        
+    background: #007AFF;
     padding: 10px;
     color: #fff;
     min-height: 80px;
@@ -2047,7 +2059,7 @@ a.mail-dropdown {
 }
 
 .inbox-body {
-    padding: 20px;    
+    padding: 20px;
 }
 
 .btn-compose {
@@ -2082,7 +2094,7 @@ ul.mail-nav li {
 }
 
 ul.mail-nav li a  {
-    color: #6a6a6a;     
+    color: #6a6a6a;
     width: 100%;
     display: inline-block;
     padding: 0 20px;
@@ -2092,7 +2104,7 @@ ul.mail-nav .mail-info{
     font-size: 14px;
 }
 ul.mail-nav p{
-    font-size: 12px;   
+    font-size: 12px;
 }
 ul.mail-nav li:hover, ul.mail-nav li.active, ul.mail-nav li:focus  {
     color: #6a6a6a;
@@ -2108,7 +2120,7 @@ ul.mail-nav li a i {
 }
 
 ul.mail-nav li a span.label {
-   margin-top: 13px;
+    margin-top: 13px;
 }
 ul.inbox-nav  {
     display: inline-block;
@@ -2147,7 +2159,7 @@ ul.inbox-nav li a i {
 }
 
 ul.inbox-nav li a span.label {
-   margin-top: 13px;
+    margin-top: 13px;
 }
 
 ul.labels-info li h4 {
@@ -2160,7 +2172,7 @@ ul.labels-info li h4 {
 }
 
 ul.labels-info li  {
-   margin: 0;
+    margin: 0;
 }
 
 ul.labels-info li a {
@@ -2188,7 +2200,7 @@ ul.labels-info li a i {
     padding:10px;
     background: #007AFF;
     color: #fff;
-    border-bottom: 1px solid #D7D7D7;    
+    border-bottom: 1px solid #D7D7D7;
     min-height: 80px;
 }
 
@@ -2276,7 +2288,7 @@ ul.inbox-pagination li {
     background: #ffffff;
     color: #007AFF;
     border-radius: 0px !important;
-    -webkit-border-radius: 0px !important;    
+    -webkit-border-radius: 0px !important;
 }
 .inbox-pagination a.np-btn  {
     border: 1px solid #e7e7e7;
@@ -2340,67 +2352,67 @@ ul.inbox-pagination li {
 /*404 page*/
 
 .page-404{
-  position:relative;
-  width:350px;
-  height:200px;    
-  margin:100px auto;
-  text-align: center;
+    position:relative;
+    width:350px;
+    height:200px;
+    margin:100px auto;
+    text-align: center;
 }
 
-.text-404{    
-  font-size:138px;
-  background:#e9e3dd;
-  background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQTdWeWNteABnbzguiXSBxmfc8Z8nh_HHoWoK35QL81x4HnpVmgvQ');
-  background-repeat: no-repeat;
-  background-size: 200% 200%;
-  background-position: 100% 100%;
-  -webkit-animation: square 3s linear infinite;
-  -ms-animation: square 3s linear infinite;
-  animation: square 3s linear infinite;
-  -webkit-background-clip: text;
-  color:transparent;  
-  text-align:center;
-  line-height:200px;
-  position:relative;
+.text-404{
+    font-size:138px;
+    background:#e9e3dd;
+    background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQTdWeWNteABnbzguiXSBxmfc8Z8nh_HHoWoK35QL81x4HnpVmgvQ');
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+    background-position: 100% 100%;
+    -webkit-animation: square 3s linear infinite;
+    -ms-animation: square 3s linear infinite;
+    animation: square 3s linear infinite;
+    -webkit-background-clip: text;
+    color:transparent;
+    text-align:center;
+    line-height:200px;
+    position:relative;
 }
 
 .text-404:nth-of-type(2){
-  text-shadow:none;
-  z-index:2;
-  position:absolute;
-  top:-139px;
-  left:-1px;
+    text-shadow:none;
+    z-index:2;
+    position:absolute;
+    top:-139px;
+    left:-1px;
 }
 
 @-webkit-keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
+    0% { background-position: 0 0; }
+    25% { background-position: 100% 0; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0 100%; }
+    100% { background-position: 0 0; }
 }
 
 @-ms-keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
+    0% { background-position: 0 0; }
+    25% { background-position: 100% 0; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0 100%; }
+    100% { background-position: 0 0; }
 }
 
 @keyframes square {
-  0% { background-position: 0 0; }
-  25% { background-position: 100% 0; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
+    0% { background-position: 0 0; }
+    25% { background-position: 100% 0; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0 100%; }
+    100% { background-position: 0 0; }
 }
 
 /*profile*/
 
 .profile-nav .user-heading {
     background: #007AFF;
-    color: #fff;    
+    color: #fff;
     padding: 30px;
     text-align: center;
 }
@@ -2514,7 +2526,7 @@ ul.inbox-pagination li {
     text-align: center;
     font-style: italic;
     padding: 40px 110px;
-    
+
     font-size: 16px;
     font-weight: 300;
 }
@@ -2960,12 +2972,12 @@ ul.amounts li {
 }
 
 .tab-bg-primary {
-    background: #007AFF;    
+    background: #007AFF;
     border-bottom: none;
 }
 
 .tab-bg-info {
-    background: #34AADC;    
+    background: #34AADC;
     border-bottom: none;
 }
 .tab-bg-info.panel-heading .nav > li.active > a, .tab-bg-info.panel-heading .nav > li > a:hover{
@@ -3133,7 +3145,7 @@ ul.amounts li {
 
 .form-horizontal .checkbox-inline > input {
     margin-top: 1px;
-	border:none;
+    border:none;
 }
 
 
@@ -3158,7 +3170,7 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 }
 
 .checkbox, .checkbox:hover, .checkbox:focus  {
-	border:none;
+    border:none;
 }
 
 
@@ -3771,7 +3783,7 @@ table.sliders tr td {
     display: inline-block;
     margin-bottom: 10px;
     margin-top: 15px;
-    width: 100%;    
+    width: 100%;
 }
 
 .twt-category ul li, .profile-widget-data ul li,.profile-nav ul > li{
@@ -3811,7 +3823,7 @@ table.sliders tr td {
 }
 
 .p-thumb img {
-    width: 50px;    
+    width: 50px;
     border-radius: 3px;
     -webkit-border-radius: 3px;
 }
@@ -3976,7 +3988,7 @@ table.sliders tr td {
 }
 
 .messages-wrapper {
-  position: relative;
+    position: relative;
 }
 .message {
     border-radius: 20px 20px 20px 20px;
@@ -3996,7 +4008,7 @@ table.sliders tr td {
 }
 .message.to + .message.to,
 .message.from + .message.from {
-  margin-top: -7px;
+    margin-top: -7px;
 }
 .message:before {
     border-color: #2095FE;
@@ -4038,4 +4050,13 @@ span.customSelect.changed {
 .customSelectInner {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
+
+#signup-button{
+    color : white;
+}
+
+#signup-button:hover{
+    color: #0b97c4;
+}
+
 
