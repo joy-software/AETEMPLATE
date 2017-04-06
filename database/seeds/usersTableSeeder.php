@@ -18,7 +18,7 @@ class usersTableSeeder extends Seeder
         //DB::table('users')->delete();
 
         for($i = 0; $i < 10; $i++){
-           DB::table('users')->insert([
+         /*  DB::table('users')->insert([
                 'name'=> 'Nom'.$i,
                 'surname' =>'Surname'.$i,
                 'profession' => 'profession'.$i,
@@ -31,8 +31,8 @@ class usersTableSeeder extends Seeder
                 'photo'=> 'none'
             ]);//*/
 
-        }
-        $user = new users(/*[
+
+        $user = new users([
                 'name'=> 'Nom'.$i,
                 'surname' =>'Surname'.$i,
                 'profession' => 'profession'.$i,
@@ -43,9 +43,9 @@ class usersTableSeeder extends Seeder
                 'phone'=> 'phoneNumber'.$i,
                 'statut'=> rand(0,2),
                 'photo'=> 'none'
-            ]//*/);
+            ]);
         $user->save();
 
-
+        }
     }
 }

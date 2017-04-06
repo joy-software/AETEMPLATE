@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
 
         $this->call(usersTableSeeder::class);
         /*$this->call('filesTableSeeder');
@@ -24,6 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call('ballotTableSeeder');
         $this->call('propositionTableSeeder');
         */
-        Model::reguard();
+        //Model::reguard();
     }
 }
