@@ -25,7 +25,7 @@ class CreatePropositionTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
-           $table->integer('ballot_ID');
+           $table->integer('ballot_ID')->unsigned();
             $table->foreign('ballot_ID')
             ->references('id')
             ->on('ballot')
