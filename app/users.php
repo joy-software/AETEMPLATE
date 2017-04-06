@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -15,18 +16,28 @@ class users extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'surname',
+        'email',
+        'profession',
+        'email',
+        'password',
+        'promotion',
+        'country',
+        'phone',
+        'photo'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
+     * */
 
     protected $hidden = [
-        'password', 'remember_token',
+    'password', 'remember_token',
     ];
-     * */
 
     public function ads(){
         return $this->hasMany('App\ads', 'user_ID');
