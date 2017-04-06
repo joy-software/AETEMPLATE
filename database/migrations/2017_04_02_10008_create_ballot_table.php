@@ -20,14 +20,14 @@ class CreateBallotTable extends Migration
             $table->integer('status'); 
             $table->timestamps();
 
-            $table->integer('user_ID');
+            $table->integer('user_ID')->unsigned();
             $table->foreign('user_ID')
             ->references('id')
             ->on('users')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
-            $table->integer('group_ID');
+            $table->integer('group_ID')->unsigned();
             $table->foreign('group_ID')
             ->references('id')
             ->on('group')

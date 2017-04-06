@@ -20,7 +20,7 @@ class CreateGroupTable extends Migration
             
             $table->timestamps();
 
-            $table->integer('user_ID');
+            $table->integer('user_ID')->unsigned();
             $table->foreign('user_ID')
             ->references('id')
             ->on('users')

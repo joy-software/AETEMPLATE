@@ -17,14 +17,14 @@ class CreateAdsHasFilesTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-         $table->integer('ads_ID');
+         $table->integer('ads_ID')->unsigned();
          $table->foreign('ads_ID')
             ->references('id')
             ->on('ads')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
-        $table->integer('files_ID');
+        $table->integer('files_ID')->unsigned();
         $table->foreign('files_ID')
             ->references('id')
             ->on('files')
