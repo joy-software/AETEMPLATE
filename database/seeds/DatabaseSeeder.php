@@ -11,6 +11,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+
+        $this->call(usersTableSeeder::class);
+        /*$this->call('filesTableSeeder');
+        $this->call('periodTableSeeder');
+        $this->call('contributionTableSeeder');
+        $this->call('groupTableSeeder');
+        $this->call('usergroupTableSeeder');
+        $this->call('adsTableSeeder');
+        $this->call('ads_has_filesTableSeeder');
+        $this->call('ballotTableSeeder');
+        $this->call('propositionTableSeeder');
+        */
+        //Model::reguard();
     }
 }
