@@ -23,7 +23,7 @@ class CreateGroupTable extends Migration
             $table->integer('user_ID');
             $table->foreign('user_ID')
             ->references('id')
-            ->on('users')
+            ->on('user')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 

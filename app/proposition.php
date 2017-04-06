@@ -13,7 +13,7 @@ class proposition extends Model
      */
 
     public function users(){
-        return $this->belongsTo('App\users', 'user_ID');
+        return $this->belongsTo('App\User', 'user_ID');
     }
 
     public function ballot(){

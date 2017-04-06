@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\users;
+use App\User;
 
 class usersTableSeeder extends Seeder
 {
@@ -12,39 +12,26 @@ class usersTableSeeder extends Seeder
      */
     public function run()
     {
-       // DB::table('users')->delete();
+       // DB::table('user')->delete();
 
         $pays = array('cameroun', 'france','allemagne','usa');
-        //DB::table('users')->delete();
+        //DB::table('user')->delete();
 
         for($i = 0; $i < 10; $i++){
-         /*  DB::table('users')->insert([
-                'name'=> 'Nom'.$i,
-                'surname' =>'Surname'.$i,
-                'profession' => 'profession'.$i,
-                'email' => $i.'email@gmail.com',
-                'password'=> bcrypt('password'.$i),
-                'promotion'=> rand(1996, 2015),
-                'country'=> $pays[rand(0,3)],
-                'phone'=> 'phoneNumber'.$i,
-                'statut'=> rand(0,2),
-                'photo'=> 'none'
-            ]);//*/
 
-
-        $user = new users([
-                'name'=> 'Nom'.$i,
-                'surname' =>'Surname'.$i,
-                'profession' => 'profession'.$i,
-                'email' => $i.'email@gmail.com',
-                'password'=> bcrypt('password'.$i),
-                'promotion'=> rand(1996, 2015),
-                'country'=> $pays[rand(0,3)],
-                'phone'=> 'phoneNumber'.$i,
-                'statut'=> rand(0,2),
-                'photo'=> 'none'
-            ]);
-        $user->save();
+            $user = new User([
+                    'name'=> 'Nom'.$i,
+                    'surname' =>'Surname'.$i,
+                    'profession' => 'profession'.$i,
+                    'email' => $i.'email@gmail.com',
+                    'password'=> bcrypt('password'.$i),
+                    'promotion'=> rand(1996, 2015),
+                    'country'=> $pays[rand(0,3)],
+                    'phone'=> 'phoneNumber'.$i,
+                    'statut'=> rand(0,2),
+                    'photo'=> 'none'
+                ]);
+            $user->save();
 
         }
     }

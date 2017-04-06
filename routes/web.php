@@ -23,3 +23,5 @@ Route::get('/test', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/annuaire', 'AnnuaireController@index');

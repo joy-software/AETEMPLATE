@@ -3,120 +3,157 @@
 @section('content')
 
     <section class="wrapper">
-        <!--overview start-->
-        <div class="row state-overview">
-            <div class="col-lg-12">
-                <!--user profile info start-->
-                <section class="panel">
-                    <div class="profile-widget profile-widget-info">
-                        <div class="panel-body">
-                            <div class="col-lg-1 col-sm-1 profile-widget-name">
-                                <h4>John Smith</h4>
-                                <div class="follow-ava">
-                                    <img src="{{ asset('karmanta/img/profile-widget-avatar.jpg') }}" alt="">
-                                </div>
-                                <h6>Administrator</h6>
-                            </div>
-                            <div class="col-lg-8 col-sm-8 follow-info">
-                                <p>Bienvenue John, Ce qui s'est passé depuis la dernière fois.</p>
-                                <h6>
-                                    <span><i class="icon_clock_alt"></i>11:05 AM</span>
-                                    <span><i class="icon_calendar"></i>25.10.13</span>
-                                    <span><i class="icon_pin_alt"></i>NY</span>
-                                </h6>
-                            </div>
-                            <div class="weather-category twt-category">
-                                <ul>
-                                    <li class="active col-lg-3">
-                                        <h4>5</h4>
-                                        <i class="icon_close_alt2"></i> Evènements
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <h4>4</h4>
-                                        <i class="icon_check_alt2 "></i> Annonces
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <h4>1</h4>
-                                        <i class="icon_plus_alt2 "></i> Réunions
-                                    </li>
-                                    <li class="col-lg-3">
-                                        <h4>3</h4>
-                                        <i class="icon_plus_alt2 col-lg-3"></i> Demandes d'adhésion
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h3>Buttons</h3>
+
+                    </header>
+                    <div class="panel-body">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th><input class="form-control" placeholder="Rechercher quelqu'un" type="text"></th>
+                                <th>Large Button</th>
+                                <th>Small Button</th>
+                                <th>Disabled Button</th>
+                                <th>Button with Icon</th>
+                                <th>Split Button</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a class="btn btn-default" href="" title="Bootstrap 3 themes generator">Default</a></td>
+                                <td><a class="btn btn-default btn-lg" href="" title="Bootstrap 3 themes generator">Default</a></td>
+                                <td><a class="btn btn-default btn-sm" href="" title="Bootstrap 3 themes generator">Default</a></td>
+                                <td><a class="btn btn-default disabled" href="" title="Bootstrap 3 themes generator">Default</a></td>
+                                <td><a class="btn btn-default" href="" title="Bootstrap 3 themes generator">
+                                        <span class="icon_cloud-upload_alt"></span> Default</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="" title="Bootstrap 3 themes generator">Default</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-primary" href="" title="Bootstrap 3 themes generator">Primary</a></td>
+                                <td><a class="btn btn-primary btn-lg" href="" title="Bootstrap 3 themes generator">Primary</a></td>
+                                <td><a class="btn btn-primary btn-sm" href="" title="Bootstrap 3 themes generator">Primary</a></td>
+                                <td><a class="btn btn-primary disabled" href="" title="Bootstrap 3 themes generator">Primary</a></td>
+                                <td><a class="btn btn-primary" href="" title="Bootstrap 3 themes generator"><span class="icon_lightbulb_alt"></span> Primary</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="" title="Bootstrap 3 themes generator">Primary</a>
+                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-info" href="" title="Bootstrap 3 themes generator">Info</a></td>
+                                <td><a class="btn btn-info btn-lg" href="" title="Bootstrap 3 themes generator">Info</a></td>
+                                <td><a class="btn btn-info btn-sm" href="" title="Bootstrap 3 themes generator">Info</a></td>
+                                <td><a class="btn btn-info disabled" href="" title="Bootstrap 3 themes generator">Info</a></td>
+                                <td><a class="btn btn-info" href="" title="Bootstrap 3 themes generator"><span class="icon_house_alt"></span> Info</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-info" href="" title="Bootstrap 3 themes generator">Info</a>
+                                        <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-success" href="" title="Bootstrap 3 themes generator">Success</a></td>
+                                <td><a class="btn btn-success btn-lg" href="" title="Bootstrap 3 themes generator">Success</a></td>
+                                <td><a class="btn btn-success btn-sm" href="" title="Bootstrap 3 themes generator">Success</a></td>
+                                <td><a class="btn btn-success disabled" href="" title="Bootstrap 3 themes generator">Success</a></td>
+                                <td><a class="btn btn-success" href="" title="Bootstrap 3 themes generator"><span class="icon_mic_alt"></span> Success</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" href="" title="Bootstrap 3 themes generator">Success</a>
+                                        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-warning" href="" title="Bootstrap 3 themes generator">Warning</a></td>
+                                <td><a class="btn btn-warning btn-lg" href="" title="Bootstrap 3 themes generator">Warning</a></td>
+                                <td><a class="btn btn-warning btn-sm" href="" title="Bootstrap 3 themes generator">Warning</a></td>
+                                <td><a class="btn btn-warning disabled" href="" title="Bootstrap 3 themes generator">Warning</a></td>
+                                <td><a class="btn btn-warning" href="" title="Bootstrap 3 themes generator"><span class="icon_pin_alt"></span> Warning</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-warning" href="" title="Bootstrap 3 themes generator">Warning</a>
+                                        <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a class="btn btn-danger" href="" title="Bootstrap 3 themes generator">Danger</a></td>
+                                <td><a class="btn btn-danger btn-lg" href="" title="Bootstrap 3 themes generator">Danger</a></td>
+                                <td><a class="btn btn-danger btn-sm" href="" title="Bootstrap 3 themes generator">Danger</a></td>
+                                <td><a class="btn btn-danger disabled" href="" title="Bootstrap 3 themes generator">Danger</a></td>
+                                <td><a class="btn btn-danger" href="" title="Bootstrap 3 themes generator"><span class="icon_target"></span> Danger</a></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a class="btn btn-danger" href="" title="Bootstrap 3 themes generator">Danger</a>
+                                        <a class="btn btn-danger dropdown-toggle" data-toggle="dropdown" href="" title="Bootstrap 3 themes generator"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="" title="Bootstrap 3 themes generator">Action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Another action</a></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="" title="Bootstrap 3 themes generator">Separated link</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </section>
-                <!--user profile info end-->
             </div>
-            <!-- statics start -->
-            <div class="state col-lg-12">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">Promotion 96</div>
-                    <div class="panel-body">
-
-                        <div class="weather-category twt-category">
-                            <ul>
-                                <li class="active col-lg-3">
-                                    <h4>7</h4>
-                                    <i class="icon_close_alt2"></i> Evènements
-                                </li>
-                                <li class="col-lg-3">
-                                    <h4>0</h4>
-                                    <i class="icon_check_alt2 "></i> Annonces
-                                </li>
-
-                                <li class="col-lg-3">
-                                    <h4>1</h4>
-                                    <i class="icon_plus_alt2 col-lg-3"></i> Demandes d'adhésion
-                                </li>
-                                <li>
-                                    <button class="btn btn-primary btnViewGroup">Voir</button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Kangourou
-                    </div>
-                    <div class="panel-body">
-
-                        <div class="weather-category twt-category">
-                            <ul>
-                                <li class="active col-lg-3">
-                                    <h4>2</h4>
-                                    <i class="icon_close_alt2"></i> Evènements
-                                </li>
-                                <li class="col-lg-3">
-                                    <h4>3</h4>
-                                    <i class="icon_check_alt2 "></i> Annonces
-                                </li>
-
-                                <li class="col-lg-3">
-                                    <h4>0</h4>
-                                    <i class="icon_plus_alt2 col-lg-3"></i> Demandes d'adhésion
-                                </li>
-                                <li>
-                                    <button class="btn btn-primary btnViewGroup">Voir</button>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
+
+
 
 
     </section>

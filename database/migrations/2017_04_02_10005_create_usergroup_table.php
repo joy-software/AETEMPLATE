@@ -23,7 +23,7 @@ class CreateUsergroupTable extends Migration
              $table->integer('user_ID')->unsigned();
             $table->foreign('user_ID')
             ->references('id')
-            ->on('users')
+            ->on('user')
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
