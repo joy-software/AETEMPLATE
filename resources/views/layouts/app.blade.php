@@ -92,6 +92,8 @@
 <script src="{{ asset('karmanta/js/easy-pie-chart.js') }}"></script>
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
 
+@yield('script')
+
 <script>
 
     //knob
