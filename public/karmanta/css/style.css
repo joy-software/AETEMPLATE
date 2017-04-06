@@ -4069,6 +4069,10 @@ span.customSelect.changed {
 }
 
 #signup-submit > button,#signup-submit > a{
-    border-radius: 0px;
+    border-radius: 0;
+}
+
+#section-signup{
+    margin: 200px auto 0;
 }
 

@@ -33,7 +33,7 @@
 <div class="container">
 
 
-    <section class="panel">
+    <section class="panel" id="section-signup">
         <header class="panel-heading" id="header-signup" >
             <span><i class="icon_lock_alt"></i></span><span id="form-signup-title">INSCRIPTION</span>
 
@@ -127,12 +127,17 @@
 
 
                     <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                        <label for="password-confirm" class="control-label col-lg-2">Confirmer mot de passe</label>
 
-                        <div class="col-md-6">
+                        <div class="col-lg-10">
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                         </div>
                     </div>
+                    @if ($errors->has('password-confirm'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password-confirm') }}</strong>
+                        </span>
+                    @endif
 
 
 

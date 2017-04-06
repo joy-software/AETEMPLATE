@@ -30,7 +30,7 @@
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
 
-    @yield('css');
+    @yield('css')
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <script src="{{ asset('karmanta/js/html5shiv.js') }}"></script>
