@@ -43,8 +43,26 @@ $('#groupes').click(function(){
 });
 
 $('#annuaire').click(function(){
-    retractAsideEffectClick();
-    colorMenuEffectClick('#annuaire');
+
+    $.ajax({
+        url : '/annuaire',
+        type : 'GET',
+        dataType : 'html',
+        success : function(code_html, statut){
+            $('section .wrapper').html($(code_html).children('section').html());
+            colorMenuEffectClick('#annuaire');
+        },
+
+        error : function(resultat, statut, erreur){
+            $('#accueil').css('color', 'red');
+        },
+
+        complete : function(resultat, statut){
+            retractAsideEffectClick();
+        }
+    });
+
+
 });
 
 $('#bibliotheque').click(function(){
