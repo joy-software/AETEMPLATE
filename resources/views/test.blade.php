@@ -1,13 +1,13 @@
 
 @extends('layouts/app')
-<<<<<<< HEAD
+
 
 @section('css')
 
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
-=======
+
 @section('sideOption')
     @include('layouts/asideOption', [
 
@@ -59,7 +59,7 @@
         ]
     ])
     @endsection
->>>>>>> 44d00d1d317a6aacf70267661ce11c710fe8d0a4
+
 
 @section('content')
 
