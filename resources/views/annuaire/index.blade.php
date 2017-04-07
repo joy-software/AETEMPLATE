@@ -5,6 +5,13 @@
 
     <link href="{{ asset('css/annuaire.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
+
 @endsection
 
 @section('content')
@@ -29,6 +36,10 @@
                     <style>
                         #table_resultats_filter {
                             display : none;
+                        }
+
+                       table.dataTable thead .sorting:after {
+                            display: none !important;
                         }
                     </style>
 
@@ -109,15 +120,26 @@
 
                         <!--table id="table_resultats" class="table table-bordered table-responsive table-striped dataTable display"-->
 
-                         <table id="table_resultats" class="display" cellspacing="0" width="100%">
+                         <table id="table_resultats" class="table table-striped table-advance table-hover table-responsive "  style="width:90%; margin: auto !important;">
                             <thead>
                             <tr>
-                                <th> Photo</th>
+                                <th>
+                                    Photo
+                                </th>
+
                                 <th><i class="icon_calendar"></i> Promotion</th>
-                                <th><i class="icon_profile"></i> Noms</th>
-                                <th>Profession</th>
+
+                                <th>
+                                    <i class="icon_profile"></i>Noms
+                                </th>
+
+                                <th>Profession
+                                </th>
+
                                 <th><i class="icon_pin_alt"></i> Pays</th>
+
                                 <th><i class="icon_mobile"></i> Téléphone</th>
+
                                 <th><i class="icon_mail_alt"></i> Email</th>
 
                             </tr>
@@ -144,8 +166,6 @@
                 </section>
             </div>
         </div>
-
-
 
 
     </section>

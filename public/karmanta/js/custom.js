@@ -10,14 +10,19 @@ colorMenuEffectClick = function(idMenu){
 };
 
 retractAsideEffectClick = function(){
-    $('#sidebar').animate({'left': "-250px"}, 600, function(){$('#sidebar').css('display', 'none')});
-    $('#main-content').animate({'margin-left': "0px"}, 600, function(){});
+    $('#sidebar').css('display', 'none');
+    $('#sidebar').css('left', '-250px');
+    $('#main-content').css('margin-left', '0px');
+    //$('#sidebar').animate({'left': "-250px"}, 600, function(){$('#sidebar').css('display', 'none')});
+    //$('#main-content').animate({'margin-left': "0px"}, 600, function(){});
 };
 
 expandAsideEffectClick = function(){
     $('#sidebar').css('display', 'block');
-    $('#sidebar').animate({'left': "0px"}, 600, function(){} );
-    $('#main-content').animate({'margin-left': "250px"}, 600, function(){});
+    $('#sidebar').css('left', '0px');
+    $('#main-content').css('margin-left', '250px');
+    //$('#sidebar').animate({'left': "0px"}, 600, function(){} );
+    //$('#main-content').animate({'margin-left': "250px"}, 600, function(){});
 };
 
 slideLeft = function(selectorElement, pixel){
@@ -32,57 +37,44 @@ slideLeftFixed = function(selectorElement, value){
 /*
  * Actions performed after a click on the menu item
  */
+
 $('#accueil').click(function(){
-    retractAsideEffectClick();
-    colorMenuEffectClick('#accueil');
+    window.location.href = 'http://assovogt.org/test';
+
 });
 
 $('#groupes').click(function(){
-    expandAsideEffectClick();
-    colorMenuEffectClick('#groupes');
+    window.location.href = '#';
+
 });
 
 $('#annuaire').click(function(){
 
-    $.ajax({
-        url : '/annuaire',
-        type : 'GET',
-        dataType : 'html',
-        success : function(code_html, statut){
-            $('section .wrapper').html($(code_html).children('section').html());
-            colorMenuEffectClick('#annuaire');
-        },
-
-        error : function(resultat, statut, erreur){
-            $('#accueil').css('color', 'red');
-        },
-
-        complete : function(resultat, statut){
-            retractAsideEffectClick();
-        }
-    });
+    window.location.href = 'http://assovogt.org/annuaire';
 
 
 });
 
 $('#bibliotheque').click(function(){
-    expandAsideEffectClick();
-    colorMenuEffectClick('#bibliotheque');
+    window.location.href = '#';
+
 });
 
 $('#comptabilite').click(function(){
-    expandAsideEffectClick();
-    colorMenuEffectClick('#comptabilite');
+    window.location.href = '#';
+
 });
 
 $('#administration').click(function(){
-    expandAsideEffectClick();
-    colorMenuEffectClick('#administration');
+    window.location.href = '#';
+
 });
 
 /**
  * Actions performed after a click on logout link
  */
+
+
 
 $('#logout-link').click(function(event){
     event.preventDefault();

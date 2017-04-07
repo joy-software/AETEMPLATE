@@ -29,8 +29,8 @@
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/annuaire.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+
+
 
     @yield('css')
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
@@ -94,9 +94,6 @@
 <script src="{{ asset('karmanta/js/sparkline-chart.js') }}"></script>
 <script src="{{ asset('karmanta/js/easy-pie-chart.js') }}"></script>
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
-<script src="{{ asset('js/annuaire.js') }}"></script>
-<script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
 
 @yield('script')
 
