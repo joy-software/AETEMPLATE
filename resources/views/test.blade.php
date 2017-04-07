@@ -1,11 +1,65 @@
 
 @extends('layouts/app')
+<<<<<<< HEAD
 
 @section('css')
 
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
+=======
+@section('sideOption')
+    @include('layouts/asideOption', [
+
+                'classIconOption' => 'icon_house_alt',
+                'optionName' => 'Assemblée générale',
+                'retractable' => 'true',
+                'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
+                                 ['link' => 'javascript:', 'name' => 'Créer un évènement'],
+                                 ['link' => 'javascript:', 'name' => 'Créer une annonce'],
+                                 ['link' => 'javascript:', 'name' => 'Options']
+                ]
+
+            ])
+
+    @include('layouts/asideOption', [
+
+        'classIconOption' => 'icon_table',
+        'optionName' => 'Promotion 96',
+        'retractable' => 'true',
+        'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
+                         ['link' => 'javascript:', 'name' => 'Créer un évènement'],
+                         ['link' => 'javascript:', 'name' => 'Créer une annonce'],
+                         ['link' => 'javascript:', 'name' => 'Options']
+        ]
+
+    ])
+
+    @include('layouts/asideOption', [
+
+        'classIconOption' => 'icon_piechart',
+        'optionName' => 'Kongourou',
+        'retractable' => 'true',
+        'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
+                         ['link' => 'javascript:', 'name' => 'Créer un évènement'],
+                         ['link' => 'javascript:', 'name' => 'Créer une annonce'],
+                         ['link' => 'javascript:', 'name' => 'Options']
+        ]
+    ])
+
+    @include('layouts/asideOption', [
+
+        'classIconOption' => 'icon_documents_alt',
+        'optionName' => 'Rechercher0002 un groupe',
+        'retractable' => 'true',
+        'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
+                         ['link' => 'javascript:', 'name' => 'Créer un évènement'],
+                         ['link' => 'javascript:', 'name' => 'Créer une annonce'],
+                         ['link' => 'javascript:', 'name' => 'Options']
+        ]
+    ])
+    @endsection
+>>>>>>> 44d00d1d317a6aacf70267661ce11c710fe8d0a4
 
 @section('content')
 
