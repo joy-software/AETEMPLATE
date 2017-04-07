@@ -37,9 +37,9 @@
                         <div class="row col-md-offset-1 col-md-10 col-md-offset-1" >
 
                             <div class="col-md-3">
-                                <table  style="width: 90%;">
+                                <table  style="width: 90%; ">
                                     <thead>
-                                        <tr><td> Recherche globale </td></tr>
+                                        <tr><td><label>Recherche globale </label></td></tr>
                                     </thead>
                                     <tbody>
                                     <tr>
@@ -55,7 +55,7 @@
                                 <table style="width: 90%; ">
                                     <thead>
                                     <tr>
-                                        <td> par Promotion</td>
+                                        <td><label for="">Par Promotion</label> </td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +72,7 @@
 
                                 <table style="width: 90%;">
                                     <thead>
-                                    <tr><td>Par Profession</td></tr>
+                                    <tr><td><label for="">Par Profession</label> </td></tr>
                                     </thead>
                                     <tbody>
                                     <tr id="filter_col4" data-column="3">
@@ -87,7 +87,7 @@
                                 <table  style="width: 90%; ">
                                     <thead>
                                     <tr>
-                                        <td>Par Pays</td>
+                                        <td><label for="">Par Pays</label> </td>
                                     </tr>
                                     </thead>
 
