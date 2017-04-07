@@ -1,0 +1,22 @@
+.help-block{
+    margin: 40px 30px 0px 30px;
+    color: #b64c4c;
+}
+
+
+#header-signup{
+    text-align: center;
+}
+
+#form-signup-title{
+    margin-left: 30px;
+    size: 2em;
+}
+
+#signup-submit > button,#signup-submit > a{
+    border-radius: 0;
+}
+
+#section-signup{
+    margin: 200px 100px;
+}

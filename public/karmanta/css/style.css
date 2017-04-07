@@ -14,17 +14,7 @@ Website: http://geekslabs.com/
     margin-top: 7px;
 }
 
-.login-form input[type="email"] {
-    border: none;
-    box-shadow: none;
-    font-size: 16px;
-    border-radius: 0;
-}
 
-.login-form a{
-
-    color: white;
-}
 
 .btnViewGroup{
     margin-top: 20px;
@@ -4049,30 +4039,5 @@ span.customSelect.changed {
 }
 .customSelectInner {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
-}
-
-#signup-button{
-    color : white;
-}
-
-#signup-button:hover{
-    color: #0b97c4;
-}
-
-#header-signup{
-    text-align: center;
-}
-
-#form-signup-title{
-    margin-left: 30px;
-    size: 2em;
-}
-
-#signup-submit > button,#signup-submit > a{
-    border-radius: 0;
-}
-
-#section-signup{
-    margin: 200px auto 0;
 }
 
