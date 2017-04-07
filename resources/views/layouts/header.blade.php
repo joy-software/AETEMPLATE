@@ -28,7 +28,7 @@
 
             @include('layouts/menuItem', ['itemName' => 'accueil'])
             @include('layouts/menuItem', ['itemName' => 'groupes'])
-            @include('layouts/menuItem', ['itemName' => 'annuaire'])
+            @include('layouts/menuItem', ['itemName' => 'annuaire','link' => 'annuaire'])
             @include('layouts/menuItem', ['itemName' => 'bibliotheque'])
             @include('layouts/menuItem', ['itemName' => 'comptabilite'])
             @include('layouts/menuItem', ['itemName' => 'administration'])
