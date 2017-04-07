@@ -13,10 +13,23 @@ class AnnuaireController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $users = null;
+
     public function index()
     {
         $users =DB::table('users')->get();
-        return view('annuaire/index')->with('users',$users);
+       // $years = DB::table('users')->groupBy('promotion')->get();
+
+        $years = $users;
+        $this->users = $users;
+        return view('annuaire/index', ['users'=> $users, 'nom'=> $years]);
+    }
+
+
+    public function search($annees, $profession, $pays){
+        $users_filter = null;
+        return view('annuaire/search')->with('users_search',$users_filter);
     }
 
 

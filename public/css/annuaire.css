@@ -14,7 +14,9 @@
 .f1-5{
     font-size: 1.5em;
 }
-
+.f2{
+    font-size: 2em;
+}
 
 .center{
     text-align: center;
@@ -55,5 +57,11 @@
 }
 
 .img_profil{
-    height: 100px;
+    width: auto;
+    height: 15%;
+}
+
+table.dataTable thead .sorting:after {
+    /* opacity: 0.2; */
+    content: "\e150";
 }

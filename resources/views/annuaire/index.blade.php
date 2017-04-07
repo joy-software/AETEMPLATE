@@ -18,68 +18,98 @@
                     <header class="panel-heading">
                         <div class="row">
                             <div class="col-md-offset-3 col-md-6 col-md-offset-3 center">
-                                <label class="f1-5"> <small>Rechercher dans l'annuaire de promotvogt</small> </label>
+                                <label class="f2"> <small>Rechercher dans l'annuaire de promotvogt</small> </label>
+
                                 <br>
                             </div>
                         </div>
 
                     </header>
 
-                    <div id="div_search_ann" class="col-md-offset-1 col-md-10 col-md-offset-1" >
+                    <style>
+                        #table_resultats_filter {
+                            display : none;
+                        }
+                    </style>
 
+                    <div id="result_Search" class="panel-body" id="result_ann" >
 
-                        <div id="div_filter_search_an">
-                            <h3>Faire une recherche filtrée :</h3>
-                            <table class="table table-responsive">
-                                <tr>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Toutes les années</option>
-                                            <option>1996</option>
-                                            <option>1998</option>
-                                            <option>2001</option>
-                                            <option>1998</option>
-                                            <option>2009</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Toutes les professions</option>
-                                            <option>Informaticien</option>
-                                            <option>Médécin</option>
-                                            <option>Ingénieur Télécom</option>
-                                            <option>Millitaire</option>
-                                            <option>Policier</option>
-                                            <option>Enseignant</option>
-                                            <option>Artiste</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Tous les pays</option>
-                                            <option>Cameroun</option>
-                                            <option>Cote d'ivoire</option>
-                                            <option>Mali</option>
-                                            <option>Togo</option>
-                                            <option>Gabon</option>
-                                            <option>Congo Brazza</option>
-                                            <option>RDC</option>
-                                        </select>
+                        <div class="row col-md-offset-1 col-md-10 col-md-offset-1" >
 
-                                    </td>
-                                    <td>
-                                        <button id="btn-find-filter-an" class="btn btn-primary">Chercher</button>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="col-md-3">
+                                <table  style="width: 90%;">
+                                    <thead>
+                                        <tr><td> Recherche globale </td></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td id="filter_global">
+                                            <input type="text" class="global_filter form-control" id="global_filter">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-3">
+                                <table style="width: 90%; ">
+                                    <thead>
+                                    <tr>
+                                        <td> par Promotion</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id="filter_col2" data-column="1">
+                                        <td >
+                                            <input  type="text" class="column_filter form-control" id="col1_filter">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-3">
+
+                                <table style="width: 90%;">
+                                    <thead>
+                                    <tr><td>Par Profession</td></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id="filter_col4" data-column="3">
+                                        <td><input type="text" class="column_filter form-control" id="col3_filter"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <table  style="width: 90%; ">
+                                    <thead>
+                                    <tr>
+                                        <td>Par Pays</td>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr id="filter_col5" data-column="4">
+                                        <td>
+                                            <input type="text" class="column_filter form-control" id="col4_filter">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                            </div>
+
                         </div>
 
-                    </div>
-
-                    <div id="result_Search" class="panel-body" id="result_ann">
 
 
-                        <table id="table_resultats" class="table table-bordered table-striped">
+                        <!--table id="table_resultats" class="table table-bordered table-responsive table-striped dataTable display"-->
+
+                         <table id="table_resultats" class="display" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th> Photo</th>
