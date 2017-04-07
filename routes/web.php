@@ -28,4 +28,9 @@ Route::get('/annuaire', [
     'uses' => 'AnnuaireController@index'
 ]);
 
+Route::get('/files', [
+    'as' => 'files',
+    'uses' => 'filesController@index'
+]);
+
 Auth::routes();
