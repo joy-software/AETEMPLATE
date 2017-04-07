@@ -1,5 +1,12 @@
 
 @extends('layouts/app')
+
+@section('css')
+
+    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+
+@endsection
+
 @section('content')
 
     <section class="wrapper">

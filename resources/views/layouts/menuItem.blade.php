@@ -1,5 +1,5 @@
 <li id="{{ $itemName }}" class="active">
-    <a data-toggle="dropdown" class="" href="#">
+    <a data-toggle="dropdown" class="" href="{{ $link }}">
         <span class="welcome-label">
             @if ($itemName === 'accueil')
                 Accueil

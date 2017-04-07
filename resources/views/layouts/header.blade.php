@@ -26,12 +26,12 @@
         <ul class="nav pull-right top-menu">
 
 
-            @include('layouts/menuItem', ['itemName' => 'accueil'])
-            @include('layouts/menuItem', ['itemName' => 'groupes'])
-            @include('layouts/menuItem', ['itemName' => 'annuaire'])
-            @include('layouts/menuItem', ['itemName' => 'bibliotheque'])
-            @include('layouts/menuItem', ['itemName' => 'comptabilite'])
-            @include('layouts/menuItem', ['itemName' => 'administration'])
+            @include('layouts/menuItem', ['itemName' => 'accueil', 'link' => "/test" ])
+            @include('layouts/menuItem', ['itemName' => 'groupes', 'link' => "/test"])
+            @include('layouts/menuItem', ['itemName' => 'annuaire', 'link' => "/annuaire"])
+            @include('layouts/menuItem', ['itemName' => 'bibliotheque', 'link' => "/test"])
+            @include('layouts/menuItem', ['itemName' => 'comptabilite', 'link' => "/test"])
+            @include('layouts/menuItem', ['itemName' => 'administration', 'link' => "/test"])
 
 
             @include('layouts/menuNotification',

@@ -23,6 +23,9 @@ Route::get('/test', [
     'uses' => 'HomeController@index'
 ]);
 
-Route::get('/annuaire', 'AnnuaireController@index');
+Route::get('/annuaire', [
+    'as' => 'annuaire',
+    'uses' => 'AnnuaireController@index'
+]);
 
 Auth::routes();
