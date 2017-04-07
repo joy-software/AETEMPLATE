@@ -33,4 +33,9 @@ Route::get('/files', [
     'uses' => 'filesController@index'
 ]);
 
+Route::get('/profile', [
+    'as' => 'profile',
+    'uses' => 'HomeController@profile'
+]);
+
 Auth::routes();
