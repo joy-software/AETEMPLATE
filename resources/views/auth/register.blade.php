@@ -21,6 +21,7 @@
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/signup.css') }}" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
@@ -44,123 +45,145 @@
                     {{ csrf_field() }}
                     <div class="form-group ">
                         <label for="surname" class="control-label col-lg-2">Prénom <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class=" form-control" id="surname" name="surname" type="text" />
+                        <div class="col-lg-9">
+                            <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" />
                         </div>
-                    </div>
-                    @if ($errors->has('surname'))
-                        <span class="help-block">
+                        @if ($errors->has('surname'))
+                            <span class="help-block">
                             <strong>{{ $errors->first('surname') }}</strong>
-                        </span>
-                    @endif
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="form-group ">
                         <label for="name" class="control-label col-lg-2">Nom <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class=" form-control" id="name" name="name" type="text" />
+                        <div class="col-lg-9">
+                            <input class=" form-control" id="name" name="name" type="text" value="{{ old('name') }}" />
                         </div>
-                    </div>
-                    @if ($errors->has('name'))
-                        <span class="help-block">
+                        @if ($errors->has('name'))
+                            <span class="help-block">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
                     <div class="form-group ">
                         <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class="form-control " id="email" name="email" type="email" />
+                        <div class="col-lg-9">
+                            <input class="form-control " id="email" name="email" type="email" value="{{ old('email') }}" />
                         </div>
-                    </div>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
+                        @if ($errors->has('email'))
+                            <span class="help-block ">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
                     <div class="form-group ">
                         <label for="promotion" class="control-label col-lg-2">Promotion <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class="form-control " id="promotion" name="promotion" type="text" />
+                        <div class="col-lg-9">
+                            <input class="form-control " id="promotion" name="promotion" type="text"value="{{ old('promotion') }}" />
                         </div>
-                    </div>
-                    @if ($errors->has('promotion'))
-                        <span class="help-block">
+                        @if ($errors->has('promotion'))
+                            <span class="help-block">
                             <strong>{{ $errors->first('promotion') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
                     <div class="form-group ">
                         <label for="country" class="control-label col-lg-2">Pays <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class="form-control " id="country" name="country" type="text" />
+                        <div class="col-lg-9">
+                            <input class="form-control " id="country" name="country" type="text" value="{{ old('country') }}"/>
                         </div>
-                    </div>
-                    @if ($errors->has('country'))
-                        <span class="help-block">
+                        @if ($errors->has('country'))
+                            <span class="help-block">
                             <strong>{{ $errors->first('country') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="profession" class="control-label col-lg-2">Profession <span class="required">*</span></label>
+                        <div class="col-lg-9">
+                            <input class="form-control " id="profession" name="profession" type="text" value="{{ old('profession') }}"/>
+                        </div>
+                        @if ($errors->has('profession'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('profession') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+
 
                     <div class="form-group ">
                         <label for="phone" class="control-label col-lg-2">Telephone <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class="form-control " id="phone" name="phone" type="text" />
+                        <div class="col-lg-9">
+                            <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}"/>
                         </div>
-                    </div>
-                    @if ($errors->has('phone'))
-                        <span class="help-block">
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
                             <strong>{{ $errors->first('phone') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
 
                     <div class="form-group ">
                         <label for="password" class="control-label col-lg-2">Mot de passe <span class="required">*</span></label>
-                        <div class="col-lg-10">
-                            <input class="form-control " id="password" name="password" type="password" />
+                        <div class="col-lg-9">
+                            <input class="form-control " id="password" name="password" type="password" value="{{ old('password') }}"/>
                         </div>
-                    </div>
-                    @if ($errors->has('password'))
-                        <span class="help-block">
+                        @if ($errors->has('password'))
+
+                            <span class="help-block">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
-                    @endif
-
-
-
-
+                        @endif
+                    </div>
 
                     <div class="form-group">
-                        <label for="password-confirm" class="control-label col-lg-2">Confirmer mot de passe</label>
+                        <label for="password_confirmation" class="control-label col-lg-2">Confirmer mot de passe<span class="required">*</span></label>
 
-                        <div class="col-lg-10">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <div class="col-lg-9">
+                            <input id="password_confirmation" type="password" value="{{ old('password_confirmation') }}" class="form-control" name="password_confirmation" required>
                         </div>
-                    </div>
-                    @if ($errors->has('password-confirm'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password-confirm') }}</strong>
+                        @if ($errors->has('password_confirmation'))
+
+                            <span class="help-block">
+                            <strong>{{ $errors->first('password_confirmation') }}</strong>
                         </span>
-                    @endif
-
-
+                        @endif
+                    </div>
 
                     <div class="form-group ">
                         <label for="photo" class="control-label col-lg-2">Photo <span class="required">*</span></label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-9">
                             <input class="form-control " id="photo" name="photo" type="text" />
                         </div>
-                    </div>
-                    @if ($errors->has('photo'))
-                        <span class="help-block">
+                        @if ($errors->has('photo'))
+
+                            <span class="help-block">
                             <strong>{{ $errors->first('photo') }}</strong>
                         </span>
-                    @endif
+                        @endif
+                    </div>
+
 
                     <div class="form-group ">
                         <label for="agree" class="control-label col-lg-2 col-sm-3">Agree to Our Policy <span class="required">*</span></label>
-                        <div class="col-lg-10 col-sm-9">
+                        <div class="col-lg-9 col-sm-9">
                             <input  type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" />
                         </div>
+                        @if ($errors->has('agree'))
+
+                            <span class="help-block">
+                            <strong>{{ $errors->first('agree') }}</strong>
+                        </span>
+                        @endif
                     </div>
                     <div class="form-group" >
-                        <div class="col-lg-offset-2 col-lg-10" id="signup-submit">
+                        <div class="col-lg-offset-2 col-lg-9" id="signup-submit">
                             <button  class="btn btn-primary" type="submit">S'inscrire</button>
                             <a class="btn btn-default" type="button" href="{{ route('login') }}">Cancel</a>
                         </div>

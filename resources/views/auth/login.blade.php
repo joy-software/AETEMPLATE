@@ -21,6 +21,7 @@
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
