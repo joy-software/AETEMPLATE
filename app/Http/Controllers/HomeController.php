@@ -30,4 +30,9 @@ class HomeController extends Controller
     {
         return view('auth/lagin');
     }
+
+    public function profile(Request $request){
+
+        return view('profile/index');
+    }
 }

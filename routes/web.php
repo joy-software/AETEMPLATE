@@ -28,4 +28,14 @@ Route::get('/annuaire', [
     'uses' => 'AnnuaireController@index'
 ]);
 
+Route::get('/files', [
+    'as' => 'files',
+    'uses' => 'filesController@index'
+]);
+
+Route::get('/profile', [
+    'as' => 'profile',
+    'uses' => 'HomeController@profile'
+]);
+
 Auth::routes();
