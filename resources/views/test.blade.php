@@ -58,7 +58,7 @@
                          ['link' => 'javascript:', 'name' => 'Options']
         ]
     ])
-    @endsection
+@endsection
 
 
 @section('content')
