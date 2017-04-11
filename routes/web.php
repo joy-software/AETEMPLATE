@@ -130,3 +130,7 @@ Route::group(compact('middleware', 'prefix', 'as'), function () {
     Route::get('/demo', '\Unisharp\Laravelfilemanager\controllers\DemoController@index');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
