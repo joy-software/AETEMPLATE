@@ -8,14 +8,14 @@ return [
     */
 
     // Include to pre-defined routes from package or not. Middlewares
-    'use_package_routes' => true,
+    'use_package_routes' => false,
 
     // Middlewares which should be applied to all package routes.
     // For laravel 5.1 and before, remove 'web' from the array.
     'middlewares' => ['web','auth'],
 
     // The url to this package. Change it if necessary.
-    'prefix' => 'laravel-filemanager',
+    'prefix' => 'filemanager',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     */
 
     // If true, private folders will be created for each signed-in user.
-    'allow_multi_user' => true,
+    'allow_multi_user' => false,
     // If true, share folder will be created when allow_multi_user is true.
     'allow_share_folder' => true,
 
@@ -57,7 +57,7 @@ return [
     // The default display type for items.
     // Supported: "grid", "list"
     'images_startup_view' => 'grid',
-    'files_startup_view' => 'list',
+    'files_startup_view' => 'grid',
 
     /*
     |--------------------------------------------------------------------------

@@ -18,13 +18,7 @@
     <!--external css-->
     <!-- font icon -->
     <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('karmanta/assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
-    <!-- full calendar css-->
-    <link href="{{ asset('karmanta/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css') }}" rel="stylesheet" />
-    <!-- easy pie chart-->
-    <link href="{{ asset('karmanta/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css') }}" rel="stylesheet" type="text/css" media="screen"/>
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="{{ asset('karmanta/css/owl.carousel.css') }}" type="text/css">
+
 
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet">
@@ -39,13 +33,16 @@
     <script src="{{ asset('karmanta/js/respond.min.js') }}"></script>
     <script src="{{ asset('karmanta/js/lte-ie7.js') }}"></script>
 
-    <script>
-        window.Laravel = {!! json_encode([
-                    'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
+
+
     <![endif]-->
+
+    <script>
+    window.Laravel = {!! json_encode([
+                    'csrfToken' => csrf_token(),
+        ]) !!};</script>
 </head>
+
 
 <body>
 <!-- container section start -->
@@ -58,7 +55,7 @@
 
     <!--sidebar start-->
 
-@include('layouts/aside')
+
 <!--sidebar end-->
 
     <!--main content start-->
@@ -69,33 +66,18 @@
 <!-- container section start -->
 
 <!-- javascripts -->
-<script src="{{ asset('karmanta/js/jquery.js') }}"></script>
-<script src="{{ asset('karmanta/js/jquery-1.8.3.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('karmanta/js/jquery-ui-1.9.2.custom.min.js') }}"></script>
-<!-- bootstrap -->
-<script src="{{ asset('karmanta/js/bootstrap.min.js') }}"></script>
+
 <!-- nice scroll -->
-<script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
-<script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
-<!-- charts scripts -->
-<script src="{{ asset('karmanta/assets/jquery-knob/js/jquery.knob.js') }}"></script>
-<script src="{{ asset('karmanta/js/jquery.sparkline.js') }}" type="text/javascript"></script>
-<script src="{{ asset('karmanta/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js') }}"></script>
-<script src="{{ asset('karmanta/js/owl.carousel.js') }}" ></script>
-<!-- jQuery full calendar -->
-<script src="{{ asset('karmanta/assets/fullcalendar/fullcalendar/fullcalendar.min.js') }}"></script>
-<!--script for this page only-->
-<!--script src="{{ asset('karmanta/js/calendar-custom.js') }}"></script-->
-<!-- custom select -->
-<!--script src="{{-- asset('karmanta/js/jquery.customSelect.min.js') --}}" ></script-->
-<!--custome script for all page-->
-<!--script src="{{-- asset('karmanta/js/scripts.js') --}}"></script>
-<!-- custom script for this page-->
-<!--script src="{{-- asset('karmanta/js/sparkline-chart.js') --}}"></script!-->
-<!--script src="{{-- //asset('karmanta/js/easy-pie-chart.js') --}}"></script-->
-<script src="{{ asset('karmanta/js/custom.js') }}"></script>
+
+
 
 @yield('script')
+
+<script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
+<script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}"></script>
+<script src="{{ asset('karmanta/js/scripts.js') }}"></script>
+
+<script src="{{ asset('karmanta/js/custom.js') }}"></script>
 
 <script>
 
