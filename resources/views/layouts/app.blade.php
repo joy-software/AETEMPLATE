@@ -8,7 +8,7 @@
     <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="{{ asset('karmanta/img/favicon.png') }}">
 
-    <title>Karmanta - Bootstrap 3 Responsive Admin Template</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap CSS -->
 
