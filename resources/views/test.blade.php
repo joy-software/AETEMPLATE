@@ -14,6 +14,7 @@
                 'classIconOption' => 'icon_house_alt',
                 'optionName' => 'Assemblée générale',
                 'retractable' => 'true',
+                'link' => 'http://polytechnique.cm',
                 'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
                                  ['link' => 'javascript:', 'name' => 'Créer un évènement'],
                                  ['link' => 'javascript:', 'name' => 'Créer une annonce'],
@@ -27,6 +28,7 @@
         'classIconOption' => 'icon_table',
         'optionName' => 'Promotion 96',
         'retractable' => 'true',
+        'link' => 'javascript:',
         'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
                          ['link' => 'javascript:', 'name' => 'Créer un évènement'],
                          ['link' => 'javascript:', 'name' => 'Créer une annonce'],
@@ -39,6 +41,7 @@
 
         'classIconOption' => 'icon_piechart',
         'optionName' => 'Kongourou',
+        'link' => 'javascript:',
         'retractable' => 'true',
         'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
                          ['link' => 'javascript:', 'name' => 'Créer un évènement'],
@@ -50,7 +53,8 @@
     @include('layouts/asideOption', [
 
         'classIconOption' => 'icon_documents_alt',
-        'optionName' => 'Rechercher0002 un groupe',
+        'optionName' => 'Rechercher un groupe',
+        'link' => 'javascript:',
         'retractable' => 'true',
         'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
                          ['link' => 'javascript:', 'name' => 'Créer un évènement'],
