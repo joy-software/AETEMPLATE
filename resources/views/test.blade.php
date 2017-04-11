@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -14,7 +14,7 @@
                 'classIconOption' => 'icon_house_alt',
                 'optionName' => 'Assemblée générale',
                 'retractable' => 'true',
-                'link' => 'http://polytechnique.cm',
+                'link' => url('profile'),
                 'subOptions' => [['link' => 'javascript:', 'name' => 'Voir les membres'],
                                  ['link' => 'javascript:', 'name' => 'Créer un évènement'],
                                  ['link' => 'javascript:', 'name' => 'Créer une annonce'],

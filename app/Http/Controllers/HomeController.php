@@ -30,4 +30,9 @@ class HomeController extends Controller
 
         return view('profile/index');
     }
+
+    public function tester(Request $request){
+
+        return view('test/testIndex');
+    }
 }

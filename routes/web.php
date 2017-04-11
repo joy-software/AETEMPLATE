@@ -38,6 +38,21 @@ Route::get('/', [
     'uses' => 'HomeController@auth'
 ]);
 
+Route::post('/editProfile', [
+    'as' => 'editProfile',
+    'uses' => 'UserController@editProfile'
+]);
+
+Route::post('/editCredential', [
+    'as' => 'editCredential',
+    'uses' => 'UserController@editCredential'
+]);
+
+Route::get('/tester', [
+    'as' => 'tester',
+    'uses' => 'HomeController@tester'
+]);
+
 
 Auth::routes();
 

@@ -3,6 +3,7 @@
 @section('css')
 
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -61,7 +62,7 @@
                         <header class="panel-heading tab-bg-info">
                             <ul class="nav nav-tabs">
 
-                                <li>
+                                <li class="active">
                                     <a data-toggle="tab" href="#profile">
                                         <i class="icon-user"></i>
                                         Profile
@@ -71,6 +72,12 @@
                                     <a data-toggle="tab" href="#edit-profile">
                                         <i class="icon-envelope"></i>
                                         Edit Profile
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#edit-credential">
+                                        <i class="icon-envelope"></i>
+                                        Edit Credential
                                     </a>
                                 </li>
                             </ul>
@@ -85,32 +92,66 @@
                                         </div>
                                         <div class="panel-body bio-graph-info">
                                             <h1>Bio Graph</h1>
+                                            @if(\Illuminate\Support\Facades\Session::has('success'))
+                                                <div class="alert alert-success"> {{ Session::get('success') }} </div>
+                                            @endif
                                             <div class="row">
                                                 <div class="bio-row">
-                                                    <p><span>First Name </span>: Jonathan</p>
+                                                    <p><span>Prénom </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->surname }}
+                                                        @endif
+                                                    </p>
                                                 </div>
                                                 <div class="bio-row">
-                                                    <p><span>Last Name </span>: Smith</p>
+                                                    <p><span>Nom </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->name }}
+                                                        @endif
+                                                    </p>
                                                 </div>
                                                 <div class="bio-row">
-                                                    <p><span>Birthday</span>: 18 June 1990</p>
+                                                    <p><span>Email</span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->email }}
+                                                        @endif
+                                                    </p>
                                                 </div>
+
                                                 <div class="bio-row">
-                                                    <p><span>Country </span>: Los Angeles</p>
+                                                    <p><span>Telephone </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->phone }}
+                                                        @endif
+                                                    </p>
                                                 </div>
+
                                                 <div class="bio-row">
-                                                    <p><span>Occupation </span>: UI Designer</p>
+                                                    <p><span>Promotion </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->promotion }}
+                                                        @endif
+                                                    </p>
                                                 </div>
+
                                                 <div class="bio-row">
-                                                    <p><span>Email </span>: johnf@karmanta.com</p>
+                                                    <p><span>Profession </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->profession }}
+                                                        @endif
+                                                    </p>
                                                 </div>
+
                                                 <div class="bio-row">
-                                                    <p><span>Mobile </span>: (08) 564 789</p>
+                                                    <p><span>Pays </span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ \Illuminate\Support\Facades\Auth::user()->country }}
+                                                        @endif
+                                                    </p>
                                                 </div>
-                                                <div class="bio-row">
-                                                    <p><span>Phone </span>:  (+91) 90164 18808</p>
-                                                </div>
+
                                             </div>
+
                                         </div>
                                     </section>
                                     <section>
@@ -123,68 +164,151 @@
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
                                             <h1> Profile Info</h1>
-                                            <form class="form-horizontal" role="form">
+                                            <form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}">
+                                                {{ csrf_field() }}
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">First Name</label>
+                                                    <label class="col-lg-2 control-label">Prénom</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="f-name" placeholder=" ">
+                                                        <input type="text" class="form-control"  placeholder=" " name="surname" @if(\Illuminate\Support\Facades\Auth::check())
+                                                        {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->surname)  }}@endif>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Last Name</label>
+                                                    <label class="col-lg-2 control-label">Nom</label>
                                                     <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="l-name" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">About Me</label>
-                                                    <div class="col-lg-10">
-                                                        <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Country</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="c-name" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Birthday</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="b-day" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Occupation</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="occupation" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Email</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="email" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Mobile</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="mobile" placeholder=" ">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Website URL</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
+                                                        <input type="text" class="form-control" id="name" placeholder=" " name="name" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->name)  }}@endif>
                                                     </div>
                                                 </div>
 
+
                                                 <div class="form-group">
-                                                    <div class="col-lg-offset-2 col-lg-10">
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                        <button type="button" class="btn btn-danger">Cancel</button>
+                                                    <label class="col-lg-2 control-label">Telephone</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="phone" placeholder=" " name="phone" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->phone)  }}@endif>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Promotion</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="promotion" placeholder=" " name="promotion" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->promotion)  }}@endif>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Pays</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="country" placeholder=" " name="country" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->country)  }}@endif>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Profession</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="profession" placeholder=" " name="profession" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->profession)  }}@endif>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Photo</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="photo" placeholder="" name="photo" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->photo) }}@endif>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">About Me</label>
+                                                    <div class="col-lg-6">
+                                                        <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">
+                                                        <button id="profileButton" type="submit" class="btn btn-primary">Enregistrer</button>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
+
+
+                                <div id="edit-credential" class="tab-pane">
+                                    <section class="panel">
+                                        <div class="panel-body bio-graph-info">
+                                            <h1> Profile Info</h1>
+                                            <form class="form-horizontal" role="form" method="post" action="{{ route('editCredential') }}">
+                                                {{ csrf_field() }}
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Ancien mot de passe</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="password" class="form-control" id="old_password" placeholder=" " name="old_password" >
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('old_password'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('old_password') }}</strong>
+                                                    </span>
+                                                @endif
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Email</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="email" placeholder=" " name="email" @if(\Illuminate\Support\Facades\Auth::check())
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->email)  }}@endif>
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Nouveau mot de passe</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="password" class="form-control" id="new_password" placeholder=" " name="new_password" >
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('new_password'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('new_password') }}</strong>
+                                                    </span>
+                                                @endif
+
+
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">Confirmer le nouveau mot de passe</label>
+                                                    <div class="col-lg-6">
+                                                        <input type="password" class="form-control" id="password_confirmation" placeholder=" " name="password_confirmation" >
+                                                    </div>
+                                                </div>
+                                                @if ($errors->has('password_confirmation'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                                    </span>
+                                                @endif
+
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-offset-2 col-lg-10">
+                                                        <button id="profileButton" id="credential-submit" type="submit" class="btn btn-primary">Enregistrer</button>
+
+                                                    </div>
+                                                </div>
+
+
                                             </form>
                                         </div>
                                     </section>
@@ -208,6 +332,11 @@
 
 </script>
 
+@section('script')
+
+    <script src="{{ asset('js/profile.js') }}"></script>
+
+@endsection
 
 </body>
 </html>
