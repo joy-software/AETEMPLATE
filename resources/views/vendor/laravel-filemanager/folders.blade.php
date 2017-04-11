@@ -10,7 +10,7 @@
 <div class="caption text-center">
   <div class="btn-group">
     <button type="button" data-id="{{ $folder_path }}" class="btn btn-default btn-xs folder-item">
-      {{ str_limit($folder_name, $limit = 10, $end = '...') }}
+      {{ str_limit($folder_name, $limit = 15, $end = '...') }}
     </button>
     <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="false">
       <span class="caret"></span>
