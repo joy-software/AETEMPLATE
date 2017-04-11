@@ -39,7 +39,7 @@ slideLeftFixed = function(selectorElement, value){
  */
 
 $('#accueil').click(function(){
-    window.location.href = '/test';
+    window.location.href = 'http://assovogt.org/test';
 
 });
 
@@ -50,13 +50,13 @@ $('#groupes').click(function(){
 
 $('#annuaire').click(function(){
 
-    window.location.href = '/annuaire';
+    window.location.href = 'http://assovogt.org/annuaire';
 
 
 });
 
 $('#bibliotheque').click(function(){
-    window.location.href = '/files';
+    window.location.href = '#';
 
 });
 

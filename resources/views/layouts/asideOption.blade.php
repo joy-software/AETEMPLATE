@@ -1,6 +1,6 @@
 
 <li class="sub-menu">
-    <a href="javascript:;" class="">
+    <a href="{{ $link }}" class="">
         <i class="{{ $classIconOption }}"></i>
         <span>{{ $optionName }}</span>
 
