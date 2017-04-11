@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
-
 
 Route::get('/home', 'HomeController@auth');
 
@@ -39,3 +35,7 @@ Route::get('/profile', [
 ]);
 
 Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

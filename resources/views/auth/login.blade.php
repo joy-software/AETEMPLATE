@@ -59,11 +59,11 @@
 
             <label class="checkbox">
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right"> <a href="{{ route('password.request') }}"> Forgot Password?</a></span>
+                <span class="pull-right"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
             </label>
             <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
             <br>
-            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup<a>
+            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup</a>
         </div>
     </form>
 

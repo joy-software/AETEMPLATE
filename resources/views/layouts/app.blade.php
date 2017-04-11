@@ -32,8 +32,8 @@
 
 
 
-    @yield('css')
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+@yield('css')
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <script src="{{ asset('karmanta/js/html5shiv.js') }}"></script>
     <script src="{{ asset('karmanta/js/respond.min.js') }}"></script>
@@ -53,18 +53,18 @@
     <!--header start-->
 
 
-    @include('layouts/header')
-    <!--header end-->
+@include('layouts/header')
+<!--header end-->
 
     <!--sidebar start-->
 
-    @include('layouts/aside')
-    <!--sidebar end-->
+@include('layouts/aside')
+<!--sidebar end-->
 
     <!--main content start-->
 
-    @include('layouts/main-content')
-    <!--main content end-->
+@include('layouts/main-content')
+<!--main content end-->
 </section>
 <!-- container section start -->
 

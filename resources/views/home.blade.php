@@ -1,4 +1,4 @@
-@extends('layouts.opp')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,6 @@
 
                 <div class="panel-body">
                     You are logged in!
-                    Thank you
                 </div>
             </div>
         </div>
