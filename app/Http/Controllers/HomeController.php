@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -15,7 +12,6 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -23,6 +19,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('test');
+    }
+    public function auth()
+    {
+        return view('auth/lagin');
+    }
+    public function profile(Request $request){
+        return view('profile/index');
     }
 }

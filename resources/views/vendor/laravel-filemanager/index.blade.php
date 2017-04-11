@@ -17,12 +17,12 @@
   </style>
   @endsection
 
-<body>
-  <div class="container-fluid">
+
+
+@section('content')
+    <div class="container-fluid">
     <div class="panel panel-primary" id="wrapper">
-      <div class="panel-heading">
-        <h3 class="panel-title">{{ trans('laravel-filemanager::lfm.title-panel') }}</h3>
-      </div>
+    <br/><br/><br/>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-2">
@@ -83,8 +83,7 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -113,20 +112,22 @@
       </div>
     </div>
   </div>
+    @endsection
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-  <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
-  <script src="{{ asset('vendor/laravel-filemanager/js/jquery.form.min.js') }}"></script>
-  <script>
-    var route_prefix = "{{ url('/') }}";
-    var lfm_route = "{{ url(config('lfm.prefix')) }}";
-    var lang = {!! json_encode(trans('laravel-filemanager::lfm')) !!};
-  </script>
-  <script src="{{ asset('vendor/laravel-filemanager/js/script.js') }}"></script>
-  {{-- Use the line below instead of the above if you need to ignore browser cache. --}}
-  <!-- <script>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/js/script.js')) !!}</script> -->
-</body>
-</html>
+@section('script')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/cropper.min.js') }}"></script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/jquery.form.min.js') }}"></script>
+    <script>
+        var route_prefix = "{{ url('/') }}";
+        var lfm_route = "{{ url(config('lfm.prefix')) }}";
+        var lang = {!! json_encode(trans('laravel-filemanager::lfm')) !!};
+    </script>
+    <script src="{{ asset('vendor/laravel-filemanager/js/script.js') }}"></script>
+    {{-- Use the line below instead of the above if you need to ignore browser cache. --}}
+    <!-- <script>{!! \File::get(base_path('vendor/unisharp/laravel-filemanager/public/js/script.js')) !!}</script> -->
+  @endsection
+
