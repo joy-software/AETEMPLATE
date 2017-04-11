@@ -33,13 +33,10 @@ Route::get('/profile', [
     'as' => 'profile',
     'uses' => 'HomeController@profile'
 ]);
-Route::get('/', [
-    'as' => 'racine',
-    'uses' => 'HomeController@auth'
-]);
+
+Auth::routes();
 
 
-Route::get('/home', 'HomeController@index');
 
 $middleware = array_merge(\Config::get('lfm.middlewares'), [
     '\Unisharp\Laravelfilemanager\middlewares\MultiUser',
