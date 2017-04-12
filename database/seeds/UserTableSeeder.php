@@ -32,6 +32,17 @@ class UserTableSeeder extends Seeder
         ]);
         $user->save();
 
+        $owner = new Role();
+        $owner->name         = 'owner';
+        $owner->display_name = 'Project Owner'; // optional
+        $owner->description  = 'User is the owner of a given project'; // optional
+        $owner->save();
+
+        $permission =  \App\Permission::find(1);
+        $owner->attachPermission($permission);
+
+        $user->attachRole($owner);
+
         for($i = 0; $i < 10; $i++){
 
             $user = new User([
