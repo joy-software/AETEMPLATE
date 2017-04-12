@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -12,6 +13,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $createPost = new Permission();
+
         $createPost->name         = 'delete-users';
         $createPost->display_name = 'Delete Users'; // optional
 // Allow a user to...

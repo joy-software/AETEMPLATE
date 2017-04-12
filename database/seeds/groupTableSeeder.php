@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\group;
+use App\Role;
 
 class groupTableSeeder extends Seeder
 {
