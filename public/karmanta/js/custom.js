@@ -39,12 +39,12 @@ slideLeftFixed = function(selectorElement, value){
  */
 
 $('#accueil').click(function(){
-    window.location.href = '/test';
+    window.location.href = '/accueil';
 
 });
 
 $('#groupes').click(function(){
-    window.location.href = '#';
+    window.location.href = '/groupe';
 
 });
 
@@ -56,7 +56,7 @@ $('#annuaire').click(function(){
 });
 
 $('#bibliotheque').click(function(){
-    window.location.href = '/files';
+    window.location.href = '/filemanager?type=file';
 
 });
 

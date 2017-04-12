@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,11 +37,10 @@ class UserController extends Controller
        $user = Auth::user();
        $param = $request->only(['old_password', 'email', 'new_password', 'password_confirmation']);
 
-       $param['old_password'] = bcrypt($param['old_password']);
-       $param['new_password'] = bcrypt($param['new_password']);
+       $param['new_password'] = Hash::make($param['new_password']);
        $changed = false;
 
-       if($user->password == $param['old_password']){
+       if(Hash::check($param['old_password'], $user->password)){
 
            if ($param['email'] != null){
 
@@ -66,7 +66,7 @@ class UserController extends Controller
        }
 
 
-       return redirect()->route('profile')->with(['success' => $message . '/////' . $param['old_password'] . '/////' . $user->password]);
+       return redirect()->route('profile')->with(['success' => $message]);
 
    }
 }

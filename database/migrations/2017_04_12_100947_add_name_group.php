@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDescriptionToUsers extends Migration
+class AddNameGroup extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddDescriptionToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users',function($table)
+        Schema::table('group',function($table)
         {
-            $table->text('description')->after('email')->nullable();
-            $table->enum('sex', ['M', 'F'])->after('surname')->nullable();
+           $table->string('name')->after('id')->nullable();
         });
     }
 
@@ -27,10 +26,8 @@ class AddDescriptionToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users',function($table)
-        {
-            $table->dropColumn('decscription');
-            $table->dropColumn('sexe');
+        Schema::table('group',function($table){
+            $table->dropColumn('name');
         });
     }
 }

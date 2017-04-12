@@ -14,10 +14,6 @@
 
 Route::get('/home', 'HomeController@auth');
 
-Route::get('/test', [
-    'as' => 'test',
-    'uses' => 'HomeController@index'
-]);
 
 Route::get('/','HomeController@index');
 
@@ -142,6 +138,11 @@ Route::post('/editCredential', [
 Route::get('/tester', [
     'as' => 'tester',
     'uses' => 'HomeController@tester'
+]);
+
+Route::get('/accueil', [
+    'as' => 'accueil',
+    'uses' => 'HomeController@index'
 ]);
 
 
