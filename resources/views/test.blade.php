@@ -4,7 +4,7 @@
 
 @section('css')
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 
