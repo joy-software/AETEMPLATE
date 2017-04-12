@@ -202,12 +202,18 @@
                                                     <div class="col-lg-9">
                                                         <select class="form-control" name="sexe" id="sexe">
                                                             @if (\Illuminate\Support\Facades\Auth::user()->sexe == 'M')
-                                                                {{  }}
+                                                                {{
+                                                                    '<option value="M" selected>Homme</option>
+                                                                    <option value="F">Femme</option>'
+                                                                 }}
                                                             @else
-                                                                {{  }}
+                                                                {{
+                                                                    '<option value="M" >Homme</option>
+                                                                    <option value="F" selected>Femme</option>'
+                                                                }}
                                                             @endif
-                                                            <option value="M" selected>Homme</option>
-                                                            <option value="F">Femme</option>
+
+
                                                         </select>
                                                     </div>
                                                     @if ($errors->has('sexe'))
