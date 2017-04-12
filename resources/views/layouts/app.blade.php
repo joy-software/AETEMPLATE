@@ -89,7 +89,9 @@
 <!-- custom select -->
 <!--script src="{{-- asset('karmanta/js/jquery.customSelect.min.js') --}}" ></script-->
 <!--custome script for all page-->
-<!--script src="{{-- asset('karmanta/js/scripts.js') --}}"></script>
+
+<script src="{{ asset('karmanta/js/scripts.js') }}"></script>
+
 <!-- custom script for this page-->
 <!--script src="{{-- asset('karmanta/js/sparkline-chart.js') --}}"></script!-->
 <!--script src="{{-- //asset('karmanta/js/easy-pie-chart.js') --}}"></script-->

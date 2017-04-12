@@ -20,37 +20,45 @@
                     <div class="profile-widget profile-widget-info">
                         <div class="panel-body">
                             <div class="col-lg-2 col-sm-2">
-                                <h4>John Smith</h4>
+                                <h4>
+                                    @if(\Illuminate\Support\Facades\Auth::check())
+                                        {{ \Illuminate\Support\Facades\Auth::user()->surname  }}@endif
+                                </h4>
                                 <div class="follow-ava">
                                     <img src="{{ asset('karmanta/img/profile-widget-avatar.jpg') }}" alt="">
                                 </div>
-                                <h6>Administrator</h6>
+
+                                <h6>Role if exists</h6>
                             </div>
+
                             <div class="col-lg-4 col-sm-4 follow-info">
-                                <p>Hello I’m John Smith, a leading expert in interactive and creative design.</p>
-                                <p>@johnsmith</p>
+                                <p></p>
+                                <p>@if(\Illuminate\Support\Facades\Auth::check())
+                                        {{ \Illuminate\Support\Facades\Auth::user()->email  }}@endif</p>
                                 <h6>
                                     <span><i class="icon_clock_alt"></i>11:05 AM</span>
                                     <span><i class="icon_calendar"></i>25.10.13</span>
                                     <span><i class="icon_pin_alt"></i>NY</span>
                                 </h6>
                             </div>
+
                             <div class="col-lg-6 col-sm-6 follow-info weather-category">
                                 <ul>
                                     <li class="active">
                                         <h4>50</h4>
-                                        <i class="icon_close_alt2"></i> Pending Task
+                                        <i class="icon_close_alt2"></i> Annonces
                                     </li>
                                     <li>
                                         <h4>550</h4>
-                                        <i class="icon_check_alt2"></i> Completed
+                                        <i class="icon_check_alt2"></i> Evènements
                                     </li>
                                     <li>
                                         <h4>600</h4>
-                                        <i class="icon_plus_alt2"></i> Total Task
+                                        <i class="icon_plus_alt2"></i> Adhésions validées
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -88,7 +96,10 @@
                                 <div id="profile" class="tab-pane active">
                                     <section class="panel">
                                         <div class="bio-graph-heading">
-                                            Hello I’m John Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication.
+                                            @if(\Illuminate\Support\Facades\Auth::check())
+                                                {{ \Illuminate\Support\Facades\Auth::user()->description }}
+                                            @endif
+
                                         </div>
                                         <div class="panel-body bio-graph-info">
                                             <h1>Bio Graph</h1>
@@ -114,6 +125,19 @@
                                                     <p><span>Email</span>
                                                         @if(\Illuminate\Support\Facades\Auth::check())
                                                             {{ \Illuminate\Support\Facades\Auth::user()->email }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+
+                                                <div class="bio-row">
+                                                    <p><span>Genre</span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            @if(\Illuminate\Support\Facades\Auth::user()->sex == 'M')
+                                                                {{ 'Homme' }}
+
+                                                            @elseif(\Illuminate\Support\Facades\Auth::user()->sex == 'F')
+                                                                {{ 'Femme' }}
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
@@ -181,19 +205,44 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group ">
+                                                    <label for="sex" class="control-label col-lg-2">Genre <span class="required">*</span></label>
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control" name="sex" id="sex">
+                                                            @if (\Illuminate\Support\Facades\Auth::user()->sex == 'M')
+
+                                                                    <option value="M" selected>Homme</option>
+                                                                    <option value="F">Femme</option>
+
+                                                            @else
+
+                                                                <option value="M" >Homme</option>
+                                                                <option value="F" selected>Femme</option>
+                                                            @endif
+
+
+                                                        </select>
+                                                    </div>
+                                                    @if ($errors->has('sex'))
+                                                        <span class="help-block ">
+                                                            <strong>{{ $errors->first('sex') }}</strong>
+                                                        </span>
+                                                    @endif
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Telephone</label>
                                                     <div class="col-lg-6">
                                                         <input type="text" class="form-control" id="phone" placeholder=" " name="phone" @if(\Illuminate\Support\Facades\Auth::check())
-                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->phone)  }}@endif>
+                                                            {{'value=' . Auth::user()->phone}}@endif>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Promotion</label>
                                                     <div class="col-lg-6">
                                                         <input type="text" class="form-control" id="promotion" placeholder=" " name="promotion" @if(\Illuminate\Support\Facades\Auth::check())
-                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->promotion)  }}@endif>
+                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->promotion) }}@endif>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -220,9 +269,13 @@
 
 
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">About Me</label>
+                                                    <label class="col-lg-2 control-label">A propos de moi</label>
                                                     <div class="col-lg-6">
-                                                        <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
+                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">
+                                                            @if(\Illuminate\Support\Facades\Auth::check())
+                                                                {{\Illuminate\Support\Facades\Auth::user()->description}}
+                                                            @endif
+                                                        </textarea>
                                                     </div>
                                                 </div>
 

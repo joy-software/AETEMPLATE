@@ -148,6 +148,9 @@ Route::get('/accueil', [
 
 Auth::routes();
 
+
+
+
 Route::get('/home', 'HomeController@index');
 
 
