@@ -27,7 +27,7 @@
 
 
             @include('layouts/menuItem', ['itemName' => 'accueil', 'link' => "/accueil" ])
-            @include('layouts/menuItem', ['itemName' => 'groupes', 'link' => "/groupe"])
+            @include('layouts/menuItem', ['itemName' => 'groupes', 'link' => "/group"])
             @include('layouts/menuItem', ['itemName' => 'annuaire', 'link' => "/annuaire"])
             @include('layouts/menuItem', ['itemName' => 'bibliotheque', 'link' => "/filemanager?type=file"])
             @include('layouts/menuItem', ['itemName' => 'comptabilite', 'link' => "/#"])

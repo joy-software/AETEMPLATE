@@ -169,8 +169,10 @@ return [
 
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
+        Zizaco\Entrust\EntrustServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -230,6 +232,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

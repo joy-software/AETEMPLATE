@@ -149,3 +149,33 @@ Route::get('/accueil', [
 Auth::routes();
 
 
+
+
+Route::get('/home', 'HomeController@index');
+
+
+
+/****
+ *
+ *  route pour les groupes.
+ */
+
+Route::get('/group/create_group', [
+    'as'=>'create_group',
+    'uses'=>'groupController@create_group'
+]);
+
+Route::get('/group/', [
+    'as'=>'index',
+    'uses'=>'groupController@index'
+]);
+
+Route::get('/group/search_group', [
+    'as'=>'search_group',
+    'uses'=>'groupController@search_group'
+]);
+
+Route::post('/group/post_create_group', [
+    'as' =>'post_create_group',
+    'uses'=>'groupController@post_create_group'
+]);

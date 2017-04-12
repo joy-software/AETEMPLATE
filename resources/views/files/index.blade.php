@@ -5,13 +5,12 @@
 
     <link href="{{ asset('css/annuaire.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-<<<<<<< HEAD
+
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
-=======
+
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
->>>>>>> 44d00d1d317a6aacf70267661ce11c710fe8d0a4
 @endsection
 
 @section('content')
