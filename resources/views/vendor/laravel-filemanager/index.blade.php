@@ -27,10 +27,10 @@
     <div class="panel panel-primary" id="wrapper">
       <div class="panel panel-primary hidden-xs">
         <br> <br> <br>
-        <div id="panel-heading" class="panel-heading" style="text-align: right; ">
+        <!--div id="panel-heading" class="panel-heading" style="text-align: right; ">
           <a class="btn btn-primary" href="/filemanager?type=image" style="background-color: white; color : black; ">Gérer les images</a>
           <a class="btn btn-primary" href="/filemanager?type=file" style="background: white; color : black;">Gérer les fichiers (pdf, fichier excel, word, etc...) </a>
-        </div>
+        </div-->
       </div>
       <div class="panel-body">
         <div class="row">

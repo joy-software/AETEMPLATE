@@ -40,13 +40,13 @@ class UserTableSeeder extends Seeder
                     'sex' => $sexe[rand(0,1)],
                     'profession' => 'profession'.$i,
                     'email' => $i.'email@gmail.com',
-                    'description' => 'je m\'appelle Nom'.$i,
                     'password'=> Hash::make('password'.$i),
                     'promotion'=> rand(1996, 2015),
                     'country'=> $pays[rand(0,3)],
                     'phone'=> 'phoneNumber'.$i,
                     'statut'=> 'actif',
-                    'photo'=> 'none'
+                    'photo'=> 'none',
+                'description' => 'je m\'appelle Nom'.$i,
                 ]);
             $user->save();
 

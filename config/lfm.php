@@ -66,7 +66,7 @@ return [
     */
 
     // If true, the uploaded file will be renamed to uniqid() + file extension.
-    'rename_file' => false,
+    'rename_file' => true,
 
     // If rename_file set to false and this set to true, then non-alphanumeric characters in filename will be replaced.
     'alphanumeric_filename' => true,
@@ -75,7 +75,7 @@ return [
     'alphanumeric_directory' => false,
 
     // If true, the uploading file's size will be verified for over than max_image_size/max_file_size.
-    'should_validate_size' => false,
+    'should_validate_size' => true,
 
     'max_image_size' => 500000,
     'max_file_size' => 500000,
@@ -100,6 +100,7 @@ return [
         'image/gif',
         'application/pdf',
         'text/plain',
+        'video/x-flv',
     ],
 
     /*
