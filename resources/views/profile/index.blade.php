@@ -88,7 +88,10 @@
                                 <div id="profile" class="tab-pane active">
                                     <section class="panel">
                                         <div class="bio-graph-heading">
-                                            Hello I’m John Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication.
+                                            @if(\Illuminate\Support\Facades\Auth::check())
+                                                {{ \Illuminate\Support\Facades\Auth::user()->description }}
+                                            @endif
+
                                         </div>
                                         <div class="panel-body bio-graph-info">
                                             <h1>Bio Graph</h1>
@@ -114,6 +117,19 @@
                                                     <p><span>Email</span>
                                                         @if(\Illuminate\Support\Facades\Auth::check())
                                                             {{ \Illuminate\Support\Facades\Auth::user()->email }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+
+                                                <div class="bio-row">
+                                                    <p><span>Genre</span>
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                            @if(\Illuminate\Support\Facades\Auth::user()->sexe == 'M')
+                                                                {{ Homme }}
+
+                                                            @elseif(\Illuminate\Support\Facades\Auth::user()->sexe == 'F')
+                                                                {{ Femme }}
+                                                            @endif
                                                         @endif
                                                     </p>
                                                 </div>
@@ -179,6 +195,26 @@
                                                         <input type="text" class="form-control" id="name" placeholder=" " name="name" @if(\Illuminate\Support\Facades\Auth::check())
                                                             {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->name)  }}@endif>
                                                     </div>
+                                                </div>
+
+                                                <div class="form-group ">
+                                                    <label for="sexe" class="control-label col-lg-2">Genre <span class="required">*</span></label>
+                                                    <div class="col-lg-9">
+                                                        <select class="form-control" name="sexe" id="sexe">
+                                                            @if (\Illuminate\Support\Facades\Auth::user()->sexe == 'M')
+                                                                {{  }}
+                                                            @else
+                                                                {{  }}
+                                                            @endif
+                                                            <option value="M" selected>Homme</option>
+                                                            <option value="F">Femme</option>
+                                                        </select>
+                                                    </div>
+                                                    @if ($errors->has('sexe'))
+                                                        <span class="help-block ">
+                                                            <strong>{{ $errors->first('sexe') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
 
 

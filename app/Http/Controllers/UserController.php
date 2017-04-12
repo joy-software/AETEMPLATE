@@ -18,7 +18,7 @@ class UserController extends Controller
    {
 
         $user = Auth::user();
-        $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession']);
+        $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sexe', 'description']);
 
         foreach ($param as $key => $value){
 

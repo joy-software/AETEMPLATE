@@ -67,16 +67,16 @@
                     </div>
 
                     <div class="form-group ">
-                        <label for="gender" class="control-label col-lg-2">Genre <span class="required">*</span></label>
+                        <label for="sexe" class="control-label col-lg-2">Genre <span class="required">*</span></label>
                         <div class="col-lg-9">
-                            <select class="form-control" name="gender" id="gender">
+                            <select class="form-control" name="sexe" id="sexe">
                                 <option value="M" selected>Homme</option>
                                 <option value="F">Femme</option>
                             </select>
                         </div>
-                        @if ($errors->has('gender'))
+                        @if ($errors->has('sexe'))
                             <span class="help-block ">
-                            <strong>{{ $errors->first('gender') }}</strong>
+                            <strong>{{ $errors->first('sexe') }}</strong>
                         </span>
                         @endif
                     </div>
@@ -147,7 +147,7 @@
                     <div class="form-group ">
                         <label for="description" class="control-label col-lg-2">Description <span class="required">*</span></label>
                         <div class="col-lg-9">
-                            <textarea class="form-group" name="description" id="description">{{ old('description') }}</textarea>
+                            <textarea class="form-control" cols="30" rows="5" name="description" id="description">{{ old('description') }}</textarea>
                         </div>
                         @if ($errors->has('description'))
                             <span class="help-block">
