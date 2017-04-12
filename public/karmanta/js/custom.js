@@ -44,7 +44,7 @@ $('#accueil').click(function(){
 });
 
 $('#groupes').click(function(){
-    window.location.href = '#';
+    window.location.href = '/groupe';
 
 });
 
@@ -56,7 +56,7 @@ $('#annuaire').click(function(){
 });
 
 $('#bibliotheque').click(function(){
-    window.location.href = '/files';
+    window.location.href = '/filemanager?type=file';
 
 });
 

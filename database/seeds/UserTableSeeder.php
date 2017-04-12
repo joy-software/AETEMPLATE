@@ -24,7 +24,7 @@ class UserTableSeeder extends Seeder
                     'surname' =>'Surname'.$i,
                     'profession' => 'profession'.$i,
                     'email' => $i.'email@gmail.com',
-                    'password'=> bcrypt('password'.$i),
+                    'password'=> Hash::make('password'.$i),
                     'promotion'=> rand(1996, 2015),
                     'country'=> $pays[rand(0,3)],
                     'phone'=> 'phoneNumber'.$i,
