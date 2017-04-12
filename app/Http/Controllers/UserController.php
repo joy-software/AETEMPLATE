@@ -18,7 +18,7 @@ class UserController extends Controller
    {
 
         $user = Auth::user();
-        $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sexe', 'description']);
+        $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sex', 'description']);
 
         foreach ($param as $key => $value){
 
@@ -37,20 +37,21 @@ class UserController extends Controller
        $user = Auth::user();
        $param = $request->only(['old_password', 'email', 'new_password', 'password_confirmation']);
 
-       $param['new_password'] = Hash::make($param['new_password']);
+
        $changed = false;
 
        if(Hash::check($param['old_password'], $user->password)){
 
-           if ($param['email'] != null){
+           if ($param['email'] != null && $param['email'] != ''){
 
                $changed = true;
                $user->email = $param['email'];
            }
 
-           if($param['new_password'] != null){
+           if($param['new_password'] != null && $param['new_password'] != ''){
 
                $changed = true;
+               $param['new_password'] = Hash::make($param['new_password']);
                $user->password = $param['new_password'];
            }
 
