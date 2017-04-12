@@ -39,7 +39,7 @@ slideLeftFixed = function(selectorElement, value){
  */
 
 $('#accueil').click(function(){
-    window.location.href = '/test';
+    window.location.href = '/accueil';
 
 });
 
