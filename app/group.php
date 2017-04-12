@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class group extends Model
 {
 
+    protected $fillable = ['name','description','logo'];
+
+    protected $table = 'group';
+
     /******
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

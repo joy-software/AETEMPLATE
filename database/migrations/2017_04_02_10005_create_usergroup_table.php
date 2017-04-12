@@ -16,7 +16,7 @@ class CreateUsergroupTable extends Migration
         Schema::create('usergroup', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_validator');
-            $table->integer('status');
+            $table->enum('statut', ['attente', 'actif', 'suspendu'])->default('attente');
             $table->boolean('notification'); 
             $table->timestamps();
 

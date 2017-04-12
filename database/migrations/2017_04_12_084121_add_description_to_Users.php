@@ -16,7 +16,7 @@ class AddDescriptionToUsers extends Migration
         Schema::table('users',function($table)
         {
             $table->text('description')->after('email')->nullable();
-            $table->enum('sexe', ['M', 'F'])->after('surname')->nullable();
+            $table->enum('sex', ['M', 'F'])->after('surname')->nullable();
         });
     }
 
