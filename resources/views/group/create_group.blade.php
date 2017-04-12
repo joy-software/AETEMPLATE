@@ -53,14 +53,42 @@
                        <h4>Créer un nouveau Groupe</h4>
                     </header>
                     <div class="panel-body">
-                        {!! Form::open(array('route' => 'create_group', 'files' => true)) !!}
+
+                        @if(Session::has('message'))
                             <div class="form-group">
-                                <label for="name_group">Nom du groupe</label>
-                                <input name="name_group" type="text" class="form-control" id="name_of_group" placeholder="Entrer le nom du groupe">
+                                <div class="alert alert-info">
+                                    {{Session::get('message')}}
+                                </div>
+                            </div>
+                        @endif
+
+                            @if($errors->any())
+
+                                    <div class="form-group">
+                                            @foreach($errors->all() as $error)
+                                                <div class="alert alert-danger">
+                                                    {{ $error }}
+                                                </div>
+                                            @endforeach
+                                    </div>
+                            @endif
+
+
+                            @if(Session::has('error'))
+                                <div class="form-group">
+                                    <div class="alert alert-danger">
+                                        {{Session::get('error')}}
+                                    </div>
+                                </div>
+                            @endif
+                        {!! Form::open(array('route' => 'post_create_group', 'files' => true)) !!}
+                            <div class="form-group">
+                                <label for="name">Nom du groupe</label>
+                                <input name="name" type="text" class="form-control" id="name" placeholder="Entrer le nom du groupe">
                             </div>
                             <div class="form-group">
                                 <label for="logo_group">Logo du groupe</label>
-                                <input type="file" id="logo_group">
+                                {!! Form::file('logo', null) !!}
                                 <p class="help-block">Extension acceptée : jpeg, png,etc...</p>
                             </div>
                             <div class="form-group">
@@ -69,7 +97,15 @@
                                     </textarea>
                             </div>
 
-                            <a type="submit" style="width: 80%; margin-left: 10%;" class="btn btn-primary">Créer le groupe</a>
+                            @if(Session::has('error'))
+                                <div class="form-group">
+                                    <div class="alert alert-danger">
+                                        {{Session::get('error')}}
+                                    </div>
+                                </div>
+                            @endif
+
+                            <button type="submit" style="width: 80%; margin-left: 10%;" class="btn btn-primary">Créer le groupe</button>
                         {!! Form::close() !!}
 
 

@@ -8,7 +8,7 @@ class usergroup extends Model
 {
     protected $table = 'usergroup';
 
-    protected $fillable = ['statut','notification'];
+    protected $fillable = ['statut','notification','id_validator'];
 
     public function users(){
         return $this->belongsTo('App\User','user_ID');
