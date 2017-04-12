@@ -55,7 +55,7 @@
 
     <!--sidebar start-->
 
-@include('layouts/aside')
+
 <!--sidebar end-->
 
     <!--main content start-->
@@ -68,14 +68,16 @@
 <!-- javascripts -->
 
 <!-- nice scroll -->
-<script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
-<script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}" type="text/javascript"></script>
 
+
+
+@yield('script')
+
+<script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
+<script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('karmanta/js/scripts.js') }}"></script>
 
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
-
-@yield('script')
 
 <script>
 

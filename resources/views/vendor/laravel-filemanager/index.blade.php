@@ -8,6 +8,16 @@
   <link rel="stylesheet" href="{{ asset('vendor/laravel-filemanager/css/cropper.min.css') }}">
   <link rel="stylesheet" href="{{ asset('/vendor/laravel-filemanager/css/lfm.css') }}">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css">
+
+  <style>
+    .panel-primary > .panel-heading {
+      background-color: #34aadc;
+    }
+
+    #panel-heading  a:hover{
+      background-color: red;
+    }
+  </style>
   @endsection
 
 
@@ -15,13 +25,18 @@
 @section('content')
     <div class="container-fluid">
     <div class="panel panel-primary" id="wrapper">
-    <br/><br/><br/>
+      <div class="panel panel-primary hidden-xs">
+        <br> <br> <br>
+        <div id="panel-heading" class="panel-heading" style="text-align: right; ">
+          <a class="btn btn-primary" href="/filemanager?type=image" style="background-color: white; color : black; ">Gérer les images</a>
+          <a class="btn btn-primary" href="/filemanager?type=file" style="background: white; color : black;">Gérer les fichiers (pdf, fichier excel, word, etc...) </a>
+        </div>
+      </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-xs-2">
             <div id="tree"></div>
           </div>
-
           <div class="col-xs-10" id="main">
             <nav class="navbar navbar-default">
               <div class="navbar-header">

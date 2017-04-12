@@ -129,3 +129,22 @@ Route::group(compact('middleware', 'prefix', 'as'), function () {
     Route::get('/demo', '\Unisharp\Laravelfilemanager\controllers\DemoController@index');
 });
 
+Route::post('/editProfile', [
+    'as' => 'editProfile',
+    'uses' => 'UserController@editProfile'
+]);
+
+Route::post('/editCredential', [
+    'as' => 'editCredential',
+    'uses' => 'UserController@editCredential'
+]);
+
+Route::get('/tester', [
+    'as' => 'tester',
+    'uses' => 'HomeController@tester'
+]);
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

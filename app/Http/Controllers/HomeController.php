@@ -28,4 +28,8 @@ class HomeController extends Controller
     public function profile(Request $request){
         return view('profile/index');
     }
+
+
+
 }
+
