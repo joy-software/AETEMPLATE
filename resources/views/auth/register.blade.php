@@ -67,16 +67,16 @@
                     </div>
 
                     <div class="form-group ">
-                        <label for="sexe" class="control-label col-lg-2">Genre <span class="required">*</span></label>
+                        <label for="sex" class="control-label col-lg-2">Genre <span class="required">*</span></label>
                         <div class="col-lg-9">
-                            <select class="form-control" name="sexe" id="sexe">
+                            <select class="form-control" name="sex" id="sex">
                                 <option value="M" selected>Homme</option>
                                 <option value="F">Femme</option>
                             </select>
                         </div>
-                        @if ($errors->has('sexe'))
+                        @if ($errors->has('sex'))
                             <span class="help-block ">
-                            <strong>{{ $errors->first('sexe') }}</strong>
+                            <strong>{{ $errors->first('sex') }}</strong>
                         </span>
                         @endif
                     </div>
@@ -93,6 +93,18 @@
                         @endif
                     </div>
 
+
+                    <div class="form-group ">
+                        <label for="phone" class="control-label col-lg-2">Telephone <span class="required">*</span></label>
+                        <div class="col-lg-9">
+                            <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}"/>
+                        </div>
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
 
                     <div class="form-group ">
@@ -127,19 +139,6 @@
                         @if ($errors->has('profession'))
                             <span class="help-block">
                             <strong>{{ $errors->first('profession') }}</strong>
-                        </span>
-                        @endif
-                    </div>
-
-
-                    <div class="form-group ">
-                        <label for="phone" class="control-label col-lg-2">Telephone <span class="required">*</span></label>
-                        <div class="col-lg-9">
-                            <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}"/>
-                        </div>
-                        @if ($errors->has('phone'))
-                            <span class="help-block">
-                            <strong>{{ $errors->first('phone') }}</strong>
                         </span>
                         @endif
                     </div>
@@ -213,7 +212,7 @@
                     <div class="form-group" >
                         <div class="col-lg-offset-2 col-lg-9" id="signup-submit">
                             <button  class="btn btn-primary" type="submit">S'inscrire</button>
-                            <a class="btn btn-default" type="button" href="{{ route('login') }}">Cancel</a>
+                            <a class="btn btn-default" type="button" href="{{ route('login') }}">Fermer</a>
                         </div>
                     </div>
                 </form>
