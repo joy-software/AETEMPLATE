@@ -8,13 +8,11 @@
         "php": ">=5.6.4",
         "doctrine/dbal": "^2.5",
         "laravel/framework": "5.3.*",
-<<<<<<< HEAD
+
         "laravelcollective/html": "^5.3.0",
-        "unisharp/laravel-filemanager": "^1.7"
-=======
         "unisharp/laravel-filemanager": "^1.7",
         "zizaco/entrust": "^1.8"
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

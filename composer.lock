@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "330269e6a3110b40a28a05bed5a02b90",
-=======
-    "content-hash": "7248b565f85a18e89f682254973727db",
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
+    "content-hash": "130b261a5ac6969f88e4d03227de573d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -96,8 +92,6 @@
             ],
             "description": "implementation of xdg base directory specification for php",
             "time": "2014-10-24T07:27:01+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "doctrine/annotations",
@@ -447,7 +441,6 @@
                 "queryobject"
             ],
             "time": "2017-02-08T12:53:47+00:00"
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
         },
         {
             "name": "doctrine/inflector",
@@ -515,8 +508,6 @@
                 "string"
             ],
             "time": "2015-11-06T14:35:42+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "doctrine/lexer",
@@ -571,7 +562,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
         },
         {
             "name": "guzzlehttp/psr7",
@@ -972,7 +962,6 @@
                 "laravel"
             ],
             "time": "2017-03-24T16:31:06+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "laravelcollective/html",
@@ -1027,8 +1016,6 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
             "time": "2016-12-13T14:23:36+00:00"
-=======
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
         },
         {
             "name": "league/flysystem",
@@ -2583,8 +2570,6 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "zizaco/entrust",
@@ -2653,7 +2638,6 @@
                 "roles"
             ],
             "time": "2016-12-29T06:24:46+00:00"
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
         }
     ],
     "packages-dev": [

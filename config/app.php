@@ -169,13 +169,10 @@ return [
 
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-<<<<<<< HEAD
+
         Collective\Html\HtmlServiceProvider::class,
 
-=======
         Zizaco\Entrust\EntrustServiceProvider::class,
->>>>>>> fdf8804a88346ecd6b15407e36d356aa46905f53
-
         /*
          * Application Service Providers...
          */
