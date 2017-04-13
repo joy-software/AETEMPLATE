@@ -7,6 +7,7 @@
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
@@ -18,11 +19,14 @@
 @endsection
 
 
+
+
 @section('content')
 
 
     <section class="wrapper">
-            Vous voulez faire la recherche sur les groupes
+        <h1>Hello la valeur de l'id du groupe est  : {{$id}}</h1>
+        view_group
     </section>
 
 @endsection

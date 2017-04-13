@@ -9,34 +9,14 @@
 @endsection
 
 @section('sideOption')
-    @include('layouts/asideOption', [
-
-                'classIconOption' => 'icon_house_alt',
-                'optionName' => 'Rechercher un groupe',
-                'retractable' => 'false',
-                'link' => url('/group/search_group')
-            ])
-
-    @include('layouts/asideOption', [
-
-        'classIconOption' => 'icon_table',
-        'optionName' => 'Créer un groupe',
-        'retractable' => 'false',
-        'link' => url('/group/create_group')
-    ])
-
-    @include('layouts/asideOption', [
-
-        'classIconOption' => 'icon_piechart',
-        'optionName' => 'Assemblée Générale',
-        'link' => 'javascript:',
-        'retractable' => 'false'
-    ])
+    @include('layouts/asideOptionGenerated')
 
 @endsection
 
 
+
 @section('content')
+
 
     <section class="wrapper">
         <!--overview start-->

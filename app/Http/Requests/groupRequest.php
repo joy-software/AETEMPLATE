@@ -24,8 +24,8 @@ class groupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:group|max:255',
-            'description_group' => 'required|max:1000',
+            'name' => 'required|unique:group|max:22|min:5',
+            'description_group' => 'required|max:1000|min:10',
             'logo' => 'mimes:png,jpeg,bmp'
         ];
     }
@@ -34,7 +34,10 @@ class groupRequest extends FormRequest
     {
         return [
             'name.required' => 'Vous devez saisir le nom du groupe',
-            'description_group.required' => 'Vous devez donner une description à votre groupe, maximum 1000 Caractères',
+            'name.max'=>'Le nom du groupe doit avoir maximum 22 caractères',
+            'name.min'=>'le nom du groupe doit avoir minimum 5 caractères',
+            'description_group.min'=>'la description doit être au moins 10 caractères',
+            'description_group.required' => 'Le champ description est obligatoire',
             'logo.mimes'=>'l\'extention doit être : jpeg, png, ou bmp',
             'name.unique'=>'Un groupe existe déjà avec ce nom'
         ];

@@ -179,3 +179,40 @@ Route::post('/group/post_create_group', [
     'as' =>'post_create_group',
     'uses'=>'groupController@post_create_group'
 ]);
+
+//Route::get('/group/view_group', 'groupController@index');
+
+Route::get('/group/view_group/{id}', [
+    'as'=>'view_group',
+    'uses'=>'groupController@view_group'
+]);
+
+Route::get('/group/view_group', 'groupController@index');
+
+
+Route::get('/group/member_group/{id}', [
+    'as'=>'member_group',
+    'uses'=>'groupController@member_group'
+]);
+
+Route::get('/group/member_group', 'groupController@index');
+
+Route::get('/group/event_group/{id}', [
+    'as'=>'event_group',
+    'uses'=>'groupController@event_group'
+]);
+Route::get('/group/event_group', 'groupController@index');
+
+Route::get('/group/ads_group/{id}', [
+    'as'=>'ads_group',
+    'uses'=>'groupController@ads_group'
+]);
+
+Route::get('/group/ads_group', 'groupController@index');
+
+Route::get('/group/ballot_group/{id}', [
+    'as'=>'ballot_group',
+    'uses'=>'groupController@ballot_group'
+]);
+
+Route::get('/group/ballot_group', 'groupController@index');
