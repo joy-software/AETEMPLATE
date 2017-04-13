@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GroupCreateEvent;
 use App\group;
-use App\User;
+use App\Listeners\GroupCreateListener;
 use App\usergroup;
 use App\Http\Requests\groupRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class groupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         return view('group.index');
     }
@@ -60,8 +67,14 @@ class groupController extends Controller
         $usergroup->users()->associate(Auth::user());
         $usergroup->group()->associate($group);
         $usergroup->save();
+        //echo $group;
+        //firing the event so that we can associate roles to the user
+      //  event(new GroupCreateEvent($group));
+       // $order = group::findOrFail($group->id);
+       // dd($order);
+        \Event::fire(new GroupCreateEvent( $group));
 
-        return \Redirect::route('create_group')->with('message', 'Le group '.$group->name.' a été bien crée. ');
+        return \Redirect::route('create_group')->with('message', 'Le groupe '.$group->name.' a été bien crée. ');
 
     }
 }

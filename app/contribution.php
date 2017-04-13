@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\contribution
+ *
+ * @property-read \App\period $period
+ * @property-read \App\User $users
+ * @mixin \Eloquent
+ */
 class contribution extends Model
 {
     /*****

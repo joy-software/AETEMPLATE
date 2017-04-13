@@ -4,6 +4,29 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\group
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ * @property string $logo
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property int $user_ID
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ads[] $ads
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ballot[] $ballot
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\usergroup[] $usergroup
+ * @property-read \App\User $users
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereLogo($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\group whereUserID($value)
+ * @mixin \Eloquent
+ */
 class group extends Model
 {
 
