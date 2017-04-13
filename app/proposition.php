@@ -4,6 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\proposition
+ *
+ * @property-read \App\ballot $ballot
+ * @property-read \App\User $users
+ * @mixin \Eloquent
+ */
 class proposition extends Model
 {
     /*******

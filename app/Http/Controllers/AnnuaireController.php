@@ -13,14 +13,22 @@ class AnnuaireController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-    private $users = null;
+    private $_users = null;
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $users =DB::table('users')->get();
        // $years = DB::table('users')->groupBy('promotion')->get();
-
+        $this->_users = $users;
         $years = $users;
         $this->users = $users;
         return view('annuaire/index', ['users'=> $users, 'nom'=> $years]);

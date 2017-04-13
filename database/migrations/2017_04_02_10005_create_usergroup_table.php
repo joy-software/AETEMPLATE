@@ -15,12 +15,12 @@ class CreateUsergroupTable extends Migration
     {
         Schema::create('usergroup', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_validator');
+            $table->integer('id_validator')->nullable();
             $table->enum('statut', ['attente', 'actif', 'suspendu'])->default('attente');
             $table->boolean('notification'); 
             $table->timestamps();
 
-             $table->integer('user_ID')->unsigned();
+             $table->integer('user_ID')->unsigned()->nullable();
             $table->foreign('user_ID')
             ->references('id')
             ->on('users')
