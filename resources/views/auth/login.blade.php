@@ -33,6 +33,13 @@
 
 <div class="container">
 
+
+    @if ($errors->has('message'))
+            <div class="alert alert-info">
+                      <strong>{{ $errors->first('message') }}</strong>
+            </div>
+    @endif
+
     <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
         {{ csrf_field() }}
         <div class="login-wrap">
