@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\ballot
+ *
+ * @property-read \App\group $group
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\proposition[] $proposition
+ * @property-read \App\User $users
+ * @mixin \Eloquent
+ */
 class ballot extends Model
 {
 

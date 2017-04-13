@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GroupCreateEvent;
 use App\group;
-use App\User;
+use App\Listeners\GroupCreateListener;
 use App\usergroup;
 use App\Http\Requests\groupRequest;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AnnuaireController;
 class groupController extends Controller
@@ -16,6 +18,7 @@ class groupController extends Controller
    private $_compteur =0;
 
    public function __construct()
+
     {
         $this->middleware('auth');
     }
@@ -55,7 +58,6 @@ class groupController extends Controller
     public function verification_param($id){
         //contenu à venir.
     }
-
 
     public function index(){
         $this->verification();
@@ -111,7 +113,7 @@ class groupController extends Controller
         $usergroup->users()->associate(Auth::user());
         $usergroup->group()->associate($group);
         $usergroup->save();
-
+        \Event::fire(new GroupCreateEvent( $group));
         $this->load_group(); // Pour actualiser la base de donnée.
         return \Redirect::route('create_group')->with(['message' => 'Le group '.$group->name.' a été bien crée.', 'list_group'=> $this->_list_group]);
         //return \Redirect::route('create_group')->with('message', 'Le group '.$group->name.' a été bien crée. ');

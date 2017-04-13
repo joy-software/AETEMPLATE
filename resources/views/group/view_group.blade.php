@@ -26,7 +26,7 @@
 
     <section class="wrapper">
         <h1>Hello la valeur de l'id du groupe est  : {{$id}}</h1>
-        view_group
+
     </section>
 
 @endsection

@@ -60,18 +60,20 @@
                             @endif
                         {!! Form::open(array('route' => 'post_create_group', 'files' => true)) !!}
                             <div class="form-group">
-                                <label for="name">Nom du groupe</label>
+                                <label for="name">Nom du groupe (*)</label>
                                 <input name="name" type="text" class="form-control" id="name" placeholder="Entrer le nom du groupe">
+                                <p class="help-block">Min 5 caractères, Maxi 20 caractères</p>
                             </div>
                             <div class="form-group">
                                 <label for="logo_group">Logo du groupe</label>
                                 {!! Form::file('logo', null) !!}
-                                <p class="help-block">Extension acceptée : jpeg, png,etc...</p>
+                                <p class="help-block">Extensions acceptées : jpeg, png (2Mo maxi)</p>
                             </div>
                             <div class="form-group">
-                                <label for="description_group">Description du groupe</label> <br>
-                                    <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10">
+                                <label for="description_group">Description du groupe (*)</label> <br>
+                                    <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10" placeholder="Description du groupe">
                                     </textarea>
+                                <p class="help-block">Min 10 caractères, Maxi 1000 caractères</p>
                             </div>
 
                             @if(Session::has('error'))
