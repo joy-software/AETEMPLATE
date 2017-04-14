@@ -59,7 +59,7 @@
 
                                     @if(Session::has('message'))
                                         <tr>
-                                            <td><br></td>
+                                            <td>br</td>
                                         </tr>
                                         <tr>
                                             <td>

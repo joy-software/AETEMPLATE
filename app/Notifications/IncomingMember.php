@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class IncomingMember extends Notification
+class IncomingMember extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -48,13 +48,27 @@ class IncomingMember extends Notification
     public function toMail($notifiable)
     {
         $url = url('group/view_group/'.$this->group['id']);
+        if ($this->group['id'] === 1)
+        {
 
-        return (new MailMessage)
-            ->subject($this->group['name'].': Une nouvelle demande d\'adhésion')
-            ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer le groupe: '. $this->group['name'])
-           ->line('Pour valider son adhésion, cliquer sur le lien ci-dessous')
-            ->action('Valider une Adhésion', $url)
-            ->line('Merci pour votre collaboration!');
+            return (new MailMessage)
+                ->subject('Un nouvel adhérent')
+                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer l\'association Promot-Vogt. ')
+                ->line('Pouvez-vous confirmer sur honneur qu\'il est un ancien vogtois ?')
+                ->line('Pour valider son adhésion, cliquer sur le boutton ci-dessous.')
+                ->action('Valider son Adhésion', $url)
+                ->line('Merci pour votre collaboration!');
+        }
+        else
+        {
+
+            return (new MailMessage)
+                ->subject($this->group['name'].': Une nouvelle demande d\'adhésion')
+                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer le groupe: '. $this->group['name'].)
+                ->line('Pour valider son adhésion, cliquer sur le boutton ci-dessous.')
+                ->action('Valider son Adhésion', $url)
+                ->line('Merci pour votre collaboration!');
+        }
     }
 
     /**

@@ -21,7 +21,7 @@ class usergroupTableSeeder extends Seeder
         ]);
         $usergroup->save();
 
-        for($i = 2; $i < 11; $i++){
+        for($i = 2; $i < 6; $i++){
             $usergroup = new usergroup([
                 'statut'=> 'actif',
                 'notification' => 1,
@@ -32,7 +32,7 @@ class usergroupTableSeeder extends Seeder
             $usergroup->save();
         }
 
-        for($i = 2; $i < 5; $i++){
+        for($i = 2; $i < 6; $i++){
             $usergroup = new usergroup([
                 'statut'=> 'actif',
                 'notification' => 1,

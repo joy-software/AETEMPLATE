@@ -46,9 +46,10 @@ class ActivationKeyCreatedNotification extends Notification implements ShouldQue
         return (new MailMessage)
             ->subject('Your Account Activation Key')
             ->greeting('Hello, '.$notifiable->username)
-            ->line('You need to activating your email before you can start using all of our services.')
-            ->action('Activate Your Account', $route)
-            ->line('Thank you for using '. config('app.name'));
+            ->line('Vous devez activer votre compte pour continuer à utiliser nos services.')
+            ->line('Cliquer sur le boutton ci-dessous pour l\'activer')
+            ->action('Activer votre compte', $route)
+            ->line('Merci pour votre collaboration '. config('app.name'));
     }
 
     /**

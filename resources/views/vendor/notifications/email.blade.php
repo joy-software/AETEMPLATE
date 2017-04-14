@@ -90,7 +90,7 @@ $style = [
                                                 @if ($level == 'error')
                                                     Whoops!
                                                 @else
-                                                    Bienvenue!
+                                                    Hello!
                                                 @endif
                                             @endif
                                         </h1>
