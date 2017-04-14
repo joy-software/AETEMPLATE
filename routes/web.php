@@ -217,11 +217,7 @@ Route::get('/group/ballot_group/{id}', [
 
 Route::get('/group/ballot_group', 'groupController@index');
 
-Route::get('activation/key/{activation_key}', [
-    'as' => 'activation_key',
-    'uses' => 'Auth\ActivationKeyController@activateKey'
-]);
-
+Route::get('/activation/key/{activation_key}', ['as' => 'activation', 'uses' => 'Auth\ActivationKeyController@activateKey']);
 Route::get('activation/resend', [
     'as' =>  'activation_key_resend',
     'uses' => 'Auth\ActivationKeyController@showKeyResendForm'
