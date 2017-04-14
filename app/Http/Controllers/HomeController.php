@@ -1,5 +1,8 @@
 <?php
 namespace App\Http\Controllers;
+
+use Auth;
+use App\Notifications\incomingUser;
 use Illuminate\Http\Request;
 class HomeController extends Controller
 {
@@ -19,6 +22,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        //$user->notify(new incomingUser());
         return view('accueil');
     }
     public function auth()
