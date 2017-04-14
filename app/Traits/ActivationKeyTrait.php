@@ -3,8 +3,12 @@
 namespace App\Traits;
 
 //use App\Logic\Activation\ActivationRepository;
+use App\group;
+use App\Notifications\IncomingMember;
 use App\User;
 use App\ActivationKey;
+use App\usergroup;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\ActivationKeyCreatedNotification;
 
@@ -79,6 +83,16 @@ trait ActivationKeyTrait
         // set the user to activated
         $userToActivate->activated = true;
         $userToActivate->save();
+
+        /**Envoie de la notification par mail**/
+        $id_users = usergroup::select('user_id')->where('group_id', '=',1)->where('user_id','!=',$userToActivate->id)->get();
+        $group = group::find(1);
+        foreach ($id_users as $id_user)
+        {
+            $user = User::findorfail($id_user->user_id);
+            $user->notify(new IncomingMember($userToActivate, $group));
+        }
+        /**Fin de l'envoie**/
 
         // delete the activation key
         $activationKey->delete();

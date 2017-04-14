@@ -365,6 +365,7 @@ class groupController extends Controller
             $user->notify(new IncomingMember(Auth::user(), $group_associate));
         }
         /**Fin de l'envoie**/
+
         $this->load_group();
         Session::flash('message', 'Votre demande d\'adhésion a été envoyé avec succès. En attente de validation de votre demande par un membre de ce groupe');
         return redirect()->route('search_group');

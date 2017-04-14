@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Assovogt.org',
+    'env' => env('APP_NAME', 'promot-vogt.org'),
 
     /*
     |--------------------------------------------------------------------------
