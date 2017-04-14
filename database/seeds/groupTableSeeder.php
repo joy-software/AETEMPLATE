@@ -16,7 +16,8 @@ class groupTableSeeder extends Seeder
         $group = new group([
             'name'=> 'Assemblée Générale',
             'description' =>'Le grand groupe assemblée générale',
-            'user_ID' => 1
+            'user_ID' => 1,
+            'logo' => 'logos/default.png'
         ]);
         $group->save();
 
@@ -38,7 +39,8 @@ class groupTableSeeder extends Seeder
         $group = new group([
             'name'=> 'Laboratoire de Cybersécurité',
             'description' =>'Le groupe des stagiaires du Lacy',
-            'user_ID' => 2
+            'user_ID' => 2,
+            'logo' => 'logos/default.png'
         ]);
         $group->save();
 
