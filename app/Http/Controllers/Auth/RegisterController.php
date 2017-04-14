@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -82,5 +83,19 @@ class RegisterController extends Controller
             'photo' => $data['photo']
 
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout($user);
+        $request->session()->flush();
+        $request->session()->regenerate();
+
+        /*return view('auth.register_success')->with('message', 'Inscription réussie. Pour activer votre
+        compte suivez le lien de validation qui vous a été envoyé puis réessayez quelques jours plutard le temps
+         que les membres de promotvogt accepte votre demande d\'adhésion. Merci !');*/
+
+        return redirect()->route('register')->with(['message' => 'Inscription réussie. Pour activer votre
+        compte suivez le lien de validation qui vous a été envoyé à l\'adresse '. $user->email . '. Merci !']);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -53,76 +55,41 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
+        $param = $request->only(['email', 'password', 'statut']);
+        $password = Hash::make($param['password']);
 
+        $user = User::where('email', $param['email'])->get()->first();
 
-        if ($this->attemptLogin($request)) {
+        if (isset($user) && $user != null && Hash::check($param['password'], $user->password)) {
 
-            if ($this->attemptLoginValidation($request)) {
+            if (Hash::check( $param['password'], $user->password) && $user->statut == 'actif') {
 
-                //return $this->sendFailedLoginResponse($request);
-                return $this->sendLoginResponse($request);
+                if ($this->attemptLogin($request)) {
+
+                        return $this->sendLoginResponse($request);
+                }
+
             } else {
 
-                return $this->sendFailedLoginResponseValidation($request);
+                return $this->sendFailedLoginResponse($request, 'message', "Désolé, votre demande 
+                d'adhésion n'a pas encore été validée par les membres de Promotvogt. Merci de réessayez plutard.");
             }
 
-            //return $this->sendLoginResponse($request);
         }
 
         $this->incrementLoginAttempts($request);
 
-        return $this->sendFailedLoginResponse($request);
+        return $this->sendFailedLoginResponse($request, 'email', 'Identifiants incorrects');
     }
 
 
 
-    protected function attemptLoginValidation(Request $request)
-    {
-        return $this->guard()->attempt(
-            array_merge($this->credentials($request), ['statut' => 'actif']), $request->has('remember')
-        );
-    }
-
-    /**
-     * Get the needed authorization credentials from the request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    /*protected function credentials(Request $request)
-    {
-        return array_merge($request->only($this->username(), 'password'), ['statut' => 'actif']);
-    }*/
-
-
-    protected function sendLoginResponse(Request $request)
-    {
-        $request->session()->regenerate();
-
-        $this->clearLoginAttempts($request);
-
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath())->with(['message' => 'bonjour']);
-    }
-
-
-
-
-    protected function sendFailedLoginResponse(Request $request)
+    protected function sendFailedLoginResponse(Request $request, $label, $message)
     {
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
-                $this->username() => 'Identifiants incorrects'
-            ]);
-    }
-
-    protected function sendFailedLoginResponseValidation(Request $request)
-    {
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                'message' => 'En attente de validation'
+                $label => $message
             ]);
     }
 }

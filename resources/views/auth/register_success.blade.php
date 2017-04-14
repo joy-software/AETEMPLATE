@@ -35,9 +35,9 @@
 
 
     @if ($errors->has('message'))
-            <div class="alert alert-block col-lg-9">
-                      <strong>{{ $errors->first('message') }}</strong>
-            </div>
+        <div class="alert alert-block col-lg-9">
+            <strong>{{ $errors->first('message') }}</strong>
+        </div>
     @endif
 
     @if (isset($message))
@@ -46,39 +46,7 @@
         </div>
     @endif
 
-    <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
-        {{ csrf_field() }}
-        <div class="login-wrap">
-            <p class="login-img"><i class="icon_lock_alt"></i></p>
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon_profile"></i></span>
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
-            </div>
-            @if ($errors->has('email'))
-                <span class="help-block">
-                          <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-            @endif
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input id="password" type="password" name="password" class="form-control" placeholder="Password">
-            </div>
 
-            @if ($errors->has('password'))
-                <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-            @endif
-
-            <label class="checkbox">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
-            </label>
-            <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-            <br>
-            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup</a>
-        </div>
-    </form>
 
 
 </div>
