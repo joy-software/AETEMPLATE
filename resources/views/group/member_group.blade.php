@@ -25,7 +25,6 @@
 
 
     <section class="wrapper">
-        <h1>Liste des membres du groupe d'id = {{$id}}</h1>
 
         <style>
             .personal-task > tbody > tr > td:last-child {
@@ -42,42 +41,60 @@
                 </div>
                 <table class="table table-hover personal-task">
                     <tbody>
+
+                    @foreach($tab_user_membre as $user)
+
                     <tr>
                         <td>
-                                    <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
-                                    </span>
+                            <span class="profile-ava">
+                                <img alt="" class="simple" src="/{{$user->logo}}">
+                            </span>
                         </td>
                         <td>
-                            <p class="profile-name">John Doe</p>
-                            <p class="profile-occupation">UX Designer</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                                    <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar-mini.jpg">
-                                    </span>
+                            <p class="profile-name">{{$user->name}}, {$user->surname}}</p>
+                            <p class="profile-occupation">{{$user->profession}}</p>
                         </td>
                         <td>
-                            <p class="profile-name">Rena Rios</p>
-                            <p class="profile-occupation">UX Designer</p>
+                            <p>
+                                {{$user->description}}
+                            </p>
+                        </td>
+
+                        <td>
+                            <?php $role_admin= "admin_".$id_group; $_is_admin = false;?>
+                            @role($role_admin)
+                            <?php $_is_admin = true; ?>
+                                <span class="badge bg-success">Administrateur du groupe</span>
+                            @endrole
+                            <?php
+
+                            if($_is_admin == false)
+                            {
+
+                            if($statut_group[''.$all_group_el->id.''] == 'actif'){
+                            ?>
+                            <span class="badge bg-success">Vous êtes déjà membre de ce groupe</span>
+                            <?php }
+                            else if($statut_group[''.$all_group_el->id.''] == 'attente') {
+                            ?>
+                            <span class="badge bg-info">En attente de validation de votre adhésion</span>
+                            <?php   }
+                            else if($statut_group[''.$all_group_el->id.''] == 'suspendu'){
+                            ?>
+                            <span class="badge bg-important">Vous avez été suspendu de ce groupe</span>
+                            <?php }
+
+                            }
+
+                            ?>
+
+
+
                         </td>
 
                     </tr>
-                    <tr>
-                        <td>
-                                    <span class="profile-ava">
-                                        <img alt="" class="simple" src="img/avatar-mini2.jpg">
-                                    </span>
-                        </td>
-                        <td>
-                            <p class="profile-name">Robin Mathis</p>
-                            <p class="profile-occupation">UX Designer</p>
-                        </td>
 
-                    </tr>
-
+                    @endforeach
                     </tbody>
                 </table>
             </section>

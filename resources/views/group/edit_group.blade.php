@@ -25,7 +25,45 @@
 
 
     <section class="wrapper">
-        <h1>Editer le groupe d'id = {{$id}}</h1>
+
+        <div class="col-lg-6">
+            <section class="panel">
+                <header class="panel-heading">
+                    Editer le groupe
+                </header>
+                <div class="panel-body">
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    {!! Form::model($group, [
+                          'method' => 'POST',
+                          'route' => 'valid_edit_group'
+                        ]) !!}
+
+                    <div class="form-group">
+                        {!! Form::label('name', 'Nom du groupe', ['class' => 'control-label']) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+
+                        <input type="hidden" value="{{$group->id}}" name="id">
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('description', 'Description du groupe', ['class' => 'control-label']) !!}
+                        {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    {!! Form::submit('Mettre à jour les informations du groupe', ['class' => 'btn btn-primary']) !!}
+
+                    {!! Form::close() !!}
+
+                </div>
+            </section>
+        </div>
 
     </section>
 

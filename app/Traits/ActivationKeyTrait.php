@@ -4,7 +4,7 @@ namespace App\Traits;
 
 //use App\Logic\Activation\ActivationRepository;
 use App\User;
-//use App\Models\ActivationKey;
+use App\ActivationKey;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\ActivationKeyCreatedNotification;
 
@@ -44,9 +44,9 @@ trait ActivationKeyTrait
     {
         //if user is already activated, then there is nothing to do
         if ($user->activated) {
-            return redirect()->route('front.home')
-                ->with('message', 'This account is already activated')
-                ->with('status', 'success');
+            return redirect()->route('login')
+                ->with('message', 'Ce compte est déjà activé');
+
         }
 
         // check to see if we already have an activation key for this user. If so, use it. If not, create one
@@ -71,8 +71,8 @@ trait ActivationKeyTrait
             ->first();
 
         if (empty($userToActivate)) {
-            return redirect()->route('front.home')
-                ->with('message', 'We could not find a user with this activation key! Please register to get a valid key')
+            return redirect()->route('login')
+                ->with('message', 'Il n\'y a pas d\'utilisateur associé à cette clé d\'activation ! Inscrivez vous pour avoir une clé valide')
                 ->with('status', 'success');
         }
 

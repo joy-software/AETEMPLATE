@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\ActivationKey;
-use App\Models\User;
+use App\ActivationKey;
+use App\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -40,8 +40,8 @@ class ActivationKeyController extends Controller
                 'email'                 => 'required|email',
             ],
             [
-                'email.required'        => 'Email is required',
-                'email.email'           => 'Email is invalid',
+                'email.required'        => 'L\'email est obligatoire',
+                'email.email'           => 'Email invalide',
             ]
         );
 
