@@ -2,23 +2,30 @@
 
 namespace App\Notifications;
 
+use App\group;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class incomingUser extends Notification implements ShouldQueue
+class IncomingMember extends Notification
 {
     use Queueable;
 
+    public $incomingMember;
+    public $group;
+
     /**
      * Create a new notification instance.
-     *
+     * @param a new member comming
+     * @param group : the group where there is a new demand of admission
      * @return void
      */
-    public function __construct()
+    public function __construct(User $newMember,group $group)
     {
-        //
+        $this->incomingMember = $newMember;
+        $this->group = $group;
     }
 
     /**
@@ -40,13 +47,14 @@ class incomingUser extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $url = url('group/member_group/1');
+        $url = url('group/view_group/'.$this->group['id']);
 
         return (new MailMessage)
-                    ->subject('New admission request')
-                    ->line('The introduction to the notification.')
-                    ->action('Validate this user', $url)
-                    ->line('Thank you for using our application!');
+            ->subject($this->group['name'].': Une nouvelle demande d\'adhésion')
+            ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer le groupe: '. $this->group['name'])
+           ->line('Pour valider son adhésion, cliquer sur le lien ci-dessous')
+            ->action('Valider une Adhésion', $url)
+            ->line('Merci pour votre collaboration!');
     }
 
     /**

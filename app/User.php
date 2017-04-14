@@ -30,6 +30,7 @@ class User extends Authenticatable
         'country',
         'phone',
         'statut',
+        'activated',
         'photo'
     ];
 
