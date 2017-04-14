@@ -182,13 +182,13 @@ Route::post('/group/post_create_group', [
 
 //Route::get('/group/view_group', 'groupController@index');
 
-// voir les groupes
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
     'uses'=>'groupController@view_group'
 ]);
 
 Route::get('/group/view_group', 'groupController@index');
+
 
 
 //Supprimer un groupe
@@ -231,6 +231,7 @@ Route::post('/group/valid_invitation_group', [
 Route::get('/group/valid_invitation_group', 'groupController@search_group');
 
 //Liste des membres d'un groupe.
+
 Route::get('/group/member_group/{id}', [
     'as'=>'member_group',
     'uses'=>'groupController@member_group'
@@ -238,16 +239,12 @@ Route::get('/group/member_group/{id}', [
 
 Route::get('/group/member_group', 'groupController@index');
 
-
-//Les évènements liés à un groupe.
 Route::get('/group/event_group/{id}', [
     'as'=>'event_group',
     'uses'=>'groupController@event_group'
 ]);
 Route::get('/group/event_group', 'groupController@index');
 
-
-//les annonces liées à un groupe
 Route::get('/group/ads_group/{id}', [
     'as'=>'ads_group',
     'uses'=>'groupController@ads_group'
@@ -255,8 +252,6 @@ Route::get('/group/ads_group/{id}', [
 
 Route::get('/group/ads_group', 'groupController@index');
 
-
-//les scrutins liés à un groupe
 Route::get('/group/ballot_group/{id}', [
     'as'=>'ballot_group',
     'uses'=>'groupController@ballot_group'
@@ -264,3 +259,17 @@ Route::get('/group/ballot_group/{id}', [
 
 Route::get('/group/ballot_group', 'groupController@index');
 
+Route::get('activation/key/{activation_key}', [
+    'as' => 'activation_key',
+    'uses' => 'Auth\ActivationKeyController@activateKey'
+]);
+
+Route::get('activation/resend', [
+    'as' =>  'activation_key_resend',
+    'uses' => 'Auth\ActivationKeyController@showKeyResendForm'
+]);
+
+Route::post('activation/resend', [
+    'as' =>  'activation_key_resend.post',
+    'uses' => 'Auth\ActivationKeyController@resendKey'
+]);
