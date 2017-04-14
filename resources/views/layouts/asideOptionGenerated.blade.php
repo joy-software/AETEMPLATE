@@ -15,21 +15,20 @@
 
 
 @if($list_group != null)
-    @foreach($list_group as $group)
+    @foreach($list_group as $list_group_el)
         @include('layouts/asideOptionII', [
-            'id' => $group->id,
-            'optionName' => $group->name,
-            'url_image' => $group->logo,
+            'id' => $list_group_el['id'],
+            'optionName' => $list_group_el['name'],
+            'url_image' => $list_group_el['logo'],
             'retractable' => 'true',
             'subOptions' =>
                 [
-                    ['link'=>url('/group/view_group/'.$group->id), 'classIconOption' => 'icon_house_alt', 'name'=>'Accueil'],
-                    ['link' => url('/group/member_group/'.$group->id), 'name' => 'Membres'],
-                    ['link' => url('/group/ads_group/'.$group->id), 'name' => 'Annonces'],
-                    ['link' => url('/group/event_group/'.$group->id), 'name' => 'Evenements'],
-                    ['link' => url('/group/ballot_group/'.$group->id), 'name' => 'Scrutin']
+                    ['link'=>url('/group/view_group/'.$list_group_el['id']), 'classIconOption' => 'icon_house_alt', 'name'=>'Accueil'],
+                    ['link' => url('/group/member_group/'.$list_group_el['id']), 'name' => 'Membres'],
+                    ['link' => url('/group/ads_group/'.$list_group_el['id']), 'name' => 'Annonces'],
+                    ['link' => url('/group/event_group/'.$list_group_el['id']), 'name' => 'Evenements'],
+                    ['link' => url('/group/ballot_group/'.$list_group_el['id']), 'name' => 'Scrutin']
                 ]
-
             ])
 
     @endforeach

@@ -27,6 +27,64 @@
     <section class="wrapper">
         <h1>Liste des membres du groupe d'id = {{$id}}</h1>
 
+        <style>
+            .personal-task > tbody > tr > td:last-child {
+                text-align: left;
+            }
+        </style>
+        <div class="col-lg-4">
+            <!--project team start-->
+            <section class="panel">
+                <div class="panel-body project-team">
+                    <div class="task-progress">
+                        <h1>Project Team</h1>
+                    </div>
+                </div>
+                <table class="table table-hover personal-task">
+                    <tbody>
+                    <tr>
+                        <td>
+                                    <span class="profile-ava">
+                                        <img alt="" class="simple" src="img/avatar1_small.jpg">
+                                    </span>
+                        </td>
+                        <td>
+                            <p class="profile-name">John Doe</p>
+                            <p class="profile-occupation">UX Designer</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                                    <span class="profile-ava">
+                                        <img alt="" class="simple" src="img/avatar-mini.jpg">
+                                    </span>
+                        </td>
+                        <td>
+                            <p class="profile-name">Rena Rios</p>
+                            <p class="profile-occupation">UX Designer</p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                                    <span class="profile-ava">
+                                        <img alt="" class="simple" src="img/avatar-mini2.jpg">
+                                    </span>
+                        </td>
+                        <td>
+                            <p class="profile-name">Robin Mathis</p>
+                            <p class="profile-occupation">UX Designer</p>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </section>
+            <!--Project Team end-->
+        </div>
+
+
     </section>
 
 @endsection
