@@ -210,8 +210,12 @@ Route::get('/group/edit_group/{id}', [
     'as'=>'edit_group',
     'uses'=>'groupController@edit_group'
 ]);
+Route::post('/group/valid_edit_group',[
+    'as'=> 'valid_edit_group',
+    'uses'=>'groupController@valid_edit_group'
+    ]);
 Route::get('/group/edit_group', 'groupController@search_group');
-
+Route::get('/group/valid_edit_group', 'groupController@search_group');
 
 
 //demander une invitation à un groupe.

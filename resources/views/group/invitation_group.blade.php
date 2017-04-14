@@ -63,7 +63,7 @@
                                 </div>
 
                             </footer>
-                        @endif
+
                     </div>
                 </section>
 
