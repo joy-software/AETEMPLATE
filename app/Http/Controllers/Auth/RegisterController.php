@@ -24,6 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use ActivationKeyTrait;
 
     /**
      * Where to redirect user after registration.
@@ -70,11 +71,11 @@ class RegisterController extends Controller
                 'surname.max'    => 'Le prénom doit contenir au plus  100 caractères',
                 'email.required'        => 'Ce champ est obligatoire',
                 'email.email'           => 'Addresse email invalide',
-                'email.unique:users'           => 'Cette adresse est déjà utilisée',
+                'email.unique'           => 'Cette adresse est déjà utilisée',
                 'password.required'     => 'Ce champ est obligatoire',
                 'password.min'          => 'Le mot de passe doit contenir au moin 6 caractères',
                 'password_confirmation.required'    => 'Ce champ est obligatoire',
-                'password_confirmation.same:password'    => 'Est différent du mot de passe',
+                'password_confirmation.same'    => 'Ce champ est différent du mot de passe',
             ]
         );
 
@@ -103,13 +104,15 @@ class RegisterController extends Controller
             'profession' => $data['profession'],
             'description' => $data['description'],
             'password' => Hash::make($data['password']),
-            'photo' => $data['photo']
+            'photo' => $data['photo'],
+            'activated' => !config('settings.send_activation_email')
 
         ]);
     }
 
     protected function registered(Request $request, $user)
     {
+        $this->queueActivationKeyNotification($user);
         $this->guard()->logout($user);
         $request->session()->flush();
         $request->session()->regenerate();

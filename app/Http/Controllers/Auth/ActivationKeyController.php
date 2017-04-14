@@ -59,9 +59,7 @@ class ActivationKeyController extends Controller
         if (Auth::check()) {
             if (auth()->user()->activated) {
 
-                return redirect()->route('admin.dashboard')
-                    ->with('message', 'Your email is already activated.')
-                    ->with('status', 'success');
+                return redirect()->route('accueil');
             }
 
         }
@@ -72,8 +70,8 @@ class ActivationKeyController extends Controller
 
         if (empty($activationKey)) {
 
-            return redirect()->route('front.home')
-                ->with('message', 'The provided activation key appears to be invalid')
+            return redirect()->route('login')
+                ->with('message', 'La clé d\'activation utilisée est invalide')
                 ->with('status', 'warning');
 
         }
@@ -83,7 +81,9 @@ class ActivationKeyController extends Controller
 
         // redirect to the login page after a successful activation
         return redirect()->route('login')
-            ->with('message', 'You successfully activated your email! You can now login')
+            ->with('message', "Félicitation votre compte est activé! Cependant l'accès à l'espace membre
+            nécessite que les membres de Promotvogt acceptent votre demande d'adhésion. Donc réessayer dans
+            quelques jours pour profiter de l'application")
             ->with('status', 'success');
 
 

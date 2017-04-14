@@ -22,7 +22,7 @@ and open the template in the editor.
 
 <div class="coulissant" id="divCoulisse">
 
-    {{ \Illuminate\Support\Facades\Auth::user()->name }}{{ \Illuminate\Support\Facades\Auth::user()->name }}
+    {{ route('activation', ['activation_key' => 'bonjour']) }}
     <hr/>
 
 </div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Events\GroupCreateEvent;
 use App\group;
 use App\Listeners\GroupCreateListener;
+use App\Notifications\IncomingMember;
+use App\User;
 use App\usergroup;
 use App\Http\Requests\groupRequest;
 use Illuminate\Support\Facades\Auth;
@@ -361,6 +363,15 @@ class groupController extends Controller
         $usergroup->users()->associate(Auth::user());
         $usergroup->group()->associate($group_associate);
         $usergroup->save();
+
+        /**Envoie de la notification par mail**/
+        $id_users = usergroup::select('user_id')->where('group_id', '=',$id_group)->where('user_id','!=',Auth::id())->get();
+        foreach ($id_users as $id_user)
+        {
+            $user = User::findorfail($id_user->user_id);
+            $user->notify(new IncomingMember(Auth::user(), $group_associate));
+        }
+        /**Fin de l'envoie**/
 
         $this->load_group();
         Session::flash('message', 'Votre demande d\'adhésion a été envoyé avec succès. En attente de validation de votre demande par un membre de ce groupe');
