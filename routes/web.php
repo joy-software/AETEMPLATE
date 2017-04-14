@@ -190,6 +190,48 @@ Route::get('/group/view_group/{id}', [
 Route::get('/group/view_group', 'groupController@index');
 
 
+
+//Supprimer un groupe
+Route::get('/group/del_group/{id}', [
+    'as'=>'del_group',
+    'uses'=>'groupController@del_group'
+]);
+Route::post('/group/valid_del_group', [
+    'as'=>'valid_del_group',
+    'uses'=>'groupController@valid_del_group'
+]);
+Route::get('/group/valid_del_group', 'groupController@search_group');
+Route::get('/group/del_group', 'groupController@search_group');
+
+
+
+//editer un groupe
+Route::get('/group/edit_group/{id}', [
+    'as'=>'edit_group',
+    'uses'=>'groupController@edit_group'
+]);
+Route::post('/group/valid_edit_group',[
+    'as'=> 'valid_edit_group',
+    'uses'=>'groupController@valid_edit_group'
+    ]);
+Route::get('/group/edit_group', 'groupController@search_group');
+Route::get('/group/valid_edit_group', 'groupController@search_group');
+
+
+//demander une invitation à un groupe.
+Route::get('/group/invitation_group/{id}', [
+    'as'=>'invitation_group',
+    'uses'=>'groupController@invitation_group'
+]);
+Route::get('/group/invitation_group', 'groupController@search_group');
+Route::post('/group/valid_invitation_group', [
+    'as'=>'valid_invitation_group',
+    'uses'=>'groupController@valid_invitation_group'
+]);
+Route::get('/group/valid_invitation_group', 'groupController@search_group');
+
+//Liste des membres d'un groupe.
+
 Route::get('/group/member_group/{id}', [
     'as'=>'member_group',
     'uses'=>'groupController@member_group'

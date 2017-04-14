@@ -21,7 +21,6 @@ class groupController extends Controller
    private $_all_group; //Liste de tous les groupes présent dans la bd.
    private $_id_list_group; //c'est le tableau contenant les id des groupes auxquels j'appartiens.
 
-
    private $_statut_group; // c'est un tableau clé valeur. clé = id_groupe, valeur = statut_dans_le_groupe.
 
    public function __construct()
@@ -159,6 +158,10 @@ class groupController extends Controller
         return view('group.view_group',['list_group'=> $this->_list_group, 'id'=>$id]);
     }
 
+    /**
+     * @param $id = id_du groupe où on veut les paramètres.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function member_group($id){
         $this->load_group();
         $this->verification_param($id);
@@ -166,10 +169,28 @@ class groupController extends Controller
         if($id==null){
             return view('group.index',['list_group'=> $this->_list_group]);
         }
-       // $user_group_i = DB::table('usergroup')
-       //     ->select('usergroup.')
 
-        return view('group.member_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+        if(! in_array($id, $this->_id_list_group)){
+            //Il n'est pas de ce groupe.
+            return redirect()->back();
+        }
+
+        $id_users = DB::table('usergroup')->select('id')->where('group_ID','=',$id)->get();
+
+        $tab_user_membre[]=null;
+        foreach ($id_users as $el){
+            $tab_user_membre[]= DB::table('users')->find($el->id);
+        }
+
+        return view('group.member_group',
+            [
+              'tab_user_membre'=>$tab_user_membre,
+              'list_group'=> $this->_list_group,
+              'all_group'=>$this->_all_group,
+              'id_list_group'=>$this->_id_list_group,
+              'statut_group'=>$this->_statut_group,
+                'id_group'=>$id
+            ]);
     }
 
     public function ads_group($id){
@@ -201,15 +222,53 @@ class groupController extends Controller
         return view('group.ballot_group',['list_group'=> $this->_list_group, 'id'=>$id]);
     }
 
+    /***
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Function réservé uniquement aux administrateurs du groupe.
+     */
     public function edit_group($id){
         $this->load_group();
         $this->verification_param($id);
         if($id==null){
-            $this->search_group();
+            return redirect()->route('search_group');
         }
+
+        if(Auth::user()->hasRole('admin_'.$id)){
+            $group = group::find($id);
+            //$group = DB::table('group')->whereId($id)->first();
+            return view('group.edit_group',['list_group'=> $this->_list_group,'group'=>$group]);
+        }
+        else {
+            return redirect()->route('search_group');
+        }
+
         //return response()->download($pathToFile, $name, $headers); $name c'est le nom du fichier à afficher à l'utilisateur.
-        return view('group.edit_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+       // return view('group.edit_group',['list_group'=> $this->_list_group, 'group'=>$group]);
     }
+
+    public function valid_edit_group(Request $request){
+
+        $group = group::findOrFail($request->get('id'));
+        $this->validate($request, [
+            'name' => 'required|min:5|max:20',
+            'description' => 'required|min:5|max:1000'
+        ]);
+
+        $input = $request->all();
+        $group->fill($input)->save();
+        Session::flash('message', 'le groupe '.$group->name.' a été modifié avec succès');
+        return redirect()->route('search_group');
+
+    }
+
+    /***
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * Fonction reservée uniquement aux administrateurs du groupe.
+     */
 
     public function del_group($id){
         $this->load_group();
@@ -298,7 +357,7 @@ class groupController extends Controller
 
         $this->load_group();
         Session::flash('message', 'Votre demande d\'adhésion a été envoyé avec succès. En attente de validation de votre demande par un membre de ce groupe');
-        return view('group.search_group',['list_group'=> $this->_list_group]);
+        return redirect()->route('search_group');
     }
 
 }
