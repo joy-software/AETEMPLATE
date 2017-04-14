@@ -44,25 +44,92 @@ class UserTableSeeder extends Seeder
 
         $user->attachRole($owner);
 
-        for($i = 0; $i < 10; $i++){
 
-            $user = new User([
-                    'name'=> 'Nom'.$i,
-                    'surname' =>'Surname'.$i,
-                    'sex' => $sexe[rand(0,1)],
-                    'profession' => 'profession'.$i,
-                    'email' => $i.'email@gmail.com',
-                    'password'=> Hash::make('password'.$i),
-                    'promotion'=> rand(1996, 2015),
-                    'country'=> $pays[rand(0,3)],
-                    'phone'=> 'phoneNumber'.$i,
-                    'statut'=> 'actif',
-                    'photo'=> 'none',
-                'description' => 'je m\'appelle Nom'.$i,
-                ]);
-            $user->save();
 
-        }
+        $user = new User([
+                'name'=> 'Yoba',
+                'surname' =>'Rostand',
+                'sex' => 'M',
+                'profession' => 'ing informaticien',
+                'email' => 'rostandyoba2014@gmail.com',
+                'password'=> Hash::make('password'),
+                'promotion'=> rand(1996, 2015),
+                'country'=> $pays[rand(0,3)],
+                'phone'=> 'phoneNumber',
+                'statut'=> 'actif',
+                'activated'=> 1,
+                'photo'=> 'none',
+            'description' => 'je suis un demarreur',
+            ]);
+        $user->save();
+
+        $user = new User([
+            'name'=> 'Joy',
+            'surname' =>'Jedidja',
+            'sex' => 'M',
+            'profession' => 'ing informaticien',
+            'email' => 'joyjedid@gmail.com',
+            'password'=> Hash::make('password'),
+            'promotion'=> rand(1996, 2015),
+            'country'=> $pays[rand(0,3)],
+            'phone'=> 'phoneNumber',
+            'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'none',
+            'description' => 'je suis un demarreur',
+        ]);
+        $user->save();
+
+        $user = new User([
+            'name'=> 'Yobi',
+            'surname' =>'York',
+            'sex' => 'M',
+            'profession' => 'ing informaticien',
+            'email' => 'yobarostand@yahoo.fr',
+            'password'=> Hash::make('password'),
+            'promotion'=> rand(1996, 2015),
+            'country'=> $pays[rand(0,3)],
+            'phone'=> 'phoneNumber',
+            'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'none',
+            'description' => 'je suis un demarreur',
+        ]);
+        $user->save();
+
+        $user = new User([
+            'name'=> 'Michel',
+            'surname' =>'Bayoi',
+            'sex' => 'M',
+            'profession' => 'ing informaticien',
+            'email' => 'wmbayoi@gmail.com',
+            'password'=> Hash::make('password'),
+            'promotion'=> rand(1996, 2015),
+            'country'=> $pays[rand(0,3)],
+            'phone'=> 'phoneNumber',
+            'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'none',
+            'description' => 'je suis un demarreur',
+        ]);
+        $user->save();
+
+        $user = new User([
+            'name'=> 'Jedidja',
+            'surname' =>'Joy',
+            'sex' => 'M',
+            'profession' => 'ing informaticien',
+            'email' => 'jedidjajoy@yahoo.fr',
+            'password'=> Hash::make('password'),
+            'promotion'=> rand(1996, 2015),
+            'country'=> $pays[rand(0,3)],
+            'phone'=> 'phoneNumber',
+            'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'none',
+            'description' => 'je suis un demarreur',
+        ]);
+        $user->save();
 
 
     }
