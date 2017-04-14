@@ -59,21 +59,8 @@
                           <strong>{{ $errors->first('email') }}</strong>
                     </span>
             @endif
-            <div class="input-group">
-                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input id="password" type="password" name="password" class="form-control" placeholder="Password">
-            </div>
 
-            @if ($errors->has('password'))
-                <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-            @endif
 
-            <label class="checkbox">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
-            </label>
             <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
             <br>
             <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup</a>

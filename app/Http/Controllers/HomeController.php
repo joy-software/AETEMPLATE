@@ -34,6 +34,10 @@ class HomeController extends Controller
         return view('profile/index');
     }
 
+    public function tester(){
+        return view('test/testIndex');
+    }
+
 
 }
 

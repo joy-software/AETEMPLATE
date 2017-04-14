@@ -42,11 +42,12 @@ class ActivationKeyCreatedNotification extends Notification implements ShouldQue
      */
     public function toMail($notifiable)
     {
+        $route = route('activation', array('activation_key' => $this->activationKey->activation_key, 'email' => $notifiable->email));
         return (new MailMessage)
             ->subject('Your Account Activation Key')
             ->greeting('Hello, '.$notifiable->username)
-            ->line('You need to activate your email before you can start using all of our services.')
-            ->action('Activate Your Account', route('activation_key', ['activation_key' => $this->activationKey->activation_key, 'email' => $notifiable->email]))
+            ->line('You need to activating your email before you can start using all of our services.')
+            ->action('Activate Your Account', $route)
             ->line('Thank you for using '. config('app.name'));
     }
 
