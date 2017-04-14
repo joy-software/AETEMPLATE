@@ -20,10 +20,7 @@ class AnnuaireController extends Controller
 
     private $_users = null;
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
     public function index()
     {
         $users =DB::table('users')->get();

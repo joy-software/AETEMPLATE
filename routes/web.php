@@ -182,6 +182,7 @@ Route::post('/group/post_create_group', [
 
 //Route::get('/group/view_group', 'groupController@index');
 
+// voir les groupes
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
     'uses'=>'groupController@view_group'
@@ -190,6 +191,42 @@ Route::get('/group/view_group/{id}', [
 Route::get('/group/view_group', 'groupController@index');
 
 
+//Supprimer un groupe
+Route::get('/group/del_group/{id}', [
+    'as'=>'del_group',
+    'uses'=>'groupController@del_group'
+]);
+Route::post('/group/valid_del_group', [
+    'as'=>'valid_del_group',
+    'uses'=>'groupController@valid_del_group'
+]);
+Route::get('/group/valid_del_group', 'groupController@search_group');
+Route::get('/group/del_group', 'groupController@search_group');
+
+
+
+//editer un groupe
+Route::get('/group/edit_group/{id}', [
+    'as'=>'edit_group',
+    'uses'=>'groupController@edit_group'
+]);
+Route::get('/group/edit_group', 'groupController@search_group');
+
+
+
+//demander une invitation à un groupe.
+Route::get('/group/invitation_group/{id}', [
+    'as'=>'invitation_group',
+    'uses'=>'groupController@invitation_group'
+]);
+Route::get('/group/invitation_group', 'groupController@search_group');
+Route::post('/group/valid_invitation_group', [
+    'as'=>'valid_invitation_group',
+    'uses'=>'groupController@valid_invitation_group'
+]);
+Route::get('/group/valid_invitation_group', 'groupController@search_group');
+
+//Liste des membres d'un groupe.
 Route::get('/group/member_group/{id}', [
     'as'=>'member_group',
     'uses'=>'groupController@member_group'
@@ -197,12 +234,16 @@ Route::get('/group/member_group/{id}', [
 
 Route::get('/group/member_group', 'groupController@index');
 
+
+//Les évènements liés à un groupe.
 Route::get('/group/event_group/{id}', [
     'as'=>'event_group',
     'uses'=>'groupController@event_group'
 ]);
 Route::get('/group/event_group', 'groupController@index');
 
+
+//les annonces liées à un groupe
 Route::get('/group/ads_group/{id}', [
     'as'=>'ads_group',
     'uses'=>'groupController@ads_group'
@@ -210,9 +251,12 @@ Route::get('/group/ads_group/{id}', [
 
 Route::get('/group/ads_group', 'groupController@index');
 
+
+//les scrutins liés à un groupe
 Route::get('/group/ballot_group/{id}', [
     'as'=>'ballot_group',
     'uses'=>'groupController@ballot_group'
 ]);
 
 Route::get('/group/ballot_group', 'groupController@index');
+
