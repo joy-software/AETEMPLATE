@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Traits\ActivationKeyTrait;
 
 class RegisterController extends Controller
 {
@@ -50,13 +51,35 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
 
-        //return $data;
+        $validator = Validator::make($data,
+            [
+                'name'               => 'required|max:100|min:4',
+                'surname'            => 'required|max:100|min:4',
+                'email'                 => 'required|email|unique:users',
+                'password'              => 'required|min:6|confirmed',
+                'password_confirmation' => 'required|same:password',
+
+            ],
+            [
+                'name.required'     => 'Ce champs est obligatoire',
+                'name.min'           => 'Le nom doit contenir au moins 4 caractères',
+                'name.max'           => 'Le nom doit contenir au plus 100 caractères',
+                'surname.required'   => 'Ce champ est obligatoire',
+                'surname.min'    => 'Le prénom doit contenir au moins  4 caractères',
+                'surname.max'    => 'Le prénom doit contenir au plus  100 caractères',
+                'email.required'        => 'Ce champ est obligatoire',
+                'email.email'           => 'Addresse email invalide',
+                'email.unique:users'           => 'Cette adresse est déjà utilisée',
+                'password.required'     => 'Ce champ est obligatoire',
+                'password.min'          => 'Le mot de passe doit contenir au moin 6 caractères',
+                'password_confirmation.required'    => 'Ce champ est obligatoire',
+                'password_confirmation.same:password'    => 'Est différent du mot de passe',
+            ]
+        );
+
+        return $validator;
+
     }
 
     /**

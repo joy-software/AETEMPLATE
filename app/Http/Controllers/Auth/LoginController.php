@@ -44,7 +44,7 @@ class LoginController extends Controller
 
 
 
-    public function login(Request $request)
+    /*public function login(Request $request)
     {
         $this->validateLogin($request);
 
@@ -80,16 +80,53 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request, 'email', 'Identifiants incorrects');
-    }
+    }*/
 
 
 
-    protected function sendFailedLoginResponse(Request $request, $label, $message)
+    /*protected function sendFailedLoginResponse(Request $request, $label = false, $message = false)
     {
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
                 $label => $message
             ]);
+    }*/
+
+    protected function authenticated(Request $request, $user)
+    {
+
+        if ($user->statut == 'attente') {
+
+            $this->guard()->logout($user);
+            $request->session()->flush();
+            $request->session()->regenerate();
+
+            return redirect()->back()->with(['message' => 'Désolé, votre demande 
+                d\'adhésion n\'a pas encore été validée par les membres de Promotvogt. Merci de réessayez plutard.']);
+
+        }
+
+    }
+
+
+    protected function validator(array $data)
+    {
+
+        $validator = Validator::make($data,
+            [
+                'email'                 => 'required|email',
+                'password'              => 'required|min:6|confirmed',
+            ],
+            [
+                'email.required'        => 'L\'email est obligatoire',
+                'email.email'           => 'Email invalide',
+                'password.required'     => 'Le mot de passe est obligatoire',
+
+            ]
+        );
+
+        return $validator;
+
     }
 }

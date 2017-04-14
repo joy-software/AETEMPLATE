@@ -17,8 +17,8 @@
 div .alert-block {
 
     margin: 100px 100px 0px 150px;
-    opacity: 60 !important;
+    opacity: 100 !important;
     text-align: center;
     border: 1px solid #B0B6BE;
-    background: rgba(213,215,222,0.9);
+    background: rgba(213,215,222,0.7);
 }
