@@ -155,7 +155,11 @@ class groupController extends Controller
         if($id==null){
             return view('group.index',['list_group'=> $this->_list_group]);
         }
-        return view('group.view_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+        $group = group::find($id);
+        return view('group.view_group',
+            ['list_group'=> $this->_list_group,
+                'group'=>$group
+            ]);
     }
 
     /**
@@ -175,21 +179,24 @@ class groupController extends Controller
             return redirect()->back();
         }
 
-        $id_users = DB::table('usergroup')->select('id')->where('group_ID','=',$id)->get();
+        $id_users = DB::table('usergroup')->select('user_id')->where('group_ID','=',$id)->get();
 
         $tab_user_membre[]=null;
+        $compt =0;
         foreach ($id_users as $el){
-            $tab_user_membre[]= DB::table('users')->find($el->id);
+
+            $tab_user_membre[$compt]= DB::table('users')->find($el->user_id);
+            $compt++;
         }
+        $group = group::find($id);
 
         return view('group.member_group',
             [
+               'users_group'=>$this->_users_group,
               'tab_user_membre'=>$tab_user_membre,
-              'list_group'=> $this->_list_group,
-              'all_group'=>$this->_all_group,
-              'id_list_group'=>$this->_id_list_group,
-              'statut_group'=>$this->_statut_group,
-                'id_group'=>$id
+              'id_group'=>$id,
+                'list_group'=>$this->_list_group,
+                'name_group'=> $group->name
             ]);
     }
 
