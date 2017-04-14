@@ -95,6 +95,16 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        if ($user->activated == 0) {
+
+            $this->guard()->logout($user);
+            $request->session()->flush();
+            $request->session()->regenerate();
+
+            return redirect()->back()->with(['message' => "Accès impossible : compte non validé. Pour accéder à l'application
+                                            suivez le lien de validation qui vous a été envoyé par mail à l'addresse $user->email."]);
+
+        }
 
         if ($user->statut == 'attente') {
 
