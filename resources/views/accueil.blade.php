@@ -66,6 +66,9 @@
 
 
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <div class="alert alert-success"> {{ Session::get('success') }} </div>
+    @endif
 
     <section class="wrapper">
         <!--overview start-->

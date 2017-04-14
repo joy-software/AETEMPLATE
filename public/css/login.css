@@ -13,3 +13,12 @@
     font-size: 16px;
     border-radius: 0;
 }
+
+div .alert-block {
+
+    margin: 100px 100px 0px 150px;
+    opacity: 60 !important;
+    text-align: center;
+    border: 1px solid #B0B6BE;
+    background: rgba(213,215,222,0.9);
+}

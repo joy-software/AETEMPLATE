@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
             $table->enum('statut', ['attente', 'actif', 'suspendu'])->default('attente');
+            $table->boolean('activated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

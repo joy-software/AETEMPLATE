@@ -30,6 +30,7 @@ class User extends Authenticatable
         'country',
         'phone',
         'statut',
+        'activated',
         'photo'
     ];
 
@@ -68,4 +69,13 @@ class User extends Authenticatable
         return $this->hasMany('App\contribution','user_ID');
     }
 
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email;
+    }
 }
