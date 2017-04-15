@@ -59,7 +59,7 @@
 
                                     @if(Session::has('message'))
                                         <tr>
-                                            <td>br</td>
+                                            <td><br></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -119,7 +119,7 @@
 
                                          if($_is_admin == false)
                                              {
-                                            if(in_array($all_group_el->id, $id_list_group)){
+                                            if(array_key_exists(''.$all_group_el->id.'', $statut_group)){
                                                 if($statut_group[''.$all_group_el->id.''] == 'actif'){
                                                     ?>
                                                     <span class="badge bg-success">Vous êtes déjà membre de ce groupe</span>
@@ -139,7 +139,8 @@
                                                 ?>
                                             <a class="btn btn-primary" href="{{ route('invitation_group', $all_group_el->id) }}">Adhérer à ce groupe</a>
                                             <?php }
-                                            }
+                                             }
+
                                                 ?>
 
                                     </td>
