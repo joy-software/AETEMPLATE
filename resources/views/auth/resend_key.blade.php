@@ -46,6 +46,12 @@
         </div>
     @endif
 
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <form id="login-form"class="login-form" method="post" action="{{ route('activation_key_resend') }}">
         {{ csrf_field() }}
         <div class="login-wrap">
