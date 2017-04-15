@@ -53,27 +53,37 @@ class ActivationKeyController extends Controller
         return view('auth.resend_key');
     }
 
-    public function activateKey($activation_key)
+    public function activateKey($activation_key, Request $request)
     {
-        // determine if the user is logged-in already
-        if (Auth::check()) {
-            if (auth()->user()->activated) {
-
-                return redirect()->route('accueil');
-            }
-
-        }
-
-        // get the activation key and chck if its valid
+        // get the activation
         $activationKey = ActivationKey::where('activation_key', $activation_key)
             ->first();
 
+        // determine if the user is logged-in already
+
+        if (Auth::check()) {
+
+            $userToActivate = User::where('id', $activationKey->user_id)->first();
+
+            if (auth()->user()->activated && !empty($userToActivate)) {
+
+
+                if(Auth::user()->id == $userToActivate->id){
+                    return redirect()->route('accueil');
+                }
+
+            }
+        }
+
+        // get the activation key and chck if its valid
+
+
         if (empty($activationKey)) {
 
-            return redirect()->route('login')
-                ->with('message', 'La clé d\'activation utilisée est invalide')
-                ->with('status', 'warning');
 
+                $msg = 'Le lien d\'activation utilisé est expiré ou invalide. <a href="'. route("activation_key_resend").'">Suivez ce lien</a> pour renvoyer un nouveau lien d\'activation.';
+                $request->session()->flash("message",  $msg);
+                return redirect()->route('login');
         }
 
         // process the activation key we're received
@@ -81,11 +91,9 @@ class ActivationKeyController extends Controller
 
         // redirect to the login page after a successful activation
         return redirect()->route('login')
-            ->with('message', "Félicitation votre compte est activé! Cependant l'accès à l'espace membre
-            nécessite que les membres de Promotvogt acceptent votre demande d'adhésion. Donc réessayer dans
-            quelques jours pour profiter de l'application")
+            ->with('message', "Félicitation votre compte est activé ! <br>Cependant vous ne pourrez accéder à l'application que lorsque les 
+            membres de Promotvogt valideront votre demande d'adhésion.<br> Un mail vous sera envoyé lorsque votre demande sera acceptée.")
             ->with('status', 'success');
-
 
     }
 
@@ -108,21 +116,21 @@ class ActivationKeyController extends Controller
 
         if (empty($user)) {
             return redirect()->route('activation_key_resend')
-                ->with('message', 'We could not find this email in our system')
+                ->with('message', 'Cet email ne correspond à aucun utilisateur.')
                 ->with('status', 'warning');
         }
 
         if ($user->activated) {
-            return redirect()->route('login')
-                ->with('message', 'This email address is already activated')
+            return redirect()->route('activation_key_resend')
+                ->with('message', 'Cet email est déjà activé.')
                 ->with('status', 'success');
         }
 
         // queue up another activation email for the user
         $this->queueActivationKeyNotification($user);
 
-        return redirect()->route('front.home')
-            ->with('message', 'The activation email has been re-sent.')
+        return redirect()->route('login')
+            ->with('message', 'Un nouveau lien d\'activation vous a été envoyé. Il est valide pendant une heure.')
             ->with('status', 'success');
     }
 }

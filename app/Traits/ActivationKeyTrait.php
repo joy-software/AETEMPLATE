@@ -76,7 +76,7 @@ trait ActivationKeyTrait
 
         if (empty($userToActivate)) {
             return redirect()->route('login')
-                ->with('message', 'Il n\'y a pas d\'utilisateur associé à cette clé d\'activation ! Inscrivez vous pour avoir une clé valide')
+                ->with('message', 'Il n\'y a pas d\'utilisateur associé à ce lien d\'activation ! Inscrivez vous pour avoir un lien valide')
                 ->with('status', 'success');
         }
 

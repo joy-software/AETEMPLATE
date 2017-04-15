@@ -36,13 +36,13 @@
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
         <div class="alert alert-block col-lg-9">
-            <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
+            <strong> {!! \Illuminate\Support\Facades\Session::get('message')  !!}</strong>
         </div>
     @endif
 
     @if (isset($message))
         <div class="alert alert-block col-lg-9">
-            <strong>{{ $message }}</strong>
+            <strong>{!! $message !!} </strong>
         </div>
     @endif
 

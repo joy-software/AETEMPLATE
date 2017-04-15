@@ -29,6 +29,8 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    protected $rules;
+    protected $messages;
 
 
     /**
@@ -40,61 +42,39 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
         $this->redirectTo = '/accueil';
+
+        $this->rules = [
+            'email'                 => 'required|email',
+            'password'              => 'required|min:6',
+
+        ];
+
+        $this->messages = [
+            'email.required'        => 'L\'email est obligatoire',
+            'email.email'           => 'Email invalide',
+            'password.required'     => 'Le mot de passe est obligatoire',
+            'password.min'          => 'Le mot de passe doit contenir au moins six caractères',
+            'auth.failed'             => "Email ou mode passe incorrect"
+
+        ];
     }
 
 
 
-    /*public function login(Request $request)
-    {
-        $this->validateLogin($request);
 
-
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-
-            return $this->sendLockoutResponse($request);
-        }
-
-        $param = $request->only(['email', 'password', 'statut']);
-        $password = Hash::make($param['password']);
-
-        $user = User::where('email', $param['email'])->get()->first();
-
-        if (isset($user) && $user != null && Hash::check($param['password'], $user->password)) {
-
-            if (Hash::check( $param['password'], $user->password) && $user->statut == 'actif') {
-
-                if ($this->attemptLogin($request)) {
-
-                        return $this->sendLoginResponse($request);
-                }
-
-            } else {
-
-                return $this->sendFailedLoginResponse($request, 'message', "Désolé, votre demande 
-                d'adhésion n'a pas encore été validée par les membres de Promotvogt. Merci de réessayez plutard.");
-            }
-
-        }
-
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request, 'email', 'Identifiants incorrects');
-    }*/
-
-
-
-    /*protected function sendFailedLoginResponse(Request $request, $label = false, $message = false)
-    {
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                $label => $message
-            ]);
-    }*/
 
     protected function authenticated(Request $request, $user)
     {
+        if ($user->activated == 0) {
+
+            $this->guard()->logout($user);
+            $request->session()->flush();
+            $request->session()->regenerate();
+
+            return redirect()->back()->with(['message' => "Accès impossible : compte non validé. Pour accéder à l'application
+                                            suivez le lien de validation qui vous a été envoyé par mail à l'addresse $user->email."]);
+
+        }
 
         if ($user->statut == 'attente') {
 
@@ -110,23 +90,18 @@ class LoginController extends Controller
     }
 
 
-    protected function validator(array $data)
+
+    protected function validateLogin(Request $request)
     {
+        $this->validate($request, $this->rules, $this->messages);
+    }
 
-        $validator = Validator::make($data,
-            [
-                'email'                 => 'required|email',
-                'password'              => 'required|min:6|confirmed',
-            ],
-            [
-                'email.required'        => 'L\'email est obligatoire',
-                'email.email'           => 'Email invalide',
-                'password.required'     => 'Le mot de passe est obligatoire',
-
-            ]
-        );
-
-        return $validator;
-
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([
+                $this->username() => 'Email ou mot de passe incorrect',
+            ]);
     }
 }
