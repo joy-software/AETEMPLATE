@@ -55,8 +55,8 @@ class RegisterController extends Controller
 
         $validator = Validator::make($data,
             [
-                'name'               => 'required|max:100|min:4',
-                'surname'            => 'required|max:100|min:4',
+                'name'               => 'required|max:100|min:2',
+                'surname'            => 'required|max:100|min:2',
                 'email'                 => 'required|email|unique:users',
                 'password'              => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|same:password',
@@ -64,10 +64,10 @@ class RegisterController extends Controller
             ],
             [
                 'name.required'     => 'Ce champs est obligatoire',
-                'name.min'           => 'Le nom doit contenir au moins 4 caractères',
+                'name.min'           => 'Le nom doit contenir au moins 2 caractères',
                 'name.max'           => 'Le nom doit contenir au plus 100 caractères',
                 'surname.required'   => 'Ce champ est obligatoire',
-                'surname.min'    => 'Le prénom doit contenir au moins  4 caractères',
+                'surname.min'    => 'Le prénom doit contenir au moins  2 caractères',
                 'surname.max'    => 'Le prénom doit contenir au plus  100 caractères',
                 'email.required'        => 'Ce champ est obligatoire',
                 'email.email'           => 'Addresse email invalide',

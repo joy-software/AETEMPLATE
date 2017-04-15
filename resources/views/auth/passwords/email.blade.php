@@ -48,9 +48,11 @@
 
     <form id="login-form"class="login-form" method="post" action="{{ url('/password/email') }}">
         {{ csrf_field() }}
+
+
         <div class="login-wrap">
             <p class="login-img litle"><i class="icon_refresh"></i></p>
-            <p id="resend-title">Réinisialiser le mot de passe </p>
+            <p id="resend-title">Réinitialiser le mot de passe </p>
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_profile"></i></span>

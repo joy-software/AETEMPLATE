@@ -54,6 +54,6 @@ class ForgotPasswordController extends Controller
 
     protected function sendResetLinkResponse($response)
     {
-        return back()->with('message', "Le lien de réinisialisation du mot de passe vous a été envoyé avec succès.");
+        return back()->with('message', "Le lien de réinitialisation du mot de passe vous a été envoyé avec succès.");
     }
 }
