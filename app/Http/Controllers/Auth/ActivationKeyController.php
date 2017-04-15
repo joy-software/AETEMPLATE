@@ -55,18 +55,28 @@ class ActivationKeyController extends Controller
 
     public function activateKey($activation_key, Request $request)
     {
+        // get the activation
+        $activationKey = ActivationKey::where('activation_key', $activation_key)
+            ->first();
+
         // determine if the user is logged-in already
+
         if (Auth::check()) {
-            if (auth()->user()->activated) {
 
-                return redirect()->route('accueil');
+            $userToActivate = User::where('id', $activationKey->user_id)->first();
+
+            if (auth()->user()->activated && !empty($userToActivate)) {
+
+
+                if(Auth::user()->id == $userToActivate->id){
+                    return redirect()->route('accueil');
+                }
+
             }
-
         }
 
         // get the activation key and chck if its valid
-        $activationKey = ActivationKey::where('activation_key', $activation_key)
-            ->first();
+
 
         if (empty($activationKey)) {
 
