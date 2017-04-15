@@ -64,7 +64,7 @@ class IncomingMember extends Notification implements ShouldQueue
 
             return (new MailMessage)
                 ->subject($this->group['name'].': Une nouvelle demande d\'adhésion')
-                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer le groupe: '. $this->group['name'].)
+                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer le groupe: '. $this->group['name'])
                 ->line('Pour valider son adhésion, cliquer sur le boutton ci-dessous.')
                 ->action('Valider son Adhésion', $url)
                 ->line('Merci pour votre collaboration!');

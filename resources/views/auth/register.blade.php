@@ -40,7 +40,7 @@
     @else
         <section class="panel" id="section-signup">
             <header class="panel-heading" id="header-signup" >
-                <span><i class="icon_lock_alt"></i></span><span id="form-signup-title">INSCRIPTION</span>
+                <span><i class="icon_pencil-edit"></i></span><span id="form-signup-title">INSCRIPTION</span>
 
             </header>
             <div class="panel-body">

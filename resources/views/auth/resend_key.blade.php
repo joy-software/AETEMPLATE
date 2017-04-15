@@ -46,11 +46,13 @@
         </div>
     @endif
 
-    <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
+    <form id="login-form"class="login-form" method="post" action="{{ route('activation_key_resend') }}">
         {{ csrf_field() }}
         <div class="login-wrap">
-            <p class="login-img"><i class="icon_lock_alt"></i></p>
-            <div class="input-group">
+            <p class="login-img litle"><i class="icon_refresh"></i></p>
+            <p id="resend-title">Générer une nouveau lien d'activation </p>
+
+        <div class="input-group">
                 <span class="input-group-addon"><i class="icon_profile"></i></span>
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
             </div>
@@ -61,9 +63,8 @@
             @endif
 
 
-            <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-            <br>
-            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup</a>
+            <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Envoyer</button>
+
         </div>
     </form>
 
