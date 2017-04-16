@@ -189,7 +189,8 @@ Route::get('/group/view_group/{id}', [
 
 Route::get('/group/view_group', 'groupController@index');
 
-
+//Route::post('/group/valid_adhesion_group/{id_user}/{id_group}')
+Route::post('/group/valid_adhesion_group', 'groupController@valid_adhesion_group');
 
 //Supprimer un groupe
 Route::get('/group/del_group/{id}', [

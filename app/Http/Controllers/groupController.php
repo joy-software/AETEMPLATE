@@ -46,16 +46,27 @@ class groupController extends Controller
 
 
         $this->_all_group = DB::table('group')->get();
-        $this->_users_group = usergroup::where('user_ID', '=', Auth::id())->get();
+        $this->_users_group = usergroup::where('user_ID', '=', Auth::id())->where('statut','=', 'actif')->get();
 
-
+        $_users_group2 = usergroup::where('user_ID', '=', Auth::id())->get();
+        foreach ($_users_group2 as $_el){
+            $this->_statut_group[''.$_el->group_ID.''] = $_el->statut;
+        }
 
         foreach ($this->_users_group as $element){
             $this->_list_group[$this->_compteur] = group::where('id','=',$element['group_ID'])->first();
             $this->_id_list_group[$this->_compteur] = $this->_list_group[$this->_compteur]['id'];
-            $this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
+            //$this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
             $this->_compteur++;
         }
+
+
+        /*foreach ($this->_users_group as $element){
+            $this->_list_group[$this->_compteur] = group::where('id','=',$element['group_ID'])->first();
+            $this->_id_list_group[$this->_compteur] = $this->_list_group[$this->_compteur]['id'];
+            $this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
+            $this->_compteur++;
+        }*/
 
     }
 
@@ -118,11 +129,6 @@ class groupController extends Controller
             $chemin = 'logos/'. $request->file('logo')->getClientOriginalName();
         }
 
-
-        /*   if( $extension!=null && (! in_array($extension,$extension_accepted ))){
-            return \Redirect::route('create_group')->with('error', 'l\'extension '.$extension.'n\'est pas acceptée');
-        }*/
-
             $id= Auth::id();
             $group = group::create([
             'description'=> $request->get('description_group'),
@@ -157,13 +163,76 @@ class groupController extends Controller
         if($id==null){
             return view('group.index',['list_group'=> $this->_list_group]);
         }
+
         $group = group::find($id);
+
+        $user_group = usergroup::where('group_ID','=',$id)->whereStatut("attente")->get();
+        $users[]=null;
+        $com = 0;
+
+
+        foreach($user_group as $u_g){
+
+            $users[$com] = User::find($u_g['user_ID']);
+            $com++;
+        }
+
+        if($com == 0){
+            //ça veut dire que la liste est vide $user_group est vide.
+            $users = null;
+        }
+        //print_r ($users);
+
         return view('group.view_group',
             ['list_group'=> $this->_list_group,
-                'group'=>$group
+                'group'=>$group,
+                'users'=> $users
             ]);
     }
 
+    //public function valid_adhesion_group($id_user, $id_group){
+    public function valid_adhesion_group(Request $request){
+        $id_user = null;
+        $id_group = null;
+        if($request->ajax()) {
+            $id_user = $request->id_user;
+            $id_group = $request->id_group;
+
+        }
+
+        $this->load_group();
+        foreach ($this->_id_list_group as $id_gp ){
+            if( ! in_array($id_group, $this->_id_list_group)){
+                //il n'est pas dans ce groupe.
+                print_r("cet utilisateur n'est pas de ce groupe");
+                die;
+            }
+
+        }
+
+        $usergroup = usergroup::where('user_ID','=',$id_user)->where('group_ID','=',$id_group)->get();
+
+        if(! ( ($usergroup[0]->user_ID == $id_user ) && ($usergroup[0]->group_ID == $id_group) )){
+
+            print_r("La clé user_id et group_id est incorrecte");
+            die;
+        }
+
+        if($usergroup[0]->statut != "attente"){
+            //Cet utilisateur n'est pas en attente de validation, mauvaise information.
+            //return redirect()->route('search_group');
+            print_r("cet utilisateur n'est pas en attente de validation dans le groupe");
+            die;
+        }
+
+        $u_group = usergroup::findOrFail($usergroup[0]->id);
+        $u_group->statut = "actif";
+        $u_group->save();
+
+        //Renvoyer le message pour dire que son statut a été changé.
+        print_r("success");
+        die;
+    }
     /**
      * @param $id = id_du groupe où on veut les paramètres.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -334,14 +403,23 @@ class groupController extends Controller
         $this->load_group();
         $this->verification_param($id);
         if($id==null){
-            $this->search_group();
+            return redirect()->route('search_group');
         }
 
+
         //vérifions s'il n'est pas déjà inscrit dans le groupe.
-        if(in_array($id, $this->_id_list_group)){
-            //il est déjà dans le groupe c'est un petit jongleur. on le fait la redirection.
-            $this->view_group($id);
+
+        if($this->_id_list_group != null){
+            if(in_array($id, $this->_id_list_group)){
+                //il est déjà dans le groupe c'est un petit jongleur. on le fait la redirection.
+                return redirect()->route('search_group');
+            }
+            else{
+                $group = DB::table('group')->whereId($id)->first();
+                return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group]);
+            }
         }
+
         else{
             $group = DB::table('group')->whereId($id)->first();
             return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group]);
