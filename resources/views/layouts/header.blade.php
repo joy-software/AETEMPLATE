@@ -36,25 +36,14 @@
 
             @include('layouts/menuNotification',
              [
-                'idElement' => 'task_notificatoin_bar',
-                'classIcon' => 'icon-task-l',
-                'numberNotification' => '3',
-                'summary' => 'You have 4 pending tasks',
-                'notifications' => [['typeLabel' => 'primary', 'classIcon' => 'icon_profile', 'message' => 'Friend Request', 'time' => '5 mins'],
-                                    ['typeLabel' => 'warning', 'classIcon' => 'icon_pin', 'message' => 'John location.', 'time' => 'today']
-                                   ]
-             ])
-
-            @include('layouts/menuNotification',
-             [
                 'idElement' => 'alert_notificatoin_bar',
                 'classIcon' => 'icon-bell-l',
-                'numberNotification' => '9',
-                'summary' => 'You have 9 new alerts',
-                'notifications' => [['typeLabel' => 'danger', 'classIcon' => 'icon_profile', 'message' => 'Friend Request', 'time' => '9 mins'],
-                                    ['typeLabel' => 'warning', 'classIcon' => 'icon_pin', 'message' => 'John location.', 'time' => 'yesterday']
-                                   ]
+                'numberNotification' => $nbr_notif,
+                'summary' => 'Vous avez '.$nbr_notif.' messages non lues',
+                'notifications' => $notifications
              ])
+
+
 
 
 

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'env' => env('APP_NAME', 'promot-vogt.org'),
+    'name' => env('APP_NAME', 'promot-vogt'),
 
     /*
     |--------------------------------------------------------------------------
@@ -178,7 +178,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 

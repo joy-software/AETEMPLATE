@@ -12,7 +12,7 @@
         @foreach($notifications as $notification)
 
             <li>
-                <a href="#">
+                <a href="#" style="white-space: normal">
                     <span class="label label-{{ $notification['typeLabel'] }}"><i class="{{ $notification['classIcon'] }}"></i></span>
                     {{ $notification['message'] }}
                     <span class="small italic pull-right"> {{ $notification['time'] }}</span>

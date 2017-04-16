@@ -24,7 +24,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         //$user->notify(new incomingUser());
-        return view('accueil');
+
+        $notifications = $user->unreadNotifications;
+        return view('accueil',['notifications'=> $notifications,'nbr_notif'=> count($notifications)]);
     }
     public function auth()
     {
