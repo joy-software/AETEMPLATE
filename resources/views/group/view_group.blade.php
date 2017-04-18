@@ -154,7 +154,7 @@
                         <label class="checkbox inline">
                             <input type="checkbox" id="" value="option1"> Publier comme un évènement
                         </label>
-                        <input
+
                     </div>
 
                 </div>
