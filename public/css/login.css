@@ -44,3 +44,13 @@ div .alert-block {
 
     font-size: 40px;
 }
+
+.text-danger{
+
+    color: #ff2d55 !important;
+}
+
+.black-alert{
+
+    color: black;
+}

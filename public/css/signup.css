@@ -1,8 +1,14 @@
 .help-block{
-    margin: 40px 30px 0px 30px;
-    color: #b64c4c;
+    margin-top: 30px;
+
+    text-align: left !important;
+
 }
 
+.text-danger{
+
+    color: #ff2d55 !important;
+}
 
 #header-signup{
     text-align: center;
@@ -19,4 +25,9 @@
 
 #section-signup{
     margin: 200px 100px;
+}
+
+.black-alert{
+
+    color: black;
 }

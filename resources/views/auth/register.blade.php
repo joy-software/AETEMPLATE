@@ -34,7 +34,7 @@
 <div class="container">
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9">
+        <div class="alert alert-block col-lg-9 black-alert">
             <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
         </div>
     @else
@@ -54,7 +54,7 @@
                                 <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" />
                             </div>
                             @if ($errors->has('surname'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('surname') }}</strong>
                             </span>
                             @endif
@@ -66,7 +66,7 @@
                                 <input class=" form-control" id="name" name="name" type="text" value="{{ old('name') }}" />
                             </div>
                             @if ($errors->has('name'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
                             @endif
@@ -81,7 +81,7 @@
                                 </select>
                             </div>
                             @if ($errors->has('sex'))
-                                <span class="help-block ">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
                             <strong>{{ $errors->first('sex') }}</strong>
                         </span>
                             @endif
@@ -93,7 +93,7 @@
                                 <input class="form-control " id="email" name="email" type="email" value="{{ old('email') }}" />
                             </div>
                             @if ($errors->has('email'))
-                                <span class="help-block ">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                             @endif
@@ -106,7 +106,7 @@
                                 <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}"/>
                             </div>
                             @if ($errors->has('phone'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('phone') }}</strong>
                         </span>
                             @endif
@@ -119,7 +119,7 @@
                                 <input class="form-control " id="promotion" name="promotion" type="text"value="{{ old('promotion') }}" />
                             </div>
                             @if ($errors->has('promotion'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('promotion') }}</strong>
                         </span>
                             @endif
@@ -131,19 +131,19 @@
                                 <input class="form-control " id="country" name="country" type="text" value="{{ old('country') }}"/>
                             </div>
                             @if ($errors->has('country'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('country') }}</strong>
                         </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="profession" class="control-label col-lg-2">Profession <span class="required">*</span></label>
+                            <label for="profession" class="control-label col-lg-2 offs">Profession <span class="required">*</span></label>
                             <div class="col-lg-9">
                                 <input class="form-control " id="profession" name="profession" type="text" value="{{ old('profession') }}"/>
                             </div>
                             @if ($errors->has('profession'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('profession') }}</strong>
                         </span>
                             @endif
@@ -155,7 +155,7 @@
                                 <textarea class="form-control" cols="30" rows="5" name="description" id="description">{{ old('description') }}</textarea>
                             </div>
                             @if ($errors->has('description'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('description') }}</strong>
                         </span>
                             @endif
@@ -169,7 +169,7 @@
                             </div>
                             @if ($errors->has('password'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                             @endif
@@ -183,7 +183,7 @@
                             </div>
                             @if ($errors->has('password_confirmation'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                         </span>
                             @endif
@@ -196,7 +196,7 @@
                             </div>
                             @if ($errors->has('photo'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('photo') }}</strong>
                         </span>
                             @endif
@@ -210,7 +210,7 @@
                             </div>
                             @if ($errors->has('agree'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('agree') }}</strong>
                         </span>
                             @endif
