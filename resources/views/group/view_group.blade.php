@@ -37,48 +37,103 @@
             </div>
         </div>
 
-        <section class="panel">
+        <section class="panel col-lg-offset-1 col-lg-10" >
             <div class="panel-body progress-panel">
                 <div class="row">
                     <div class="col-lg-8 task-progress pull-left">
                         <h1>Demande d'adhésion</h1>
                     </div>
                     <div class="col-lg-4">
-                                <span class="profile-ava pull-right">
-                                        <img alt="" style="width: 50px; height: auto;" class="simple" src="/{{$group->logo}}">
-                                </span>
+                        <?php if($users != null){
+                            ?>
+                        <button  class="btn btn-primary pull-right" type="button"  id="show_demande">Afficher les demandes</button>
+                        <button id="hide_demande" class="btn btn-primary pull-right hidden" >Cacher les demandes</button>
+                        <br>
+                        <?php
+                            } else {
+                            ?>
+                            <span class="badge bg-success pull-right">Aucune demande d'adhésion</span>
+                            <?php } ?>
+
                     </div>
+
+                </div>
+                <br>
+                <div class="row" id="message_adhesion">
+
                 </div>
             </div>
-            <table class="table table-hover personal-task">
+            <br>
+            <section id="section_demande"  style="display: none;" class="well" >
+                <table class="table table-hover personal-task table-responsive ">
                 <tbody>
-                <tr>
-                    <td>
+
+                <?php
+
+                if($users != null){
+
+                foreach($users as $user){
+                    ?>
+                <tr id="tr-user-{{ $user['id'] }}">
+                    <td id="td-image-{{ $user['id'] }}" style="width: 15%;">
                         <span class="profile-ava">
-                           <img alt="" class="simple" src="img/avatar1_small.jpg">
+                           <img alt="" class="simple" style="width : 100%; height : auto;" src="/{{ $user['photo'] }}">
                         </span>
                     </td>
 
-                    <td>Rostand,<br>YOBA</td>
-                    <td>
-                        Promotion<br><span class="badge bg-primary">2017</span>
-                    </td>
-                    <td>
-                        Email : <label>rostandyoba2014@gmail.com</label><br>
-                        Tel : +237 690238230
-                    </td>
-                    <td>
-                        <p style="text-align: justify;">Je suis un ancien ingénieur de l'école nationale Supérieure polytechnique de yaoundé.
-                            Je suis de la promotion 2017 du Génie informatique de l'enspy.</p>
-                    </td>
-                    <td>
+                    <td id="td-name-{{ $user['id'] }}">{{ $user['name'] }}, {{ $user['surname'] }}.<br> Promotion <span class="badge bg-primary">{{ $user['promotion'] }}</span> </td>
 
+                    <td style="text-align: justify;">
+                        <p> Email : <label> {{ $user['email'] }}</label><br>
+                            Tel : <label>{{ $user['phone'] }}</label>
+                        </p>
+                        <p id="td-desc-{{ $user['id'] }}">
+                            {{ $user['description'] }} <br>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+                        </p>
+                    </td>
+                    <td style="width: 25%">
+                        <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn">Accepter</button>
+                        <br><br>
+                        <?php $role_admin= "admin_".$group->id; ?>
+                        @role($role_admin)
+                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger">Refuser</button>
+                        @endrole
                     </td>
 
                 </tr>
+                <?php
+                        }
+                       } ?>
 
                 </tbody>
             </table>
+
+                <!-- Modal -->
+                <div class="modal fade" id="ConfirmAction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                            <div class="modal-body" style="background: white;">
+                                Exemple de modal
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+            </section>
+
+
         </section>
 
 
@@ -87,9 +142,25 @@
 
 @endsection
 
+
+
 @section('script')
-    <script src="{{ asset('js/group.js') }}"></script>
+
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/collapse.js') }}"></script>
+<script>
+    var group = '<?php echo $group; ?>';
+    group = eval('(' + group + ')');
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+
+    var _token = $('input[name=_token]').val();
+
+</script>
+
+
+    <script src="{{ asset('js/group.js') }}"></script>
 
 @endsection

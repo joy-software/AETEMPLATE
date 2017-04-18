@@ -77,8 +77,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/group.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-
+    <script src="{{ asset('js/group.js') }}"></script>
 @endsection
