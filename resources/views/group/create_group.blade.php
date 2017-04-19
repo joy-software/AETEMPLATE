@@ -71,8 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="description_group">Description du groupe (*)</label> <br>
-                                    <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10" placeholder="Description du groupe">
-                                    </textarea>
+                                    <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10" placeholder="Description du groupe"></textarea>
                                 <p class="help-block">Min 10 caractères, Maxi 1000 caractères</p>
                             </div>
 

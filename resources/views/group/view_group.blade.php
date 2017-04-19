@@ -137,34 +137,47 @@
         </div>
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10">
+                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
                 <div class="row">
                     <div class="col-lg-8">
-                        <section class="panel">
+                        <section class="panel" >
                             <header class="panel-heading">
-                                Créer une publication
+                                Créer une annonce
                             </header>
-                            <div class="panel-body">
-                                <textarea cols="10"  rows="8" class="form-control" value="Exprimez-vous">
-                                        Exprimez-vous
-                                </textarea>
+                            <div class="panel-body" style="text-align: center;">
+                                <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
+                                <textarea cols="10" rows="10" name="description" class="form-control" value="Exprimez-vous"></textarea>
+                                <br>
+                                <button class="btn btn-primary" id="btn-create-ads" style="width: 200px;">Créer l'annonce</button>
                             </div>
+
                         </section>
                     </div>
-                    <div class="col-lg-4">
-                        <label class="checkbox inline">
-                            <input type="checkbox" id="" value="option1"> Publier comme un évènement
+                    <div class="col-lg-4 well">
+                        <p>
+                            Joindre des fichiers a l'annonce <br>
+                            <span id="span_file1"><input type="file" name="file1" id="file1"  class="form-control btn btn-primary"> <br></span>
+                            <span id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </span>
+                            <span id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </span>
+                        </p>
+
+                        <p>
+                        <label class="checkbox checkbox-inline">
+                            <input type="checkbox" id="checkbox-even" name="checkbox_even" value="option1"> Publier comme un évènement
                         </label>
+                        </p>
+                        <p id="p_date_even" style="margin-left: -20px;">
+                        <label class="checkbox checkbox-inline">
+                            Cet évènement sera valide jusqu'en <input name="expiration_date" type="date" id="input_date" class="form-control">
+                        </label>
+                        </p>
 
                     </div>
 
                 </div>
-
+                {!! Form::close() !!}
             </section>
         </div>
-
-
-
-
 
 
     </section>
