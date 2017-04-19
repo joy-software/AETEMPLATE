@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,10 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
    public function editProfile(Request $request)
    {
 
@@ -27,10 +32,16 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('profile')->with(['success' => 'Modifications réussies']);
+       $notifications = $user->unreadnotifications()->count();
+
+        return redirect()->route('profile')->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
    }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
    public function editCredential(Request $request)
    {
 
@@ -67,7 +78,38 @@ class UserController extends Controller
        }
 
 
-       return redirect()->route('profile')->with(['success' => $message]);
+       $notifications = $user->unreadnotifications()->count();
+
+       return redirect()->route('profile')->with(['success' => $message,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
 
    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+   public function notifications()
+   {
+       $user = Auth::user();
+       $notifications = $user->unreadnotifications()->count();
+       return view('layouts/index',['user' =>  $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+   }
+
+    /**
+     * @return string
+     */
+    public function read_notifications()
+    {
+        $user = Auth::user();
+        foreach ($user->unreadnotifications()->paginate(6)  as $notification) {
+            $notification->markAsRead();
+        }
+        $notifications = $user->unreadnotifications()->count();
+        $view  = View::make('layouts/Notifications',
+            [
+                'classIcon' => 'icon-bell-l',
+                'numberNotification' => $notifications,
+                'user' => $user->unreadnotifications()->paginate(6)
+            ]);
+        return $view->render();
+    }
 }

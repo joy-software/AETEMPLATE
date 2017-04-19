@@ -69,7 +69,10 @@ class ActivationKeyController extends Controller
 
 
                 if(Auth::user()->id == $userToActivate->id){
-                    return redirect()->route('accueil');
+
+                    $user = Auth::user();
+                    $notifications = $user->unreadnotifications()->count();
+                    return redirect()->route('accueil',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
                 }
 
             }
@@ -79,7 +82,7 @@ class ActivationKeyController extends Controller
 
 
         if (empty($activationKey)) {
-
+                print($request->email);
 
                 $msg = 'Le lien d\'activation utilisé est expiré ou invalide. <a href="'. route("activation_key_resend").'">Suivez ce lien</a> pour renvoyer un nouveau lien d\'activation.';
                 $request->session()->flash("message",  $msg);

@@ -18,7 +18,7 @@ class CreateAdsTable extends Migration
             $table->text('description');
             $table->dateTime('expiration_date');
             $table->integer('nb_like');
-            $table->integer('type');
+            $table->enum('type',['annonce,evenement'])->default('annonce');
             $table->boolean('archiving'); 
             $table->timestamps();
     

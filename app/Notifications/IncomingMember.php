@@ -36,7 +36,7 @@ class IncomingMember extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail','database','broadcast'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -83,7 +83,9 @@ class IncomingMember extends Notification implements ShouldQueue
         return [
             'name_member' => $this->incomingMember['name'],
             'surname_member' => $this->incomingMember['surname'],
+            'photo_member' => $this->incomingMember['photo'],
             'name_group' => $this->group['name'],
+            'logo_group' => $this->group['logo'],
         ];
     }
 }

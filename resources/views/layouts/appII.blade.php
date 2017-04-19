@@ -10,12 +10,13 @@
 
     <title>@yield('title')</title>
 
-    <!-- Bootstrap CSS -->
-
-    <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<!--link href="{{-- asset('karmanta/css/bootstrap.min.css') --}}" rel="stylesheet">
     <!-- bootstrap theme -->
-    <link href="{{ asset('karmanta/css/bootstrap-theme.css') }}" rel="stylesheet">
+<!--link href="{{-- asset('karmanta/css/bootstrap-theme.css') --}}" rel="stylesheet">
     <!--external css-->
+    <!-- font icon -->
     <!-- font icon -->
     <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
 
@@ -70,7 +71,7 @@
 <!-- nice scroll -->
 
 
-
+<script src="{{asset('js/app.js')}}"></script>
 @yield('script')
 
 <script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>

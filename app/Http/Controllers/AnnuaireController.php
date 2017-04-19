@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Http\Request;
+use Auth;
 use Illuminate\Support\Facades\DB;
 
 class AnnuaireController extends Controller
@@ -18,24 +17,20 @@ class AnnuaireController extends Controller
         $this->middleware('auth');
     }
 
-    private $_users = null;
 
 
     public function index()
     {
-        $users =DB::table('users')->get();
+        $members =DB::table('users')->where('id','!=',1)->get();
        // $years = DB::table('users')->groupBy('promotion')->get();
-        $this->_users = $users;
-        $years = $users;
-        $this->users = $users;
-        return view('annuaire/index', ['users'=> $users, 'nom'=> $years]);
+
+        //$years = $users;
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+        return view('annuaire/index', ['members'=> $members,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif' => $notifications]);
     }
 
 
-    public function search($annees, $profession, $pays){
-        $users_filter = null;
-        return view('annuaire/search')->with('users_search',$users_filter);
-    }
 
 
 

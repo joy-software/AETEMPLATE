@@ -270,3 +270,15 @@ Route::post('activation/resend', [
     'as' =>  'activation_key_resend.post',
     'uses' => 'Auth\ActivationKeyController@resendKey'
 ]);
+
+/**La route pour afficher toutes les notifications d'un utilsateur**/
+Route::get('notifications', [
+    'as' =>  'notifications',
+    'uses' => 'UserController@notifications'
+]);
+
+/**La route pour marquer toutes les notifications affichées d'un utilsateur comme lues**/
+Route::post('notifications', [
+    'as' =>  'notificationsRead',
+    'uses' => 'UserController@read_notifications'
+]);

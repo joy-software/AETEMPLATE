@@ -39,8 +39,7 @@
                 'idElement' => 'alert_notificatoin_bar',
                 'classIcon' => 'icon-bell-l',
                 'numberNotification' => $nbr_notif,
-                'summary' => 'Vous avez '.$nbr_notif.' messages non lues',
-                'notifications' => $notifications
+                'notifications' => $user
              ])
 
 
