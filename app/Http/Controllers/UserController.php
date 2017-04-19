@@ -35,8 +35,8 @@ class UserController extends Controller
    {
 
        $user = Auth::user();
-       $param = $request->only(['old_password', 'email', 'new_password', 'password_confirmation']);
 
+       $param = $request->only(['old_password', 'email', 'new_password', 'password_confirmation']);
 
        $changed = false;
 
