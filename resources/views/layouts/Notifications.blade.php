@@ -23,7 +23,7 @@
             </thead>
             <tbody>
 
-            @foreach($user->unreadnotifications()->paginate(6) as $notification)
+            @foreach($notifications as $notification)
             <tr>
                 <td><img src="/@if($notification['data']['photo_member'] == null)users/user.png" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
                     @else
