@@ -24,14 +24,18 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         //$user->notify(new incomingUser());
-        return view('accueil');
+
+        $notifications = $user->unreadnotifications()->count();
+        return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
     public function auth()
     {
         return view('auth/lagin');
     }
     public function profile(Request $request){
-        return view('profile/index');
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+        return view('profile/index',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
 
     public function tester(){

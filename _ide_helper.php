@@ -6143,6 +6143,64 @@ namespace Illuminate\Support\Facades {
         
     }         
 
+    class Redis {
+        
+        /**
+         * Get a specific Redis connection instance.
+         *
+         * @param string $name
+         * @return \Predis\ClientInterface|null 
+         * @static 
+         */
+        public static function connection($name = 'default')
+        {
+            return \Illuminate\Redis\Database::connection($name);
+        }
+        
+        /**
+         * Run a command against the Redis database.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @static 
+         */
+        public static function command($method, $parameters = array())
+        {
+            return \Illuminate\Redis\Database::command($method, $parameters);
+        }
+        
+        /**
+         * Subscribe to a set of given channels for messages.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @param string $method
+         * @return void 
+         * @static 
+         */
+        public static function subscribe($channels, $callback, $connection = null, $method = 'subscribe')
+        {
+            \Illuminate\Redis\Database::subscribe($channels, $callback, $connection, $method);
+        }
+        
+        /**
+         * Subscribe to a set of given channels with wildcards.
+         *
+         * @param array|string $channels
+         * @param \Closure $callback
+         * @param string $connection
+         * @return void 
+         * @static 
+         */
+        public static function psubscribe($channels, $callback, $connection = null)
+        {
+            \Illuminate\Redis\Database::psubscribe($channels, $callback, $connection);
+        }
+        
+    }         
+
     class Request {
         
         /**
@@ -12287,6 +12345,8 @@ namespace {
     class Queue extends \Illuminate\Support\Facades\Queue {}
     
     class Redirect extends \Illuminate\Support\Facades\Redirect {}
+    
+    class Redis extends \Illuminate\Support\Facades\Redis {}
     
     class Request extends \Illuminate\Support\Facades\Request {}
     

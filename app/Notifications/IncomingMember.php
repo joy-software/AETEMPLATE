@@ -18,7 +18,7 @@ class IncomingMember extends Notification implements ShouldQueue
 
     /**
      * Create a new notification instance.
-     * @param a new member comming
+     * @param $newMember the member comming
      * @param group : the group where there is a new demand of admission
      * @return void
      */
@@ -36,7 +36,7 @@ class IncomingMember extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -53,7 +53,8 @@ class IncomingMember extends Notification implements ShouldQueue
 
             return (new MailMessage)
                 ->subject('Un nouvel adhérent')
-                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', voudrait intégrer l\'association Promot-Vogt. ')
+                ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', se reclame être un ancien vogtois et voudrait
+                 integrer Promot-Vogt.')
                 ->line('Pouvez-vous confirmer sur honneur qu\'il est un ancien vogtois ?')
                 ->line('Pour valider son adhésion, cliquer sur le boutton ci-dessous.')
                 ->action('Valider son Adhésion', $url)
@@ -80,7 +81,11 @@ class IncomingMember extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            //
+            'name_member' => $this->incomingMember['name'],
+            'surname_member' => $this->incomingMember['surname'],
+            'photo_member' => $this->incomingMember['photo'],
+            'name_group' => $this->group['name'],
+            'logo_group' => $this->group['logo'],
         ];
     }
 }

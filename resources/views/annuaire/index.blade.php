@@ -146,16 +146,16 @@
                             </thead>
                             <tbody>
 
-                            @foreach($users as $user)
+                            @foreach($members as $member)
                             <tr>
                                 <td><img class="img_profil" src="{{asset('img/cam.svg')}}" alt="Photo de profil"></td>
-                                <td>{{ $user->promotion}}</td>
-                                <td>{{ $user->name}} , {{ $user->surname}}</td>
+                                <td>{{ $member->promotion}}</td>
+                                <td>{{ $member->name}} , {{ $member->surname}}</td>
 
-                                <td>{{ $user->profession}}</td>
-                                <td>{{ $user->country}}</td>
-                                <td>{{ $user->phone}}</td>
-                                <td>{{ $user->email}}</td>
+                                <td>{{ $member->profession}}</td>
+                                <td>{{ $member->country}}</td>
+                                <td>{{ $member->phone}}</td>
+                                <td>{{ $member->email}}</td>
 
                             </tr>
                             @endforeach

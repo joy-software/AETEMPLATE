@@ -46,3 +46,31 @@ window.axios.defaults.headers.common = {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+/*
+import Echo from "laravel-echo"
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+});
+**/
+
+import Echo from "laravel-echo"
+
+window.io = require('socket.io-client');
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+});
+/*
+let echo = this.echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001',
+});/*/
+
+window.Echo.private('App.User.' + userId)
+    .notification((notification) => {
+    console.log(notification.type);
+});
+    //*/
