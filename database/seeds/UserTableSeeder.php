@@ -58,7 +58,7 @@ class UserTableSeeder extends Seeder
                 'phone'=> 'phoneNumber',
                 'statut'=> 'actif',
                 'activated'=> 1,
-                'photo'=> 'none',
+                'photo'=> 'users/user.png',
             'description' => 'je suis un demarreur',
             ]);
         $user->save();
@@ -75,7 +75,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'none',
+            'photo'=> 'users/user.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
@@ -92,7 +92,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'none',
+            'photo'=> 'users/user.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
@@ -109,7 +109,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'none',
+            'photo'=> 'users/user.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
@@ -126,7 +126,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'none',
+            'photo'=> 'users/user.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();

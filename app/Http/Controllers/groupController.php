@@ -99,23 +99,30 @@ class groupController extends Controller
     public function index(){
         $this->load_group();
 
-        return view('group.index',['list_group'=> $this->_list_group]);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+        return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
 
     //elle renvoie la page de création d'un groupe.
     public function create_group(){
         $this->load_group();
-        return view('group.create_group',['list_group'=> $this->_list_group]);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+        return view('group.create_group',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
 
     public function search_group(){
         $this->load_group();
-
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
         return view('group.search_group',
             ['list_group'=> $this->_list_group,
              'all_group'=>$this->_all_group,
              'id_list_group'=>$this->_id_list_group,
-             'statut_group'=>$this->_statut_group
+             'statut_group'=>$this->_statut_group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications
             ]);
 
     }
@@ -139,11 +146,11 @@ class groupController extends Controller
             'name' =>trim($request->get('name')),
             'logo' => $chemin,
             ]);
-        $group->users()->associate(Auth::user());
-        $group->save();
+            $group->users()->associate(Auth::user());
+            $group->save();
 
             $group_id = $group->id;
-        $usergroup = usergroup::create([
+            $usergroup = usergroup::create([
                 'id_validator'=> $id,
                 'statut'=>'actif',
                 'notification'=>TRUE
@@ -165,7 +172,9 @@ class groupController extends Controller
         $this->verification_param($id);
 
         if($id==null){
-            return view('group.index',['list_group'=> $this->_list_group]);
+            $user = Auth::user();
+            $notifications = $user->unreadnotifications()->count();
+            return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
         }
 
         $group = group::find($id);
@@ -186,11 +195,15 @@ class groupController extends Controller
             $users = null;
         }
         //print_r ($users);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
 
         return view('group.view_group',
             ['list_group'=> $this->_list_group,
                 'group'=>$group,
-                'users'=> $users
+                'users'=> $users,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications
             ]);
     }
 
@@ -326,25 +339,29 @@ class groupController extends Controller
         }
         $group = group::find($id);
         $group->description = trim($group->description);
-
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
         return view('group.member_group',
             [
                'users_group'=>$this->_users_group,
               'tab_user_membre'=>$tab_user_membre,
               'id_group'=>$id,
                 'list_group'=>$this->_list_group,
-                'name_group'=> $group->name
+                'name_group'=> $group->name,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications
             ]);
     }
 
     public function ads_group($id){
         $this->load_group();
         $this->verification_param($id);
-
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
         if($id==null){
-            return view('group.index',['list_group'=> $this->_list_group]);
+            return view('group.index',['list_group'=> $this->_list_group, 'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
         }
-        return view('group.ads_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+        return view('group.ads_group',['list_group'=> $this->_list_group, 'id'=>$id,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
 
     public function post_ads(Request $request){
@@ -469,20 +486,30 @@ class groupController extends Controller
     public function event_group($id){
         $this->load_group();
         $this->verification_param($id);
-
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
         if($id==null){
-            return view('group.index',['list_group'=> $this->_list_group]);
+            return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications]);
         }
-        return view('group.event_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+        return view('group.event_group',['list_group'=> $this->_list_group, 'id'=>$id,
+            'user'=> $user->unreadnotifications()->paginate(6),
+            'nbr_notif'=> $notifications]);
     }
 
     public function ballot_group($id){
         $this->load_group();
         $this->verification_param($id);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
         if($id==null){
-            return view('group.index',['list_group'=> $this->_list_group]);
+            return view('group.index',['list_group'=> $this->_list_group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications]);
         }
-        return view('group.ballot_group',['list_group'=> $this->_list_group, 'id'=>$id]);
+        return view('group.ballot_group',['list_group'=> $this->_list_group, 'id'=>$id,
+            'user'=> $user->unreadnotifications()->paginate(6),
+            'nbr_notif'=> $notifications]);
     }
 
     /***
@@ -501,7 +528,11 @@ class groupController extends Controller
         if(Auth::user()->hasRole('admin_'.$id)){
             $group = group::find($id);
             //$group = DB::table('group')->whereId($id)->first();
-            return view('group.edit_group',['list_group'=> $this->_list_group,'group'=>$group]);
+            $user = Auth::user();
+            $notifications = $user->unreadnotifications()->count();
+            return view('group.edit_group',['list_group'=> $this->_list_group,'group'=>$group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications]);
         }
         else {
             return redirect()->route('search_group');
@@ -601,13 +632,21 @@ class groupController extends Controller
             }
             else{
                 $group = DB::table('group')->whereId($id)->first();
-                return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group]);
+                $user = Auth::user();
+                $notifications = $user->unreadnotifications()->count();
+                return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group,
+                    'user'=> $user->unreadnotifications()->paginate(6),
+                    'nbr_notif'=> $notifications]);
             }
         }
 
         else{
             $group = DB::table('group')->whereId($id)->first();
-            return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group]);
+            $user = Auth::user();
+            $notifications = $user->unreadnotifications()->count();
+            return view('group.invitation_group',['list_group'=> $this->_list_group, 'group'=>$group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications]);
         }
     }
 

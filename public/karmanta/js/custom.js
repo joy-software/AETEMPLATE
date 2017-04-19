@@ -85,4 +85,3 @@ $('#logout-link').click(function(event){
 /**
  * Actions performed after a clic on sign up button from login form
  */
-

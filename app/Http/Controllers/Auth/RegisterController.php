@@ -104,7 +104,6 @@ class RegisterController extends Controller
             'profession' => $data['profession'],
             'description' => $data['description'],
             'password' => Hash::make($data['password']),
-            'photo' => $data['photo'],
             'activated' => !config('settings.send_activation_email')
 
         ]);
@@ -112,6 +111,17 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+
+        if($request->file("logo") == null){
+            $extension = null;
+            $chemin = 'logos/default.png';
+        }
+        else{
+
+            $request->file('logo')->move('logos', $request->file('logo')->getClientOriginalName());
+            $chemin = 'logos/'. $request->file('logo')->getClientOriginalName();
+        }
+
         $this->queueActivationKeyNotification($user);
         $this->guard()->logout($user);
         $request->session()->flush();

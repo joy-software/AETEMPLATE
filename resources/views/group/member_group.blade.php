@@ -53,7 +53,7 @@
                 <table class="table table-hover personal-task">
                     <tbody>
 
-                    @foreach($tab_user_membre as $user)
+                    @foreach($tab_user_membre as $member)
 
                     <tr>
                         <td>
@@ -61,7 +61,7 @@
 
                                 <?php
                                 $chemin_photo = "users/user.png";
-                                if(! ($user->photo == null || isset($user->photo))){
+                                if(! ($member->photo == null || isset($member->photo))){
                                     $chemin_photo = $user->photo;
                                 }
                                 ?>
@@ -69,8 +69,8 @@
                             </span>
                         </td>
                         <td>
-                            <p class="profile-name">{{$user->name}}, {{$user->surname}}</p>
-                            <p class="profile-occupation">{{$user->profession}}</p>
+                            <p class="profile-name">{{$member->name}}, {{$member->surname}}</p>
+                            <p class="profile-occupation">{{$member->profession}}</p>
                         </td>
                         <!--td>
                             <p>
@@ -79,12 +79,12 @@
                         </td-->
                         <td>
                             <p>
-                                 Email : <label>  {{$user->email}} </label>,<br> Tel : <label> {{$user->phone}} </label>
+                                 Email : <label>  {{$member->email}} </label>,<br> Tel : <label> {{$member->phone}} </label>
                             </p>
                         </td>
                         <td>
                             <p style="text-align: justify;">
-                                {{$user->description}}
+                                {{$member->description}}
                             </p>
                         </td>
 

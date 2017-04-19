@@ -207,7 +207,7 @@
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
-    var _token = $('input[name=_token]').val();
+
 
 </script>
 
