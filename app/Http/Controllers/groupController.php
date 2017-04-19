@@ -135,11 +135,11 @@ class groupController extends Controller
             'name' =>$request->get('name'),
             'logo' => $chemin,
             ]);
-        $group->users()->associate(Auth::user());
-        $group->save();
+            $group->users()->associate(Auth::user());
+            $group->save();
 
             $group_id = $group->id;
-        $usergroup = usergroup::create([
+            $usergroup = usergroup::create([
                 'id_validator'=> $id,
                 'statut'=>'actif',
                 'notification'=>TRUE

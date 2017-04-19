@@ -1,8 +1,20 @@
 .help-block{
     margin-top: 30px;
+    text-align: left !important;
+}
+
+p.photo-label{
 
     text-align: left !important;
+    margin-top: 30px !important;
+    padding-left: 15px;
+}
 
+@media screen and (max-width: 1200px) {
+    p.photo-label{
+
+        margin-top: 0px !important;
+    }
 }
 
 .text-danger{
@@ -31,3 +43,21 @@
 
     color: black;
 }
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label{
+    border-radius: 0px !important;
+}
+
+#label-photo{
+    margin-left: 10px;
+}
+
