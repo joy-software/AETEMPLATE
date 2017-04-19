@@ -10,7 +10,6 @@ var show_demande = false;
 $('#show_demande').click( cacher_afficher_adhesion);
 $('#hide_demande').click( cacher_afficher_adhesion);
 
-console.log(group.name);
 
 function cacher_afficher_adhesion() {
 
@@ -38,15 +37,83 @@ function refuser(user){
 /*
 ici c'est la confirmation.
  */
+
+$('.refuse-btn').click(function(){
+   var chaine = this.id;
+    if(chaine.indexOf("btn-refuse-",0) != 0){
+        alert("les informations sont incorrectes");
+    }
+    var id_user = chaine.substring(11,chaine.length);
+    if(isNaN(id_user)){
+        alert("informations incorrectes");
+    }
+    var id_group = group.id;
+    var nom_user = $("#td-name-"+id_user+"").text();
+    if(!confirm("Nous allons procéder a la suppression de la demande du membre "+nom_user)){
+        return false;
+    }
+
+    $.ajax({
+        //url: '/group/valid_adhesion_group/id_user='+id_user+'/id_group='+id_group,
+        url: '/group/del_adhesion_group',
+        type: "post",
+        dataType: 'json',
+        data: {'id_user':id_user, 'id_group': id_group, '_token': _token},
+        //data : "id_user="+id_user+"&id_group="+id_group,
+        //data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},
+        success: function(data){
+            var rep = data;
+            if(rep.type === "success"){
+                alert('le message est : '+rep.message);
+                // tout a marché comme sur des roulettes.
+                if($('#tab_demande tr').length > 1){
+                    $("#tr-user-"+id_user+"").hide();
+                  }
+                else{
+                    $("#section_demande").hide();
+                    $("#hide_demande").hide();
+                }
+
+                $("#message_adhesion").html("<div class=\"alert alert-success fade in\">" +
+                    "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
+                    "<i class=\"icon-remove\"></i></button>" +
+                    "<strong>"+rep.message+"</strong> " +
+                    "</div>");
+            }
+            else{
+                if(rep.type === "error"){
+                    $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
+                        "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
+                        "<i class=\"icon-remove\"></i></button>" +
+                        "<strong>"+rep.message+"</strong> " +
+                        "</div>");
+                }
+            }
+
+        },
+        error : function (data) {
+            alert(data);
+            alert("erreur lors de la suppression.");
+            $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
+                "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
+                "<i class=\"icon-remove\"></i></button>" +
+                "<strong>Erreur lors de la suppression de la demande. <br> erreur =</strong> " + data +
+                "</div>");
+
+        }
+    });
+
+});
+
 $('.send-btn').click(function () {
-    chaine = this.id;
-    alert("tu ma cliqué");
+    var chaine = this.id;
+    //alert("tu ma cliqué");
     if(chaine.indexOf("btn-accept-",0) != 0){
         //il a triché, il faut arreter la requete.
     }
     var id_user = chaine.substring(11,chaine.length);
     if(isNaN(id_user)){
-       //ce n'est pas un nombre, il a encore triché. il faut arreter la requete.
+       //ce n'est pas un nombre, il a encore triché. il faut arreter la requete
     }
 
     var id_group = group.id;
@@ -81,24 +148,37 @@ function accepter(id_user, id_group){
         //data : "id_user="+id_user+"&id_group="+id_group,
         //data: {'email':$('input[name=email]').val(), '_token': $('input[name=_token]').val()},
         success: function(data){
-            if(data == "success"){
+            var rep = data;
+            if(rep.type === "success"){
+                alert('le message est : '+rep.message);
                 // tout a marché comme sur des roulettes.
-                $("#tr-user-"+id_user+"").hidde();
+                if($('#tab_demande tr').length > 1){
+                    $("#tr-user-"+id_user+"").hide();
+                }
+                else{
+                    $("#section_demande").hide();
+                    $("#hide_demande").hide();
+                }
+
                 $("#message_adhesion").html("<div class=\"alert alert-success fade in\">" +
                     "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
                     "<i class=\"icon-remove\"></i></button>" +
-                    "<strong>La demande d'adhésion a été validé avec succès.</strong> " +
+                    "<strong>"+rep.message+"</strong> " +
                     "</div>");
             }
             else{
-                $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
-                    "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
-                    "<i class=\"icon-remove\"></i></button>" +
-                    "<strong>Erreur lors de la validation de la demande, success method.</strong> " +
-                    "</div>");
+                if(rep.type === "error"){
+                    $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
+                        "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
+                        "<i class=\"icon-remove\"></i></button>" +
+                        "<strong>"+rep.message+"</strong> " +
+                        "</div>");
+                }
             }
+
         },
         error : function (data) {
+            alert(data);
             alert("erreur lors de la validation. la valeur est : "+data);
             $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
                 "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +

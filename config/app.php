@@ -171,7 +171,6 @@ return [
         Intervention\Image\ImageServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
-
         Zizaco\Entrust\EntrustServiceProvider::class,
         /*
          * Application Service Providers...

@@ -78,13 +78,13 @@ class ActivationKeyController extends Controller
             }
         }
 
+
         // get the activation key and chck if its valid
 
 
         if (empty($activationKey)) {
-                print($request->email);
+                $msg = 'Le lien d\'activation utilisé est expiré ,invalide ou a déjà été utilisé. <a href="'. route("activation_key_resend").'">Suivez ce lien</a> pour renvoyer un nouveau lien d\'activation.';
 
-                $msg = 'Le lien d\'activation utilisé est expiré ou invalide. <a href="'. route("activation_key_resend").'">Suivez ce lien</a> pour renvoyer un nouveau lien d\'activation.';
                 $request->session()->flash("message",  $msg);
                 return redirect()->route('login');
         }

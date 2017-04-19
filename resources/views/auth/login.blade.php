@@ -35,13 +35,13 @@
 
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9">
+        <div class="alert alert-block col-lg-9 black-alert">
             <strong> {!! \Illuminate\Support\Facades\Session::get('message')  !!}</strong>
         </div>
     @endif
 
     @if (isset($message))
-        <div class="alert alert-block col-lg-9">
+        <div class="alert alert-block col-lg-9 black-alert">
             <strong>{!! $message !!} </strong>
         </div>
     @endif
@@ -55,7 +55,7 @@
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
             </div>
             @if ($errors->has('email'))
-                <span class="help-block">
+                <span class="help-block text-danger">
                           <strong>{{ $errors->first('email') }}</strong>
                     </span>
             @endif
@@ -65,7 +65,7 @@
             </div>
 
             @if ($errors->has('password'))
-                <span class="help-block">
+                <span class="help-block text-danger">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
             @endif

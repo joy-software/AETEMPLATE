@@ -131,15 +131,15 @@ class groupController extends Controller
 
             $id= Auth::id();
             $group = group::create([
-            'description'=> $request->get('description_group'),
-            'name' =>$request->get('name'),
+            'description'=> trim($request->get('description_group')),
+            'name' =>trim($request->get('name')),
             'logo' => $chemin,
             ]);
-        $group->users()->associate(Auth::user());
-        $group->save();
+            $group->users()->associate(Auth::user());
+            $group->save();
 
             $group_id = $group->id;
-        $usergroup = usergroup::create([
+            $usergroup = usergroup::create([
                 'id_validator'=> $id,
                 'statut'=>'actif',
                 'notification'=>TRUE
@@ -190,7 +190,7 @@ class groupController extends Controller
             ]);
     }
 
-    //public function valid_adhesion_group($id_user, $id_group){
+   // public function valid_adhesion_group($id_user, $id_group){
     public function valid_adhesion_group(Request $request){
         $id_user = null;
         $id_group = null;
@@ -203,9 +203,12 @@ class groupController extends Controller
         $this->load_group();
         foreach ($this->_id_list_group as $id_gp ){
             if( ! in_array($id_group, $this->_id_list_group)){
-                //il n'est pas dans ce groupe.
-                print_r("cet utilisateur n'est pas de ce groupe");
-                die;
+
+                return response()->json([
+                    'type'=>'error',
+                    'message'=>"cet utilisateur n'est pas de ce groupe"
+                    ]);
+                //die;
             }
 
         }
@@ -213,26 +216,84 @@ class groupController extends Controller
         $usergroup = usergroup::where('user_ID','=',$id_user)->where('group_ID','=',$id_group)->get();
 
         if(! ( ($usergroup[0]->user_ID == $id_user ) && ($usergroup[0]->group_ID == $id_group) )){
+            //print_r( 'incorrect');
+            return response()->json([
+                'type'=>'error',
+                'message'=>"Les données de l'utilisateur et du groupe sont incorrectes."
+            ]);
 
-            print_r("La clé user_id et group_id est incorrecte");
-            die;
         }
 
         if($usergroup[0]->statut != "attente"){
-            //Cet utilisateur n'est pas en attente de validation, mauvaise information.
-            //return redirect()->route('search_group');
-            print_r("cet utilisateur n'est pas en attente de validation dans le groupe");
-            die;
+            return response()->json([
+                'type'=>'error',
+                'message'=>"Cet utilisateur n'est pas en attente de validation dans le groupe."
+            ]);
+
+            //die;
         }
 
         $u_group = usergroup::findOrFail($usergroup[0]->id);
         $u_group->statut = "actif";
+        $u_group->id_validator = Auth::id();
         $u_group->save();
-
+       // print_r( 'tout est bien qui finit bien');
         //Renvoyer le message pour dire que son statut a été changé.
-        print_r("success");
-        die;
+        return response()->json([
+            'type'=>'success',
+            'message'=>"La demande a été validé avec succès."
+        ]);
     }
+
+    public function del_adhesion_group(Request $request){
+        $id_user = null;
+        $id_group = null;
+        if($request->ajax()) {
+            $id_user = $request->id_user;
+            $id_group = $request->id_group;
+        }
+
+        $this->load_group();
+
+        $this->load_group();
+        foreach ($this->_id_list_group as $id_gp ){
+            if( ! in_array($id_group, $this->_id_list_group)){
+                return response()->json([
+                    'type'=>'error',
+                    'message'=>"cet utilisateur n'est pas de ce groupe"
+                ]);
+
+            }
+
+        }
+
+        $usergroup = usergroup::where('user_ID','=',$id_user)->where('group_ID','=',$id_group)->get();
+
+        if(! ( ($usergroup[0]->user_ID == $id_user ) && ($usergroup[0]->group_ID == $id_group) )){
+            //print_r( 'incorrect');
+            return response()->json([
+                'type'=>'error',
+                'message'=>"Les données de l'utilisateur et du groupe sont incorrectes."
+            ]);
+
+        }
+
+        if(!(Auth::user()->hasRole('admin_'.$id_group))){
+            return response()->json([
+                'type'=>'error',
+                'message'=> "Vous n'êtes pas administrateur de ce groupe. Vous n'avez pas le droit de supprimer cette demande"
+            ]);
+        }
+
+
+        $u_group = usergroup::findOrFail($usergroup[0]->id);
+        $u_group->delete();
+        return response()->json([
+            'type'=>'success',
+            'message'=>"La suppression a été effectué avec succès."
+        ]);
+    }
+
     /**
      * @param $id = id_du groupe où on veut les paramètres.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -260,6 +321,7 @@ class groupController extends Controller
             $compt++;
         }
         $group = group::find($id);
+        $group->description = trim($group->description);
 
         return view('group.member_group',
             [

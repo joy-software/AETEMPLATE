@@ -34,7 +34,7 @@
 <div class="container">
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9">
+        <div class="alert alert-block col-lg-9 black-alert">
             <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
         </div>
     @else
@@ -51,10 +51,10 @@
                         <div class="form-group ">
                             <label for="surname" class="control-label col-lg-2">Prénom <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" />
+                                <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" required/>
                             </div>
                             @if ($errors->has('surname'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('surname') }}</strong>
                             </span>
                             @endif
@@ -63,10 +63,10 @@
                         <div class="form-group ">
                             <label for="name" class="control-label col-lg-2">Nom <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class=" form-control" id="name" name="name" type="text" value="{{ old('name') }}" />
+                                <input class=" form-control" id="name" name="name" type="text" value="{{ old('name') }}" required/>
                             </div>
                             @if ($errors->has('name'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
                             @endif
@@ -75,13 +75,13 @@
                         <div class="form-group ">
                             <label for="sex" class="control-label col-lg-2">Genre <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <select class="form-control" name="sex" id="sex">
+                                <select class="form-control" name="sex" id="sex" required>
                                     <option value="M" selected>Homme</option>
                                     <option value="F">Femme</option>
                                 </select>
                             </div>
                             @if ($errors->has('sex'))
-                                <span class="help-block ">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
                             <strong>{{ $errors->first('sex') }}</strong>
                         </span>
                             @endif
@@ -90,10 +90,10 @@
                         <div class="form-group ">
                             <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="email" name="email" type="email" value="{{ old('email') }}" />
+                                <input class="form-control " id="email" name="email" type="email" value="{{ old('email') }}" required/>
                             </div>
                             @if ($errors->has('email'))
-                                <span class="help-block ">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
                             <strong>{{ $errors->first('email') }}</strong>
                         </span>
                             @endif
@@ -103,10 +103,10 @@
                         <div class="form-group ">
                             <label for="phone" class="control-label col-lg-2">Telephone <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}"/>
+                                <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}" required/>
                             </div>
                             @if ($errors->has('phone'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('phone') }}</strong>
                         </span>
                             @endif
@@ -116,10 +116,10 @@
                         <div class="form-group ">
                             <label for="promotion" class="control-label col-lg-2">Promotion <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="promotion" name="promotion" type="text"value="{{ old('promotion') }}" />
+                                <input class="form-control " id="promotion" name="promotion" type="text"value="{{ old('promotion') }}" required/>
                             </div>
                             @if ($errors->has('promotion'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('promotion') }}</strong>
                         </span>
                             @endif
@@ -128,22 +128,22 @@
                         <div class="form-group ">
                             <label for="country" class="control-label col-lg-2">Pays <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="country" name="country" type="text" value="{{ old('country') }}"/>
+                                <input class="form-control " id="country" name="country" type="text" value="{{ old('country') }}" required/>
                             </div>
                             @if ($errors->has('country'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('country') }}</strong>
                         </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="profession" class="control-label col-lg-2">Profession <span class="required">*</span></label>
+                            <label for="profession" class="control-label col-lg-2 offs">Profession <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="profession" name="profession" type="text" value="{{ old('profession') }}"/>
+                                <input class="form-control " id="profession" name="profession" type="text" value="{{ old('profession') }}" required/>
                             </div>
                             @if ($errors->has('profession'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('profession') }}</strong>
                         </span>
                             @endif
@@ -152,10 +152,10 @@
                         <div class="form-group ">
                             <label for="description" class="control-label col-lg-2">Description <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <textarea class="form-control" cols="30" rows="5" name="description" id="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control" cols="30" rows="5" name="description" id="description" required>{{ old('description') }}</textarea>
                             </div>
                             @if ($errors->has('description'))
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('description') }}</strong>
                         </span>
                             @endif
@@ -165,11 +165,11 @@
                         <div class="form-group ">
                             <label for="password" class="control-label col-lg-2">Mot de passe <span class="required">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control " id="password" name="password" type="password" value="{{ old('password') }}"/>
+                                <input class="form-control " id="password" name="password" type="password" value="{{ old('password') }}" required/>
                             </div>
                             @if ($errors->has('password'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('password') }}</strong>
                         </span>
                             @endif
@@ -183,22 +183,26 @@
                             </div>
                             @if ($errors->has('password_confirmation'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                         </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="photo" class="control-label col-lg-2">Photo <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="photo" name="photo" type="text" />
-                            </div>
-                            @if ($errors->has('photo'))
 
-                                <span class="help-block">
-                            <strong>{{ $errors->first('photo') }}</strong>
-                        </span>
+                            <label for="photo" class="control-label col-lg-2">Photo</label>
+                            <div class="col-lg-4">
+                                {!! Form::file('file', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'file']) !!}
+                                <label for="file" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
+                            </div>
+
+                            <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>
+
+                            @if ($errors->has('photo'))
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                    <strong>{{ $errors->first('photo') }}</strong>
+                                </span>
                             @endif
                         </div>
 
@@ -206,11 +210,11 @@
                         <div class="form-group ">
                             <label for="agree" class="control-label col-lg-2 col-sm-3">Agree to Our Policy <span class="required">*</span></label>
                             <div class="col-lg-9 col-sm-9">
-                                <input  type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" />
+                                <input  type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" required/>
                             </div>
                             @if ($errors->has('agree'))
 
-                                <span class="help-block">
+                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
                             <strong>{{ $errors->first('agree') }}</strong>
                         </span>
                             @endif
@@ -259,5 +263,7 @@
 <script src="{{ asset('karmanta/js/sparkline-chart.js') }}"></script>
 <script src="{{ asset('karmanta/js/easy-pie-chart.js') }}"></script>
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
+<script src="{{ asset('js/upload.js') }}"></script>
+
 </body>
 </html>

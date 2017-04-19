@@ -23,7 +23,6 @@
 
 @section('content')
 
-
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -36,8 +35,8 @@
                 <!--breadcrumbs end -->
             </div>
         </div>
-
-        <section class="panel col-lg-offset-1 col-lg-10" >
+        <div class="row">
+            <section class="panel col-lg-offset-1 col-lg-10" >
             <div class="panel-body progress-panel">
                 <div class="row">
                     <div class="col-lg-8 task-progress pull-left">
@@ -65,7 +64,7 @@
             </div>
             <br>
             <section id="section_demande"  style="display: none;" class="well" >
-                <table class="table table-hover personal-task table-responsive ">
+                <table id="tab_demande" class="table table-hover personal-task table-responsive ">
                 <tbody>
 
                 <?php
@@ -103,7 +102,7 @@
                         <br><br>
                         <?php $role_admin= "admin_".$group->id; ?>
                         @role($role_admin)
-                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger">Refuser</button>
+                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn">Refuser</button>
                         @endrole
                     </td>
 
@@ -135,6 +134,36 @@
 
 
         </section>
+        </div>
+        <div class="row">
+            <section class="panel col-lg-offset-1 col-lg-10">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Créer une publication
+                            </header>
+                            <div class="panel-body">
+                                <textarea cols="10"  rows="8" class="form-control" value="Exprimez-vous">
+                                        Exprimez-vous
+                                </textarea>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="checkbox inline">
+                            <input type="checkbox" id="" value="option1"> Publier comme un évènement
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+        </div>
+
+
+
 
 
 
@@ -150,8 +179,17 @@
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/collapse.js') }}"></script>
 <script>
-    var group = '<?php echo $group; ?>';
-    group = eval('(' + group + ')');
+
+    var group = new Object();
+    group.id = '<?php echo $group->id ?>';
+    group.name = '<?php echo $group->name ?>';
+
+    group.description = '{{ $group->description }}';
+    group.logo = '{{ $group->logo }}';
+    group.user_ID = '{{ $group->user_ID }}';
+
+
+
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
@@ -159,7 +197,6 @@
 
 
 </script>
-
 
     <script src="{{ asset('js/group.js') }}"></script>
 
