@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
     "content-hash": "fe133a075cb320cef9bc92c3fa911c46",
-
-    "hash": "1d08a8d93eb8a54fcbfec8e90292f034",
-
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1709,15 +1705,7 @@
                 "pseudorandom",
                 "random"
             ],
-<<<<<<< HEAD
             "time": "2017-03-13T16:27:32+00:00"
-=======
-<<<<<<< HEAD
-            "time": "2017-03-13T16:27:32+00:00"
-=======
-            "time": "2017-03-13 16:27:32"
->>>>>>> 61d69c376e29d2a764373df4ae7a18907e9f3c77
->>>>>>> fe0b3bd6de489ac0aa0c321c63a6a00c772a5d9c
         },
         {
             "name": "predis/predis",
@@ -1767,15 +1755,7 @@
                 "predis",
                 "redis"
             ],
-<<<<<<< HEAD
             "time": "2016-06-16T16:22:20+00:00"
-=======
-<<<<<<< HEAD
-            "time": "2016-06-16T16:22:20+00:00"
-=======
-            "time": "2016-06-16 16:22:20"
->>>>>>> 61d69c376e29d2a764373df4ae7a18907e9f3c77
->>>>>>> fe0b3bd6de489ac0aa0c321c63a6a00c772a5d9c
         },
         {
             "name": "psr/http-message",
@@ -2031,16 +2011,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.6",
+            "version": "v5.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e"
+                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e",
-                "reference": "81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
+                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
                 "shasum": ""
             },
             "require": {
@@ -2081,7 +2061,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2017-02-13T07:52:53+00:00"
+            "time": "2017-04-20T17:32:18+00:00"
         },
         {
             "name": "symfony/class-loader",
@@ -2981,16 +2961,16 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "v1.7.1",
+            "version": "v1.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a"
+                "reference": "741622fce79df3d77b6063239e3d95566db1810e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/df97c5c7bf43eb0660f13fdc16a0efefc534311a",
-                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/741622fce79df3d77b6063239e3d95566db1810e",
+                "reference": "741622fce79df3d77b6063239e3d95566db1810e",
                 "shasum": ""
             },
             "require": {
@@ -3007,6 +2987,9 @@
                 "ext-gd": "to use GD library based image processing.",
                 "ext-imagick": "to use Imagick based image processing."
             },
+            "bin": [
+                "bin/debug"
+            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -3038,7 +3021,7 @@
                 "tinymce",
                 "upload"
             ],
-            "time": "2017-03-23T06:55:16+00:00"
+            "time": "2017-04-19T20:35:43+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
