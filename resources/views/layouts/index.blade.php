@@ -29,7 +29,7 @@
                                     <tbody>
 
                                     @foreach($user->notifications()->paginate(4) as $notification)
-                                        <tr>
+                                        <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
                                             <td><img src="/@if($notification['data']['photo_member'] == null)users/user.png" style="height: 20%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
                                                 @else
                                                     {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>

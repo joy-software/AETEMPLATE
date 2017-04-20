@@ -24,7 +24,7 @@
             <tbody>
 
             @foreach($notifications as $notification)
-            <tr>
+            <tr class='clickable-row' data-href='url:#'>
                 <td><img src="/@if($notification['data']['photo_member'] == null)users/user.png" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
                     @else
                     {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>

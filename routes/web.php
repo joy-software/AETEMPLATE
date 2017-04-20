@@ -286,3 +286,9 @@ Route::post('notifications', [
     'as' =>  'notificationsRead',
     'uses' => 'UserController@read_notifications'
 ]);
+
+/**La route pour recharger les notifications affichées d'un utilsateur comme lues**/
+Route::post('updatenotifications', [
+    'as' =>  'notificationsUpdate',
+    'uses' => 'UserController@update_notifications'
+]);

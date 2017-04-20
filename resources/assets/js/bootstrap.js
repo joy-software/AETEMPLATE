@@ -71,6 +71,6 @@ let echo = this.echo = new Echo({
 
 window.Echo.private('App.User.' + userId)
     .notification((notification) => {
-    console.log(notification.type);
+    ReloadNotifications()
 });
     //*/

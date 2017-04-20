@@ -6,6 +6,7 @@ use App\Events\GroupCreateEvent;
 use App\group;
 use App\Listeners\GroupCreateListener;
 use App\Notifications\IncomingMember;
+use App\Notifications\InvitationAccepted;
 use App\User;
 use App\usergroup;
 use App\Http\Requests\groupRequest;
@@ -252,6 +253,18 @@ class groupController extends Controller
         $u_group->save();
        // print_r( 'tout est bien qui finit bien');
         //Renvoyer le message pour dire que son statut a été changé.
+
+        /**Envoie de la notification par mail**/
+        $id_users = usergroup::select('user_id')->where('group_id', '=',$id_group)
+            ->where('user_id','!=',Auth::id())->where('notification','=',1)->get();
+        $group_associate = group::findOrFail($id_group);
+        foreach ($id_users as $id_user)
+        {
+            $user = User::findorfail($id_user->user_id);
+            $user->notify(new InvitationAccepted(Auth::user(), $group_associate));
+        }
+        /**Fin de l'envoie**/
+
         return response()->json([
             'type'=>'success',
             'message'=>"La demande a été validé avec succès."
@@ -544,7 +557,8 @@ class groupController extends Controller
         $usergroup->save();
 
         /**Envoie de la notification par mail**/
-        $id_users = usergroup::select('user_id')->where('group_id', '=',$id_group)->where('user_id','!=',Auth::id())->get();
+        $id_users = usergroup::select('user_id')->where('group_id', '=',$id_group)
+            ->where('user_id','!=',Auth::id())->where('notification','=',1)->get();
         foreach ($id_users as $id_user)
         {
             $user = User::findorfail($id_user->user_id);
