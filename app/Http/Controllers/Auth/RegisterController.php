@@ -104,7 +104,6 @@ class RegisterController extends Controller
             'profession' => $data['profession'],
             'description' => $data['description'],
             'password' => Hash::make($data['password']),
-            'photo' => $data['photo'],
             'activated' => !config('settings.send_activation_email')
 
         ]);
@@ -112,16 +111,44 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+
+        if($request->file("photo") == null){
+
+            $extension = null;
+
+            if ($user->sex == 'M') {
+
+                $chemin = "users/default_gent_avatar.png";
+
+            } else {
+
+                $chemin = "users/default_lady_avatar.png";
+            }
+        }
+        else{
+
+            $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id);
+            $chemin = 'users/'. 'photo' . '___' . $user->name . '___' . $user->id;
+        }
+        $user->photo = $chemin;
+        $user->save();
+
         $this->queueActivationKeyNotification($user);
-        $this->guard()->logout($user);
-        $request->session()->flush();
-        $request->session()->regenerate();
+        //$this->guard()->logout($user);
+        //$request->session()->flush();
+        //$request->session()->regenerate();
+
+        return redirect()->route('register')->with(['message' => $request->file('photo')->getClientOriginalName()]);
+        /*
+
 
         /*return view('auth.register_success')->with('message', 'Inscription réussie. Pour activer votre
         compte suivez le lien de validation qui vous a été envoyé puis réessayez quelques jours plutard le temps
          que les membres de promotvogt accepte votre demande d\'adhésion. Merci !');*/
-
+        /*
         return redirect()->route('register')->with(['message' => 'Inscription réussie. Pour activer votre
         compte suivez le lien de validation qui vous a été envoyé à l\'adresse '. $user->email . '. Merci !']);
+
+        */
     }
 }
