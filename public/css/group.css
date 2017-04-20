@@ -15,6 +15,10 @@
     display: none;
 }
 
-#p_date_even{
+#p_date_even {
     display: none;
+}
+.profile-ava img{
+
+    width: 40px;
 }

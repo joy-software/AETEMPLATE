@@ -5,6 +5,7 @@
 @section('css')
 
     <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet" />
 
 @endsection
 
