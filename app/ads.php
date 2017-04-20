@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ads extends Model
 {
+   // protected $fillable = ['description','description','logo'];
+
     public function ads_has_files()
     {
         return $this->hasMany('App\ads_has_files', 'ads_ID');

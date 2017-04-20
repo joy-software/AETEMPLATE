@@ -29,11 +29,6 @@ function cacher_afficher_adhesion() {
 
 }
 
-
-function refuser(user){
-    alert("vous voulez refuser l'invitation de "+user);
-}
-
 /*
 ici c'est la confirmation.
  */
@@ -189,6 +184,109 @@ function accepter(id_user, id_group){
         }
     });
 }
+
+
+var bool_check_even = false; // il est caché.
+$("#p_date_even").hide();
+$("#checkbox-even").click(function(){
+    if(bool_check_even == false){
+        $("#p_date_even").show();
+        bool_check_even = true;
+    }
+    else{
+        $("#p_date_even").hide();
+        bool_check_even = false;
+    }
+});
+
+var bool_file1  = false;
+var bool_file2 = false;
+var bool_file3 = false;
+
+$("#span_file2").hide();
+$("#span_file3").hide();
+
+$("#file1").change(function() {
+
+    if($("#file1").val() != ''){ //il y'a quelque chose à l'intérieur.
+        $("#file1").removeClass('btn-primary').addClass('btn-success');
+        if(bool_file2 == false){
+            $("#span_file2").show();
+        }
+    }
+    else{
+        $("#file1").removeClass('btn-success').addClass('btn-primary');
+        if($("#file2").val() == ""){
+            $("#span_file2").hide();
+        }
+        if($("#file3").val() ==""){
+            $("#span_file3").hide();
+        }
+    }
+});
+
+$("#file2").change(function () {
+    if($("#file2").val()!=''){
+        $("#file2").removeClass('btn-primary').addClass('btn-success');
+        $("#span_file3").show();
+    }
+    else{
+        $("#file2").removeClass('btn-success').addClass('btn-primary');
+        if($("#file3").val()=='') {
+            $("#span_file3").hide();
+        }
+        if($("#file1").val()=='') {
+            $("#span_file2").hide();
+        }
+    }
+});
+
+$("#file3").change(function () {
+    if($("#file3").val()==''){
+        $("#file3").removeClass('btn-success').addClass('btn-primary');
+        if($("#file2").val()=='') {
+            $("#span_file3").hide();
+        }
+    }
+    else{
+        $("#file3").removeClass('btn-primary').addClass('btn-success');
+    }
+});
+
+var form_create_ad = null;
+$("#create_ad").on('submit', function (event) {
+    event.preventDefault();
+    console.log("on a cliqué");
+    form_create_ad = this;
+    var data = new FormData( this );
+
+    console.log("url = "+ form_create_ad['action']);
+    console.log("method = "+ form_create_ad['method']);
+
+    $.ajax({
+        url: form_create_ad['action'],
+        type: form_create_ad['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        success: function (response) {
+            if(response.responseJSON.success){
+                console.log("reponse = "+response['success']);
+            }
+            else {
+                console.log("reponse = "+response['error']);
+            }
+            //console.log("Reponse = "+response.responseJSON.success);
+            //console.log(response);
+        },
+        error : function () {
+            //alert("erreur");
+            console.log("Erreur = "+response.responseJSON.error);
+        }
+
+    });
+});
 
 
 /*

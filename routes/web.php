@@ -250,12 +250,21 @@ Route::get('/group/event_group/{id}', [
 ]);
 Route::get('/group/event_group', 'groupController@index');
 
+/**
+ * Ads et Event.
+ */
+Route::post('/group/post_ads', [
+    'as'=>'post_ads',
+    'uses'=>'groupController@post_ads'
+]);
+
 Route::get('/group/ads_group/{id}', [
     'as'=>'ads_group',
     'uses'=>'groupController@ads_group'
 ]);
 
 Route::get('/group/ads_group', 'groupController@index');
+
 
 Route::get('/group/ballot_group/{id}', [
     'as'=>'ballot_group',

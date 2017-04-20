@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\ads;
 use App\Events\GroupCreateEvent;
+use App\files;
 use App\group;
 use App\Listeners\GroupCreateListener;
 use App\Notifications\IncomingMember;
 use App\User;
 use App\usergroup;
+use Carbon\Carbon;
+use Validator;
 use App\Http\Requests\groupRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -358,6 +362,125 @@ class groupController extends Controller
             return view('group.index',['list_group'=> $this->_list_group, 'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
         }
         return view('group.ads_group',['list_group'=> $this->_list_group, 'id'=>$id,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+    }
+
+    public function post_ads(Request $request){
+        $messages = [
+            'description.required' => "vous devez donner une description à l'annonce",
+            'description.min'=>'votre annonce doit avoir minimum 10 caractères',
+            'description.max'=>'votre annonce doit avoir maximum 1000 caractères',
+            'file1.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
+            'file2.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
+            'file3.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
+            'file1.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre premier fichier',
+            'file2.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre deuxième fichier',
+            'file3.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre troisième fichier'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'description' => 'required|min:10|max:1000',
+            'file1' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000',
+            'file2' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000',
+            'file3' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000'
+        ], $messages);
+
+        if ( ! $validator->passes()) { // il y'a un problème avec les règles.
+            return response()->json(['error'=>$validator->errors()->all()]);
+        }
+
+        $type = 0;
+        $period = env('ADS_EXPIRATION_PERIOD',7);
+        $dt = Carbon::now();
+        $date_expiration = $dt->addDays($period);
+
+        $ads = ads::create([
+            'description'=> trim($request->description),
+            'expiration_date' => $date_expiration
+        ]);
+
+
+        if(($request->checkbox_even == true) && ($request->expiration_date != "") ){ //C'est un évènement.
+            $type = 1; // évènement.
+            $date = $request->expiration_date;
+            list($year, $month, $days) = explode("[-./]", $date);
+
+            $date_expiration = Carbon::create($year, $month, $days, 0);
+            if($date_expiration->isPast()){
+                return response()->json(['error'=> "La date indiquée pour l'évènement est déjà passée. Vérifier la date s'il vous plait"]);
+            }
+        }
+
+        $ads->type = $type;
+        $ads->expiration_date = $date_expiration;
+        $group = group::find($request->id_group);
+        $ads->users()->associate(Auth::user());
+        $ads->group()->associate($group);
+
+
+        $file1 = null;
+        $file2 = null;
+        $file3 = null;
+        for($i = 1 ; i<= 3 ; $i++){
+            $name = "file".$i;
+            if($request->get($name) != ""){
+
+                $request->file($name)->move('files', $request->file($name)->getClientOriginalName());
+                $chemin = 'files_ads/'. $request->file($name)->getClientOriginalName();
+                $size = $request->file($name)->getClientSize();
+
+                $mime = $request->file($name)->extension();
+                $video_music_ext = array('mp3','3gp','vlc');
+                $type = 0; // 0 pour les fichiers (pdf, video, etc....)  et 1 pour les autres (music, video)
+                if(in_array($mime, $video_music_ext )){
+                    $type=1;
+                }
+
+                switch($i){
+                    case 1 : $file1 = files::create([
+                                            'url'=>$chemin,
+                                            'size'=>$size,
+                                            'type'=>$type,
+                                            'lib'=>false
+                                        ]);
+                    break;
+                    case 2 : $file2 = files::create([
+                                            'url'=>$chemin,
+                                            'size'=>$size,
+                                            'type'=>$type,
+                                            'lib'=>false
+                                        ]);
+                                        break;
+                    case 3 : $file3 = files::create([
+                                            'url'=>$chemin,
+                                            'size'=>$size,
+                                            'type'=>$type,
+                                            'lib'=>false
+                                        ]);
+                                        break;
+                    default;
+                }
+            }
+            else {
+                switch($i){
+                    case 1 : $file1 = null; break;
+                    case 2 : $file2 = null; break;
+                    case 3 : $file3 = null; break;
+                    default;
+                }
+            }
+        }
+
+        $ads->save();
+        if($file1 != null) $file1->save();
+        if($file2 != null) $file2->save();
+        if($file3 != null) $file3->save();
+
+        for($i = 1; i<= 3; $i++){
+
+        }
+
+        return response()->json(['success'=> 'ajout avec succès']);
+
     }
 
     public function event_group($id){
