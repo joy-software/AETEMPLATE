@@ -5,9 +5,7 @@
 
     <link href="{{ asset('css/group.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
@@ -88,13 +86,6 @@
                         </p>
                         <p id="td-desc-{{ $user['id'] }}">
                             {{ $user['description'] }} <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
                         </p>
                     </td>
                     <td style="width: 25%">
@@ -120,7 +111,6 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
                                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                             </div>
                             <div class="modal-body" style="background: white;">
@@ -135,6 +125,7 @@
 
         </section>
         </div>
+
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10">
                 {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
@@ -145,10 +136,13 @@
                                 Créer une annonce
                             </header>
                             <div class="panel-body" style="text-align: center;">
+
+                                <div class="alert alert-block alert-danger fade in" id="message">
+
+                                </div>
+
                                 <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
-                                <textarea cols="10" rows="10" name="description" class="form-control" value="Exprimez-vous"></textarea>
-                                <br>
-                                <button class="btn btn-primary" id="btn-create-ads" style="width: 200px;">Créer l'annonce</button>
+                                <textarea cols="10" rows="10" name="description" id="description_create_ad" class="form-control"></textarea>
                             </div>
 
                         </section>
@@ -173,11 +167,223 @@
                         </p>
 
                     </div>
-
+                    <br>
+                </div>
+                <div class="row" style="text-align: center;">
+                    <div class="col-lg-offset-2 col-lg-2">
+                        <p>
+                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer l'annonce</button>
+                        </p>
+                    </div>
                 </div>
                 {!! Form::close() !!}
             </section>
         </div>
+
+
+
+        <!--div>
+          Partie des évènements !!!
+      </div-->
+
+
+        <?php
+        if($events != null){
+        $compteur =0;
+        foreach ($events as $event) {
+        $compteur++;
+
+        ?>
+
+        <div class="row" id="evenement{{ $compteur }}">
+            <section class="panel col-lg-offset-1 col-lg-10">
+                <div class="panel-body progress-panel">
+                    <div class="row">
+                        <div class="col-lg-8 task-progress pull-left">
+                            <span class="pull-left">
+                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $event->id .'']['photo'] }}">
+                                {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
+                                </span>
+                        </div>
+                        <div class="col-lg-4">
+                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover personal-task">
+                    <tbody>
+                    <tr>
+                        <td style="text-align: justify;">
+                            {{ $event->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pull-left">
+                            <?php
+                            if( ! empty($tab_events_final[''.$event->id.''])){
+
+                            $nb = substr_count($tab_events_final[''.$event->id.''],"|");
+                            switch ($nb){
+                                case 0 :
+                                    $lien1 = $tab_events_final[''.$event->id.'']; $lien2 = $lien3= null;
+                                    break;
+                                case 1 :
+                                    list($lien1, $lien2) = explode("|", $tab_events_final[''.$event->id.'']);
+                                    $lien3 = null;
+                                    break;
+                                case 2 :
+                                    list($lien1, $lien2, $lien3) = explode("|", $tab_events_final[''.$event->id.'']);
+                                    break;
+                                default :
+                                    break;
+                            }
+
+                            if($lien1 != null){
+                            ?>
+                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" >{{ $lien1 }}</a>
+                            <?php
+                            if($lien2 != null){
+                            ?>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"> {{ $lien2 }} </a>
+                            <?php
+                            if($lien3 != null){
+                            ?>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> {{ $lien3 }} </a>
+
+                            <?php
+                                        }
+                                    }
+                                }
+                            }
+                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cet évènement </span>
+                            <?php
+                            }
+                            }
+
+                            ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+        <?php
+        }
+        else {
+        ?>
+        <div class="row" id="evenement0">
+            <section class="panel col-lg-offset-1 col-lg-10">
+                        <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
+            </section>
+        </div>
+
+        <?php    }
+
+        ?>
+
+        <!--div>
+            Partie des annoncess !!!!!
+        </div-->
+
+    <?php
+            if($ads != null){
+        $compteur =0;
+        foreach ($ads as $ad) {
+            $compteur++;
+
+        ?>
+
+        <div class="row" id="annonce{{ $compteur }}">
+            <section class="panel col-lg-offset-1 col-lg-10">
+                <div class="panel-body progress-panel">
+                    <div class="row">
+                        <div class="col-lg-8 task-progress pull-left">
+                            <span class="pull-left">
+                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $ad->id .'']['photo'] }}">
+                                          {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
+                                </span>
+                        </div>
+                        <div class="col-lg-4">
+                            <span class="badge bg-success"><?php $std = $ad->created_at; echo $std->toRfc850String(); ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover personal-task">
+                    <tbody>
+                    <tr>
+                        <td style="text-align: justify;">
+                            {{ $ad->description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pull-left">
+                            <?php
+                                if( ! empty($tab_ads_final[''.$ad->id.''])){
+
+                                    $nb = substr_count($tab_ads_final[''.$ad->id.''],"|");
+                                    switch ($nb){
+                                        case 0 :
+                                            $lien1 = $tab_ads_final[''.$ad->id.'']; $lien2 = $lien3= null;
+                                            break;
+                                        case 1 :
+                                            list($lien1, $lien2) = explode("|", $tab_ads_final[''.$ad->id.'']);
+                                            $lien3 = null;
+                                            break;
+                                        case 2 :
+                                            list($lien1, $lien2, $lien3) = explode("|", $tab_ads_final[''.$ad->id.'']);
+                                            break;
+                                        default :
+                                            break;
+                                    }
+
+                                    if($lien1 != null){
+                                        ?>
+                                        <a style="margin-right: 50px" href="/{{ $lien1 }}">
+                                            <?php //$nom1 = end(explode('/',$lien1)); echo  ?>
+                                            {{ $lien1 }}
+                                        </a>
+                                    <?php
+                                        if($lien2 != null){
+                                            ?>
+                                            <a style="margin-right: 50px" href="/{{ $lien2 }}"> {{ $lien2 }} </a>
+                                            <?php
+                                            if($lien3 != null){
+                                            ?>
+                                            <a style="margin-right: 50px" href="/{{ $lien3 }}"> {{ $lien3 }} </a>
+
+                                            <?php
+                                              }
+                                            }
+                                        }
+                                    }
+                                    else{  ?> <span class="badge bg-warning">Aucun fichier pour cette annonce</span>
+                                        <?php
+                                    }
+                                }
+
+                         ?>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </div>
+        <?php
+            }
+            else {
+                ?>
+        <div class="row" id="annonce{{ $compteur }}">
+            <section class="panel col-lg-offset-1 col-lg-10">
+                Ce groupe n'a aucune annonce
+            </section>
+        </div>
+
+        <?php    } ?>
+
 
 
     </section>

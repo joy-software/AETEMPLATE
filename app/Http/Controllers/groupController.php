@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ads;
+use App\ads_has_files;
 use App\Events\GroupCreateEvent;
 use App\files;
 use App\group;
@@ -198,12 +199,93 @@ class groupController extends Controller
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
 
+        /*
+         * Chargement des 5 premières annonces et évènements.
+         */
+        $count_ads = ads::where('type','=',0)->count();
+
+        if($count_ads > 5){
+            $ads = ads::orderBy('created_at','desc')->where('type','=', 0)->take(5);
+        }
+        else{
+            $ads = ads::orderBy('created_at','desc')->where('type','=', 0)->get();
+        }
+
+        $count_events = ads::where('type','=',1)->count();
+
+        if($count_events > 5){
+            $events = ads::orderBy('created_at','desc')->where('type','=', 1)->take(5);
+        }
+        else{
+            $events = ads::orderBy('created_at','desc')->where('type','=', 1)->get();
+        }
+
+        $tab_ads_final = null;
+        $tab_events_final = null;
+        $tab_users= null;
+
+        if($count_ads != 0){
+
+            for($i = 0; $i< $count_ads; $i++){
+
+                $tab_users[''.$ads[$i]['id'].''] = User::find($ads[$i]['user_ID']);
+
+               $ad_h_file = ads_has_files::where('ads_ID','=', $ads[$i]['id'])->get();
+
+               if(count($ad_h_file)){
+                   //echo "id = ".$ads;
+                   foreach($ad_h_file as $el){
+                       $file = files::findOrFail($el->files_ID);
+                       $tab_ads_final[''.$ads[$i]['id'].''] =
+                           (!isset($tab_ads_final[''.$ads[$i]['id'].'']) && empty($tab_ads_final[''.$ads[$i]['id'].'']))
+                               ? $file->url : $tab_ads_final[''.$ads[$i]['id'].''] . '|' .$file->url;
+
+                   }
+               }else{
+                   $tab_ads_final["".$ads[$i]['id'].""] = null;
+               }
+              // echo 'fin tour';
+            }
+        }else{
+            $ads = null;
+        }
+
+        if($count_events != 0){
+            for($i = 0; $i< $count_events; $i++){
+
+                $tab_users[''.$events[$i]['id'].''] = User::findOrFail($events[$id]['user_ID']);
+
+                $ad_h_file = ads_has_files::where('ads_ID','=', $events[$i]['id'])->get();
+                if(count($ad_h_file)){
+                    foreach($ad_h_file as $el){
+                        $file = files::findOrFail($el->files_ID);
+
+                        $tab_events_final[''.$events[$i]['id'].''] =
+                            (!isset($tab_events_final[''.$events[$i]['id'].'']) && empty($tab_events_final[''.$events[$i]['id'].'']))
+                                ? $file->url : $tab_events_final[''.$events[$i]['id'].''] . '|' .$file->url;
+
+                        //$tab_events_final["".$events[$i]['id'] .""] .= "|".$file->url;
+                    }
+                }else{
+                    $tab_events_final["".$events[$i]['id'] .""] = null;
+                }
+            }
+        }
+        else{
+            $events = null;
+        }
+
         return view('group.view_group',
             ['list_group'=> $this->_list_group,
                 'group'=>$group,
                 'users'=> $users,
                 'user'=> $user->unreadnotifications()->paginate(6),
-                'nbr_notif'=> $notifications
+                'nbr_notif'=> $notifications,
+                'ads'=>$ads,
+                'events'=>$events,
+                'tab_events_final'=>$tab_events_final,
+                'tab_ads_final'=>$tab_ads_final,
+                'tab_users'=>$tab_users
             ]);
     }
 
@@ -385,13 +467,16 @@ class groupController extends Controller
         ], $messages);
 
         if ( ! $validator->passes()) { // il y'a un problème avec les règles.
-            return response()->json(['error'=>$validator->errors()->all()]);
+            return response()->json([
+                'type'=>'error',
+                'message'=>$validator->errors()->all()]);
         }
 
         $type = 0;
         $period = env('ADS_EXPIRATION_PERIOD',7);
         $dt = Carbon::now();
         $date_expiration = $dt->addDays($period);
+       // echo $date_expiration;
 
         $ads = ads::create([
             'description'=> trim($request->description),
@@ -402,33 +487,32 @@ class groupController extends Controller
         if(($request->checkbox_even == true) && ($request->expiration_date != "") ){ //C'est un évènement.
             $type = 1; // évènement.
             $date = $request->expiration_date;
-            list($year, $month, $days) = explode("[-./]", $date);
+            list($year, $month, $days) = explode("-", $date);
 
             $date_expiration = Carbon::create($year, $month, $days, 0);
             if($date_expiration->isPast()){
-                return response()->json(['error'=> "La date indiquée pour l'évènement est déjà passée. Vérifier la date s'il vous plait"]);
+                return response()->json([
+                    'type'=>'error',
+                    'message'=> "La date indiquée pour l'évènement est déjà passée. Vérifier la date s'il vous plait"]);
             }
         }
 
         $ads->type = $type;
         $ads->expiration_date = $date_expiration;
-        $group = group::find($request->id_group);
-        $ads->users()->associate(Auth::user());
-        $ads->group()->associate($group);
-
-
         $file1 = null;
         $file2 = null;
         $file3 = null;
-        for($i = 1 ; i<= 3 ; $i++){
-            $name = "file".$i;
-            if($request->get($name) != ""){
 
-                $request->file($name)->move('files', $request->file($name)->getClientOriginalName());
+        for($i = 1 ; $i<= 3 ; $i++){
+            $name = "file".$i;
+
+            if($request->file($name) != ""){
+                echo "name = ".$name;
+                $mime = $request->file($name)->extension();
+                $request->file($name)->move('files_ads', $request->file($name)->getClientOriginalName());
                 $chemin = 'files_ads/'. $request->file($name)->getClientOriginalName();
                 $size = $request->file($name)->getClientSize();
 
-                $mime = $request->file($name)->extension();
                 $video_music_ext = array('mp3','3gp','vlc');
                 $type = 0; // 0 pour les fichiers (pdf, video, etc....)  et 1 pour les autres (music, video)
                 if(in_array($mime, $video_music_ext )){
@@ -442,7 +526,9 @@ class groupController extends Controller
                                             'type'=>$type,
                                             'lib'=>false
                                         ]);
-                    break;
+
+                                       break;
+
                     case 2 : $file2 = files::create([
                                             'url'=>$chemin,
                                             'size'=>$size,
@@ -470,16 +556,40 @@ class groupController extends Controller
             }
         }
 
+        $group = group::find($request->id_group);
+        $ads->user()->associate(Auth::user());
+        $ads->group()->associate($group);
         $ads->save();
-        if($file1 != null) $file1->save();
+        if($file1 != null){
+            $file1->save();
+        }
         if($file2 != null) $file2->save();
         if($file3 != null) $file3->save();
 
-        for($i = 1; i<= 3; $i++){
-
+        if($file1 != null) {
+            $ad_h_file1 = ads_has_files::create();
+            $ad_h_file1->ads()->associate($ads);
+            $ad_h_file1->files()->associate($file1);
+            $ad_h_file1->save();
         }
 
-        return response()->json(['success'=> 'ajout avec succès']);
+        if($file2 != null) {
+            $ad_h_file2 = ads_has_files::create();
+            $ad_h_file2->ads()->associate($ads);
+            $ad_h_file2->files()->associate($file2);
+            $ad_h_file2->save();
+        }
+
+        if($file3 != null) {
+            $ad_h_file3 = ads_has_files::create();
+            $ad_h_file3->ads()->associate($ads);
+            $ad_h_file3->files()->associate($file3);
+            $ad_h_file3->save();
+        }
+
+        return response()->json([
+            'type'=> 'success',
+            'message'=> "Votre annonce a été publié avec succès."]);
 
     }
 
