@@ -193,7 +193,7 @@
 
                             <label for="photo" class="control-label col-lg-2">Photo</label>
                             <div class="col-lg-4">
-                                {!! Form::file('file', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'file']) !!}
+                                {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'file']) !!}
                                 <label for="file" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
                             </div>
 

@@ -5,6 +5,7 @@
 
     <link href="{{ asset('css/annuaire.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet" />
 
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
