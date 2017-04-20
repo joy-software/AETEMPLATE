@@ -7,26 +7,21 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 
-class InformOthersInvitationAccepted extends Notification
+class InformOthersInvitationAccepted extends Notification implements  ShouldQueue
 {
     use Queueable;
 
     public $group;
-    public $validator;
     public $sender;
 
     /**
      * Create a new notification instance.
-     * @param $validator  user who has accepted my invitation
      * @param $sender  user, the person to whom the email will be send
      * @param $group group, the group in which there is an invitation
-     * @return void
      */
-    public function __construct(User $validator,group $group,User $sender)
+    public function __construct(User $sender, group $group)
     {
-        $this->validator = $validator;
         $this->group = $group;
         $this->sender = $sender;
     }
@@ -39,7 +34,7 @@ class InformOthersInvitationAccepted extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','broadcast'];
+        return ['database','broadcast',OneSignalChannel::class];
     }
 
 
@@ -52,13 +47,12 @@ class InformOthersInvitationAccepted extends Notification
     public function toArray($notifiable)
     {
         return [
-            'name_member' => $this->incomingMember['name'],
-            'surname_member' => $this->incomingMember['surname'],
-            'photo_member' => $this->incomingMember['photo'],
+            'name_member' => $this->sender['name'],
+            'surname_member' => $this->sender['surname'],
+            'photo_member' => $this->sender['photo'],
             'name_group' => $this->group['name'],
             'logo_group' => $this->group['logo'],
             'id_group' => $this->group['id'],
-            'id_member'=> $this->incomingMember['id']
         ];
     }
 }

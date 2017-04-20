@@ -7,11 +7,15 @@
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="{{ asset('karmanta/img/favicon.png') }}">
-
+    <script>
+        // rename myToken as you like
+        window.Laravel ={!! json_encode([
+              'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     <title>@yield('title')</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+
 <!--link href="{{-- asset('karmanta/css/bootstrap.min.css') --}}" rel="stylesheet">
     <!-- bootstrap theme -->
 <!--link href="{{-- asset('karmanta/css/bootstrap-theme.css') --}}" rel="stylesheet">
@@ -24,10 +28,12 @@
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 @yield('css')
+
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <script src="{{ asset('karmanta/js/html5shiv.js') }}"></script>
@@ -37,11 +43,6 @@
 
 
     <![endif]-->
-
-    <script>
-    window.Laravel = {!! json_encode([
-                    'csrfToken' => csrf_token(),
-        ]) !!};</script>
 </head>
 
 
@@ -51,7 +52,7 @@
     <!--header start-->
 
 
-@include('layouts/header')
+@include('layouts/headerII')
 <!--header end-->
 
     <!--sidebar start-->
@@ -71,7 +72,7 @@
 <!-- nice scroll -->
 
 
-<script src="{{asset('js/app.js')}}"></script>
+
 @yield('script')
 
 <script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
@@ -79,7 +80,7 @@
 <script src="{{ asset('karmanta/js/scripts.js') }}"></script>
 
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
-
+<!--script src="{{--asset('js/app.js')--}}"></script-->
 <script>
 
     //knob

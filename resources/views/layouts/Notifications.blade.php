@@ -24,17 +24,36 @@
             <tbody>
 
             @foreach($notifications as $notification)
-            <tr class='clickable-row' data-href='url:#'>
-                <td><img src="/@if($notification['data']['photo_member'] == null)users/user.png" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
-                    @else
-                    {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
-                    @endif
-                </td>
-                <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} voudrait rejoindre le groupe:
-                    {{$notification['data']['name_group'] }}</td>
-                <td><img src="/{{$notification['data']['logo_group']}}" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_group'] }}></td>
-                <td></td>
-            </tr>
+                @if($notification['type']  === 'App\Notifications\IncomingMember')
+                    <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
+                        <td><img src="
+                                {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
+                        </td>
+                        @if($notification['data']['id_group'] == 1)
+                            <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} se reclame comme étant un ancien vogtois.</td>
+                        @else
+                            <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} voudrait rejoindre le groupe:
+                                {{$notification['data']['name_group'] }}</td>
+                        @endif
+                        <td><img src="/{{$notification['data']['logo_group']}}" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_group'] }}></td>
+                        <td></td>
+                    </tr>
+                @endif
+                @if($notification['type']  === 'App\Notifications\InformOthersInvitationAccepted')
+                    <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
+                        <td><img src="
+                                {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
+                        </td>
+                        @if($notification['data']['id_group'] == 1)
+                            <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient d'intégrer l'association.</td>
+                        @else
+                            <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient d'intégrer le groupe:
+                                {{$notification['data']['name_group'] }}</td>
+                        @endif
+                        <td><img src="/{{$notification['data']['logo_group']}}" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_group'] }}></td>
+                        <td></td>
+                    </tr>
+                @endif
             @endforeach
             </tbody>
 

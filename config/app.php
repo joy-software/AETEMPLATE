@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'promot-vogt'),
+    'name' => env('APP_NAME', 'Promot-Vogt'),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,9 +169,9 @@ return [
 
         Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         /*
          * Application Service Providers...
          */

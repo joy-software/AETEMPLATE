@@ -8,6 +8,7 @@ use App\files;
 use App\group;
 use App\Listeners\GroupCreateListener;
 use App\Notifications\IncomingMember;
+use App\Notifications\InformOthersInvitationAccepted;
 use App\Notifications\InvitationAccepted;
 use App\User;
 use App\usergroup;
@@ -259,13 +260,20 @@ class groupController extends Controller
         //Renvoyer le message pour dire que son statut a été changé.
 
         /**Envoie de la notification par mail**/
+        $group_associate = group::find($id_group);
+        //notification par mail
+        $validator = Auth::user();
+        $sender = User::find($id_user);
+        $sender->notify(new InvitationAccepted($validator,$group_associate,$sender));
+
+        //notifications aux autres utilisateurs du groupe
         $id_users = usergroup::select('user_id')->where('group_id', '=',$id_group)
             ->where('user_id','!=',Auth::id())->where('notification','=',1)->get();
-        $group_associate = group::findOrFail($id_group);
+
         foreach ($id_users as $id_user)
         {
             $user = User::findorfail($id_user->user_id);
-            $user->notify(new InvitationAccepted(Auth::user(), $group_associate));
+            $user->notify(new InformOthersInvitationAccepted($sender, $group_associate));
         }
         /**Fin de l'envoie**/
 
