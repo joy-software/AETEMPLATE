@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+
     "content-hash": "fe133a075cb320cef9bc92c3fa911c46",
+
+    "hash": "1d08a8d93eb8a54fcbfec8e90292f034",
+
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1705,7 +1709,15 @@
                 "pseudorandom",
                 "random"
             ],
+<<<<<<< HEAD
             "time": "2017-03-13T16:27:32+00:00"
+=======
+<<<<<<< HEAD
+            "time": "2017-03-13T16:27:32+00:00"
+=======
+            "time": "2017-03-13 16:27:32"
+>>>>>>> 61d69c376e29d2a764373df4ae7a18907e9f3c77
+>>>>>>> fe0b3bd6de489ac0aa0c321c63a6a00c772a5d9c
         },
         {
             "name": "predis/predis",
@@ -1755,7 +1767,15 @@
                 "predis",
                 "redis"
             ],
+<<<<<<< HEAD
             "time": "2016-06-16T16:22:20+00:00"
+=======
+<<<<<<< HEAD
+            "time": "2016-06-16T16:22:20+00:00"
+=======
+            "time": "2016-06-16 16:22:20"
+>>>>>>> 61d69c376e29d2a764373df4ae7a18907e9f3c77
+>>>>>>> fe0b3bd6de489ac0aa0c321c63a6a00c772a5d9c
         },
         {
             "name": "psr/http-message",

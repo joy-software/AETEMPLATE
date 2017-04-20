@@ -118,7 +118,7 @@ $('.send-btn').click(function () {
 
 
     $(".modal-title").html("<i class=\"icon_plus_alt2\"></i>"+group.name + " >> Valider l'adhésion");
-    $(".modal-body").html("<h4>nom_user </h4>" + "<br> " +
+    $(".modal-body").html("<h4>"+nom_user +"</h4>" + "<br> " +
         "<p style='float: left; width: 150px; height: auto; margin-right: 20px;'>"+photo+" </p>"+
         "<p style='text-align: justify;'>"+ description + "" +
         " </p>" +
@@ -256,12 +256,9 @@ $("#file3").change(function () {
 var form_create_ad = null;
 $("#create_ad").on('submit', function (event) {
     event.preventDefault();
-    console.log("on a cliqué");
+
     form_create_ad = this;
     var data = new FormData( this );
-
-    console.log("url = "+ form_create_ad['action']);
-    console.log("method = "+ form_create_ad['method']);
 
     $.ajax({
         url: form_create_ad['action'],
@@ -271,18 +268,24 @@ $("#create_ad").on('submit', function (event) {
         dataType : 'json',
         data: data,
         success: function (response) {
-            if(response.responseJSON.success){
-                console.log("reponse = "+response['success']);
+            if(response.type === "success" ){
+                $("#message").removeClass('alert-danger').addClass('alert-success');
+                $("#file1").val("");
+                $("#file2").val("");
+                $("#file3").val("");
+                $("#description_create_ad").val("");
+                $("#message").html("<strong>"+response.message+"</strong>");
             }
             else {
-                console.log("reponse = "+response['error']);
+                $("#message").removeClass('alert-success').addClass('alert-danger');
+                $("#message").html("<strong>"+response.message+"</strong>");
             }
             //console.log("Reponse = "+response.responseJSON.success);
             //console.log(response);
         },
-        error : function () {
-            //alert("erreur");
-            console.log("Erreur = "+response.responseJSON.error);
+        error : function (erreur) {
+            $("#message").removeClass('alert-success').addClass('alert-danger');
+            $("#message").html("<strong>"+erreur+"</strong>");
         }
 
     });
