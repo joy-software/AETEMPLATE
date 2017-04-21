@@ -356,11 +356,18 @@ class groupController extends Controller
        // print_r( 'tout est bien qui finit bien');
         //Renvoyer le message pour dire que son statut a été changé.
 
+
         /**Envoie de la notification par mail**/
+        $sender = User::find($id_user);
+        if($id_group == 1)
+        {
+            $sender->statut = "actif";
+            $sender->save();
+        }
         $group_associate = group::find($id_group);
         //notification par mail
         $validator = Auth::user();
-        $sender = User::find($id_user);
+
         $sender->notify(new InvitationAccepted($validator,$group_associate,$sender));
 
         //notifications aux autres utilisateurs du groupe
@@ -472,23 +479,68 @@ class groupController extends Controller
             ]);
     }
 
+
     public function ads_group($id){
         $this->load_group();
         $this->verification_param($id);
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
 
+
         if($id==null){
             return view('group.index',['list_group'=> $this->_list_group, 'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+        }
+
+        $ads = ads::orderBy('created_at','desc')
+                ->where('archiving','=',false)
+                ->where('group_ID','=', $id)
+                ->where('type','=', "annonce")
+                ->paginate(5);
+
+        if(count($ads) == 0){
+            $ads = null;
+        }
+
+        $tab_ads_final = null;
+        $tab_users= null;
+
+        if($ads != null){
+
+            //for($i = 0; $i< $count_ads; $i++){
+            foreach($ads as  $ad){
+
+                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID'])->first();
+
+                $ad_h_file = ads_has_files::where('ads_ID','=', $ad['id'])->get();
+
+                if(count($ad_h_file)){
+                    //echo "id = ".$ads;
+                    foreach($ad_h_file as $el){
+                        $file = files::findOrFail($el->files_ID);
+                        $tab_ads_final[''.$ad['id'].''] =
+                            (!isset($tab_ads_final[''.$ad['id'].'']) && empty($tab_ads_final[''.$ad['id'].'']))
+                                ? $file->url : $tab_ads_final[''.$ad['id'].''] . '|' .$file->url;
+
+                    }
+                }else{
+                    $tab_ads_final["".$ad['id'].""] = null;
+                }
+                // echo 'fin tour';
+            }
         }
 
         $group = group::findOrFail($id);
         return view('group.ads_group',
             ['list_group'=> $this->_list_group,
-                'id'=>$id,'user'=> $user->unreadnotifications()->paginate(6),
+                'user'=> $user->unreadnotifications()->paginate(6),
                 'nbr_notif'=> $notifications,
-                'group'=>$group]);
+                'group'=>$group,
+                'tab_ads_final'=>$tab_ads_final,
+                'tab_users' => $tab_users,
+                'ads'=>$ads
+            ]);
     }
+
 
     public function post_ads(Request $request){
         $messages = [
@@ -653,11 +705,59 @@ class groupController extends Controller
             return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),
                 'nbr_notif'=> $notifications]);
         }
+
+
+
+
+        $events = ads::orderBy('created_at','desc')
+            ->where('archiving','=',false)
+            ->where('group_ID','=', $id)
+            ->where('type','=', "evenement")
+            ->paginate(5);
+
+        if(count($events) == 0){
+            $events = null;
+        }
+
+        $tab_events_final = null;
+        $tab_users= null;
+
+        if($events != null){
+
+            //for($i = 0; $i< $count_ads; $i++){
+            foreach($events as  $event){
+
+                $tab_users[''.$event['id'].''] = User::find($event['user_ID'])->first();
+
+                $ad_h_file = ads_has_files::where('ads_ID','=', $event['id'])->get();
+
+                if(count($ad_h_file)){
+                    //echo "id = ".$ads;
+                    foreach($ad_h_file as $el){
+                        $file = files::findOrFail($el->files_ID);
+                        $tab_events_final[''.$event['id'].''] =
+                            (!isset($tab_events_final[''.$event['id'].'']) && empty($tab_events_final[''.$event['id'].'']))
+                                ? $file->url : $tab_events_final[''.$event['id'].''] . '|' .$file->url;
+
+                    }
+                }else{
+                    $tab_events_final["".$event['id'].""] = null;
+                }
+                // echo 'fin tour';
+            }
+        }
+
         $group = group::findOrFail($id);
-        return view('group.event_group',['list_group'=> $this->_list_group, 'id'=>$id,
-            'user'=> $user->unreadnotifications()->paginate(6),
-            'nbr_notif'=> $notifications,
-            'group'=>$group]);
+        return view('group.event_group',
+            ['list_group'=> $this->_list_group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications,
+                'group'=>$group,
+                'tab_events_final'=>$tab_events_final,
+                'tab_users' => $tab_users,
+                'events'=>$events
+            ]);
+
     }
 
     public function ballot_group($id){
