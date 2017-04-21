@@ -273,15 +273,15 @@
 
                             if($lien1 != null){
                             ?>
-                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" >  <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" > <i class="icon_download"></i>  <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien2 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"> <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"><i class="icon_download"></i>  <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien3 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> <i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                             <?php
                                         }
@@ -379,15 +379,15 @@
 
                                     if($lien1 != null){
                                         ?>
-                                        <a style="margin-right: 50px" href="/{{ $lien1 }}" target="_blank"><?php $name = explode("/", $lien1); echo $name[count($name)-1];?></a>
+                                        <a style="margin-right: 50px" href="/{{ $lien1 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien1); echo $name[count($name)-1];?></a>
                                     <?php
                                         if($lien2 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien2 }}" target="_blank"><?php $name = explode("/", $lien2); echo $name[count($name)-1];?></a>
+                                            <a style="margin-right: 50px" href="/{{ $lien2 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien2); echo $name[count($name)-1];?></a>
                                             <?php
                                             if($lien3 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien3 }}" target="_blank"><?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
+                                            <a style="margin-right: 50px" href="/{{ $lien3 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                                             <?php
                                               }

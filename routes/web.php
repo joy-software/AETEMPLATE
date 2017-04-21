@@ -17,6 +17,7 @@ Route::get('/home', 'HomeController@auth');
 
 Route::get('/','HomeController@index');
 
+
 Route::get('/annuaire', [
     'as' => 'annuaire',
     'uses' => 'AnnuaireController@index'
@@ -300,4 +301,15 @@ Route::post('notifications', [
 Route::post('updatenotifications', [
     'as' =>  'notificationsUpdate',
     'uses' => 'UserController@update_notifications'
+]);
+
+
+
+/****
+ *  Route pour la partie comptabilité.
+ */
+
+Route::get('/comptabilite', [
+    'as'=>'comptabilite',
+    'uses'=>'comptabiliteController@index'
 ]);

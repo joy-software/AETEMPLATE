@@ -1,13 +1,13 @@
 
 @include('layouts/asideOption', [
 
-            'classIconOption' => 'icon_house_alt',
+            'classIconOption' => 'icon_search',
             'optionName' => 'Rechercher un groupe',
             'retractable' => 'false',
             'link' => url('/group/search_group')
         ])
 @include('layouts/asideOption', [
-            'classIconOption' => 'icon_house_alt',
+            'classIconOption' => 'icon_pencil-edit',
             'optionName' => 'Créer un groupe',
             'retractable' => 'false',
             'link' => url('/group/create_group')
