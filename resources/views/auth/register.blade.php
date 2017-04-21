@@ -46,7 +46,7 @@
             <div class="panel-body">
                 <div class="form">
 
-                    <form class="form-validate form-horizontal " id="register_form" method="post" action="{{ route('register') }}">
+                    <form class="form-validate form-horizontal " enctype="multipart/form-data" id="register_form" method="post" action="{{ route('register') }}">
                         {{ csrf_field() }}
                         <div class="form-group ">
                             <label for="surname" class="control-label col-lg-2">Prénom <span class="required">*</span></label>
@@ -193,8 +193,8 @@
 
                             <label for="photo" class="control-label col-lg-2">Photo</label>
                             <div class="col-lg-4">
-                                {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'file']) !!}
-                                <label for="file" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
+                                {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputphoto', 'id' => 'photo']) !!}
+                                <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
                             </div>
 
                             <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>

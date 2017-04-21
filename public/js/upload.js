@@ -2,7 +2,7 @@
  * Created by michelB on 18/04/2017.
  */
 
-var inputs = document.querySelectorAll( '.inputfile' );
+var inputs = document.querySelectorAll( '.inputphoto' );
 Array.prototype.forEach.call( inputs, function( input )
 {
     var label	 = input.nextElementSibling,
