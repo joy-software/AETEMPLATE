@@ -96,6 +96,7 @@ class IncomingMember extends Notification implements ShouldQueue
 
     public function toOneSignal($notifiable)
     {
+        $site = config(app.url);
         $url = url('group/view_group/'.$this->group['id']);
         if ($this->group['id'] === 1)
         {
@@ -103,7 +104,7 @@ class IncomingMember extends Notification implements ShouldQueue
             return OneSignalMessage::create()
                 ->subject("Un nouvel adhérent")
                 ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ."se reclame comme étant un ancien vogtois.")
-                ->url($url)
+                ->url($site)
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
@@ -117,7 +118,7 @@ class IncomingMember extends Notification implements ShouldQueue
             return OneSignalMessage::create()
                 ->subject($this->group['name'].": Une nouvelle demande d'adhésion")
                 ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ." voudrait rejoindre le groupe: ". $this->group['name'])
-                ->url($url)
+                ->url($site)
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
