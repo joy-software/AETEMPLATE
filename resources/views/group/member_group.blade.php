@@ -26,6 +26,20 @@
 
     <section class="wrapper">
 
+        <div class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
+                    <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
+                    <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
         <style>
             .personal-task > tbody > tr > td:last-child {
                 text-align: left;

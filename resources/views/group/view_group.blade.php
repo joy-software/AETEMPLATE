@@ -14,9 +14,7 @@
 
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
-
 @endsection
-
 
 
 
@@ -26,20 +24,24 @@
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
-                <ul class="breadcrumb">
-                    <li><a href="{{ route('accueil') }}"><i class="icon_house_alt"></i> Home</a></li>
-                    <li><a href="/group/"> Groupes </a></li>
-                    <li class="active">{{$group->name}}</li>
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
+                    <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
+                    <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
+
+
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10" >
             <div class="panel-body progress-panel">
                 <div class="row">
                     <div class="col-lg-8 task-progress pull-left">
-                        <h1>Demande d'adhésion</h1>
+                        <h1>Demande d'adhésion à {{ $group->name }}</h1>
                     </div>
                     <div class="col-lg-4">
                         <?php if($users != null){
@@ -134,7 +136,7 @@
                     <div class="col-lg-8">
                         <section class="panel" >
                             <header class="panel-heading">
-                                Créer une annonce
+                                Créer une annonce / évènement
                             </header>
                             <div class="panel-body" style="text-align: center;">
 
@@ -151,9 +153,33 @@
                     <div class="col-lg-4 well">
                         <p>
                             Joindre des fichiers a l'annonce <br>
-                            <span id="span_file1"><input type="file" name="file1" id="file1"  class="form-control btn btn-primary"> <br></span>
-                            <span id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </span>
-                            <span id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </span>
+                        <div class="row" id="span_file1">
+                                <div class="col-lg-9">
+                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary">
+                                </div>
+                                <div class="col-lg-3">
+                                    <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                </div>
+                        </div><br>
+                        <div class="row" id="span_file2">
+                            <div class="col-lg-9">
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary">
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+                        <div class="row" id="span_file3">
+                            <div class="col-lg-9">
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary">
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+
+                        <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
+                            <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
                         </p>
 
                         <p>
@@ -187,6 +213,11 @@
           Partie des évènements !!!
       </div-->
 
+    <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
+        <ul class="breadcrumb" id="menu_group">
+            <li><a><h4>Evènement</h4></a></li>
+        </ul>
+    </div>
 
         <?php
         if($events != null){
@@ -197,7 +228,7 @@
         ?>
 
         <div class="row" id="evenement{{ $compteur }}">
-            <section class="panel col-lg-offset-1 col-lg-10">
+            <section class="panel col-lg-offset-2 col-lg-8">
                 <div class="panel-body progress-panel">
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
@@ -207,7 +238,8 @@
                                 </span>
                         </div>
                         <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span>
+                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span> <br><br>
+                            <span class="badge bg-warning"><?php $std2 = $event->expiration_date; echo $std2; ?></span>
                         </div>
                     </div>
                 </div>
@@ -242,15 +274,15 @@
 
                             if($lien1 != null){
                             ?>
-                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" >{{ $lien1 }}</a>
+                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" >  <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien2 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"> {{ $lien2 }} </a>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"> <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien3 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> {{ $lien3 }} </a>
+                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                             <?php
                                         }
@@ -274,8 +306,8 @@
         }
         else {
         ?>
-        <div class="row" id="evenement0">
-            <section class="panel col-lg-offset-1 col-lg-10">
+        <div class="row" id="evenement0" >
+            <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
                         <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
             </section>
         </div>
@@ -288,6 +320,12 @@
             Partie des annoncess !!!!!
         </div-->
 
+        <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
+            <ul class="breadcrumb" id="menu_group">
+                <li><a><h4>Annonce</h4></a></li>
+            </ul>
+        </div>
+
     <?php
             if($ads != null){
         $compteur =0;
@@ -297,7 +335,7 @@
         ?>
 
         <div class="row" id="annonce{{ $compteur }}">
-            <section class="panel col-lg-offset-1 col-lg-10">
+            <section class="panel col-lg-offset-2 col-lg-8">
                 <div class="panel-body progress-panel">
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
@@ -342,18 +380,15 @@
 
                                     if($lien1 != null){
                                         ?>
-                                        <a style="margin-right: 50px" href="/{{ $lien1 }}">
-                                            <?php //$nom1 = end(explode('/',$lien1)); echo  ?>
-                                            {{ $lien1 }}
-                                        </a>
+                                        <a style="margin-right: 50px" href="/{{ $lien1 }}" target="_blank"><?php $name = explode("/", $lien1); echo $name[count($name)-1];?></a>
                                     <?php
                                         if($lien2 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien2 }}"> {{ $lien2 }} </a>
+                                            <a style="margin-right: 50px" href="/{{ $lien2 }}" target="_blank"><?php $name = explode("/", $lien2); echo $name[count($name)-1];?></a>
                                             <?php
                                             if($lien3 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien3 }}"> {{ $lien3 }} </a>
+                                            <a style="margin-right: 50px" href="/{{ $lien3 }}" target="_blank"><?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                                             <?php
                                               }
@@ -362,10 +397,8 @@
                                     }
                                     else{  ?> <span class="badge bg-warning">Aucun fichier pour cette annonce</span>
                                         <?php
-                                    }
-                                }
+                                   } ?>
 
-                         ?>
                         </td>
                     </tr>
                     </tbody>
@@ -373,13 +406,17 @@
 
             </section>
         </div>
+
+        <?php }
+
+        ?>
         <?php
             }
             else {
                 ?>
-        <div class="row" id="annonce{{ $compteur }}">
-            <section class="panel col-lg-offset-1 col-lg-10">
-                Ce groupe n'a aucune annonce
+        <div class="row" id="annonce0">
+            <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
+                <a class="list-group-item active">Ce groupe n'a aucune Annonce</a>
             </section>
         </div>
 
@@ -409,7 +446,7 @@
     group.user_ID = '{{ $group->user_ID }}';
 
 
-
+    _token = $('input[name=_token]').val();
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });

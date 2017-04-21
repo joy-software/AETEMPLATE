@@ -202,9 +202,24 @@ $("#checkbox-even").click(function(){
 var bool_file1  = false;
 var bool_file2 = false;
 var bool_file3 = false;
-
+/*
 $("#span_file2").hide();
 $("#span_file3").hide();
+*/
+$("#del_file1").click(function () {
+   $("#file1").val('');
+   $("#file1").change();
+});
+
+$("#del_file2").click(function () {
+    $("#file2").val('');
+    $("#file2").change();
+});
+
+$("#del_file3").click(function () {
+    $("#file3").val('');
+    $("#file3").change();
+});
 
 $("#file1").change(function() {
 
@@ -260,6 +275,14 @@ $("#create_ad").on('submit', function (event) {
     form_create_ad = this;
     var data = new FormData( this );
 
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                }
+        });
+
     $.ajax({
         url: form_create_ad['action'],
         type: form_create_ad['method'],
@@ -268,17 +291,22 @@ $("#create_ad").on('submit', function (event) {
         dataType : 'json',
         data: data,
         success: function (response) {
+
             if(response.type === "success" ){
+
                 $("#message").removeClass('alert-danger').addClass('alert-success');
-                $("#file1").val("");
-                $("#file2").val("");
-                $("#file3").val("");
+                $("#file1").val(""); $("#file1").removeClass('btn-success').addClass('btn-primary'); $("#file1").change();
+                $("#file2").val(""); $("#file2").removeClass('btn-success').addClass('btn-primary'); $("#file2").change();
+                $("#file3").val(""); $("#file3").removeClass('btn-success').addClass('btn-primary'); $("#file3").change();
                 $("#description_create_ad").val("");
                 $("#message").html("<strong>"+response.message+"</strong>");
+                $("#message").show();
             }
             else {
+
                 $("#message").removeClass('alert-success').addClass('alert-danger');
                 $("#message").html("<strong>"+response.message+"</strong>");
+                $("#message").show();
             }
             //console.log("Reponse = "+response.responseJSON.success);
             //console.log(response);

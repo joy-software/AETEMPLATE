@@ -1,6 +1,6 @@
 
 <li class="sub-menu">
-    <a href="#{{--$link --}}" class=""  id="{{ $id }}">
+    <a href="{{ $link }}" class=""  id="{{ $id }}">
         <span><img style="width: 20px; height: 20px;" src="/{{$url_image}}" alt="Logo du groupe : {{ $optionName }}" > {{ $optionName }}</span>
 
         @if($retractable === 'true')
