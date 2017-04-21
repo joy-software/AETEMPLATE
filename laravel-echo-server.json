@@ -1,5 +1,5 @@
 {
-	"authHost": "http://promot-vogt.org",
+	"authHost": "http://promot-vogt.herokuapp.com",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [
 		{
@@ -10,15 +10,15 @@
 	"database": "redis",
 	"databaseConfig": {
 		"redis": {
-          "port": "6379",
-          "host": "localhost"
+          "port": "15359",
+          "host": "ec2-34-251-183-72.eu-west-1.compute.amazonaws.com"
         },
 		"sqlite": {
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
 	},
-	"devMode": true,
-	"host": "promot-vogt.org",
+	"devMode": false,
+	"host": "promot-vogt.herokuapp.com",
 	"port": "6001",
 	"protocol": "http",
 	"socketio": {},
