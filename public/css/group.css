@@ -22,3 +22,12 @@
 
     width: 40px;
 }
+
+#menu_group{
+    background: white !important;
+}
+
+
+#span_file2, #span_file3{
+    display: none;
+}

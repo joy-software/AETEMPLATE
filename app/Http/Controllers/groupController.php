@@ -203,22 +203,35 @@ class groupController extends Controller
         /*
          * Chargement des 5 premières annonces et évènements.
          */
-        $count_ads = ads::where('type','=',0)->count();
+        $ads = null;
+        $events = null;
+
+        $count_ads = ads::where('type','=',0)
+                 ->where('group_ID','=',$id)->count();
 
         if($count_ads > 5){
-            $ads = ads::orderBy('created_at','desc')->where('type','=', 0)->take(5);
+            $ads = ads::orderBy('created_at','desc')
+                ->where('type','=', 0)
+                ->where('group_ID','=',$id)->take(5);
         }
         else{
-            $ads = ads::orderBy('created_at','desc')->where('type','=', 0)->get();
+            $ads = ads::orderBy('created_at','desc')
+                ->where('type','=', 0)
+                ->where('group_ID','=',$id)->get();
         }
 
-        $count_events = ads::where('type','=',1)->count();
+        $count_events = ads::where('type','=',1)
+            ->where('group_ID','=',$id)->count();
 
         if($count_events > 5){
-            $events = ads::orderBy('created_at','desc')->where('type','=', 1)->take(5);
+            $events = ads::orderBy('created_at','desc')
+                ->where('type','=', 1)
+                ->where('group_ID','=',$id)->take(5);
         }
         else{
-            $events = ads::orderBy('created_at','desc')->where('type','=', 1)->get();
+            $events = ads::orderBy('created_at','desc')
+                ->where('type','=', 1)
+                ->where('group_ID','=',$id)->get();
         }
 
         $tab_ads_final = null;
@@ -227,23 +240,24 @@ class groupController extends Controller
 
         if($count_ads != 0){
 
-            for($i = 0; $i< $count_ads; $i++){
+            //for($i = 0; $i< $count_ads; $i++){
+            foreach($ads as  $ad){
 
-                $tab_users[''.$ads[$i]['id'].''] = User::find($ads[$i]['user_ID']);
+                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID'])->first();
 
-               $ad_h_file = ads_has_files::where('ads_ID','=', $ads[$i]['id'])->get();
+               $ad_h_file = ads_has_files::where('ads_ID','=', $ad['id'])->get();
 
                if(count($ad_h_file)){
                    //echo "id = ".$ads;
                    foreach($ad_h_file as $el){
                        $file = files::findOrFail($el->files_ID);
-                       $tab_ads_final[''.$ads[$i]['id'].''] =
-                           (!isset($tab_ads_final[''.$ads[$i]['id'].'']) && empty($tab_ads_final[''.$ads[$i]['id'].'']))
-                               ? $file->url : $tab_ads_final[''.$ads[$i]['id'].''] . '|' .$file->url;
+                       $tab_ads_final[''.$ad['id'].''] =
+                           (!isset($tab_ads_final[''.$ad['id'].'']) && empty($tab_ads_final[''.$ad['id'].'']))
+                               ? $file->url : $tab_ads_final[''.$ad['id'].''] . '|' .$file->url;
 
                    }
                }else{
-                   $tab_ads_final["".$ads[$i]['id'].""] = null;
+                   $tab_ads_final["".$ad['id'].""] = null;
                }
               // echo 'fin tour';
             }
@@ -252,23 +266,24 @@ class groupController extends Controller
         }
 
         if($count_events != 0){
-            for($i = 0; $i< $count_events; $i++){
+            //for($i = 0; $i< $count_events; $i++){
+            foreach($events as $event){
 
-                $tab_users[''.$events[$i]['id'].''] = User::findOrFail($events[$id]['user_ID']);
+                $tab_users[''.$event['id'].''] = User::find($event['user_ID']);
 
-                $ad_h_file = ads_has_files::where('ads_ID','=', $events[$i]['id'])->get();
+                $ad_h_file = ads_has_files::where('ads_ID','=', $event['id'])->get();
                 if(count($ad_h_file)){
                     foreach($ad_h_file as $el){
                         $file = files::findOrFail($el->files_ID);
 
-                        $tab_events_final[''.$events[$i]['id'].''] =
-                            (!isset($tab_events_final[''.$events[$i]['id'].'']) && empty($tab_events_final[''.$events[$i]['id'].'']))
-                                ? $file->url : $tab_events_final[''.$events[$i]['id'].''] . '|' .$file->url;
+                        $tab_events_final[''.$event['id'].''] =
+                            (!isset($tab_events_final[''.$event['id'].'']) && empty($tab_events_final[''.$event['id'].'']))
+                                ? $file->url : $tab_events_final[''.$event['id'].''] . '|' .$file->url;
 
                         //$tab_events_final["".$events[$i]['id'] .""] .= "|".$file->url;
                     }
                 }else{
-                    $tab_events_final["".$events[$i]['id'] .""] = null;
+                    $tab_events_final["".$event['id'] .""] = null;
                 }
             }
         }
@@ -444,7 +459,8 @@ class groupController extends Controller
                 'list_group'=>$this->_list_group,
                 'name_group'=> $group->name,
                 'user'=> $user->unreadnotifications()->paginate(6),
-                'nbr_notif'=> $notifications
+                'nbr_notif'=> $notifications,
+                'group'=>$group
             ]);
     }
 
@@ -453,10 +469,17 @@ class groupController extends Controller
         $this->verification_param($id);
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
+
         if($id==null){
             return view('group.index',['list_group'=> $this->_list_group, 'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
         }
-        return view('group.ads_group',['list_group'=> $this->_list_group, 'id'=>$id,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+
+        $group = group::findOrFail($id);
+        return view('group.ads_group',
+            ['list_group'=> $this->_list_group,
+                'id'=>$id,'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications,
+                'group'=>$group]);
     }
 
     public function post_ads(Request $request){
@@ -464,9 +487,9 @@ class groupController extends Controller
             'description.required' => "vous devez donner une description à l'annonce",
             'description.min'=>'votre annonce doit avoir minimum 10 caractères',
             'description.max'=>'votre annonce doit avoir maximum 1000 caractères',
-            'file1.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
-            'file2.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
-            'file3.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt',
+            'file1.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3',
+            'file2.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3',
+            'file3.mimes'=>'Les extensions acceptées sont jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3',
             'file1.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre premier fichier',
             'file2.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre deuxième fichier',
             'file3.max'=>'La taille maximale pour un fichier est 10Mo, vérifier votre troisième fichier'
@@ -474,15 +497,23 @@ class groupController extends Controller
 
         $validator = Validator::make($request->all(), [
             'description' => 'required|min:10|max:1000',
-            'file1' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000',
-            'file2' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000',
-            'file3' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt|max:10000'
+            'file1' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3,mp4,avi,asf,mov,avchd,mpg,mpeg-4,wmv,divx,xls,flv,csv,3gp|max:20000',
+            'file2' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3,mp4,avi,asf,mov,avchd,mpg,mpeg-4,wmv,divx,xls,flv,csv,3gp|max:20000',
+            'file3' => 'mimes:jpeg,png,jpg,gif,svg,pdf,docx,doc,xlsx,ppt,txt,mp3,mp4,avi,asf,mov,avchd,mpg,mpeg-4,wmv,divx,xls,flv,csv,3gp|max:20000'
         ], $messages);
 
+
+
         if ( ! $validator->passes()) { // il y'a un problème avec les règles.
+            $error = "Erreur avec vos données ";
+            foreach ($validator->errors()->all() as $err){
+                $error .= $err;
+                $error .= '<br>';
+            }
+
             return response()->json([
                 'type'=>'error',
-                'message'=>$validator->errors()->all()]);
+                'message'=>$error]);
         }
 
         $type = 0;
@@ -520,7 +551,6 @@ class groupController extends Controller
             $name = "file".$i;
 
             if($request->file($name) != ""){
-                echo "name = ".$name;
                 $mime = $request->file($name)->extension();
                 $request->file($name)->move('files_ads', $request->file($name)->getClientOriginalName());
                 $chemin = 'files_ads/'. $request->file($name)->getClientOriginalName();
@@ -615,9 +645,11 @@ class groupController extends Controller
             return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),
                 'nbr_notif'=> $notifications]);
         }
+        $group = group::findOrFail($id);
         return view('group.event_group',['list_group'=> $this->_list_group, 'id'=>$id,
             'user'=> $user->unreadnotifications()->paginate(6),
-            'nbr_notif'=> $notifications]);
+            'nbr_notif'=> $notifications,
+            'group'=>$group]);
     }
 
     public function ballot_group($id){
@@ -630,9 +662,11 @@ class groupController extends Controller
                 'user'=> $user->unreadnotifications()->paginate(6),
                 'nbr_notif'=> $notifications]);
         }
+        $group = group::findOrFail($id);
         return view('group.ballot_group',['list_group'=> $this->_list_group, 'id'=>$id,
             'user'=> $user->unreadnotifications()->paginate(6),
-            'nbr_notif'=> $notifications]);
+            'nbr_notif'=> $notifications,
+            'group'=>$group]);
     }
 
     /***
