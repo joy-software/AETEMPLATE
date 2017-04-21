@@ -4,13 +4,14 @@
 
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
     <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
 
 @endsection
 
 
 
 @section('content')
-
 
 
     <section class="wrapper">
@@ -188,7 +189,15 @@
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
                                             <h1> Profile Info</h1>
-                                            <form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}">
+                                            <!--form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}" -->
+
+                                                {!! Form::open(
+                                                            array(
+                                                                'route' => 'editProfile',
+                                                                'class' => 'form-horizontal',
+                                                                'files' => true)) !!}
+
+
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Prénom</label>
@@ -206,6 +215,7 @@
                                                 </div>
 
                                                 <div class="form-group ">
+
                                                     <label for="sex" class="control-label col-lg-2">Genre <span class="required">*</span></label>
                                                     <div class="col-lg-6">
                                                         <select class="form-control" name="sex" id="sex">
@@ -219,8 +229,6 @@
                                                                 <option value="M" >Homme</option>
                                                                 <option value="F" selected>Femme</option>
                                                             @endif
-
-
                                                         </select>
                                                     </div>
                                                     @if ($errors->has('sex'))
@@ -238,6 +246,7 @@
                                                             {{'value=' . Auth::user()->phone}}@endif>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Promotion</label>
                                                     <div class="col-lg-6">
@@ -245,6 +254,7 @@
                                                             {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->promotion) }}@endif>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Pays</label>
                                                     <div class="col-lg-6">
@@ -252,6 +262,7 @@
                                                             {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->country)  }}@endif>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Profession</label>
                                                     <div class="col-lg-6">
@@ -259,12 +270,25 @@
                                                             {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->profession)  }}@endif>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">Photo</label>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" class="form-control" id="photo" placeholder="" name="photo" @if(\Illuminate\Support\Facades\Auth::check())
-                                                            {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->photo) }}@endif>
+
+
+
+                                                <div class="form-group ">
+
+                                                    <label for="photo" class="control-label col-lg-2">Photo</label>
+                                                    <div class="col-lg-4">
+                                                        {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputphoto', 'id' => 'photo']) !!}
+                                                        <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
                                                     </div>
+
+                                                    <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>
+
+                                                    @if ($errors->has('photo'))
+                                                        <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                                            <strong>{{ $errors->first('photo') }}</strong>
+                                                        </span>
+                                                    @endif
+
                                                 </div>
 
 
@@ -286,7 +310,6 @@
 
                                                     </div>
                                                 </div>
-
 
                                             </form>
                                         </div>
@@ -388,6 +411,7 @@
 @section('script')
 
     <script src="{{ asset('js/profile.js') }}"></script>
+    <script src="{{ asset('js/upload.js') }}"></script>
 
 @endsection
 

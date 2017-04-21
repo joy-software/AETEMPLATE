@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'onesignal' => [
+        'app_id' => env('b32f442c-3516-4f00-819b-7131973a6124'),
+        'rest_api_key' => env('MTE3OTRmOWUtY2NmMS00ODUwLTgwMDMtYWRmNGJhYzBiNDc5')
+    ],
+
 ];

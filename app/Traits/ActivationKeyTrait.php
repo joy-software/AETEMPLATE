@@ -95,6 +95,7 @@ trait ActivationKeyTrait
         $usergroup->users()->associate(Auth::user());
         $usergroup->group()->associate($group);
         $usergroup->save();
+        //fin
 
         $id_users = usergroup::select('user_id')->where('group_id', '=',1)
             ->where('statut','=','actif')
