@@ -356,11 +356,18 @@ class groupController extends Controller
        // print_r( 'tout est bien qui finit bien');
         //Renvoyer le message pour dire que son statut a été changé.
 
+
         /**Envoie de la notification par mail**/
+        $sender = User::find($id_user);
+        if($id_group == 1)
+        {
+            $sender->statut = "actif";
+            $sender->save();
+        }
         $group_associate = group::find($id_group);
         //notification par mail
         $validator = Auth::user();
-        $sender = User::find($id_user);
+
         $sender->notify(new InvitationAccepted($validator,$group_associate,$sender));
 
         //notifications aux autres utilisateurs du groupe

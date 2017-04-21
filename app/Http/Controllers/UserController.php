@@ -21,11 +21,11 @@ class UserController extends Controller
      */
    public function editProfile(Request $request)
    {
-       echo "print de requestion <br>";
-       echo $request->file("photo");
+      // echo "print de requestion <br>";
+       //echo $request->file("photo");
        $request->file("photo")->move('logos', $request->get('photo'));
 
-        echo "déplacement avec succès";
+        //echo "déplacement avec succès";
         $user = Auth::user();
 
         $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sex', 'description']);
