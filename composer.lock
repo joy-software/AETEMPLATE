@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe133a075cb320cef9bc92c3fa911c46",
+    "content-hash": "23758ac6280869f2e5549a9b5fc6d725",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -2961,16 +2961,16 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "v1.7.4",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "741622fce79df3d77b6063239e3d95566db1810e"
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/741622fce79df3d77b6063239e3d95566db1810e",
-                "reference": "741622fce79df3d77b6063239e3d95566db1810e",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/df97c5c7bf43eb0660f13fdc16a0efefc534311a",
+                "reference": "df97c5c7bf43eb0660f13fdc16a0efefc534311a",
                 "shasum": ""
             },
             "require": {
@@ -2987,9 +2987,6 @@
                 "ext-gd": "to use GD library based image processing.",
                 "ext-imagick": "to use Imagick based image processing."
             },
-            "bin": [
-                "bin/debug"
-            ],
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -3021,7 +3018,7 @@
                 "tinymce",
                 "upload"
             ],
-            "time": "2017-04-19T20:35:43+00:00"
+            "time": "2017-03-23T06:55:16+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
