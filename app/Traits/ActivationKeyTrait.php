@@ -89,10 +89,10 @@ trait ActivationKeyTrait
         //création du usergroup
         $group = group::find(1);
         $usergroup = usergroup::create([
-            'statut'=>'actif',
+            'statut'=>'attente',
             'notification'=>TRUE
         ]);
-        $usergroup->users()->associate(Auth::user());
+        $usergroup->users()->associate($userToActivate);
         $usergroup->group()->associate($group);
         $usergroup->save();
         //fin

@@ -25,9 +25,7 @@
                 <tbody>
 
                 @foreach($notifications as $notification)
-
                     @if($notification['type']  === 'App\Notifications\IncomingMember')
-
                     <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
                         <td><img src="
                                 {{$notification['data']['photo_member']}}" style="height: 5%; width: auto;" alt="Photo du "{{$notification['data']['name_member'] }}>
