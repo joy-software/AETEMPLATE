@@ -32,6 +32,4 @@ class AnnuaireController extends Controller
 
 
 
-
-
 }

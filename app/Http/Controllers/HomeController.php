@@ -1,11 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Notifications\AccountApproved;
 use Auth;
 use App\Notifications\incomingUser;
 use Illuminate\Http\Request;
 class HomeController extends Controller
 {
+
+    protected $redirectTo = '/acceuil';
     /**
      * Create a new controller instance.
      *
@@ -23,8 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        //$user->notify(new incomingUser());
-
+        $user->notify(new AccountApproved());
+        echo $user->id;
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
     }
@@ -40,6 +43,11 @@ class HomeController extends Controller
 
     public function tester(){
         return view('test/testIndex');
+    }
+
+    public function redirect()
+    {
+        return $this->redirect();
     }
 
 

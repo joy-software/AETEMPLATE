@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 use NotificationChannels\OneSignal\OneSignalWebButton;
 
@@ -38,8 +39,8 @@ class IncomingMember extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database','broadcast',OneSignalChannel::class];
-        //return ['mail','database','broadcast',OneSignalChannel::class];
+       // return ['database','broadcast',OneSignalChannel::class];
+        return ['mail','database','broadcast',OneSignalChannel::class];
 
     }
 

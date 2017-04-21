@@ -54,6 +54,7 @@ function ReloadNotifications()
 $(document).ready(function(){
     _token = $('input[name=_token]').val();
     $('table tr.clickable-row').click(function(){
+        markAsRead();
         window.location = $(this).attr('data-href');
         return false;
     });

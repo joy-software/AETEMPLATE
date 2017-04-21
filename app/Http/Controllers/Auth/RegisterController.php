@@ -112,6 +112,9 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
 
+        echo $request;
+        $correctPhoto = true;
+
         if($request->file("photo") == null){
 
             $extension = null;
@@ -127,8 +130,27 @@ class RegisterController extends Controller
         }
         else{
 
-            $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id);
-            $chemin = '/users/'. 'photo' . '___' . $user->name . '___' . $user->id;
+            $extension = strtolower($request->file('photo')->extension());
+
+            if ($extension != 'png' && $extension != 'jpg' && $extension != 'jpeg') {
+
+                $correctPhoto = false;
+
+                if ($user->sex == 'M') {
+
+                    $chemin = "users/default_gent_avatar.png";
+
+                } else {
+
+                    $chemin = "users/default_lady_avatar.png";
+                }
+
+            } else {
+
+                $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension);
+                $chemin = '/users/'. 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
+            }
+
         }
         $user->photo = $chemin;
         $user->save();

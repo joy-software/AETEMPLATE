@@ -28,7 +28,7 @@
                                 <table id="table_notifications" class="table table-striped table-advance table-responsive "  style="width:100%; margin: auto !important;">
                                     <tbody>
 
-                                    @foreach($notifications as $notification)
+                                    @foreach($user->notifications()->paginate(4) as $notification)
                                         @if($notification['type']  === 'App\Notifications\IncomingMember')
                                             <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
                                                 <td><img src="
