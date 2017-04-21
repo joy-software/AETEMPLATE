@@ -7,6 +7,8 @@ use App\Notifications\incomingUser;
 use Illuminate\Http\Request;
 class HomeController extends Controller
 {
+
+    protected $redirectTo = '/acceuil';
     /**
      * Create a new controller instance.
      *
@@ -41,6 +43,11 @@ class HomeController extends Controller
 
     public function tester(){
         return view('test/testIndex');
+    }
+
+    public function redirect()
+    {
+        return $this->redirect();
     }
 
 

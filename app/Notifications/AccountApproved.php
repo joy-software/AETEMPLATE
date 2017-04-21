@@ -37,7 +37,7 @@ class AccountApproved extends Notification
             ->webButton(
                 OneSignalWebButton::create('link-1')
                     ->text('Click here')
-                    ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
+                   ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
                     ->url('http://laravel.com')
             );
     }
