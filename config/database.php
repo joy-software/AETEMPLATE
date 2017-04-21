@@ -1,5 +1,22 @@
 <?php
 
+if (getenv('REDIS_URL')) {
+    $url = parse_url(getenv('REDIS_URL'));
+
+    putenv('REDIS_HOST='.$url['host']);
+    putenv('REDIS_PORT='.$url['port']);
+    putenv('REDIS_PASSWORD='.$url['pass']);
+}
+
+if (getenv('CLEARDB_DATABASE_URL')) {
+    $url = parse_url(getenv('CLEARDB_DATABASE_URL'));
+
+    putenv('DB_HOST='.$url['host']);
+    putenv('DB_PORT='.$url['port']);
+    putenv('DB_PASSWORD='.$url['pass']);
+    putenv('DB_DATABASE='.substr($url["path"], 1));
+}
+
 return [
 
     /*

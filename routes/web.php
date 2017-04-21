@@ -255,7 +255,7 @@ Route::get('/group/event_group', 'groupController@index');
  */
 Route::post('/group/post_ads', [
     'as'=>'post_ads',
-    'uses'=>'groupController@post_ads'
+    'uses'=>'groupController@'
 ]);
 
 Route::get('/group/ads_group/{id}', [
@@ -294,4 +294,10 @@ Route::get('notifications', [
 Route::post('notifications', [
     'as' =>  'notificationsRead',
     'uses' => 'UserController@read_notifications'
+]);
+
+/**La route pour recharger les notifications affichées d'un utilsateur comme lues**/
+Route::post('updatenotifications', [
+    'as' =>  'notificationsUpdate',
+    'uses' => 'UserController@update_notifications'
 ]);

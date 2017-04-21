@@ -1,8 +1,23 @@
 .img_profil{
-    width: auto;
-    height: 15%;
+     width: auto;
+     height: 15%;
+ }
+
+/*
+#span_file2{
+     display: none !important;
+ }
+#span_file3{
+    display: none !important;
+}
+*/
+#message{
+    display: none;
 }
 
+#p_date_even {
+    display: none;
+}
 .profile-ava img{
 
     width: 40px;

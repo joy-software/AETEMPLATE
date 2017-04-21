@@ -99,7 +99,7 @@ class UserController extends Controller
    {
        $user = Auth::user();
        $notifications = $user->unreadnotifications()->count();
-       return view('layouts/index',['user' =>  $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+       return view('layouts/index',['user' =>  $user,'nbr_notif'=> $notifications]);
    }
 
     /**
@@ -116,7 +116,23 @@ class UserController extends Controller
             [
                 'classIcon' => 'icon-bell-l',
                 'numberNotification' => $notifications,
-                'user' => $user->unreadnotifications()->paginate(6)
+                'notifications' => $user->unreadnotifications()->paginate(6)
+            ]);
+        return $view->render();
+    }
+
+    /**
+     * @return string
+     */
+    public function update_notifications()
+    {
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+        $view  = View::make('layouts/Notifications',
+            [
+                'classIcon' => 'icon-bell-l',
+                'numberNotification' => $notifications,
+                'notifications' => $user->unreadnotifications()->paginate(6)
             ]);
         return $view->render();
     }

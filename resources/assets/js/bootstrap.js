@@ -61,7 +61,7 @@ window.io = require('socket.io-client');
 
 window.Echo = new Echo({
     broadcaster: 'socket.io',
-    host: window.location.hostname + ':6001'
+    host: window.location.hostname + ':'.process.env.PORT || 3000
 });
 /*
 let echo = this.echo = new Echo({
@@ -71,6 +71,6 @@ let echo = this.echo = new Echo({
 
 window.Echo.private('App.User.' + userId)
     .notification((notification) => {
-    console.log(notification.type);
+    ReloadNotifications()
 });
     //*/

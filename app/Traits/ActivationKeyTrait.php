@@ -85,8 +85,22 @@ trait ActivationKeyTrait
         $userToActivate->save();
 
         /**Envoie de la notification par mail**/
-        $id_users = usergroup::select('user_id')->where('group_id', '=',1)->where('user_id','!=',$userToActivate->id)->get();
+
+        //création du usergroup
         $group = group::find(1);
+        $usergroup = usergroup::create([
+            'statut'=>'actif',
+            'notification'=>TRUE
+        ]);
+        $usergroup->users()->associate(Auth::user());
+        $usergroup->group()->associate($group);
+        $usergroup->save();
+        //fin
+
+        $id_users = usergroup::select('user_id')->where('group_id', '=',1)
+            ->where('statut','=','actif')
+            ->where('user_id','!=',$userToActivate->id)->get();
+
         foreach ($id_users as $id_user)
         {
             $user = User::findorfail($id_user->user_id);
