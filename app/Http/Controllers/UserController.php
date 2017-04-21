@@ -21,9 +21,17 @@ class UserController extends Controller
      */
    public function editProfile(Request $request)
    {
+       echo "print de requestion <br>";
+       echo $request->file("photo");
+       $request->file("photo")->move('logos', $request->get('photo'));
 
+        echo "déplacement avec succès";
         $user = Auth::user();
+
         $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sex', 'description']);
+
+        $photo = $request->file('photo')->getClientOriginalName();
+
 
         foreach ($param as $key => $value){
 
@@ -33,8 +41,8 @@ class UserController extends Controller
         $user->save();
 
        $notifications = $user->unreadnotifications()->count();
-
-        return redirect()->route('profile')->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+        return redirect()->route('profile')->with(['success' => $photo]);
+        //return redirect()->route('profile')->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
    }
 
 
