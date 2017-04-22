@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
     {
        // $this->call(PermissionSeeder::class);
         //$this->call(UserTableSeeder::class);
-        $this->call(groupTableSeeder::class);
-        $this->call(usergroupTableSeeder::class);
+        //$this->call(groupTableSeeder::class);
+       // $this->call(usergroupTableSeeder::class);
+        $this->call(MotifTableSeeder::class);
         /*$this->call('filesTableSeeder');
         $this->call('periodTableSeeder');
         $this->call('contributionTableSeeder');
