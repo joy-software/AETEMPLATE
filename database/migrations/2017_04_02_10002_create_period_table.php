@@ -15,9 +15,9 @@ class CreatePeriodTable extends Migration
     {
         Schema::create('period', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description');
-            $table->integer('id_winner');
-            $table->integer('status'); 
+            $table->integer('year');
+            $table->integer('month');
+            //$table->integer('status');
             $table->timestamps();
         });
     }
