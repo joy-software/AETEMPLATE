@@ -18,7 +18,7 @@
                     <i class="icon_plus_alt2 col-lg-3"></i> Demandes d'adhésion
                 </li>
                 <li>
-                    <button class="btn btn-primary btnViewGroup">Voir</button>
+                    <button class="btn btn-primary btnViewGroup"><a href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a></button>
                 </li>
             </ul>
         </div>

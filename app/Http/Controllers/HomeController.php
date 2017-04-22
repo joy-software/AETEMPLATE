@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\group;
 use App\Notifications\AccountApproved;
+use App\period;
 use App\usergroup;
 use Auth;
 use App\Notifications\incomingUser;
@@ -28,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /**Loading data for the user**/
         $user = Auth::user();
         //$user->notify(new AccountApproved());
       //  echo $user->id;
@@ -68,6 +70,14 @@ class HomeController extends Controller
                 $nbr_mem++;
             }
         }
+        /**End loading**/
+        /***Loading data for accounting***/
+        $now = Carbon::now();
+        $period_month = $now->month;
+        $period_year = $now->year;
+        $period_id = period::select('id')->where('month','=',$period_month)
+            ->where('year','=',$period_year)->get()->first();
+        /***End Loading ***/
 
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),

@@ -105,7 +105,8 @@
                     'groupname' => $name_groups[$user_group['group_ID']] ,
                     'nbr_event' => $nbr_event_group[$user_group['group_ID']],
                     'nbr_ads' => $nbr_ads_group[$user_group['group_ID']],
-                    'nbr_mem' => $nbr_mem_group[$user_group['group_ID']]])
+                    'nbr_mem' => $nbr_mem_group[$user_group['group_ID']],
+                    'id_group' => $user_group['group_ID']])
 
                 @endforeach
             </div>
