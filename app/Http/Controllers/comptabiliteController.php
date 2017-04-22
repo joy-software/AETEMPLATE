@@ -5,40 +5,116 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\period;
+use Validator;
 
 use Auth;
 
 class comptabiliteController extends Controller
 {
+    private $_user;
+    private $_notifications;
+    private $_periodes;
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(){
-        //$periodes =  period::orderBy('created_at','desc')->get;
-        $tab_mois = array("Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Decembre");
+    public function load_users_notification_period(){
+
 
         $count_period= period::get()->count();
         if($count_period > 5){
-            $periodes = \period::orderBy('created_at','desc')
+            $this->_periodes  = period::orderBy('created_at','desc')
                 ->take(5);
         }
         else if($count_period == 0){
-            $periodes = null;
-            }
+            $this->_periodes  = null;
+        }
         else{
-            $periodes = period::orderBy('created_at','desc')
+            $this->_periodes = period::orderBy('created_at','desc')
                 ->get();
         }
 
-        $user = Auth::user();
-        $notifications = $user->unreadnotifications()->count();
+
+        $this->_user = Auth::user();
+        $this->_notifications = $this->_user->unreadnotifications()->count();
+    }
+
+    public function index(){
+        $this->load_users_notification_period();
+
         return view('comptabilite.index',[
-            'user' =>  $user,
-            'nbr_notif'=> $notifications,
-            'periodes'=> $periodes,
-            'tab_mois'=>$tab_mois
+            'user' =>  $this->_user,
+            'nbr_notif'=> $this->_notifications,
+            'periodes'=> $this->_periodes
             ]);
     }
+
+    public function consult_contribution(){
+        $this->load_users_notification_period();
+        return view('comptabilite.consult_contribution', [
+            'user'=>$this->_user,
+            'nbr_notif'=>$this->_notifications,
+            'periodes'=> $this->_periodes
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * Cette fonction permet de gerer le paiment des cotisations à partir d'un fichier excel.
+     */
+    public function post_contribution_file(Request $request){
+
+        $messages = [
+            'contribution_file.required' => "vous devez donner une description à l'annonce",
+            'contribution_file.max'=>'votre fichier doit peser maximum 10 Mo',
+            'contribution_file.mimes'=>'Votre fichier doit avoir l\'extention .csv'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'contribution_file' => 'required|mimes:csv|max:10000'
+        ], $messages);
+
+        if ( ! $validator->passes()) { // il y'a un problème avec les règles.
+            $error = "Erreur avec vos données ";
+            foreach ($validator->errors()->all() as $err){
+                $error .= $err;
+                $error .= '<br>';
+            }
+
+            return response()->json([
+                'type'=>'error',
+                'message'=>$error]);
+        }
+
+
+        if(Input::hasFile('import_file')){
+            $path = Input::file('import_file')->getRealPath();
+            $data = Excel::load($path, function($reader) {
+            })->get();
+            if(!empty($data) && $data->count()){
+                foreach ($data as $key => $value) {
+                    $insert[] = ['title' => $value->title, 'description' => $value->description];
+                }
+                if(!empty($insert)){
+                    DB::table('items')->insert($insert);
+                    dd('Insert Record successfully.');
+                }
+            }
+        }
+
+        return response()->json([
+            'type'=>'success',
+            'message'=>"le formulaire est passé avec succès"]);
+
+
+       // return back();
+
+    }
+
+
+
+
+
 }

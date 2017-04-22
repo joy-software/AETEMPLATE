@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-04-21.
+    * Generated on 2017-04-22.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -41,6 +41,14 @@ namespace PHPSTORM_META {
             'image' instanceof \Intervention\Image\ImageManager,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
+            'excel.identifier' instanceof \Maatwebsite\Excel\Classes\FormatIdentifier,
+            'excel.parsers.css' instanceof \Maatwebsite\Excel\Parsers\CssParser,
+            'excel.reader' instanceof \Maatwebsite\Excel\Readers\LaravelExcelReader,
+            'excel.readers.html' instanceof \Maatwebsite\Excel\Readers\Html,
+            'excel.parsers.view' instanceof \Maatwebsite\Excel\Parsers\ViewParser,
+            'phpexcel' instanceof \Maatwebsite\Excel\Classes\PHPExcel,
+            'excel.writer' instanceof \Maatwebsite\Excel\Writers\LaravelExcelWriter,
+            'excel' instanceof \Maatwebsite\Excel\Excel,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
@@ -161,6 +169,14 @@ namespace PHPSTORM_META {
             'image' instanceof \Intervention\Image\ImageManager,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
+            'excel.identifier' instanceof \Maatwebsite\Excel\Classes\FormatIdentifier,
+            'excel.parsers.css' instanceof \Maatwebsite\Excel\Parsers\CssParser,
+            'excel.reader' instanceof \Maatwebsite\Excel\Readers\LaravelExcelReader,
+            'excel.readers.html' instanceof \Maatwebsite\Excel\Readers\Html,
+            'excel.parsers.view' instanceof \Maatwebsite\Excel\Parsers\ViewParser,
+            'phpexcel' instanceof \Maatwebsite\Excel\Classes\PHPExcel,
+            'excel.writer' instanceof \Maatwebsite\Excel\Writers\LaravelExcelWriter,
+            'excel' instanceof \Maatwebsite\Excel\Excel,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
@@ -281,6 +297,14 @@ namespace PHPSTORM_META {
             'image' instanceof \Intervention\Image\ImageManager,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
+            'excel.identifier' instanceof \Maatwebsite\Excel\Classes\FormatIdentifier,
+            'excel.parsers.css' instanceof \Maatwebsite\Excel\Parsers\CssParser,
+            'excel.reader' instanceof \Maatwebsite\Excel\Readers\LaravelExcelReader,
+            'excel.readers.html' instanceof \Maatwebsite\Excel\Readers\Html,
+            'excel.parsers.view' instanceof \Maatwebsite\Excel\Parsers\ViewParser,
+            'phpexcel' instanceof \Maatwebsite\Excel\Classes\PHPExcel,
+            'excel.writer' instanceof \Maatwebsite\Excel\Writers\LaravelExcelWriter,
+            'excel' instanceof \Maatwebsite\Excel\Excel,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,
@@ -401,6 +425,14 @@ namespace PHPSTORM_META {
             'image' instanceof \Intervention\Image\ImageManager,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
+            'excel.identifier' instanceof \Maatwebsite\Excel\Classes\FormatIdentifier,
+            'excel.parsers.css' instanceof \Maatwebsite\Excel\Parsers\CssParser,
+            'excel.reader' instanceof \Maatwebsite\Excel\Readers\LaravelExcelReader,
+            'excel.readers.html' instanceof \Maatwebsite\Excel\Readers\Html,
+            'excel.parsers.view' instanceof \Maatwebsite\Excel\Parsers\ViewParser,
+            'phpexcel' instanceof \Maatwebsite\Excel\Classes\PHPExcel,
+            'excel.writer' instanceof \Maatwebsite\Excel\Writers\LaravelExcelWriter,
+            'excel' instanceof \Maatwebsite\Excel\Excel,
             'command.ide-helper.generate' instanceof \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand,
             'command.ide-helper.models' instanceof \Barryvdh\LaravelIdeHelper\Console\ModelsCommand,
             'command.ide-helper.meta' instanceof \Barryvdh\LaravelIdeHelper\Console\MetaCommand,

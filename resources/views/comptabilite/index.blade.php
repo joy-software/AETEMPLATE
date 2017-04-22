@@ -12,20 +12,26 @@
 @endsection
 
 @section('sideOption')
-    @include('layouts/asideOption', [
-
-            'classIconOption' => 'icon_pencil-edit',
-            'optionName' => 'Gerer les contributions',
+@include('layouts/asideOption', [
+            'classIconOption' => 'icon_house_alt',
+            'optionName' => 'Aller à l\'Accueil',
             'retractable' => 'false',
-            'link' => url('/comptabilite/contribution')
+            'link' => url('/comptabilite')
         ])
-    @include('layouts/asideOption', [
-                'classIconOption' => 'icon_pencil-edit',
-                'optionName' => 'Gerer les périodes',
-                'retractable' => 'false',
-                'link' => url('/group/create_group')
-            ])
 
+@include('layouts/asideOption', [
+        'classIconOption' => 'icon_search',
+        'optionName' => 'Consulter les contributions',
+        'retractable' => 'false',
+        'link' => url('/comptabilite/consult_contribution')
+    ])
+
+@include('layouts/asideOption', [
+        'classIconOption' => 'icon_download',
+        'optionName' => 'Exporter des rapports',
+        'retractable' => 'false',
+        'link' => url('/comptabilite/export_contribution')
+    ])
 @endsection
 
 
@@ -41,17 +47,20 @@
                         Charger les cotisations d'une période
                     </header>
                     <ul class="list-group">
-                        <li class="list-group-item">Importer le fichier excel des contributions <br><br>
-                            <input type="file" class="form-control"> </li>
+                        {!! Form::open(array('route' => 'post_contribution_file', 'files' => true, 'id'=> 'create_contribution_file', 'method'=>'post')) !!}
+                        <li class="list-group-item">Importer le fichier excel des contributions <br>
+                            <a id="message_file_contribution"></a>
+                            <br>
+                            <input type="file" name="contribution_file" class="form-control" required id="contribution_file"> </li>
                         <li class="list-group-item">
                             Choissisez la période : <br><br>
                             <?php
                                 if($periodes != null){
                                   ?>
-                            <select class="form-control">
+                            <select class="form-control" name="periode" id="periode">
                                 <?php foreach($periodes as $periode){
                                     ?>
-                                    <option class="form-control" value="<?php echo $periode->id; ?>"> <?php echo $tab_mois[$periode->month]." - ".$periode->year; ?> </option>
+                                    <option class="form-control" value="<?php echo $periode->id; ?>"> <?php echo strtoupper($periode->month)." - ".$periode->year; ?> </option>
                                 <?php }
                                 ?>
                             </select>
@@ -66,8 +75,8 @@
                         </li>
 
                         <li class="list-group-item" style="text-align: center">
-                        <?php if($periodes != null) { ?> <button class="btn btn-primary">Charger les contributions</button> <?php }?></li>
-
+                        <?php if($periodes != null) { ?> <button type="submit" id="btn_charger_contribution" class="btn btn-primary">Charger les contributions</button> <?php }?></li>
+                        {!! Form::close() !!}
                     </ul>
                 </section>
             </div>
@@ -84,6 +93,30 @@
                         <a class="list-group-item" style=" background: white;">Entrer sa contribution :<br><br>
                             <input type="number" placeholder="ex: 5000" class="form-control" required>
                         </a>
+
+                        <a class="list-group-item" style=" background: white;">Choissiser le motif :<br><br>
+
+                            <?php
+                            if($motifs != null){
+                            ?>
+                            <select class="form-control" name="motif">
+                                <?php foreach($motifs as $motif){
+                                ?>
+                                <option class="form-control" value="<?php echo $motif->id; ?>"> <?php echo $periode->description; ?> </option>
+                                <?php }
+                                ?>
+                            </select>
+                            <?php
+                            }
+                            else {
+                            ?>
+                            Aucun Motif n'existe. Créer une période SVP
+                            <?php
+                            }
+                            ?>
+
+                        </a>
+
                         <a class="list-group-item" style="background: white;">
                             Choissisez la période : <br><br>
                             <?php
@@ -92,7 +125,7 @@
                             <select class="form-control">
                                 <?php foreach($periodes as $periode){
                                 ?>
-                                <option class="form-control" value="<?php echo $periode->id; ?>"> <?php echo $tab_mois[$periode->month]." - ".$periode->year; ?> </option>
+                                <option class="form-control" value="<?php echo $periode->id; ?>"> <?php echo strtoupper($periode->month)." - ".$periode->year; ?> </option>
                                 <?php }
                                 ?>
                             </select>
@@ -122,24 +155,41 @@
                                 $compteur++;
                                 ?>
                             <a class="list-group-item <?php if($compteur == 1) echo "active";?> ">
-                                <h4 class="list-group-item-heading">  <?php echo $tab_mois[$periode->month]." - ".$periode->year; ?> </h4>
+                                <h4 class="list-group-item-heading">  <?php echo strtoupper($periode->month)." - ".$periode->year; ?> </h4>
                                 <p class="list-group-item-text"></p>
                             </a>
                             <?php }
                          ?>
 
-                        <a class="list-group-item"  style="text-align: center;">
-                            <button class="btn btn-primary">Créer une période</button>
+                        <a class="list-group-item"  style="text-align: center; background: white;">
+                            <button class="btn btn-primary" id="btn_add_period">Ajouter une période</button>
                             <p class="list-group-item-text"></p>
                         </a>
+
+                            <a class="list-group-item" style="background: #f7f7f7; text-align: center;" id="create_period">
+                                Selectionner le mois :
+                                <select class="form-control">
+                                    <option value="janvier">Janvier</option>
+                                    <option value="fevrier">Fevrier</option>
+                                    <option value="mars">Mars</option>
+                                    <option value="avril">Avril</option>
+                                    <option value="mai">Mai</option>
+                                    <option value="juin">Juin</option>
+                                    <option value="juillet">Juillet</option>
+                                    <option value="aout">Aout</option>
+                                    <option value="septembre">Septembre</option>
+                                    <option value="octobre">Octobre</option>
+                                    <option value="novembre">Novembre</option>
+                                    <option value="decembre">Decembre</option>
+                                </select>
+                                <br>
+                                <input type="number" placeholder="Entrer l'année" class="form-control">
+                                <br>
+                                <button class="btn btn-success">Créer la période</button> <button class="btn btn-warning" id="btn_annuler_create_period">Annuler</button>
+                            </a>
+
                     </div>
                 </section>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="">
-
             </div>
         </div>
 

@@ -313,3 +313,13 @@ Route::get('/comptabilite', [
     'as'=>'comptabilite',
     'uses'=>'comptabiliteController@index'
 ]);
+
+Route::get('/comptabilite/consult_contribution', [
+    'as'=>'consult_contribution',
+    'uses'=> 'comptabiliteController@consult_contribution'
+]);
+
+Route::post('/comptabilite/post_contribution_file',[
+    'as'=>'post_contribution_file',
+    'uses'=>'comptabiliteController@post_contribution_file'
+]);
