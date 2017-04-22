@@ -44,7 +44,7 @@ p.photo-label{
     color: black;
 }
 
-.inputphoto {
+.inputfile {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -53,7 +53,7 @@ p.photo-label{
     z-index: -1;
 }
 
-.inputphoto + label{
+.inputfile + label{
     border-radius: 0px !important;
 }
 
