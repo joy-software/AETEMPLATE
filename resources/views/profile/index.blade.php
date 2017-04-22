@@ -21,30 +21,30 @@
                     <div class="profile-widget profile-widget-info">
                         <div class="panel-body">
                             <div class="col-lg-2 col-sm-2">
+
+                                <div class="follow-ava">
+                                    <img src="{{ url(Auth::user()->photo) }}" alt="">
+                                </div>
+
                                 <h4>
                                     @if(\Illuminate\Support\Facades\Auth::check())
                                         {{ \Illuminate\Support\Facades\Auth::user()->surname  }}@endif
                                 </h4>
-                                <div class="follow-ava">
-                                    <img src="{{ asset('karmanta/img/profile-widget-avatar.jpg') }}" alt="">
-                                </div>
 
-                                <h6>Role if exists</h6>
                             </div>
 
                             <div class="col-lg-4 col-sm-4 follow-info">
-                                <p></p>
+
                                 <p>@if(\Illuminate\Support\Facades\Auth::check())
                                         {{ \Illuminate\Support\Facades\Auth::user()->email  }}@endif</p>
                                 <h6>
-                                    <span><i class="icon_clock_alt"></i>11:05 AM</span>
-                                    <span><i class="icon_calendar"></i>25.10.13</span>
-                                    <span><i class="icon_pin_alt"></i>NY</span>
+                                    <span><i class="icon_clock_alt"></i>{{date('H : i')}}</span>
+                                    <span><i class="icon_calendar"></i>{{ date('d . m . Y') }}</span>
                                 </h6>
                             </div>
 
                             <div class="col-lg-6 col-sm-6 follow-info weather-category">
-                                <ul>
+                                <ul class="recapitulatif">
                                     <li class="active">
                                         <h4>50</h4>
                                         <i class="icon_close_alt2"></i> Annonces
@@ -74,19 +74,19 @@
                                 <li class="active">
                                     <a data-toggle="tab" href="#profile">
                                         <i class="icon-user"></i>
-                                        Profile
+                                        Mon profil
                                     </a>
                                 </li>
                                 <li class="">
                                     <a data-toggle="tab" href="#edit-profile">
                                         <i class="icon-envelope"></i>
-                                        Edit Profile
+                                        Editer mon profil
                                     </a>
                                 </li>
                                 <li class="">
                                     <a data-toggle="tab" href="#edit-credential">
                                         <i class="icon-envelope"></i>
-                                        Edit Credential
+                                        Paramètres de connexion
                                     </a>
                                 </li>
                             </ul>
@@ -320,7 +320,7 @@
                                 <div id="edit-credential" class="tab-pane">
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            <h1> Profile Info</h1>
+                                            <h1>Informations</h1>
                                             <form class="form-horizontal" role="form" method="post" action="{{ route('editCredential') }}">
                                                 {{ csrf_field() }}
 

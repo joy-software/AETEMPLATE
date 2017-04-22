@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use NotificationChannels\OneSignal\OneSignalChannel;
 
 class InformOthersInvitationAccepted extends Notification implements  ShouldQueue
 {

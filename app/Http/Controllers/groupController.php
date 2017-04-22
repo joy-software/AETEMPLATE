@@ -11,6 +11,8 @@ use App\Listeners\GroupCreateListener;
 use App\Notifications\IncomingMember;
 use App\Notifications\InformOthersInvitationAccepted;
 use App\Notifications\InvitationAccepted;
+use App\Notifications\NewAnnouncement;
+use App\Notifications\NewEvent;
 use App\User;
 use App\usergroup;
 use Carbon\Carbon;
@@ -356,11 +358,18 @@ class groupController extends Controller
        // print_r( 'tout est bien qui finit bien');
         //Renvoyer le message pour dire que son statut a été changé.
 
+
         /**Envoie de la notification par mail**/
+        $sender = User::find($id_user);
+        if($id_group == 1)
+        {
+            $sender->statut = "actif";
+            $sender->save();
+        }
         $group_associate = group::find($id_group);
         //notification par mail
         $validator = Auth::user();
-        $sender = User::find($id_user);
+
         $sender->notify(new InvitationAccepted($validator,$group_associate,$sender));
 
         //notifications aux autres utilisateurs du groupe
@@ -682,6 +691,31 @@ class groupController extends Controller
             $ad_h_file3->files()->associate($file3);
             $ad_h_file3->save();
         }
+
+
+        /**Envoie de la notification interne**/
+
+        //notifications aux autres utilisateurs du groupe
+        $id_users = usergroup::select('user_id')->where('group_id', '=',$request->id_group)
+            ->where('user_id','!=',Auth::id())->where('notification','=',1)->get();
+        if($request->checkbox_even == true)
+        {
+            foreach ($id_users as $id_user)
+            {
+                $user = User::findorfail($id_user->user_id);
+                $user->notify(new NewEvent(Auth::user(), $group));
+            }
+        }
+        else
+        {
+            foreach ($id_users as $id_user)
+            {
+                $user = User::findorfail($id_user->user_id);
+                $user->notify(new NewAnnouncement(Auth::user(), $group));
+            }
+        }
+
+        /**Fin de l'envoie**/
 
         return response()->json([
             'type'=> 'success',
