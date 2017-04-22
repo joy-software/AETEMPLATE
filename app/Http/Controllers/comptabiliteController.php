@@ -14,6 +14,7 @@ class comptabiliteController extends Controller
     private $_user;
     private $_notifications;
     private $_periodes;
+    private $_motifs;
 
     public function __construct()
     {
@@ -22,7 +23,7 @@ class comptabiliteController extends Controller
 
     public function load_users_notification_period(){
 
-
+        //// Chargements des périodes
         $count_period= period::get()->count();
         if($count_period > 5){
             $this->_periodes  = period::orderBy('created_at','desc')
@@ -33,6 +34,18 @@ class comptabiliteController extends Controller
         }
         else{
             $this->_periodes = period::orderBy('created_at','desc')
+                ->get();
+        }
+
+        // Chargements des motifs
+        $this->_motifs = motif::orderBy('created_at','desc')->get();
+
+        $count_motif = count($this->_motifs);
+        if($count_motif == 0){
+            $this->_motifs  = null;
+        }
+        else{
+            $this->_motifs = period::orderBy('created_at','desc')
                 ->get();
         }
 
@@ -47,7 +60,8 @@ class comptabiliteController extends Controller
         return view('comptabilite.index',[
             'user' =>  $this->_user,
             'nbr_notif'=> $this->_notifications,
-            'periodes'=> $this->_periodes
+            'periodes'=> $this->_periodes,
+            'motifs'=>$this->_motifs
             ]);
     }
 
@@ -56,7 +70,8 @@ class comptabiliteController extends Controller
         return view('comptabilite.consult_contribution', [
             'user'=>$this->_user,
             'nbr_notif'=>$this->_notifications,
-            'periodes'=> $this->_periodes
+            'periodes'=> $this->_periodes,
+            'motifs'=>$this->_motifs
         ]);
     }
 

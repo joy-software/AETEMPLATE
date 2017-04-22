@@ -51,7 +51,30 @@
                         <li class="list-group-item">Importer le fichier excel des contributions <br>
                             <a id="message_file_contribution"></a>
                             <br>
-                            <input type="file" name="contribution_file" class="form-control" required id="contribution_file"> </li>
+                            <input type="file" name="contribution_file" class="form-control" required id="contribution_file">
+                        </li>
+
+                        <li class="list-group-item">Importer le fichier excel des contributions <br>
+                            <?php
+                            if($motifs != null){
+                            ?>
+                            <select class="form-control" name="motif">
+                                <?php foreach($motifs as $motif){
+                                ?>
+                                <option class="form-control" value="<?php echo $motif->id; ?>"> <?php echo $motif->description; ?> </option>
+                                <?php }
+                                ?>
+                            </select>
+                            <?php
+                            }
+                            else {
+                            ?>
+                            Aucun Motif n'existe. Créer une période SVP
+                            <?php
+                            }
+                            ?>
+                        </li>
+
                         <li class="list-group-item">
                             Choissisez la période : <br><br>
                             <?php
@@ -102,7 +125,7 @@
                             <select class="form-control" name="motif">
                                 <?php foreach($motifs as $motif){
                                 ?>
-                                <option class="form-control" value="<?php echo $motif->id; ?>"> <?php echo $periode->description; ?> </option>
+                                <option class="form-control" value="<?php echo $motif->id; ?>"> <?php echo $motif->description; ?> </option>
                                 <?php }
                                 ?>
                             </select>
