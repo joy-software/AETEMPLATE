@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ads extends Model
 {
-    protected $fillable = ['description', 'type', 'archiving', 'expiration_date', 'nb_like', 'create_at'];
+    protected $guarded = ['id','user_ID','group_ID'];
 
     public function ads_has_files()
     {

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ads_has_files extends Model
 {
+    protected $fillable = [];
 
     /****
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

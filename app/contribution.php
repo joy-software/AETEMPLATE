@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class contribution extends Model
 {
+
+    protected $fillable = ['amount','description'];
+
     /*****
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *

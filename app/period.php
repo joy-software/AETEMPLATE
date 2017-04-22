@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class period extends Model
 {
+
+    protected $guarded = ['id'];
+
     public function contribution(){
         return $this->hasMany('App\contribution','period_ID');
     }
