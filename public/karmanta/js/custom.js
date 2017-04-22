@@ -44,7 +44,7 @@ $('#accueil').click(function(){
 });
 
 $('#groupes').click(function(){
-    window.location.href = '/group';
+    window.location.href = '/group/view_group/1';
 
 });
 

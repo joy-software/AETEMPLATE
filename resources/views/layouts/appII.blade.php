@@ -79,7 +79,7 @@
 <script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}"></script>
 <script src="{{ asset('karmanta/js/scripts.js') }}"></script>
 
-<script src="{{ asset('karmanta/js/custom.js') }}"></script>
+<script src="{{ asset('js/header.js') }}"></script>
 <!--script src="{{--asset('js/app.js')--}}"></script-->
 <script>
 
