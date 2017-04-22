@@ -15,9 +15,10 @@ class CreatePeriodTable extends Migration
     {
         Schema::create('period', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('year');
+            //$table->integer('status');
             $table->enum('month', ['janvier', 'fevrier', 'mars','avril',
-                'mai','juin','juillet','aout','septembre','octobre','novembre','decembre'])->default('janvier');
-            $table->integer('year')->nullable();
+                'mai','juin','juillet','aout','septembre','octobre','novembre','decembre']);
             $table->timestamps();
         });
     }

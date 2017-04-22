@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 class period extends Model
 {
 
+    //protected $fillable = ['year','description','logo'];
+
+    protected $table = 'period';
+
     protected $guarded = ['id'];
 
     public function contribution(){
