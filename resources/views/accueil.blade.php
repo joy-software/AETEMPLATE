@@ -29,21 +29,21 @@
                                 <div class="panel-body" >
                                     <div class="col-lg-1 col-sm-1 profile-widget-name">
 
-                                        <h4>{{$user->surname}}</h4>
+                                        <h4>{{$avatar->surname}}</h4>
                                         <div class="follow-ava">
-                                            <img src="{{ url($user->photo) }}" alt="photo" style="background-color: white">
+                                            <img src="{{ url($avatar->photo) }}" alt="photo" style="background-color: white">
                                         </div>
                                         @role('admin_1')
                                         <h6>Administrateur</h6>
                                         @endrole()
                                     </div>
                                     <div class="col-lg-8 col-sm-8 follow-info">
-                                        <p style="text-overflow: clip">{{$user->description}}</p>
+                                        <p style="text-overflow: clip">{{$avatar->description}}</p>
 
                                         <h6>
                                             <span><i class="icon_clock_alt"></i>{{$date->toTimeString() }}</span>
                                             <span><i class="icon_calendar"></i>{{$date->toDateString()}}</span>
-                                            <span><i class="icon_pin_alt"></i>{{$user->country}}</span>
+                                            <span><i class="icon_pin_alt"></i>{{$avatar->country}}</span>
                                         </h6>
                                     </div>
 
