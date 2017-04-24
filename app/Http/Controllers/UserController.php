@@ -6,6 +6,7 @@ use View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -21,28 +22,59 @@ class UserController extends Controller
      */
    public function editProfile(Request $request)
    {
-      // echo "print de requestion <br>";
-       //echo $request->file("photo");
-       $request->file("photo")->move('logos', $request->get('photo'));
 
-        //echo "déplacement avec succès";
+        if ($request->file('photo') != null) {
+
+            $this->photoValidator($request->allFiles())->validate();
+        }
+
         $user = Auth::user();
 
         $param = $request->only(['surname', 'name', 'phone', 'promotion', 'country', 'profession', 'sex', 'description']);
-
-        $photo = $request->file('photo')->getClientOriginalName();
-
 
         foreach ($param as $key => $value){
 
             $user->$key = $value;
         }
 
-        $user->save();
+
+       $extension = null;
+
+       if ($request->file("photo") != null) {
+
+           $chemin = null;
+
+           $extension = strtolower($request->file('photo')->extension());
+
+           if ($extension != 'png' && $extension != 'jpg' && $extension != 'jpeg') {
+
+               $correctPhoto = false;
+
+               if ($user->sex == 'M') {
+
+                   $chemin = "users/default_gent_avatar.png";
+
+               } else {
+
+                   $chemin = "users/default_lady_avatar.png";
+               }
+
+           } else {
+
+               $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension);
+               $chemin = '/users/'. 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
+           }
+
+           $user->photo = $chemin;
+       }
+
+
+
+       $user->save();
 
        $notifications = $user->unreadnotifications()->count();
-        return redirect()->route('profile')->with(['success' => $photo]);
-        //return redirect()->route('profile')->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+
+       return redirect()->back()->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
    }
 
 
@@ -52,6 +84,7 @@ class UserController extends Controller
      */
    public function editCredential(Request $request)
    {
+       $this->passwordValidator($request->all())->validate();
 
        $user = Auth::user();
 
@@ -91,6 +124,40 @@ class UserController extends Controller
        return redirect()->route('profile')->with(['success' => $message,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
 
    }
+
+    protected function photoValidator(array $data)
+    {
+
+        $validator = Validator::make($data,
+            [
+                'photo'               => 'mimes:jpg,jpeg,png|max:5000',
+            ],
+            [
+                'photo.mimes'     => 'Les extensions d\'images acceptées sont jpg, jpeg et png',
+                'photo.max'       => 'La taille de l\'image ne doit pas excéder 5 Mo',
+            ]
+        );
+
+        return $validator;
+    }
+
+    protected function passwordValidator(array $data)
+    {
+
+        $validator = Validator::make($data,
+            [
+                'new_password' => 'min:6',
+                'password_confirmation' => 'min:6|same:new_password',
+            ],
+            [
+                'new_password.min'          => 'Le mot de passe doit contenir au moins 6 caractères',
+                'password_confirmation.min'    => 'Le mot de passe doit contenir au moins 6 caractères',
+                'password_confirmation.same'    => 'Ce champ est différent du mot de passe',
+            ]
+        );
+
+        return $validator;
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

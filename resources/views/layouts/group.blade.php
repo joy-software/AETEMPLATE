@@ -10,12 +10,17 @@
                 </li>
                 <li class="col-lg-3 col-sm-3">
                     <h4>{{$nbr_ads}}</h4>
+
                     <i class="icon_chat "></i> Annonces
+
                 </li>
 
                 <li class="col-lg-3 col-sm-3">
                     <h4>{{$nbr_mem}}</h4>
-                    <i class="icon_profile "></i>  Demandes d'adhésion
+
+                    <i class="icon_profile"></i> Demandes d'adhésion
+
+
                 </li>
                 <li>
                     <button class="btn btn-primary btnViewGroup"><a href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a></button>

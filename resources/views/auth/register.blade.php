@@ -194,7 +194,7 @@
                             <label for="photo" class="control-label col-lg-2">Photo</label>
                             <div class="col-lg-4">
                                 {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'photo']) !!}
-                                <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
+                                <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                             </div>
 
                             <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>

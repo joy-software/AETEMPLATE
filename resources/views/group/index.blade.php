@@ -69,6 +69,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
                 </section>
                 <!--user profile info end-->
