@@ -81,13 +81,6 @@ class groupController extends Controller
 
         }
 
-
-        /*foreach ($this->_users_group as $element){
-            $this->_list_group[$this->_compteur] = group::where('id','=',$element['group_ID'])->first();
-            $this->_id_list_group[$this->_compteur] = $this->_list_group[$this->_compteur]['id'];
-            $this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
-            $this->_compteur++;
-        }*/
     }
 
     /*
@@ -318,7 +311,7 @@ class groupController extends Controller
             //for($i = 0; $i< $count_ads; $i++){
             foreach($ads as  $ad){
 
-                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID'])->first();
+                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID']);
 
                $ad_h_file = ads_has_files::where('ads_ID','=', $ad['id'])->get();
 
@@ -365,6 +358,9 @@ class groupController extends Controller
         else{
             $events = null;
         }
+
+
+
 
         return view('group.view_group',
             ['list_group'=> $this->_list_group,
@@ -582,8 +578,7 @@ class groupController extends Controller
 
             //for($i = 0; $i< $count_ads; $i++){
             foreach($ads as  $ad){
-
-                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID'])->first();
+                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID']);
 
                 $ad_h_file = ads_has_files::where('ads_ID','=', $ad['id'])->get();
 
@@ -826,7 +821,7 @@ class groupController extends Controller
             //for($i = 0; $i< $count_ads; $i++){
             foreach($events as  $event){
 
-                $tab_users[''.$event['id'].''] = User::find($event['user_ID'])->first();
+                $tab_users[''.$event['id'].''] = User::find($event['user_ID']);
 
                 $ad_h_file = ads_has_files::where('ads_ID','=', $event['id'])->get();
 

@@ -189,42 +189,7 @@ $("#consult_contribution").on('submit', function (event) {
 });
 
 
-$(".btn-contribution").click(function () {
-    var chaine = this.id;
-    alert("tu as cliqué");
-    if(chaine.indexOf("btn-contrib-",0) != 0){
-        alert("les informations sont incorrectes");
-    }
-    var id_user = chaine.substring(12,chaine.length);
-    if(isNaN(id_user)){
-        alert("informations incorrectes");
-    }
+$(".btn-contribution").click(function(){
 
-    $.ajax({
-        url: '/comptabilite/contribution_user/',
-        type: 'post',
-        /*contentType: false, // obligatoire pour de l'upload
-        processData: false, // obligatoire pour de l'upload,*/
-        dataType : 'json',
-        data: {'id_user':id_user, '_token': _token},
-        success: function (response) {
-            $("#tab_resultat").show();
-
-            if(response.type === "success" ){
-                $(".modal-title").html("Contributions de l'utilisateur "+ response.userName);
-                $("#tbody_contrib").html(response.message);
-            }
-            else {
-                $(".modal-title").html("Contributions de l'utilisateur "+ response.userName);
-                $("#tbody_contrib").html(response.message);
-            }
-        },
-
-        error : function (erreur) {
-            $(".modal-title").html("Contributions de l'utilisateur "+ response.userName);
-            $("#tbody_contrib").html(erreur);
-        }
-
-    });
 
 });

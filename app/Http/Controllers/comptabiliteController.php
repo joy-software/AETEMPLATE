@@ -306,7 +306,7 @@ public function post_consult_contribution(Request $request){
         $message .= "<tr><td><span class='profile-ava'><img alt='' class='simple' src='/" . $user->photo . "' </span> </td>" .
                     "<td> ". $user->name ." , ". $user->surname ." </td> " .
                     "<td> ". $user->email .", <br> Tel : ". $user->phone ."</td> " .
-                    "<td> <button class='btn btn-primary btn-contribution' id='btn-contrib-". $user->id ."'> Voir ses contributions </button> </td> ".
+                    "<td> <button class='btn btn-primary btn-contribution' data-toggle='modal' data-target='#modalContribution' id='btn-contrib-". $user->id ."'> Voir ses contributions </button> </td> ".
                     "</tr>";
     }
 

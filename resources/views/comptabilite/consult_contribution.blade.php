@@ -122,7 +122,7 @@
         </div>
         <div class="row">
                 <!-- Modal -->
-                <div class="modal fade" id="ConfirmAction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalContribution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -130,11 +130,13 @@
                                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                             </div>
                             <div class="modal-body" style="background: white;">
+                                bonjour ceci est juste un test rien de comopliqué.
                                <table class="table table-responsive">
                                    <tbody id="tbody_contrib">
 
                                    </tbody>
                                </table>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
