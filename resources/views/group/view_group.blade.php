@@ -130,6 +130,13 @@
         </div>
 
         <div class="row">
+            <div class="col-lg-offset-2 col-lg-8">
+                <div class="list-group">
+                    <a class="btn btn-primary list-group-item active" id="show_create_ad" > Je veux créer une annonce </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="div_create_ad" >
             <section class="panel col-lg-offset-1 col-lg-10">
                 {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
                 <div class="row">
@@ -330,8 +337,7 @@
         </div>
 
     <?php
-            echo "print ads";
-        print_r($ads);
+
             if($ads != null){
         $compteur =0;
         foreach ($ads as $ad) {
@@ -339,6 +345,8 @@
 
 
         ?>
+
+
 
         <div class="row" id="annonce{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">

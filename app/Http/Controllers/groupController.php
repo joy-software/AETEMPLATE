@@ -280,7 +280,7 @@ class groupController extends Controller
         if($count_ads > 5){
             $ads = ads::orderBy('created_at','desc')
                 ->where('type','=', 0)
-                ->where('group_ID','=',$id)->take(5);
+                ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $ads = ads::orderBy('created_at','desc')
@@ -294,7 +294,7 @@ class groupController extends Controller
         if($count_events > 5){
             $events = ads::orderBy('created_at','desc')
                 ->where('type','=', 1)
-                ->where('group_ID','=',$id)->take(5);
+                ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $events = ads::orderBy('created_at','desc')
@@ -645,7 +645,7 @@ class groupController extends Controller
                 'message'=>$error]);
         }
 
-        $type = 0;
+        $type = "annonce";
         $period = env('ADS_EXPIRATION_PERIOD',7);
         $dt = Carbon::now();
         $date_expiration = $dt->addDays($period);
@@ -658,7 +658,7 @@ class groupController extends Controller
 
 
         if(($request->checkbox_even == true) && ($request->expiration_date != "") ){ //C'est un évènement.
-            $type = 1; // évènement.
+            $type = "evenement"; // évènement.
             $date = $request->expiration_date;
             list($year, $month, $days) = explode("-", $date);
 
@@ -786,7 +786,7 @@ class groupController extends Controller
 
         return response()->json([
             'type'=> 'success',
-            'message'=> "Votre annonce a été publié avec succès."]);
+            'message'=> "Votre publication a été publié avec succès."]);
 
     }
 

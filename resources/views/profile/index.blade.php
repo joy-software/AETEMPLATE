@@ -91,7 +91,9 @@
                                 </li>
                             </ul>
                         </header>
+
                         <div class="panel-body">
+
                             <div class="tab-content">
 
                                 <div id="profile" class="tab-pane active">
@@ -189,11 +191,6 @@
 
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            @if(\Illuminate\Support\Facades\Session::has('success'))
-                                                <div class="alert alert-success"> {{ Session::get('success') }} </div>
-                                            @endif
-
-                                            <!--form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}" -->
 
                                                 {!! Form::open(
                                                             array(
@@ -324,7 +321,7 @@
                                 <div id="edit-credential" class="tab-pane">
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            <h1>Informations</h1>
+
                                             <form class="form-horizontal" enctype="multipart/form-data" role="form" method="post" action="{{ route('editCredential') }}">
                                                 {{ csrf_field() }}
 
