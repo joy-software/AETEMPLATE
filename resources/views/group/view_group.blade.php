@@ -131,7 +131,7 @@
 
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10">
-                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post', 'class' => 'inputfile')) !!}
+                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
                 <div class="row">
                     <div class="col-lg-8">
                         <section class="panel" >

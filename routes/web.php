@@ -260,8 +260,8 @@ Route::get('/group/event_group', 'groupController@index');
  */
 Route::post('/group/post_ads', [
     'as'=>'post_ads',
-    'uses'=>'groupController@post_ads',
-    'middleware' => 'group'
+    'uses'=>'groupController@post_ads'
+
 ]);
 
 Route::get('/group/ads_group/{id}', [
