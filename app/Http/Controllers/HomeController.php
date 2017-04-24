@@ -101,7 +101,7 @@ class HomeController extends Controller
            $compteur++;
        }
         /***End Loading ***/
-        $contributions = null;
+        //$contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),
@@ -110,7 +110,7 @@ class HomeController extends Controller
             'nbr_event_A'=>$nbr_event,
             'nbr_mem_A'=>$nbr_mem,
             'nbr_meet_A'=>$nbr_meet,
-            'user' => $user,
+            'avatar' => $user,
             'date'=> Carbon::now(),
             'contributions' => $contributions,
             'amount' => $amount,

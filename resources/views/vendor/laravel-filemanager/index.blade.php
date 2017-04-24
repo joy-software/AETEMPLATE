@@ -24,6 +24,9 @@
 
 
 @section('content')
+  <br/>
+  <br/>
+  <br/>
     <div class="container-fluid">
     <div class="panel panel-primary" id="wrapper">
       <div class="panel panel-primary hidden-xs">
@@ -55,6 +58,8 @@
                       <i class="fa fa-arrow-left"></i> {{ trans('laravel-filemanager::lfm.nav-back') }}
                     </a>
                   </li>
+
+                 @role('admin_1')
                   <li><a style='cursor:default;'>|</a></li>
                   <li>
                     <a href="#" id="add-folder">
@@ -66,6 +71,7 @@
                       <i class="fa fa-upload"></i> {{ trans('laravel-filemanager::lfm.nav-upload') }}
                     </a>
                   </li>
+                  @endrole()
                   <li><a style='cursor:default;'>|</a></li>
                   <li>
                     <a href="#" id="thumbnail-display">
