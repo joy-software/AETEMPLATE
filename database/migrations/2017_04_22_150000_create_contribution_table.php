@@ -16,7 +16,6 @@ class CreateContributionTable extends Migration
         Schema::create('contribution', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amount');
-            $table->text('description');
             $table->timestamps();
     
       $table->integer('user_ID')->unsigned();
@@ -33,7 +32,15 @@ class CreateContributionTable extends Migration
             ->onDelete('restrict')
             ->onUpdate('restrict');
 
+         $table->integer('motif_ID')->unsigned();
+         $table->foreign('motif_ID')
+                ->references('id')
+                ->on('motif')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+
         });
+
     }
 
     /**
@@ -43,12 +50,13 @@ class CreateContributionTable extends Migration
      */
     public function down()
     {
-        Schema:table('contribution', function(Blueprint $table){
+        Schema::table('contribution', function(Blueprint $table){
              $table->dropForeign('contribution_user_ID_foreign');
              $table->dropForeign('contribution_period_ID_foreign');
+             $table->dropForeign('contribution_motif_ID_foreign');
         });
 
-                Schema::dropIfExists('contribution');
+        Schema::dropIfExists('contribution');
 
     }
 }

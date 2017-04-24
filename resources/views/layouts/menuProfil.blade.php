@@ -2,8 +2,8 @@
 
     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
-        <span class="profile-ava">
-            <img alt="Photo" src="{{ url(Auth::user()->photo) }}">
+        <span class="profile-ava" >
+            <img alt="Photo" src="{{ url(Auth::user()->photo) }}" >
         </span>
 
         <span class="username">
