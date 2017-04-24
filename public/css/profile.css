@@ -19,3 +19,32 @@ header.panel-heading{
     padding-right: 10px;
     padding-left: 10px;
 }
+
+.help-block{
+
+    text-align: left !important;
+}
+
+.text-danger{
+
+    color: #ff2d55 !important;
+}
+
+p.photo-label{
+
+    text-align: left !important;
+    margin-top: 30px !important;
+    padding-left: 15px;
+}
+
+@media screen and (max-width: 1200px) {
+    p.photo-label{
+
+        margin-top: 0px !important;
+    }
+}
+
+.bott{
+
+    margin-top: 40px;
+}

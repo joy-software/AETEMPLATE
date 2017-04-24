@@ -40,5 +40,10 @@ class GroupCreateListener implements ShouldQueue
         //on attache le rôle admin au créateur du groupe
         $user = \App\User::find($event->group['user_ID']);
         $user->attachRole($admin);
+
+        if(!array_has(session('group'),count(session('group'))))
+        {
+            session()->push('group',$event->group['id']);
+        }
     }
 }

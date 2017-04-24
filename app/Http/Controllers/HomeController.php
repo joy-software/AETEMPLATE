@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\contribution;
 use App\group;
+use App\motif;
 use App\Notifications\AccountApproved;
 use App\period;
 use App\usergroup;
@@ -77,7 +79,29 @@ class HomeController extends Controller
         $period_year = $now->year;
         $period_id = period::select('id')->where('month','=',$period_month)
             ->where('year','=',$period_year)->get()->first();
+
+       $contribut = contribution::where('period_ID','=',$period_id->id)->get();
+
+       $contributions = array();
+       $amount = 0;
+       $compteur = 0;
+
+       foreach ($contribut as $contrib)
+       {
+           $motif = motif::find($contrib->motif_ID);
+          // $contributions[$compteur]['motif'] = ;
+          // $contributions[$compteur]['amount'] = $contrib->amount;
+
+           //'$contribution[\'motif\']}}' .'=>'. '$contribution[\'amount\']'
+           $contributions[$contrib->amount] = $motif->reason;
+           if($compteur == 0)
+           {
+               $amount = $contrib->amount;
+           }
+           $compteur++;
+       }
         /***End Loading ***/
+        //$contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),
@@ -86,8 +110,10 @@ class HomeController extends Controller
             'nbr_event_A'=>$nbr_event,
             'nbr_mem_A'=>$nbr_mem,
             'nbr_meet_A'=>$nbr_meet,
-            'user' => $user,
+            'avatar' => $user,
             'date'=> Carbon::now(),
+            'contributions' => $contributions,
+            'amount' => $amount,
             'user_groups' =>$users_groups,
             'name_groups' => $name_group,
             'nbr_ads_group'=>$nbr_ads_group,

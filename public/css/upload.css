@@ -1,16 +1,16 @@
-/*.inputphoto {
+.inputfile {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
     position: absolute;
     z-index: -1;
-}*/
+}
 
-.inputphoto + label{
+.inputfile + label{
     border-radius: 0px !important;
 }
 
-#label-photo{
+#label-file{
     margin-left: 10px;
 }

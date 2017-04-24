@@ -7,7 +7,7 @@ use App\ads_has_files;
 use App\Events\GroupCreateEvent;
 use App\files;
 use App\group;
-use App\Listeners\GroupCreateListener;
+
 use App\Notifications\IncomingMember;
 use App\Notifications\InformOthersInvitationAccepted;
 use App\Notifications\InvitationAccepted;
@@ -53,6 +53,11 @@ class groupController extends Controller
         $this->_users_group = null;
         $this->_all_group = null;
 
+        $groups = array();
+        if (!session()->has('group')) {
+            session(['group' =>  $groups]);
+        }
+
 
         $this->_all_group = DB::table('group')->get();
         $this->_users_group = usergroup::where('user_ID', '=', Auth::id())->where('statut','=', 'actif')->get();
@@ -60,13 +65,20 @@ class groupController extends Controller
         $_users_group2 = usergroup::where('user_ID', '=', Auth::id())->get();
         foreach ($_users_group2 as $_el){
             $this->_statut_group[''.$_el->group_ID.''] = $_el->statut;
+
         }
 
         foreach ($this->_users_group as $element){
             $this->_list_group[$this->_compteur] = group::where('id','=',$element['group_ID'])->first();
             $this->_id_list_group[$this->_compteur] = $this->_list_group[$this->_compteur]['id'];
             //$this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
+
+            if(!array_has(session('group'),$this->_compteur))
+            {
+               session()->push('group',$element['group_ID']);
+            }
             $this->_compteur++;
+
         }
 
 
@@ -76,7 +88,6 @@ class groupController extends Controller
             $this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
             $this->_compteur++;
         }*/
-
     }
 
     /*
@@ -103,10 +114,63 @@ class groupController extends Controller
 
     public function index(){
         $this->load_group();
-
         $user = Auth::user();
+        $users_groups = usergroup::select('group_ID')->where('user_ID', '=', Auth::id())->where('statut','=', 'actif')->get();
+        $nbr_event = 0;
+        $nbr_ads = 0;
+        $nbr_mem = 0;
+        $nbr_meet = 0;
+        $nbr_ads_group = null;
+        $nbr_event_group = null;
+        $nbr_mem_group = null;
+        $name_group = null;
+
+        foreach ($users_groups as $users_group)
+        {
+            $nbr_ads_group[$users_group->group_ID] = 0;
+            $nbr_event_group[$users_group->group_ID] = 0;
+            $nbr_mem_group[$users_group->group_ID] = 0;
+            $group = group::findOrFail($users_group->group_ID);
+            $name_group[$users_group->group_ID] = $group->name;
+        }
+
+        foreach ($user->unreadNotifications() as $notification)
+        {
+            if($notification->type = 'App\Notifications\NewAnnouncement')
+            {
+                $nbr_ads_group[$notification->data->id_group] = $nbr_ads_group[$notification->data->id_group] + 1;
+                $nbr_ads++;
+            }
+            if($notification->type = 'App\Notifications\NewEvent')
+            {
+                $nbr_event_group[$notification->data->id_group] = $nbr_event_group[$notification->data->id_group] + 1;
+                $nbr_event++;
+            }
+            if($notification->type = 'App\Notifications\IncommingMember')
+            {
+                $nbr_mem_group[$notification->data->id_group] = $nbr_mem_group[$notification->data->id_group] + 1;
+                $nbr_mem++;
+            }
+        }
+        /**End loading**/
+
+
         $notifications = $user->unreadnotifications()->count();
-        return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+
+        return view('group.index',['list_group'=> $this->_list_group,
+            'user'=> $user->unreadnotifications()->paginate(6),
+            'nbr_notif'=> $notifications,
+            'nbr_ads_A'=>$nbr_ads,
+            'nbr_event_A'=>$nbr_event,
+            'nbr_mem_A'=>$nbr_mem,
+            'nbr_meet_A'=>$nbr_meet,
+            'avatar' => $user,
+            'date'=> Carbon::now(),
+            'user_groups' =>$users_groups,
+            'name_groups' => $name_group,
+            'nbr_ads_group'=>$nbr_ads_group,
+            'nbr_event_group'=>$nbr_event_group,
+            'nbr_mem_group'=>$nbr_mem_group]);
     }
 
     //elle renvoie la page de création d'un groupe.
@@ -165,7 +229,15 @@ class groupController extends Controller
         $usergroup->users()->associate(Auth::user());
         $usergroup->group()->associate($group);
         $usergroup->save();
+
+        /**Action sous marine**/
         \Event::fire(new GroupCreateEvent( $group));
+      /*  if(!array_has(session('group'),count(session('group'))))
+        {
+            session()->push('group',$group->id);
+        }//*/
+        /**Fin acion Sous Marine**/
+
         $this->load_group(); // Pour actualiser la base de donnée.
         return \Redirect::route('create_group')->with(['message' => 'Le group '.$group->name.' a été bien crée.', 'list_group'=> $this->_list_group]);
         //return \Redirect::route('create_group')->with('message', 'Le group '.$group->name.' a été bien crée. ');
@@ -397,7 +469,7 @@ class groupController extends Controller
             $id_group = $request->id_group;
         }
 
-        $this->load_group();
+        //$this->load_group();
 
         $this->load_group();
         foreach ($this->_id_list_group as $id_gp ){
@@ -865,7 +937,13 @@ class groupController extends Controller
 
         if(Auth::user()->hasRole('admin_'.$id)){
             $group = DB::table('group')->whereId($id)->first();
-            return view('group.del_group',['list_group'=> $this->_list_group,'group'=>$group]);
+
+            $user = Auth::user();
+            $notifications = $user->unreadnotifications()->count();
+
+            return view('group.del_group',['list_group'=> $this->_list_group,'group'=>$group,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications]);
         }
         else {
             $this->search_group();
@@ -903,6 +981,19 @@ class groupController extends Controller
         $this->load_group();
 
         Session::flash('message', 'Le groupe '.$nom_groupe .'a été supprimé avec succès');
+
+        /**Suppression du groupe dans la session**/
+        if(session()->has('group'))
+       {
+           foreach (session('group') as $group)
+           {
+               if($group == $id_group)
+               {
+                   session()->forget('group',$group);
+               }
+           }
+       }
+        /**Fin Suppression du groupe dans la session**/
 
         return redirect()->route('search_group');
     }

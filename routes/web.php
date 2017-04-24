@@ -23,10 +23,6 @@ Route::get('/annuaire', [
     'uses' => 'AnnuaireController@index'
 ]);
 
-Route::get('/files', [
-    'as' => 'files',
-    'uses' => 'filesController@index'
-]);
 
 Route::get('/profile', [
     'as' => 'profile',
@@ -185,7 +181,8 @@ Route::post('/group/post_create_group', [
 
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
-    'uses'=>'groupController@view_group'
+    'uses'=>'groupController@view_group',
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/view_group', 'groupController@index');
@@ -200,11 +197,13 @@ Route::post('/group/del_adhesion_group', 'groupController@del_adhesion_group');
 //Supprimer un groupe
 Route::get('/group/del_group/{id}', [
     'as'=>'del_group',
-    'uses'=>'groupController@del_group'
+    'uses'=>'groupController@del_group',
+    'middleware' => 'group'
 ]);
 Route::post('/group/valid_del_group', [
     'as'=>'valid_del_group',
-    'uses'=>'groupController@valid_del_group'
+    'uses'=>'groupController@valid_del_group',
+    'middleware' => 'group'
 ]);
 Route::get('/group/valid_del_group', 'groupController@search_group');
 Route::get('/group/del_group', 'groupController@search_group');
@@ -214,11 +213,13 @@ Route::get('/group/del_group', 'groupController@search_group');
 //editer un groupe
 Route::get('/group/edit_group/{id}', [
     'as'=>'edit_group',
-    'uses'=>'groupController@edit_group'
+    'uses'=>'groupController@edit_group',
+    'middleware' => 'group'
 ]);
 Route::post('/group/valid_edit_group',[
     'as'=> 'valid_edit_group',
-    'uses'=>'groupController@valid_edit_group'
+    'uses'=>'groupController@valid_edit_group',
+    'middleware' => 'group'
     ]);
 Route::get('/group/edit_group', 'groupController@search_group');
 Route::get('/group/valid_edit_group', 'groupController@search_group');
@@ -227,7 +228,8 @@ Route::get('/group/valid_edit_group', 'groupController@search_group');
 //demander une invitation à un groupe.
 Route::get('/group/invitation_group/{id}', [
     'as'=>'invitation_group',
-    'uses'=>'groupController@invitation_group'
+    'uses'=>'groupController@invitation_group',
+    'middleware' => 'group'
 ]);
 Route::get('/group/invitation_group', 'groupController@search_group');
 Route::post('/group/valid_invitation_group', [
@@ -240,14 +242,16 @@ Route::get('/group/valid_invitation_group', 'groupController@search_group');
 
 Route::get('/group/member_group/{id}', [
     'as'=>'member_group',
-    'uses'=>'groupController@member_group'
+    'uses'=>'groupController@member_group',
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/member_group', 'groupController@index');
 
 Route::get('/group/event_group/{id}', [
     'as'=>'event_group',
-    'uses'=>'groupController@event_group'
+    'uses'=>'groupController@event_group',
+    'middleware' => 'group'
 ]);
 Route::get('/group/event_group', 'groupController@index');
 
@@ -256,12 +260,14 @@ Route::get('/group/event_group', 'groupController@index');
  */
 Route::post('/group/post_ads', [
     'as'=>'post_ads',
-    'uses'=>'groupController@post_ads'
+    'uses'=>'groupController@post_ads',
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/ads_group/{id}', [
     'as'=>'ads_group',
-    'uses'=>'groupController@ads_group'
+    'uses'=>'groupController@ads_group',
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/ads_group', 'groupController@index');
@@ -269,7 +275,8 @@ Route::get('/group/ads_group', 'groupController@index');
 
 Route::get('/group/ballot_group/{id}', [
     'as'=>'ballot_group',
-    'uses'=>'groupController@ballot_group'
+    'uses'=>'groupController@ballot_group',
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/ballot_group', 'groupController@index');
