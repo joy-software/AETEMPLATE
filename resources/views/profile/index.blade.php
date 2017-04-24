@@ -103,7 +103,6 @@
 
                                         </div>
                                         <div class="panel-body bio-graph-info">
-                                            <h1>Bio Graph</h1>
                                             @if(\Illuminate\Support\Facades\Session::has('success'))
                                                 <div class="alert alert-success"> {{ Session::get('success') }} </div>
                                             @endif
@@ -184,11 +183,16 @@
                                         </div>
                                     </section>
                                 </div>
-                                <!-- edit-profile -->
+
+
                                 <div id="edit-profile" class="tab-pane">
+
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            <h1> Profile Info</h1>
+                                            @if(\Illuminate\Support\Facades\Session::has('success'))
+                                                <div class="alert alert-success"> {{ Session::get('success') }} </div>
+                                            @endif
+
                                             <!--form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}" -->
 
                                                 {!! Form::open(
@@ -196,7 +200,6 @@
                                                                 'route' => 'editProfile',
                                                                 'class' => 'form-horizontal',
                                                                 'files' => true)) !!}
-
 
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
@@ -206,6 +209,7 @@
                                                         {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->surname)  }}@endif>
                                                     </div>
                                                 </div>
+
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Nom</label>
                                                     <div class="col-lg-6">
@@ -277,8 +281,8 @@
 
                                                     <label for="photo" class="control-label col-lg-2">Photo</label>
                                                     <div class="col-lg-4">
-                                                        {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputphoto', 'id' => 'photo']) !!}
-                                                        <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-photo">Choisissez une photo</span></label>
+                                                        {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'photo']) !!}
+                                                        <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                                                     </div>
 
                                                     <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>
@@ -321,7 +325,7 @@
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
                                             <h1>Informations</h1>
-                                            <form class="form-horizontal" role="form" method="post" action="{{ route('editCredential') }}">
+                                            <form class="form-horizontal" enctype="multipart/form-data" role="form" method="post" action="{{ route('editCredential') }}">
                                                 {{ csrf_field() }}
 
                                                 <div class="form-group">
@@ -329,12 +333,13 @@
                                                     <div class="col-lg-6">
                                                         <input type="password" class="form-control" id="old_password" placeholder=" " name="old_password" >
                                                     </div>
+                                                    @if ($errors->has('old_password'))
+                                                        <span class="help-block col-lg-offset-2 text-danger bott">
+                                                            <strong>{{ $errors->first('old_password') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
-                                                @if ($errors->has('old_password'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('old_password') }}</strong>
-                                                    </span>
-                                                @endif
+
 
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">Email</label>
@@ -342,12 +347,13 @@
                                                         <input type="text" class="form-control" id="email" placeholder=" " name="email" @if(\Illuminate\Support\Facades\Auth::check())
                                                             {{ 'value='.(\Illuminate\Support\Facades\Auth::user()->email)  }}@endif>
                                                     </div>
+                                                    @if ($errors->has('email'))
+                                                        <span class="help-block col-lg-offset-2 text-danger bott">
+                                                            <strong>{{ $errors->first('email') }}</strong>
+                                                        </span>
+                                                    @endif
+
                                                 </div>
-                                                @if ($errors->has('email'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('email') }}</strong>
-                                                    </span>
-                                                @endif
 
 
                                                 <div class="form-group">
@@ -355,12 +361,12 @@
                                                     <div class="col-lg-6">
                                                         <input type="password" class="form-control" id="new_password" placeholder=" " name="new_password" >
                                                     </div>
+                                                    @if ($errors->has('new_password'))
+                                                        <span class="help-block col-lg-offset-2 text-danger bott">
+                                                            <strong>{{ $errors->first('new_password') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
-                                                @if ($errors->has('new_password'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('new_password') }}</strong>
-                                                    </span>
-                                                @endif
 
 
 
@@ -369,12 +375,13 @@
                                                     <div class="col-lg-6">
                                                         <input type="password" class="form-control" id="password_confirmation" placeholder=" " name="password_confirmation" >
                                                     </div>
+                                                    @if ($errors->has('password_confirmation'))
+                                                        <span class="help-block col-lg-offset-2 text-danger bott">
+                                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                                        </span>
+                                                    @endif
                                                 </div>
-                                                @if ($errors->has('password_confirmation'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                                    </span>
-                                                @endif
+
 
 
                                                 <div class="form-group">
@@ -389,6 +396,8 @@
                                         </div>
                                     </section>
                                 </div>
+
+
                             </div>
                         </div>
                     </section>

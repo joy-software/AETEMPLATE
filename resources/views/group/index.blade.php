@@ -28,14 +28,14 @@
                     <div class="profile-widget profile-widget-info">
                         <div class="panel-body">
                             <div class="col-lg-1 col-sm-1 profile-widget-name">
-                                <h4>John Smith</h4>
+
                                 <div class="follow-ava">
-                                    <img src="{{ asset('karmanta/img/profile-widget-avatar.jpg') }}" alt="">
+                                    <img src="{{ url(Auth::user()->photo) }}" alt="">
                                 </div>
-                                <h6>Administrator</h6>
+                                <h4>{{ Auth::user()->surname }}</h4>
                             </div>
                             <div class="col-lg-8 col-sm-8 follow-info">
-                                <p>Bienvenue John, Ce qui s'est passé depuis la dernière fois.</p>
+                                <p>Bienvenue {{ Auth::user()->surname }}, Ce qui s'est passé depuis la dernière fois.</p>
                                 <h6>
                                     <span><i class="icon_clock_alt"></i>11:05 AM</span>
                                     <span><i class="icon_calendar"></i>25.10.13</span>

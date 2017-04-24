@@ -69,51 +69,62 @@
 
                     @foreach($tab_user_membre as $member)
 
-                    <tr>
-                        <td>
-                            <span class="profile-ava">
+                        <tr>
+                            <td>
+                                <span class="profile-ava">
 
-                                <?php
-                                $chemin_photo = "users/user.png";
-                                if(! ($member->photo == null || isset($member->photo))){
-                                    $chemin_photo = $user->photo;
-                                }
-                                ?>
-                                <img alt="" class="simple" src="/<?php echo $chemin_photo?>" style="width: 50px; height: auto;">
-                            </span>
-                        </td>
-                        <td>
-                            <p class="profile-name">{{$member->name}}, {{$member->surname}}</p>
-                            <p class="profile-occupation">{{$member->profession}}</p>
-                        </td>
-                        <!--td>
-                            <p>
-                                Promotion {{--$user->promotion--}}
-                            </p>
-                        </td-->
-                        <td>
-                            <p>
-                                 Email : <label>  {{$member->email}} </label>,<br> Tel : <label> {{$member->phone}} </label>
-                            </p>
-                        </td>
-                        <td>
-                            <p style="text-align: justify;">
-                                {{$member->description}}
-                            </p>
-                        </td>
+                                     <img alt="photo" class="simple"
 
-                        <td>
+                                        @if((!($member->photo == null) && isset($member->photo)))
 
-                            <?php $role_admin= "admin_".$id_group; $_is_admin = false;?>
+                                            src="{{ url($member->photo) }}"
+                                        @else
 
-                            @role($role_admin)
-                            <?php $_is_admin = true; ?>
-                                <span class="badge bg-success">Vous êtes administrateur</span>
-                            @endrole
+                                            @if ($member->sex == 'M')
 
-                        </td>
+                                                src="{{url("users/default_gent_avatar.png")}}"
+                                            @else
 
-                    </tr>
+                                                src="{{url("users/default_lady_avatar.png")}}"
+                                            @endif
+
+                                        @endif
+
+                                     style="width: 50px; height: auto;" >
+                                </span>
+                            </td>
+                            <td>
+                                <p class="profile-name">{{$member->name}}, {{$member->surname}}</p>
+                                <p class="profile-occupation">{{$member->profession}}</p>
+                            </td>
+                            <!--td>
+                                <p>
+                                    Promotion {{--$user->promotion--}}
+                                </p>
+                            </td-->
+                            <td>
+                                <p>
+                                     Email : <label>  {{$member->email}} </label>,<br> Tel : <label> {{$member->phone}} </label>
+                                </p>
+                            </td>
+                            <td>
+                                <p style="text-align: justify;">
+                                    {{$member->description}}
+                                </p>
+                            </td>
+
+                            <td>
+
+                                <?php $role_admin= "admin_".$id_group; $_is_admin = false;?>
+
+                                @role($role_admin)
+                                <?php $_is_admin = true; ?>
+                                    <span class="badge bg-success">Vous êtes administrateur</span>
+                                @endrole
+
+                            </td>
+
+                        </tr>
 
                     @endforeach
                     </tbody>

@@ -60,6 +60,7 @@ class RegisterController extends Controller
                 'email'                 => 'required|email|unique:users',
                 'password'              => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|same:password',
+                'photo'               => 'mimes:jpeg,png,jpg|max:5000'
 
             ],
             [
@@ -76,11 +77,12 @@ class RegisterController extends Controller
                 'password.min'          => 'Le mot de passe doit contenir au moin 6 caractères',
                 'password_confirmation.required'    => 'Ce champ est obligatoire',
                 'password_confirmation.same'    => 'Ce champ est différent du mot de passe',
+                'photo.mimes' =>  'Les extensions d\'images acceptées sont jpg, jpeg et png',
+                'photo.max'   =>  'La taille maximale de l\'image est de 5 Mo'
             ]
         );
 
         return $validator;
-
     }
 
     /**
@@ -112,12 +114,10 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
 
-        echo $request;
         $correctPhoto = true;
+        $extension = null;
 
-        if($request->file("photo") == null){
-
-            $extension = null;
+        if ($request->file("photo") == null) {
 
             if ($user->sex == 'M') {
 
@@ -160,17 +160,8 @@ class RegisterController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
 
-        //return redirect()->route('register')->with(['message' => $request->file('photo')->getClientOriginalName()]);
-
-
-
-        /*return view('auth.register_success')->with('message', 'Inscription réussie. Pour activer votre
-        compte suivez le lien de validation qui vous a été envoyé puis réessayez quelques jours plutard le temps
-         que les membres de promotvogt accepte votre demande d\'adhésion. Merci !');*/
-
         return redirect()->route('register')->with(['message' => 'Inscription réussie. Pour activer votre
         compte suivez le lien de validation qui vous a été envoyé à l\'adresse '. $user->email . '. Merci !']);
-
 
     }
 }
