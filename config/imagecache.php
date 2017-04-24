@@ -54,10 +54,11 @@ return array(
     */
    
     'templates' => array(
-        'small' => 'Intervention\Image\Templates\Small',
+        'smalls' => 'Intervention\Image\Templates\Small',
         'medium' => 'Intervention\Image\Templates\Medium',
         'large' => 'Intervention\Image\Templates\Large',
-        'logo' => 'App\Filters\LogoFilter'
+        'logo' => 'App\Filters\LogoFilter',
+        'small' => 'App\Filters\LogoFilter'
     ),
 
     /*
