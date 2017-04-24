@@ -28,9 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class contribution extends Model
 {
-    protected $table = 'contribution';
-    protected $fillable = ['amount'];
 
+    protected $table = "contribution";
+    protected $fillable = ['amount'];
     /*****
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *
@@ -41,5 +41,9 @@ class contribution extends Model
 
     public function users() {
         return $this->belongsTo('App\User','user_ID');
+    }
+
+    public function motif(){
+        return $this->belongsTo('App\motif','motif_id');
     }
 }

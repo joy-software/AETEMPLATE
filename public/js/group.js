@@ -59,7 +59,7 @@ $('.refuse-btn').click(function(){
         success: function(data){
             var rep = data;
             if(rep.type === "success"){
-                //alert('le message est : '+rep.message);
+                alert('le message est : '+rep.message);
                 // tout a marché comme sur des roulettes.
                 if($('#tab_demande tr').length > 1){
                     $("#tr-user-"+id_user+"").hide();
@@ -87,8 +87,8 @@ $('.refuse-btn').click(function(){
 
         },
         error : function (data) {
-            //alert(data);
-            //alert("erreur lors de la suppression.");
+            alert(data);
+            alert("erreur lors de la suppression.");
             $("#message_adhesion").html("<div class=\"alert alert-block alert-danger fade in\">" +
                 "<button data-dismiss=\"alert\" class=\"close close-sm\" type=\"button\">" +
                 "<i class=\"icon-remove\"></i></button>" +
@@ -104,7 +104,7 @@ $('.send-btn').click(function () {
     var chaine = this.id;
     //alert("tu ma cliqué");
     if(chaine.indexOf("btn-accept-",0) != 0){
-        //il a triché, il faut arreter la requete.
+        return 0;
     }
     var id_user = chaine.substring(11,chaine.length);
     if(isNaN(id_user)){

@@ -260,7 +260,8 @@ Route::get('/group/event_group', 'groupController@index');
  */
 Route::post('/group/post_ads', [
     'as'=>'post_ads',
-    'uses'=>'groupController@post_ads'
+
+    'uses'=>'groupController@post_ads',
 
 ]);
 
@@ -320,3 +321,34 @@ Route::get('/comptabilite', [
     'as'=>'comptabilite',
     'uses'=>'comptabiliteController@index'
 ]);
+
+Route::get('/comptabilite/consult_contribution', [
+    'as'=>'consult_contribution',
+    'uses'=> 'comptabiliteController@consult_contribution'
+]);
+
+Route::post('/comptabilite/post_contribution_file',[
+    'as'=>'post_contribution_file',
+    'uses'=>'comptabiliteController@post_contribution_file'
+]);
+
+Route::post('/comptabilite/post_contribution',[
+    'as'=>'post_contribution',
+    'uses'=>'comptabiliteController@post_contribution'
+]);
+
+Route::post('/comptabilite/post_period',[
+    'as'=>'post_period',
+    'uses'=>'comptabiliteController@post_period'
+]);
+
+Route::post('/comptabilite/post_consult_contribution',[
+    'as'=>'post_consult_contribution',
+    'uses'=>'comptabiliteController@post_consult_contribution'
+]);
+
+Route::post('/comptabilite/contribution_user',[
+    'as'=>'contribution_user',
+    'uses'=>'comptabiliteController@contribution_user'
+]);
+

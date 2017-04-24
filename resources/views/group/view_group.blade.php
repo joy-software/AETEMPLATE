@@ -220,12 +220,15 @@
     </div>
 
         <?php
+
         if($events != null){
         $compteur =0;
         foreach ($events as $event) {
         $compteur++;
 
         ?>
+
+
 
         <div class="row" id="evenement{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
@@ -327,10 +330,13 @@
         </div>
 
     <?php
+            echo "print ads";
+        print_r($ads);
             if($ads != null){
         $compteur =0;
         foreach ($ads as $ad) {
             $compteur++;
+
 
         ?>
 
@@ -343,6 +349,9 @@
                                         <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $ad->id .'']['photo'] }}">
                                           {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
                                 </span>
+
+                            <?php ?>
+
                         </div>
                         <div class="col-lg-4">
                             <span class="badge bg-success"><?php $std = $ad->created_at; echo $std->toRfc850String(); ?></span>

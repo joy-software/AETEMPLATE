@@ -15,7 +15,7 @@ return array(
     | Examples: "images", "img/cache"
     |
     */
-   
+
     'route' => 'imagecache',
 
     /*
