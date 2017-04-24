@@ -104,7 +104,7 @@ $('.send-btn').click(function () {
     var chaine = this.id;
     //alert("tu ma cliqué");
     if(chaine.indexOf("btn-accept-",0) != 0){
-        //il a triché, il faut arreter la requete.
+        return 0;
     }
     var id_user = chaine.substring(11,chaine.length);
     if(isNaN(id_user)){

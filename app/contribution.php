@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class contribution extends Model
 {
 
+    protected $table = "contribution";
     protected $fillable = ['amount','description'];
 
     /*****
@@ -26,5 +27,9 @@ class contribution extends Model
 
     public function users() {
         return $this->belongsTo('App\User','user_ID');
+    }
+
+    public function motif(){
+        return $this->belongsTo('App\motif','motif_id');
     }
 }
