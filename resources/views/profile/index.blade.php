@@ -91,7 +91,9 @@
                                 </li>
                             </ul>
                         </header>
+
                         <div class="panel-body">
+
                             <div class="tab-content">
 
                                 <div id="profile" class="tab-pane active">
@@ -193,7 +195,6 @@
                                                 <div class="alert alert-success"> {{ Session::get('success') }} </div>
                                             @endif
 
-                                            <!--form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}" -->
 
                                                 {!! Form::open(
                                                             array(
