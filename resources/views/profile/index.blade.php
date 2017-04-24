@@ -23,7 +23,7 @@
                             <div class="col-lg-2 col-sm-2">
 
                                 <div class="follow-ava">
-                                    <img src="{{ url(Auth::user()->photo) }}" alt="">
+                                    <img src="{{ url('/imagecache/logo/' . Auth::user()->photo) }}" alt="">
                                 </div>
 
                                 <h4>

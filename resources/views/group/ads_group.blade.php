@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $ad->id .'']['photo'] }}">
+                                        <img style="width : 50px; height: auto;" class="simple" src="{{url('imagecache/logo/'. $tab_users[''. $ad->id .'']['photo'])}}">
                                 {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
                                 </span>
                         </div>

@@ -77,15 +77,15 @@
 
                                         @if((!($member->photo == null) && isset($member->photo)))
 
-                                            src="{{ url($member->photo) }}"
+                                            src="{{ url('/imagecache/logo/' . $member->photo) }}"
                                         @else
 
                                             @if ($member->sex == 'M')
 
-                                                src="{{url("users/default_gent_avatar.png")}}"
+                                                src="{{url("/imagecache/logo/default_gent_avatar.png")}}"
                                             @else
 
-                                                src="{{url("users/default_lady_avatar.png")}}"
+                                                src="{{url("/imagecache/logo/users/default_lady_avatar.png")}}"
                                             @endif
 
                                         @endif
