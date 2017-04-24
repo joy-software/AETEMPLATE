@@ -280,7 +280,7 @@ class groupController extends Controller
         if($count_ads > 5){
             $ads = ads::orderBy('created_at','desc')
                 ->where('type','=', 0)
-                ->where('group_ID','=',$id)->take(5);
+                ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $ads = ads::orderBy('created_at','desc')
@@ -294,7 +294,7 @@ class groupController extends Controller
         if($count_events > 5){
             $events = ads::orderBy('created_at','desc')
                 ->where('type','=', 1)
-                ->where('group_ID','=',$id)->take(5);
+                ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $events = ads::orderBy('created_at','desc')

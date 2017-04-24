@@ -22,3 +22,7 @@
 
     width: 40px;
 }
+
+#div_create_ad{
+    display: none;
+}
