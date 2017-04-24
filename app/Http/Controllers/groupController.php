@@ -274,31 +274,31 @@ class groupController extends Controller
         $ads = null;
         $events = null;
 
-        $count_ads = ads::where('type','=',0)
+        $count_ads = ads::where('type','=','annonce')
                  ->where('group_ID','=',$id)->count();
 
         if($count_ads > 5){
             $ads = ads::orderBy('created_at','desc')
-                ->where('type','=', 0)
+                ->where('type','=', 'annonce')
                 ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $ads = ads::orderBy('created_at','desc')
-                ->where('type','=', 0)
+                ->where('type','=', 'annonce')
                 ->where('group_ID','=',$id)->get();
         }
 
-        $count_events = ads::where('type','=',1)
+        $count_events = ads::where('type','=','evenement')
             ->where('group_ID','=',$id)->count();
 
         if($count_events > 5){
             $events = ads::orderBy('created_at','desc')
-                ->where('type','=', 1)
+                ->where('type','=', 'evenement')
                 ->where('group_ID','=',$id)->take(5)->get();
         }
         else{
             $events = ads::orderBy('created_at','desc')
-                ->where('type','=', 1)
+                ->where('type','=', 'evenement')
                 ->where('group_ID','=',$id)->get();
         }
 
@@ -671,6 +671,7 @@ class groupController extends Controller
         }
 
         $ads->type = $type;
+
         $ads->expiration_date = $date_expiration;
         $file1 = null;
         $file2 = null;
@@ -727,7 +728,7 @@ class groupController extends Controller
                 }
             }
         }
-
+        //echo $ads->type ;
         $group = group::find($request->id_group);
         $ads->user()->associate(Auth::user());
         $ads->group()->associate($group);
