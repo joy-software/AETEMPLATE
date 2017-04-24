@@ -33,6 +33,19 @@ function cacher_afficher_adhesion() {
 ici c'est la confirmation.
  */
 
+$('#show_create_ad').click(cacher_afficher_tab_resultat);
+var show_hide_tab_resul = false;
+function cacher_afficher_tab_resultat(){
+    if(show_hide_tab_resul == false){
+        $("#div_create_ad").show();
+        show_hide_tab_resul = true;
+    }
+    else {
+        $("#div_create_ad").hide();
+        show_hide_tab_resul = false;
+    }
+}
+
 $('.refuse-btn').click(function(){
    var chaine = this.id;
     if(chaine.indexOf("btn-refuse-",0) != 0){
