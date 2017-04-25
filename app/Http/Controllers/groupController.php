@@ -229,7 +229,7 @@ class groupController extends Controller
 
         /**Action sous marine**/
         \Event::fire(new GroupCreateEvent( $group));
-      /*  if(!array_has(session('group'),count(session('group'))))
+        if(!array_has(session('group'),count(session('group'))))
         {
             session()->push('group',$group->id);
         }//*/

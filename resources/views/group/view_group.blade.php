@@ -9,6 +9,7 @@
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -162,7 +163,8 @@
                             Joindre des fichiers a l'annonce <br>
                         <div class="row" id="span_file1">
                                 <div class="col-lg-9">
-                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary">
+                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
+                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                                 </div>
                                 <div class="col-lg-3">
                                     <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -170,7 +172,8 @@
                         </div><br>
                         <div class="row" id="span_file2">
                             <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary">
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
+                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -178,7 +181,8 @@
                         </div><br>
                         <div class="row" id="span_file3">
                             <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary">
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
+                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -243,7 +247,7 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'] )}}">
+                                <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'] )}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
@@ -354,9 +358,8 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $ad->id .'']['photo'] )}}">
-                                          {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
-                                </span>
+                                <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $ad->id .'']['photo'] )}}">
+                              </span>
 
                             <?php ?>
 
@@ -452,6 +455,7 @@
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/collapse.js') }}"></script>
+    <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
 <script>
 
     var group = new Object();

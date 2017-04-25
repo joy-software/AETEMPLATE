@@ -24,6 +24,7 @@
 
                                 <div class="follow-ava">
                                     <img src="{{ url('cache/logo/'.Auth::user()->photo) }}" alt="" style="background-color: white;">
+
                                 </div>
 
                                 <h4>

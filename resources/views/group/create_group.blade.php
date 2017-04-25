@@ -11,6 +11,7 @@
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
 @endsection
 
 @section('sideOption')
@@ -60,17 +61,18 @@
                             @endif
                         {!! Form::open(array('route' => 'post_create_group', 'files' => true)) !!}
                             <div class="form-group">
-                                <label for="name">Nom du groupe (*)</label>
+                                <label for="name" class="control-label">Nom du groupe (*)</label>
                                 <input name="name" type="text" class="form-control" id="name" placeholder="Entrer le nom du groupe">
                                 <p class="help-block">Min 5 caractères, Maxi 20 caractères</p>
                             </div>
                             <div class="form-group">
-                                <label for="logo_group">Logo du groupe</label>
-                                {!! Form::file('logo', null) !!}
+                                <label for="logo_group" class="control-label">Logo du groupe</label>
+                                {!! Form::file('logo', ['class' => 'inputfile', 'id' => 'logo']) !!}
+                                <label for="logo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une image</span></label>
                                 <p class="help-block">Extensions acceptées : jpeg, png (2Mo maxi)</p>
                             </div>
                             <div class="form-group">
-                                <label for="description_group">Description du groupe (*)</label> <br>
+                                <label for="description_group" class="control-label">Description du groupe (*)</label> <br>
                                     <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10" placeholder="Description du groupe"></textarea>
                                 <p class="help-block">Min 10 caractères, Maxi 1000 caractères</p>
                             </div>
@@ -100,5 +102,6 @@
     <script src="{{ asset('js/group.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/upload.js') }}"></script>
 
 @endsection

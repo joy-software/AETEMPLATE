@@ -52,17 +52,17 @@ class UserController extends Controller
 
                if ($user->sex == 'M') {
 
-                   $chemin = "users/default_gent_avatar.png";
+                   $chemin = "default_gent_avatar.png";
 
                } else {
 
-                   $chemin = "users/default_lady_avatar.png";
+                   $chemin = "default_lady_avatar.png";
                }
 
            } else {
 
                $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension);
-               $chemin = '/users/'. 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
+               $chemin =  'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
            }
 
            $user->photo = $chemin;

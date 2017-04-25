@@ -76,8 +76,8 @@
                                      <img alt="photo" class="simple"
 
                                         @if((!($member->photo == null) && isset($member->photo)))
-
                                             src="{{ url('cache/logo/'.$member->photo) }}"
+
                                         @else
 
                                             @if ($member->sex == 'M')
@@ -86,8 +86,6 @@
                                             @else
 
                                                 src="{{url("cache/logo/"."users/default_lady_avatar.png")}}"
-                                            @endif
-
                                         @endif
 
                                      style="width: 50px; height: auto;" >
