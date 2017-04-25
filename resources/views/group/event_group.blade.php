@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $event->id .'']['photo'] }}">
+                                        <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'])}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
@@ -102,15 +102,15 @@
 
                             if($lien1 != null){
                             ?>
-                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" > <i class="icon_download"></i> <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px;" target="_blank" href="{{ url('cache/download/'.$lien1)}}" > <i class="icon_download"></i> <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien2 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"><i class="icon_download"></i>  <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px" target="_blank" href="{{ url('cache/download/'.$lien2) }}" target="_blank"><i class="icon_download"></i>  <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien3 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
+                            <a style="margin-right: 50px" target="_blank" href="{{ url('cache/download/'.$lien3) }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                             <?php
                             }

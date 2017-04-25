@@ -3,7 +3,7 @@
     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
         <span class="profile-ava" >
-            <img alt="Photo" src="{{ url('/imagecache/logo/'. Auth::user()->photo) }}" >
+            <img alt="Photo" src="{{ url('/cache/logo/'. Auth::user()->photo) }}" >
         </span>
 
         <span class="username">

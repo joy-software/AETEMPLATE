@@ -148,7 +148,7 @@
 
                             @foreach($members as $member)
                             <tr>
-                                <td><img src="{{url('/imagecache/small/'.$member->photo)}}" alt="Photo de profil" style="height: auto"></td>
+                                <td><img src="{{url('/cache/small/'.$member->photo)}}" alt="Photo de profil" style="height: auto"></td>
                                 <td>{{ $member->promotion}}</td>
                                 <td>{{ $member->name}} , {{ $member->surname}}</td>
 

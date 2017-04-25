@@ -191,18 +191,22 @@ class groupController extends Controller
 
     public function post_create_group(groupRequest $request){
 
+        $id= Auth::id();
         //$extension_accepted = array('png','jpeg');
         if($request->file("logo") == null){
             $extension = null;
-            $chemin = 'logos/default.png';
+            $chemin = 'default.png';
         }
         else{
 
-            $request->file('logo')->move('logos', $request->file('logo')->getClientOriginalName());
-            $chemin = 'logos/'. $request->file('logo')->getClientOriginalName();
+            $fullName = $request->file('logo')->getClientOriginalName();
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $onlyName = explode('.'.$extension,$fullName);
+            $request->file('logo')->move('logos', $onlyName[0].'_'.$id.'.'.$extension);
+            $chemin = $onlyName[0].'_'.$id.'.'.$extension;
         }
 
-            $id= Auth::id();
+
             $group = group::create([
             'description'=> trim($request->get('description_group')),
             'name' =>trim($request->get('name')),
@@ -682,8 +686,12 @@ class groupController extends Controller
 
             if($request->file($name) != ""){
                 $mime = $request->file($name)->extension();
-                $request->file($name)->move('files_ads', $request->file($name)->getClientOriginalName());
-                $chemin = 'files_ads/'. $request->file($name)->getClientOriginalName();
+                $id = Auth::id();
+                $fullName = $request->file($name)->getClientOriginalName();
+                $extension = $request->file($name)->getClientOriginalExtension();
+                $onlyName = explode('.'.$extension,$fullName);
+                $request->file($name)->move('files_ads', $onlyName[0].'_'.$id.'.'.$extension);
+                $chemin =  $onlyName[0].'_'.$id.'.'.$extension;
                 $size = $request->file($name)->getClientSize();
 
                 $video_music_ext = array('mp3','3gp','vlc');

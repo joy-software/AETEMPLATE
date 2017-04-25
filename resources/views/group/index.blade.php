@@ -31,7 +31,7 @@
 
                                         <h4>{{$avatar->surname}}</h4>
                                         <div class="follow-ava">
-                                            <img src="{{ url($avatar->photo) }}" alt="photo" style="background-color: white">
+                                            <img src="{{ url('cache/logo/'.$avatar->photo) }}" alt="photo" style="background-color: white">
                                         </div>
                                         @role('admin_1')
                                         <h6>Administrateur</h6>

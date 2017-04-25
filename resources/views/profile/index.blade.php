@@ -23,7 +23,7 @@
                             <div class="col-lg-2 col-sm-2">
 
                                 <div class="follow-ava">
-                                    <img src="{{ url(Auth::user()->photo) }}" alt="">
+                                    <img src="{{ url('cache/logo/'.Auth::user()->photo) }}" alt="" style="background-color: white;">
                                 </div>
 
                                 <h4>
@@ -46,15 +46,15 @@
                             <div class="col-lg-6 col-sm-6 follow-info weather-category">
                                 <ul class="recapitulatif">
                                     <li class="active">
-                                        <h4>50</h4>
+                                        <h4>{{$nbr_ads}}</h4>
                                         <i class="icon_close_alt2"></i> Annonces
                                     </li>
                                     <li>
-                                        <h4>550</h4>
+                                        <h4>{{$nbr_event}}</h4>
                                         <i class="icon_check_alt2"></i> Evènements
                                     </li>
                                     <li>
-                                        <h4>600</h4>
+                                        <h4>{{$nbr_mem}}</h4>
                                         <i class="icon_plus_alt2"></i> Adhésions validées
                                     </li>
                                 </ul>
@@ -296,11 +296,14 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">A propos de moi</label>
                                                     <div class="col-lg-6">
-                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">
-                                                            @if(\Illuminate\Support\Facades\Auth::check())
-                                                                {{\Illuminate\Support\Facades\Auth::user()->description}}
-                                                            @endif
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">{{\Illuminate\Support\Facades\Auth::user()->description}}
                                                         </textarea>
+                                                        @else
+                                                            <textarea name="description" id="description" class="form-control" cols="30" rows="5">
+                                                        </textarea>
+
+                                                        @endif
                                                     </div>
                                                 </div>
 
