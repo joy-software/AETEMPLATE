@@ -101,7 +101,7 @@ class HomeController extends Controller
            $compteur++;
        }
         /***End Loading ***/
-        //$contributions = null;
+        $contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),

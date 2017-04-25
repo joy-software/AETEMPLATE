@@ -76,7 +76,7 @@
                                 <div class="panel-heading text-center">Vos Contributions de ce mois</div>
                                 <div class="panel-content">
 
-                                        {!! Form::open(['url' => '#']) !!}
+
                                     @if((!($contributions == null)) && isset($contributions))
                                         <div class="form-group has-success">
                                             <label for="Contribution" class="control-label hidden">Vos Contributions de ce mois</label>
@@ -92,6 +92,7 @@
 
                                         </div>
                                         @else
+
                                         <div class="form-group ">
                                             <br/>
                                             <span class="badge bg-warning">Vous n'avez pas encore contribué pour ce mois</span>
@@ -100,10 +101,29 @@
 
                                         <br/>
                                         <button type="submit" class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</button>
+                                        <form action="VOTRE CALLBACK_URL" method="POST">
+                                            <script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
+                                                    data-receiver-uid={{env('WCU_IDENTIFIANT_MARCHAND')}}
+                                                    data-receiver-public-key={{env('WCU_CLE_PUBLIQUE_MARCHAND')}}
+                                                    data-transaction-receiver-total-amount="MONTANT_TOTAL_DE_LA_TRANSACTION"
+                                                    data-transaction-receiver-currency="DEVISE_DU_MARCHAND"
+                                                    data-name={{config('app.name')}}
+                                                    data-transaction-receiver-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND"
+                                                    data-transaction-sender-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT"
+                                                    data-style="1"
+                                                    data-image="https://www.wecashup.cloud/live/2-form/img/home.png"
+                                                    data-cash="true"
+                                                    data-telecom="true"
+                                                    data-m-wallet="false"
+                                                    data-split="false"
+                                                    data-sender-lang="fr"
+                                                    data-sender-phonenumber="{{$avatar->phone}}">
 
+                                            </script>
+                                        </form>
 
                                     @endif
-                                              {!! Form::close() !!}
+
 
 
                                 </div>
