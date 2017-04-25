@@ -52,17 +52,17 @@ class UserController extends Controller
 
                if ($user->sex == 'M') {
 
-                   $chemin = "users/default_gent_avatar.png";
+                   $chemin = "default_gent_avatar.png";
 
                } else {
 
-                   $chemin = "users/default_lady_avatar.png";
+                   $chemin = "default_lady_avatar.png";
                }
 
            } else {
 
                $request->file('photo')->move('users', 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension);
-               $chemin = '/users/'. 'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
+               $chemin =  'photo' . '___' . $user->name . '___' . $user->id . '.' . $extension;
            }
 
            $user->photo = $chemin;
@@ -72,9 +72,37 @@ class UserController extends Controller
 
        $user->save();
 
+       $nbr_event = 0;
+       $nbr_ads = 0;
+       $nbr_mem = 0;
+
+       foreach ($user->unreadNotifications() as $notification)
+       {
+           if($notification->type = 'App\Notifications\NewAnnouncement')
+           {
+               $nbr_ads++;
+           }
+           if($notification->type = 'App\Notifications\NewEvent')
+           {
+               $nbr_event++;
+           }
+           if($notification->type = 'App\Notifications\IncommingMember')
+           {
+               $nbr_mem++;
+           }
+       }
+       /**End loading**/
+
+       //$contributions = null;
+
        $notifications = $user->unreadnotifications()->count();
 
-       return redirect()->back()->with(['success' => 'Modifications réussies','user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+       return redirect()->back()->with(['success' => 'Modifications réussies',
+           'user'=> $user->unreadnotifications()->paginate(6),
+           'nbr_notif'=> $notifications,
+           'nbr_ads'=>$nbr_ads,
+           'nbr_event'=>$nbr_event,
+           'nbr_mem'=>$nbr_mem]);
    }
 
 
@@ -118,10 +146,36 @@ class UserController extends Controller
            $message = 'Mot de passe incorrecte';
        }
 
+       $nbr_event = 0;
+       $nbr_ads = 0;
+       $nbr_mem = 0;
 
+       foreach ($user->unreadNotifications() as $notification)
+       {
+           if($notification->type = 'App\Notifications\NewAnnouncement')
+           {
+               $nbr_ads++;
+           }
+           if($notification->type = 'App\Notifications\NewEvent')
+           {
+               $nbr_event++;
+           }
+           if($notification->type = 'App\Notifications\IncommingMember')
+           {
+               $nbr_mem++;
+           }
+       }
+       /**End loading**/
+
+       //$contributions = null;
        $notifications = $user->unreadnotifications()->count();
 
-       return redirect()->route('profile')->with(['success' => $message,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+       return redirect()->route('profile')->with(['success' => $message,
+           'user'=> $user->unreadnotifications()->paginate(6),
+           'nbr_notif'=> $notifications,
+           'nbr_ads'=>$nbr_ads,
+           'nbr_event'=>$nbr_event,
+           'nbr_mem'=>$nbr_mem]);
 
    }
 

@@ -110,7 +110,7 @@ class HomeController extends Controller
 
 
         /***End Loading ***/
-        //$contributions = null;
+        $contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
         return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),
@@ -136,8 +136,36 @@ class HomeController extends Controller
     }
     public function profile(Request $request){
         $user = Auth::user();
+        $nbr_event = 0;
+        $nbr_ads = 0;
+        $nbr_mem = 0;
+
+        foreach ($user->unreadNotifications() as $notification)
+        {
+            if($notification->type = 'App\Notifications\NewAnnouncement')
+            {
+                $nbr_ads++;
+            }
+            if($notification->type = 'App\Notifications\NewEvent')
+            {
+                $nbr_event++;
+            }
+            if($notification->type = 'App\Notifications\IncommingMember')
+            {
+                $nbr_mem++;
+            }
+        }
+        /**End loading**/
+
+        //$contributions = null;
         $notifications = $user->unreadnotifications()->count();
-        return view('profile/index',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+
+        return view('profile/index',[
+            'user'=> $user->unreadnotifications()->paginate(6),
+            'nbr_notif'=> $notifications,
+            'nbr_ads'=>$nbr_ads,
+            'nbr_event'=>$nbr_event,
+            'nbr_mem'=>$nbr_mem]);
     }
 
     public function tester(){

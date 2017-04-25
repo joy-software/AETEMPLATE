@@ -184,6 +184,12 @@ Route::get('/group/view_group/{id}', [
     'middleware' => 'group'
 ]);
 
+Route::get('/group/meeting_group/{id}', [
+    'as'=>'meeting_group',
+    'uses'=>'groupController@meeting_group',
+    'middleware' => 'group'
+]);
+
 Route::get('/group/view_group', 'groupController@index');
 
 //Route::get('/group/valid_adhesion_group/{id_user}/{id_group}', 'groupController@valid_adhesion_group');
@@ -259,7 +265,7 @@ Route::get('/group/event_group', 'groupController@index');
  */
 Route::post('/group/post_ads', [
     'as'=>'post_ads',
-    'uses'=>'groupController@post_ads'
+    'uses'=>'groupController@post_ads',
 ]);
 
 Route::get('/group/ads_group/{id}', [

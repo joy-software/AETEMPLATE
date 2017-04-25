@@ -58,7 +58,7 @@ class UserTableSeeder extends Seeder
                 'phone'=> 'phoneNumber',
                 'statut'=> 'actif',
                 'activated'=> 1,
-                'photo'=> 'users/default_gent_avatar.png',
+                'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
             ]);
         $user->save();
@@ -75,7 +75,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'users/default_gent_avatar.png',
+            'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
@@ -92,10 +92,21 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'users/default_gent_avatar.png',
+            'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
+
+        $compta = new Role();
+        $compta->name         = 'Comptable';
+        $compta->display_name = 'Le comptable du project'; // optional
+        $compta->description  = 'La personne en charge des finances du groupe'; // optional
+        $compta->save();
+
+        $permission =  \App\Permission::find(1);
+        $compta->attachPermission($permission);
+
+        $user->attachRole($compta);
 
         $user = new User([
             'name'=> 'Michel',
@@ -109,7 +120,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'users/default_gent_avatar.png',
+            'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();
@@ -126,7 +137,7 @@ class UserTableSeeder extends Seeder
             'phone'=> 'phoneNumber',
             'statut'=> 'actif',
             'activated'=> 1,
-            'photo'=> 'users/default_gent_avatar.png',
+            'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
         ]);
         $user->save();

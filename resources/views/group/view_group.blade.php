@@ -9,6 +9,7 @@
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -26,10 +27,11 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
+                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
                     <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -77,7 +79,7 @@
                 <tr id="tr-user-{{ $user['id'] }}">
                     <td id="td-image-{{ $user['id'] }}" style="width: 15%;">
                         <span class="profile-ava">
-                           <img alt="" class="simple" style="width : 100%; height : auto;" src="/{{ $user['photo'] }}">
+                           <img alt="" class="simple" style="width : 100%; height : auto;" src="{{url('cache/logo/'.$user['photo'])}}">
                         </span>
                     </td>
 
@@ -162,7 +164,8 @@
                             Joindre des fichiers a l'annonce <br>
                         <div class="row" id="span_file1">
                                 <div class="col-lg-9">
-                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary">
+                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
+                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                                 </div>
                                 <div class="col-lg-3">
                                     <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -170,7 +173,8 @@
                         </div><br>
                         <div class="row" id="span_file2">
                             <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary">
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
+                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -178,7 +182,8 @@
                         </div><br>
                         <div class="row" id="span_file3">
                             <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary">
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
+                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -243,7 +248,7 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $event->id .'']['photo'] }}">
+                                <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'] )}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
@@ -284,15 +289,15 @@
 
                             if($lien1 != null){
                             ?>
-                            <a style="margin-right: 50px;" target="_blank" href="/{{ $lien1 }}" > <i class="icon_download"></i>  <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px;" target="_blank" href="{{url('cache/download/'. $lien1 )}}" > <i class="icon_download"></i>  <?php $name = explode("/", $lien1); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien2 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien2 }}" target="_blank"><i class="icon_download"></i>  <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
+                            <a style="margin-right: 50px" target="_blank" href="{{url('cache/download/'. $lien2) }}" target="_blank"><i class="icon_download"></i>  <?php $name = explode("/", $lien2); echo $name[count($name)-1];?> </a>
                             <?php
                             if($lien3 != null){
                             ?>
-                            <a style="margin-right: 50px" target="_blank" href="/{{ $lien3 }}" target="_blank"> <i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
+                            <a style="margin-right: 50px" target="_blank" href="{{url('cache/download/'. $lien3) }}" target="_blank"> <i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                             <?php
                                         }
@@ -354,9 +359,8 @@
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <span class="pull-left">
-                                        <img style="width : 50px; height: auto;" class="simple" src="/{{ $tab_users[''. $ad->id .'']['photo'] }}">
-                                          {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
-                                </span>
+                                <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $ad->id .'']['photo'] )}}">
+                              </span>
 
                             <?php ?>
 
@@ -397,15 +401,15 @@
 
                                     if($lien1 != null){
                                         ?>
-                                        <a style="margin-right: 50px" href="/{{ $lien1 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien1); echo $name[count($name)-1];?></a>
+                                        <a style="margin-right: 50px" href="{{url('cache/download/'. $lien1 )}}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien1); echo $name[count($name)-1];?></a>
                                     <?php
                                         if($lien2 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien2 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien2); echo $name[count($name)-1];?></a>
+                                            <a style="margin-right: 50px" href="{{url('cache/download/'. $lien2 )}}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien2); echo $name[count($name)-1];?></a>
                                             <?php
                                             if($lien3 != null){
                                             ?>
-                                            <a style="margin-right: 50px" href="/{{ $lien3 }}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
+                                            <a style="margin-right: 50px" href="{{url('cache/download/'. $lien3 )}}" target="_blank"><i class="icon_download"></i> <?php $name = explode("/", $lien3); echo $name[count($name)-1];?></a>
 
                                             <?php
                                               }
@@ -452,6 +456,7 @@
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/collapse.js') }}"></script>
+    <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
 <script>
 
     var group = new Object();

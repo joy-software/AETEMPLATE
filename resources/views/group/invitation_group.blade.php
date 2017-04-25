@@ -36,7 +36,7 @@
                                     <h3>{{$group->name}}</h3>
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3">
-                                                <img style="width: 100%; height: auto;" src="/{{$group->logo}}" alt="Logo du groupe">
+                                                <img style="width: 100%; height: auto;" src="{{url('cache/logo/'.$group->logo)}}" alt="Logo du groupe">
                                         </div>
 
                                         <div class="col-lg-7 col-sm-7">

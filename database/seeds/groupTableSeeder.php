@@ -17,7 +17,7 @@ class groupTableSeeder extends Seeder
             'name'=> 'Assemblée Générale',
             'description' =>'Le grand groupe assemblée générale',
             'user_ID' => 1,
-            'logo' => 'logos/default.png'
+            'logo' => 'default.png'
         ]);
         $group->save();
 
@@ -40,7 +40,7 @@ class groupTableSeeder extends Seeder
             'name'=> 'Laboratoire de Cybersécurité',
             'description' =>'Le groupe des stagiaires du Lacy',
             'user_ID' => 2,
-            'logo' => 'logos/default.png'
+            'logo' => 'default.png'
         ]);
         $group->save();
 

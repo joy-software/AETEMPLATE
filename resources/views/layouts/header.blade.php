@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="{{ asset('karmanta/index.html') }}" class="logo">Promo<span>Vogt</span> <span class="lite">.org</span></a>
+    <a href="promot-vogt.wordpress.com" class="logo">Promo<span>Vogt</span> <span class="lite">.org</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">

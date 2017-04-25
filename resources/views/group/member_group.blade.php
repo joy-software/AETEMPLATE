@@ -31,10 +31,11 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                     <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -76,18 +77,16 @@
                                      <img alt="photo" class="simple"
 
                                         @if((!($member->photo == null) && isset($member->photo)))
+                                            src="{{ url('cache/logo/'.$member->photo) }}"
 
-                                            src="{{ url($member->photo) }}"
                                         @else
 
                                             @if ($member->sex == 'M')
 
-                                                src="{{url("users/default_gent_avatar.png")}}"
+                                                src="{{url("cache/logo/"."users/default_gent_avatar.png")}}"
                                             @else
 
-                                                src="{{url("users/default_lady_avatar.png")}}"
-                                            @endif
-
+                                                src="{{url("cache/logo/"."users/default_lady_avatar.png")}}"
                                         @endif
 
                                      style="width: 50px; height: auto;" >

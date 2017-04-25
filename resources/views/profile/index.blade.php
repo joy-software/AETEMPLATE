@@ -23,7 +23,8 @@
                             <div class="col-lg-2 col-sm-2">
 
                                 <div class="follow-ava">
-                                    <img src="{{ url(Auth::user()->photo) }}" alt="">
+                                    <img src="{{ url('cache/logo/'.Auth::user()->photo) }}" alt="" style="background-color: white;">
+
                                 </div>
 
                                 <h4>
@@ -46,15 +47,15 @@
                             <div class="col-lg-6 col-sm-6 follow-info weather-category">
                                 <ul class="recapitulatif">
                                     <li class="active">
-                                        <h4>50</h4>
+                                        <h4>{{$nbr_ads}}</h4>
                                         <i class="icon_close_alt2"></i> Annonces
                                     </li>
                                     <li>
-                                        <h4>550</h4>
+                                        <h4>{{$nbr_event}}</h4>
                                         <i class="icon_check_alt2"></i> Evènements
                                     </li>
                                     <li>
-                                        <h4>600</h4>
+                                        <h4>{{$nbr_mem}}</h4>
                                         <i class="icon_plus_alt2"></i> Adhésions validées
                                     </li>
                                 </ul>
@@ -91,7 +92,9 @@
                                 </li>
                             </ul>
                         </header>
+
                         <div class="panel-body">
+
                             <div class="tab-content">
 
                                 <div id="profile" class="tab-pane active">
@@ -189,11 +192,6 @@
 
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            @if(\Illuminate\Support\Facades\Session::has('success'))
-                                                <div class="alert alert-success"> {{ Session::get('success') }} </div>
-                                            @endif
-
-                                            <!--form class="form-horizontal" role="form" method="post" action="{{ route('editProfile') }}" -->
 
                                                 {!! Form::open(
                                                             array(
@@ -299,11 +297,14 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">A propos de moi</label>
                                                     <div class="col-lg-6">
-                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">
-                                                            @if(\Illuminate\Support\Facades\Auth::check())
-                                                                {{\Illuminate\Support\Facades\Auth::user()->description}}
-                                                            @endif
+                                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="5">{{\Illuminate\Support\Facades\Auth::user()->description}}
                                                         </textarea>
+                                                        @else
+                                                            <textarea name="description" id="description" class="form-control" cols="30" rows="5">
+                                                        </textarea>
+
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -324,7 +325,7 @@
                                 <div id="edit-credential" class="tab-pane">
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
-                                            <h1>Informations</h1>
+
                                             <form class="form-horizontal" enctype="multipart/form-data" role="form" method="post" action="{{ route('editCredential') }}">
                                                 {{ csrf_field() }}
 
