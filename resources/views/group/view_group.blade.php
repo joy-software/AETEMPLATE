@@ -27,10 +27,11 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
+                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
                     <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -164,7 +165,7 @@
                         <div class="row" id="span_file1">
                                 <div class="col-lg-9">
                                     <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
-                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
+                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                                 </div>
                                 <div class="col-lg-3">
                                     <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -173,7 +174,7 @@
                         <div class="row" id="span_file2">
                             <div class="col-lg-9">
                                 <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
-                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
+                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
@@ -182,7 +183,7 @@
                         <div class="row" id="span_file3">
                             <div class="col-lg-9">
                                 <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
-                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
+                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
                                 <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
