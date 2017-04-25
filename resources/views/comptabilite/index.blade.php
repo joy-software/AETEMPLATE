@@ -14,7 +14,7 @@
 @section('sideOption')
 @include('layouts/asideOption', [
             'classIconOption' => 'icon_house_alt',
-            'optionName' => 'Aller à l\'Accueil',
+            'optionName' => 'Accueil des contributions',
             'retractable' => 'false',
             'link' => url('/comptabilite')
         ])
@@ -47,7 +47,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3 ">
                 <section class="panel">
                     <header class="panel-heading">
                         Charger les cotisations d'une période
@@ -110,7 +110,7 @@
                 </section>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <section class="panel">
                     <header class="panel-heading">
                         Enregistrer une cotisation
@@ -175,7 +175,7 @@
 
                 </section>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <section class="panel">
                     <header class="panel-heading">
                         Périodes
@@ -185,19 +185,25 @@
 
                         <?php
                             $compteur = 0;
+                            if($periodes != null){
                             foreach ( $periodes as $periode ){
                                 $compteur++;
                                 ?>
-                            <a class="list-group-item <?php if($compteur == 1) echo "active";?> ">
+                            <a class="list-group-item <?php if($compteur == 1) echo "active"; ?> ">
                                 <h4 class="list-group-item-heading">  <?php echo strtoupper($periode->month)." - ".$periode->year; ?> </h4>
-                                <p class="list-group-item-text"></p>
                             </a>
                             <?php }
+                            }
+                            else{
+                                ?>
+                            <a class="list-group-item">Aucune période n'existe.</a>
+                            <?php
+                            }
                          ?>
 
                         <a class="list-group-item"  style="text-align: center; background: white;">
                             <button class="btn btn-primary" id="btn_add_period">Ajouter une période</button>
-                            <p class="list-group-item-text"></p>
+
                         </a>
 
                             {!! Form::open(array('route' => 'post_period', 'files' => true, 'id'=> 'create_period', 'method'=>'post')) !!}
@@ -227,7 +233,42 @@
 
                 </section>
             </div>
+
+            <div class="col-lg-3" >
+                <section class="panel">
+                    <header class="panel-heading">
+                        Motifs
+                    </header>
+
+                    <div class="list-group">
+
+                        <?php
+                        if($motifs != null){
+                        foreach($motifs as $motif){
+                        ?>
+                        <a class="list-group-item"  style="background: white;"> <?php echo $motif->reason; ?> </a>
+
+                        <?php }
+                        }
+                        else {
+                        ?>
+                        <a class="list-group-item" style="text-align: center; background: white;"> Aucun Motif n'existe. Créer des nouveaux motifs SVP</a>
+                        <?php
+                        }
+                        ?>
+                            {!! Form::open(array('route' => 'post_motif', 'id'=> 'create_motif', 'method'=>'post')) !!}
+                         <a class="list-group-item" style="background: #f7f7f7; ">
+                             Créer un nouveau motif : <br><br>
+                             <input type="text" name="motif" id="input_motif" class="form-control" placeholder="Entrer le nom du nouveau motif" required><br>
+                             <button class="btn btn-primary" type="submit">Créer un nouveau motif</button>
+                         </a>
+                            {!! Form::close() !!}
+
+                     </div>
+                </section>
+           </div>
         </div>
+
 
     </section>
 

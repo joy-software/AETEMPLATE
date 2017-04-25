@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/home', 'HomeController@auth');
 
 
@@ -348,5 +347,17 @@ Route::post('/comptabilite/post_consult_contribution',[
 Route::post('/comptabilite/contribution_user',[
     'as'=>'contribution_user',
     'uses'=>'comptabiliteController@contribution_user'
+]);
+
+Route::get('/contrib_user/{id}', 'comptabiliteController@contrib_user');
+
+Route::post('/post_motif', [
+    'as'=>'post_motif',
+    'uses'=>'comptabiliteController@post_motif'
+]);
+
+Route::post('/contrib_user_email', [
+    'as'=>'contrib_user_email',
+    'uses'=>'comptabiliteController@contrib_user_email'
 ]);
 
