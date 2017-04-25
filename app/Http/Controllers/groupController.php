@@ -380,6 +380,145 @@ class groupController extends Controller
             ]);
     }
 
+    public function meeting_group($id){
+        $this->load_group();
+        $this->verification_param($id);
+
+        if($id==null){
+            $user = Auth::user();
+            $notifications = $user->unreadnotifications()->count();
+            return view('group.index',['list_group'=> $this->_list_group,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+        }
+
+        $group = group::find($id);
+
+        $user_group = usergroup::where('group_ID','=',$id)->whereStatut("attente")->get();
+        $users[]=null;
+        $com = 0;
+
+
+        foreach($user_group as $u_g){
+
+            $users[$com] = User::find($u_g['user_ID']);
+            $com++;
+        }
+
+        if($com == 0){
+            //ça veut dire que la liste est vide $user_group est vide.
+            $users = null;
+        }
+        //print_r ($users);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+
+        /*
+         * Chargement des 5 premières annonces et évènements.
+         */
+        $ads = null;
+        $events = null;
+
+        $count_ads = ads::where('type','=','annonce')
+            ->where('group_ID','=',$id)->count();
+
+        if($count_ads > 5){
+            $ads = ads::orderBy('created_at','desc')
+                ->where('type','=', 'annonce')
+                ->where('group_ID','=',$id)->take(5)->get();
+        }
+        else{
+            $ads = ads::orderBy('created_at','desc')
+                ->where('type','=', 'annonce')
+                ->where('group_ID','=',$id)->get();
+        }
+
+        $count_events = ads::where('type','=','evenement')
+            ->where('group_ID','=',$id)->count();
+
+        if($count_events > 5){
+            $events = ads::orderBy('created_at','desc')
+                ->where('type','=', 'evenement')
+                ->where('group_ID','=',$id)->take(5)->get();
+        }
+        else{
+            $events = ads::orderBy('created_at','desc')
+                ->where('type','=', 'evenement')
+                ->where('group_ID','=',$id)->get();
+        }
+
+        $tab_ads_final = null;
+        $tab_events_final = null;
+        $tab_users= null;
+
+        if($count_ads != 0){
+
+            //for($i = 0; $i< $count_ads; $i++){
+            foreach($ads as  $ad){
+
+                $tab_users[''.$ad['id'].''] = User::find($ad['user_ID']);
+
+                $ad_h_file = ads_has_files::where('ads_ID','=', $ad['id'])->get();
+
+                if(count($ad_h_file)){
+                    //echo "id = ".$ads;
+                    foreach($ad_h_file as $el){
+                        $file = files::findOrFail($el->files_ID);
+                        $tab_ads_final[''.$ad['id'].''] =
+                            (!isset($tab_ads_final[''.$ad['id'].'']) && empty($tab_ads_final[''.$ad['id'].'']))
+                                ? $file->url : $tab_ads_final[''.$ad['id'].''] . '|' .$file->url;
+
+                    }
+                }else{
+                    $tab_ads_final["".$ad['id'].""] = null;
+                }
+                // echo 'fin tour';
+            }
+        }else{
+            $ads = null;
+        }
+
+        if($count_events != 0){
+            //for($i = 0; $i< $count_events; $i++){
+            foreach($events as $event){
+
+                $tab_users[''.$event['id'].''] = User::find($event['user_ID']);
+
+                $ad_h_file = ads_has_files::where('ads_ID','=', $event['id'])->get();
+                if(count($ad_h_file)){
+                    foreach($ad_h_file as $el){
+                        $file = files::findOrFail($el->files_ID);
+
+                        $tab_events_final[''.$event['id'].''] =
+                            (!isset($tab_events_final[''.$event['id'].'']) && empty($tab_events_final[''.$event['id'].'']))
+                                ? $file->url : $tab_events_final[''.$event['id'].''] . '|' .$file->url;
+
+                        //$tab_events_final["".$events[$i]['id'] .""] .= "|".$file->url;
+                    }
+                }else{
+                    $tab_events_final["".$event['id'] .""] = null;
+                }
+            }
+        }
+        else{
+            $events = null;
+        }
+
+
+
+
+        return view('group.view_group',
+            ['list_group'=> $this->_list_group,
+                'group'=>$group,
+                'users'=> $users,
+                'user'=> $user->unreadnotifications()->paginate(6),
+                'nbr_notif'=> $notifications,
+                'ads'=>$ads,
+                'events'=>$events,
+                'tab_events_final'=>$tab_events_final,
+                'tab_ads_final'=>$tab_ads_final,
+                'tab_users'=>$tab_users
+            ]);
+    }
+
    // public function valid_adhesion_group($id_user, $id_group){
     public function valid_adhesion_group(Request $request){
         $id_user = null;
