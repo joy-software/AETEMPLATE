@@ -1,0 +1,32 @@
+#imprimer_contrib{
+    display: none;
+}
+
+.header {
+    display: none;
+}
+
+#aside{
+    display: none;
+}
+
+
+
+@page  {
+    size: auto;
+    margin-bottom: 0mm;
+}
+
+@page:left{
+    @top-left {
+        content: "Page " counter(page) " of " counter(pages);
+    }
+}
+
+/**
+Liste des contributions consult_contribution
+ */
+
+#div_consult_contrib{
+    display: none;
+}

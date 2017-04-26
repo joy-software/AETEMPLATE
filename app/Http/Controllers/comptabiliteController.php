@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\period;
 use Validator;
 use App\motif;
+use Redirect;
 use Illuminate\Support\Facades\Input;
 use Excel;
 
@@ -274,13 +275,38 @@ public function post_period(Request $request){
 
 }
 
+public function post_motif(Request $request){
+    $reason = $request->get('motif');
+    if( motif::where("reason","=",$reason)->get()->count() != 0){
+        $message = "<div class=\"alert alert-danger fade in\">le motif \"". $reason ."\"  existe déjà , vous ne pouvez plus créer ce motif.</div>";
+        return response()->json([
+            'type'=>'success',
+            'message'=> $message
+        ]);
+    }
+
+    $motif = motif::create([
+        'reason'=> $reason
+    ]);
+    $motif->save();
+
+    $message = "<div class=\"alert alert-success fade in\">le motif \"". $reason ."\"  a bien été créé</div>";
+    return response()->json([
+        'type'=>'success',
+        'message'=> $message
+    ]);
+
+}
+
+
+
 public function post_consult_contribution(Request $request){
 
     $period = $request->get("periode");
     $motif = $request->get("motif");
 
     $result_count = contribution::where('period_ID','=', $period)
-        ->where('motif_id','=',$motif)->count();
+        ->where('motif_id','=',$motif)->get()->count();
 
     if($result_count == 0){
         $message = "<tr><td><div class=\"alert alert-danger fade in pull-left \">Aucune contribution ne correspond à votre recherche </div></td></tr>";
@@ -301,12 +327,13 @@ public function post_consult_contribution(Request $request){
     foreach ($results as $item){
 
        // $message =  "nous sommes déjà présent;";
-        $user = User::find($item['id']);
+        $user = User::find($item['user_ID']);
 
         $message .= "<tr><td><span class='profile-ava'><img alt='' class='simple' src='/" . $user->photo . "' </span> </td>" .
                     "<td> ". $user->name ." , ". $user->surname ." </td> " .
                     "<td> ". $user->email .", <br> Tel : ". $user->phone ."</td> " .
-                    "<td> <button class='btn btn-primary btn-contribution' data-toggle='modal' data-target='#modalContribution' id='btn-contrib-". $user->id ."'> Voir ses contributions </button> </td> ".
+                    //"<td> <a class='btn btn-primary btn-contribution' data-toggle='modal' data-target='#modalContribution' id='btn-contrib-". $user->id ."'> Voir ses contributions </a> </td> ".
+                    "<td> <a class='btn btn-primary ' data-toggle='modal'  href='/contrib_user/". $user->id . "' id='btn-contrib-". $user->id ."'> Voir ses contributions </a> </td> ".
                     "</tr>";
     }
 
@@ -352,5 +379,77 @@ public function contribution_user(Request $request)
     ]);
 
 }
+
+public function contrib_user_email(Request $request){
+    $email = $request->get('email');
+
+    $count = User::where('email','=', $email)->get()->count();
+    if($count == 0){
+        return response()->json([
+            'message'=> "<div class=\"alert alert-danger fade in pull-left \"> Aucun membre n'a cette adresse email </div>",
+        ]);
+    }
+    $user = User::where('email','=', $email)->get();
+
+    Redirect::route('contribution_user', ['id' => $user[0]['id']]);
+
+}
+
+public function contrib_user($id){
+
+    $this->load_users_notification_period();
+    $count = User::where('id','=',$id)->count();
+
+    if($id != Auth::id()){
+        return Redirect::back();
+
+    }
+
+    if($count == 0){
+        return Redirect::back();
+    }
+
+    $user = User::find($id);
+    $count_contrib = contribution::where('user_ID','=',$id)->get()->count();
+
+    if($count_contrib == 0){
+        return view('comptabilite.contrib_user',[
+            'user' =>  $this->_user,
+            'nbr_notif'=> $this->_notifications,
+            //'periodes'=> $this->_periodes,
+            //'motifs'=>$this->_motifs
+            'motifs' => null,
+            'periodes'=>null,
+            'montant' => null,
+            'nom_user' => $user->name .' , '. $user->surname
+        ]);
+    }
+
+    $contrib = contribution::where('user_ID','=',$id)->get();
+    $message = " ";
+    $compteur = 0;
+    foreach( $contrib as $item ){
+        $motif = motif::find($item['id']);
+        $period = period::find($item['id']);
+
+        $motifs[''. $compteur .''] = $motif->reason;
+        $periodes[''. $compteur .''] = strtoupper($period->month) . " - " . $period->year;
+        $montant['' .$compteur .''] = $item['amount'];
+        $compteur ++;
+    }
+
+    return view('comptabilite.contrib_user',[
+        'user' =>  $this->_user,
+        'nbr_notif'=> $this->_notifications,
+        'periodes'=>  $periodes,
+        'motifs' => $motifs,
+        'montant'=> $montant,
+        'nom_user' => $user->name .' , '. $user->surname,
+        'compteur' => $compteur
+    ]);
+
+
+}
+
 
 }

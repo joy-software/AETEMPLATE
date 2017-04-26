@@ -144,9 +144,51 @@ $("#create_period").on('submit', function (event) {
 });
 
 
+var form_create_motif;
+$("#create_motif").on('submit', function (event) {
+    event.preventDefault();
+
+    form_create_motif = this;
+    var data = new FormData( this );
+
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                }
+        });
+
+    $.ajax({
+        url: form_create_motif['action'],
+        type: form_create_motif['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        success: function (response) {
+
+            if(response.type === "success" ){
+                $("#div_message").html(response.message);
+                $("#input_motif").val("");
+            }
+            else {
+                $("#div_message").html(response.message);
+            }
+        },
+
+        error : function (erreur) {
+            $("#div_message").html(response.message);
+        }
+
+    });
+});
+
+
+
+
 
 var form_consult_contributions;
-
 $("#consult_contribution").on('submit', function (event) {
     event.preventDefault();
 
@@ -183,6 +225,39 @@ $("#consult_contribution").on('submit', function (event) {
             console.log('erreur comptabilite');
             $("#tab_resultat").show();
             $("#tbody").html(erreur.message);
+        }
+
+    });
+});
+
+var form_contrib_user_email;
+$("#contrib_user_email").on('submit', function (event) {
+    event.preventDefault();
+
+    form_contrib_user_email = this;
+    var data = new FormData( this );
+
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                }
+        });
+
+    $.ajax({
+        url: form_contrib_user_email['action'],
+        type: form_contrib_user_email['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        success: function (response) {
+                $("#message_contrib_email").html(response.message);
+        },
+
+        error : function (erreur) {
+            $("#message_contrib_email").html(erreur);
         }
 
     });

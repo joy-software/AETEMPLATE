@@ -97,6 +97,17 @@ class UserTableSeeder extends Seeder
         ]);
         $user->save();
 
+        $compta = new Role();
+        $compta->name         = 'Comptable';
+        $compta->display_name = 'Le comptable du project'; // optional
+        $compta->description  = 'La personne en charge des finances du groupe'; // optional
+        $compta->save();
+
+        $permission =  \App\Permission::find(1);
+        $compta->attachPermission($permission);
+
+        $user->attachRole($compta);
+
         $user = new User([
             'name'=> 'Michel',
             'surname' =>'Bayoi',
