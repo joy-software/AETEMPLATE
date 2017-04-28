@@ -10,91 +10,102 @@
  */
 
 
-session_start();
+    session_start();
 
-/*
- * You can acquire an OAuth 2.0 client ID and client secret from the
- * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
- * For more information about using OAuth 2.0 to access Google APIs, please see:
- * <https://developers.google.com/youtube/v3/guides/authentication>
- * Please ensure that you have enabled the YouTube Data API for your project.
- */
-$OAUTH2_CLIENT_ID = '506535558695-obua888g6h3j1qc0m2g6335aon4vscbk.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = 'gk5i45Pgb0VZx8rTcKxn-Toy';
+    /*
+     * You can acquire an OAuth 2.0 client ID and client secret from the
+     * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
+     * For more information about using OAuth 2.0 to access Google APIs, please see:
+     * <https://developers.google.com/youtube/v3/guides/authentication>
+     * Please ensure that you have enabled the YouTube Data API for your project.
+     */
 
-$client = new Google_Client();
-$client->setClientId($OAUTH2_CLIENT_ID);
-$client->setClientSecret($OAUTH2_CLIENT_SECRET);
-$client->setScopes('https://www.googleapis.com/auth/youtube');
-$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-    FILTER_SANITIZE_URL);
-$client->setRedirectUri($redirect);
+    $OAUTH2_CLIENT_ID = '506535558695-obua888g6h3j1qc0m2g6335aon4vscbk.apps.googleusercontent.com';
+    $OAUTH2_CLIENT_SECRET = 'gk5i45Pgb0VZx8rTcKxn-Toy';
 
-// Define an object that will be used to make all API requests.
-$youtube = new Google_Service_YouTube($client);
+    $client = new Google_Client();
+    //$client->setDeveloperKey('AIzaSyArrY3SL_FTmiMKvNRmcXwy9y5AD5B-wW8');
+    $client->setClientId($OAUTH2_CLIENT_ID);
+    $client->setClientSecret($OAUTH2_CLIENT_SECRET);
+    $client->setScopes('https://www.googleapis.com/auth/youtube');
+    $redirect = filter_var('http://assovogt.org/tester', FILTER_SANITIZE_URL);
 
-// Check if an auth token exists for the required scopes
-$tokenSessionKey = 'token-' . $client->prepareScopes();
-if (isset($_GET['code'])) {
-    if (strval($_SESSION['state']) !== strval($_GET['state'])) {
-        die('The session state did not match.');
-    }
+    $client->setRedirectUri($redirect);
 
-    $client->authenticate($_GET['code']);
-    $_SESSION[$tokenSessionKey] = $client->getAccessToken();
-    header('Location: ' . $redirect);
-}
+    // Define an object that will be used to make all API requests.
+    $youtube = new Google_Service_YouTube($client);
 
-if (isset($_SESSION[$tokenSessionKey])) {
-    $client->setAccessToken($_SESSION[$tokenSessionKey]);
-}
+    // Check if an auth token exists for the required scopes
+    $tokenSessionKey = 'token-' . $client->prepareScopes();
 
-// Check to ensure that the access token was successfully acquired.
-if ($client->getAccessToken()) {
-    try {
-        // Execute an API request that lists the streams owned by the user who
-        // authorized the request.
-        $streamsResponse = $youtube->liveStreams->listLiveStreams('id,snippet', array(
-            'mine' => 'true',
-        ));
-
-        $htmlBody .= "<h3>Live Streams</h3><ul>";
-        foreach ($streamsResponse['items'] as $streamItem) {
-            $htmlBody .= sprintf('<li>%s (%s)</li>', $streamItem['snippet']['title'],
-                $streamItem['id']);
+    if (isset($_GET['code'])) {
+        if (strval($_SESSION['state']) !== strval($_GET['state'])) {
+            die('The session state did not match.');
         }
-        $htmlBody .= '</ul>';
 
-    } catch (Google_Service_Exception $e) {
-        $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
-            htmlspecialchars($e->getMessage()));
-    } catch (Google_Exception $e) {
-        $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
-            htmlspecialchars($e->getMessage()));
+        $client->authenticate($_GET['code']);
+        $_SESSION[$tokenSessionKey] = $client->getAccessToken();
+        header('Location: ' . $redirect);
     }
 
-    $_SESSION[$tokenSessionKey] = $client->getAccessToken();
-} elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
-    $htmlBody = <<<END
-  <h3>Client Credentials Required</h3>
-  <p>
-    You need to set <code>\$OAUTH2_CLIENT_ID</code> and
-    <code>\$OAUTH2_CLIENT_ID</code> before proceeding.
-  <p>
-END;
-} else {
-    // If the user hasn't authorized the app, initiate the OAuth flow
-    $state = mt_rand();
-    $client->setState($state);
-    $_SESSION['state'] = $state;
+    if (isset($_SESSION[$tokenSessionKey])) {
+        $client->setAccessToken($_SESSION[$tokenSessionKey]);
+    }
 
-    $authUrl = $client->createAuthUrl();
-    $htmlBody = <<<END
-  <h3>Authorization Required</h3>
-  <p>You need to <a href="$authUrl">authorize access</a> before proceeding.<p>
-END;
-}
+    // Check to ensure that the access token was successfully acquired.
+    if ($client->getAccessToken()) {
+
+        try {
+            // Execute an API request that lists the streams owned by the user who
+            // authorized the request.
+            $nextPageToken = '';
+            $htmlBody = '<ul>';
+            do {
+                $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
+                    'playlistId' => 'PLorQTUIjuMRa7sFEPbfNWxXvZcZ-LaLRO',
+                    'maxResults' => 50,
+                    'pageToken' => $nextPageToken));
+
+                foreach ($playlistItemsResponse['items'] as $playlistItem) {
+                    $htmlBody .= sprintf('<li>%s (%s)</li>', $playlistItem['snippet']['title'], $playlistItem['snippet']['resourceId']['videoId']);
+                }
+
+                $nextPageToken = $playlistItemsResponse['nextPageToken'];
+            } while ($nextPageToken <> '');
+
+            $htmlBody .= '</ul>';
+
+        } catch (Google_Service_Exception $e) {
+            $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
+                htmlspecialchars($e->getMessage()));
+        } catch (Google_Exception $e) {
+            $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
+                htmlspecialchars($e->getMessage()));
+        }
+
+        $_SESSION[$tokenSessionKey] = $client->getAccessToken();
+
+    } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
+
+        $htmlBody ='<h3>Client Credentials Required</h3>
+                      <p>
+                        You need to set <code>\$OAUTH2_CLIENT_ID</code> and
+                        <code>\$OAUTH2_CLIENT_ID</code> before proceeding.
+                      <p>';
+
+    } else {
+
+        // If the user hasn't authorized the app, initiate the OAuth flow
+        $state = mt_rand();
+        $client->setState($state);
+        $_SESSION['state'] = $state;
+
+        $authUrl = $client->createAuthUrl();
+        $htmlBody = "<h3>Authorization Required $authUrl</h3>
+                    <p>You need to <a href=\"$authUrl\">authorize access</a> before proceeding.<p>";
+    }
 ?>
+
 <!doctype html>
 
 <html>
