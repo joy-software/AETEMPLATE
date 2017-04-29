@@ -35,7 +35,7 @@
 
     @if(\Illuminate\Support\Facades\Session::has('status'))
         <div class="alert alert-block col-lg-9">
-            <strong>{{ \Illuminate\Support\Facades\Session::get('status') }}</strong>
+            {{ \Illuminate\Support\Facades\Session::get('status') }}
         </div>
     @endif
 

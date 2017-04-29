@@ -169,7 +169,7 @@ class HomeController extends Controller
     }
 
     public function tester(){
-        return view('test/playVideo');
+        return view('test/testIndex');
     }
 
 

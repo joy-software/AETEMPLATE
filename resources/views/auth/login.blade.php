@@ -35,16 +35,17 @@
 
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9 black-alert">
-            <strong> {!! \Illuminate\Support\Facades\Session::get('message')  !!}</strong>
+        <div class="alert alert-block ">
+            {!! \Illuminate\Support\Facades\Session::get('message')  !!}
         </div>
     @endif
 
     @if (isset($message))
-        <div class="alert alert-block col-lg-9 black-alert">
-            <strong>{!! $message !!} </strong>
+        <div class="alert alert-block">
+            {!! $message !!}
         </div>
     @endif
+
 
     <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
         {{ csrf_field() }}
@@ -72,7 +73,7 @@
 
             <label class="checkbox">
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
+                <span class="pull-right" id="forgot"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
             </label>
             <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
             <br>
