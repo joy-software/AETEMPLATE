@@ -21,8 +21,8 @@
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/signup.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/signup.css') }}" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
@@ -34,13 +34,13 @@
 <div class="container">
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9 black-alert">
-            <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
+        <div class="alert alert-block  black-alert">
+            <strong>{!! \Illuminate\Support\Facades\Session::get('message') !!}</strong>
         </div>
     @else
-        <section class="panel" id="section-signup">
+        <section class="panel col-sm-5 col-md-5 col-lg-5 col-xs-5" id="section-signup">
             <header class="panel-heading" id="header-signup" >
-                <span><i class="icon_pencil-edit"></i></span><span id="form-signup-title">INSCRIPTION</span>
+                <span><i class="icon_pencil-edit"></i></span><span id="form-signup-title">INSCRIVEZ  VOUS</span>
 
             </header>
             <div class="panel-body">
@@ -49,113 +49,157 @@
                     <form class="form-validate form-horizontal " enctype="multipart/form-data" id="register_form" method="post" action="{{ route('register') }}">
                         {{ csrf_field() }}
                         <div class="form-group ">
+                            <!--
                             <label for="surname" class="control-label col-lg-2">Prénom <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" required/>
+                            -->
+                            <div class="col-lg-12">
+                                <input class=" form-control" id="surname" name="surname" type="text" value="{{ old('surname') }}" placeholder="Prénom" required/>
                             </div>
                             @if ($errors->has('surname'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('surname') }}</strong>
                             </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
+                             <!--
                             <label for="name" class="control-label col-lg-2">Nom <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class=" form-control" id="name" name="name" type="text" value="{{ old('name') }}" required/>
+                            -->
+                            <div class="col-lg-12">
+                                <input class=" form-control" id="name" placeholder="Nom" name="name" type="text" value="{{ old('name') }}" required/>
                             </div>
                             @if ($errors->has('name'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('name') }}</strong>
                         </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="sex" class="control-label col-lg-2">Genre <span class="required">*</span></label>
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <select class="form-control" name="sex" id="sex" required>
-                                    <option value="M" selected>Homme</option>
-                                    <option value="F">Femme</option>
+                                    @if(! (old('sex')))
+                                        <option value="" selected>Genre</option>
+                                    @endif
+                                    <option value="M"   @if( old('sex') == 'M')
+                                                            selected>Homme</option>
+                                                        @else
+                                                            >Homme</option>
+                                                        @endif
+
+                                    <option value="F"   @if( old('sex') == 'F')
+                                                            selected>Femme</option>
+                                                        @else
+                                                            >Femme</option>
+                                                        @endif
+
                                 </select>
                             </div>
+
                             @if ($errors->has('sex'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
-                            <strong>{{ $errors->first('sex') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger ">
+                                    <strong>{{ $errors->first('sex') }}</strong>
+                                </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
+                        <!--
                             <label for="email" class="control-label col-lg-2">Email <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="email" name="email" type="email" value="{{ old('email') }}" required/>
+                            -->
+                            <div class="col-lg-12">
+                                <input class="form-control " id="email" placeholder="Email" name="email" type="email" value="{{ old('email') }}" required/>
                             </div>
                             @if ($errors->has('email'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger ">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger ">
+                                     <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                             @endif
                         </div>
 
 
                         <div class="form-group ">
+                        <!--
                             <label for="phone" class="control-label col-lg-2">Telephone <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="phone" name="phone" type="text" value="{{ old('phone') }}" required/>
+                            -->
+                            <div class="col-lg-12">
+                                <input class="form-control " id="phone" name="phone" placeholder="Téléphone" type="text" value="{{ old('phone') }}" required/>
                             </div>
                             @if ($errors->has('phone'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
-                            <strong>{{ $errors->first('phone') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger">
+                                    <strong>{{ $errors->first('phone') }}</strong>
+                                </span>
                             @endif
                         </div>
 
 
                         <div class="form-group ">
-                            <label for="promotion" class="control-label col-lg-2">Promotion <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="promotion" name="promotion" type="text"value="{{ old('promotion') }}" required/>
+                            <div class="col-lg-12">
+                                <select class="form-control" name="promotion" id="promotion" required>
+                                    @if(! (old('promotion')))
+                                        <option value="" selected>Promotion</option>
+                                    @endif
+
+                                    @if(old('promotion'))
+                                        <option value="{{ old('promotion') }}" selected>{{old('promotion')}}</option>
+                                    @endif
+
+                                    @for($i = date('Y'); $i > 1960; $i--)
+                                            <option value="{!! $i !!}">{{ $i }}</option>
+                                    @endfor
+
+                                </select>
                             </div>
                             @if ($errors->has('promotion'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
-                            <strong>{{ $errors->first('promotion') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger ">
+                                    <strong>{{ $errors->first('promotion') }}</strong>
+                                </span>
                             @endif
                         </div>
 
+
                         <div class="form-group ">
-                            <label for="country" class="control-label col-lg-2">Pays <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="country" name="country" type="text" value="{{ old('country') }}" required/>
+                            <div class="col-lg-12">
+                                <select class="form-control" name="country" id="county" required>
+
+                                    @if(! (old('country')))
+                                        <option value="" selected>Pays</option>
+                                        <option value="Cameroun">Cameroun</option>
+                                    @else
+                                        <option value="{{old('country')}}" selected>{{old('country')}}</option>
+                                    @endif
+
+                                    {!! Config::get('country.completeList') !!}
+
+                                </select>
                             </div>
                             @if ($errors->has('country'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
-                            <strong>{{ $errors->first('country') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger ">
+                                    <strong>{{ $errors->first('country') }}</strong>
+                                </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="profession" class="control-label col-lg-2 offs">Profession <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="profession" name="profession" type="text" value="{{ old('profession') }}" required/>
+
+                            <div class="col-lg-12">
+                                <input class="form-control " id="profession" placeholder="Profession" name="profession" type="text" value="{{ old('profession') }}" required/>
                             </div>
                             @if ($errors->has('profession'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
-                            <strong>{{ $errors->first('profession') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger">
+                                    <strong>{{ $errors->first('profession') }}</strong>
+                                </span>
                             @endif
                         </div>
 
                         <div class="form-group ">
-                            <label for="description" class="control-label col-lg-2">Description <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <textarea class="form-control" cols="30" rows="5" name="description" id="description" required>{{ old('description') }}</textarea>
+
+                            <div class="col-lg-12">
+                                <textarea class="form-control" cols="30" rows="5" placeholder="Décrivez vous en quelques mots (max 150 caractères)" name="description" id="description" required>{{ old('description') }}</textarea>
                             </div>
                             @if ($errors->has('description'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('description') }}</strong>
                         </span>
                             @endif
@@ -163,27 +207,26 @@
 
 
                         <div class="form-group ">
-                            <label for="password" class="control-label col-lg-2">Mot de passe <span class="required">*</span></label>
-                            <div class="col-lg-9">
-                                <input class="form-control " id="password" name="password" type="password" value="{{ old('password') }}" required/>
+
+                            <div class="col-lg-12">
+                                <input class="form-control " placeholder="Mot de passe" id="password" name="password" type="password" value="{{ old('password') }}" required/>
                             </div>
                             @if ($errors->has('password'))
 
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
+                                <span class="help-block control-label col-lg-12  text-danger">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                             @endif
                         </div>
 
                         <div class="form-group">
-                            <label for="password_confirmation" class="control-label col-lg-2">Confirmer mot de passe<span class="required">*</span></label>
 
-                            <div class="col-lg-9">
-                                <input id="password_confirmation" type="password" value="{{ old('password_confirmation') }}" class="form-control" name="password_confirmation" required>
+                            <div class="col-lg-12">
+                                <input id="password_confirmation" placeholder="Confirmer le mot de passe" type="password" value="{{ old('password_confirmation') }}" class="form-control" name="password_confirmation" required>
                             </div>
                             @if ($errors->has('password_confirmation'))
 
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('password_confirmation') }}</strong>
                         </span>
                             @endif
@@ -191,16 +234,15 @@
 
                         <div class="form-group ">
 
-                            <label for="photo" class="control-label col-lg-2">Photo</label>
-                            <div class="col-lg-4">
-                                {!! Form::file('photo', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'photo']) !!}
+                            <div class="col-lg-4 col-xs-12">
+                                {!! Form::file('photo', ['class' => 'form-control col-lg-4  inputfile', 'id' => 'photo']) !!}
                                 <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                             </div>
 
-                            <p class="control-label photo-label col-lg-offset-2">Extensions acceptées : jpeg, png (2Mo maxi)</p>
+                            <p class="control-label photo-label ">Extensions acceptées : jpg, jpeg, png (2Mo maxi)</p>
 
                             @if ($errors->has('photo'))
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                                     <strong>{{ $errors->first('photo') }}</strong>
                                 </span>
                             @endif
@@ -208,19 +250,26 @@
 
 
                         <div class="form-group ">
-                            <label for="agree" class="control-label col-lg-2 col-sm-3">Agree to Our Policy <span class="required">*</span></label>
-                            <div class="col-lg-9 col-sm-9">
-                                <input  type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" required/>
+
+                            <div class="col-lg-12">
+
+                                <input  type="checkbox" style="float: left; width: 20px" value="true" class="checkbox form-control" id="agree" name="agree" required
+                                    @if(old('agree') == 'true')
+                                        checked
+                                    @endif
+                                />
+                                <label id="label-condidtion" for="agree" class="control-label "> Accepter les conditions d'utilisation</label>
                             </div>
+
                             @if ($errors->has('agree'))
 
-                                <span class="help-block control-label col-lg-9 col-lg-offset-2 text-danger">
+                                <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('agree') }}</strong>
                         </span>
                             @endif
                         </div>
                         <div class="form-group" >
-                            <div class="col-lg-offset-2 col-lg-9" id="signup-submit">
+                            <div class=" col-lg-12" id="signup-submit">
                                 <button  class="btn btn-primary" type="submit">S'inscrire</button>
                                 <a class="btn btn-default" type="button" href="{{ route('login') }}">Fermer</a>
                             </div>

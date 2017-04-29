@@ -3,6 +3,15 @@
     text-align: left !important;
 }
 
+div .alert-block {
+
+    margin: 100px 100px 0px 100px;
+    opacity: 100 !important;
+    text-align: center;
+    border: 1px solid #B0B6BE;
+    background: rgba(213,215,222,0.7);
+}
+
 p.photo-label{
 
     text-align: left !important;
@@ -12,8 +21,76 @@ p.photo-label{
 
 @media screen and (max-width: 1200px) {
     p.photo-label{
-
         margin-top: 0px !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    #header-signup{
+        font-size: 1.2em !important;
+    }
+
+    #form-signup-title{
+        margin-left: 10px !important;
+    }
+
+    #label-condidtion{
+        width: 80% !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    #section-signup{
+        margin: 10px 0px 0px 10px !important;
+        width: 50%;
+    }
+
+    #header-signup{
+        font-size: 1em !important;
+    }
+
+}
+
+@media screen and (max-width: 550px) {
+
+    #header-signup{
+        font-size: 0.9em !important;
+        height: 40px !important;
+    }
+
+    .inputfile + label{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    #header-signup{
+        font-size: 1em !important;
+        height: 40px !important;
+        padding-top: 10px !important;
+    }
+
+    #section-signup{
+        float: none !important;
+        width: 90%;
+    }
+
+    #label-condidtion{
+        width: 83% !important;
+    }
+}
+
+@media screen and (max-width: 260px) {
+
+    #label-condidtion{
+        width: 70% !important;
+    }
+
+    #header-signup{
+        font-size: 0.8em !important;
     }
 }
 
@@ -24,11 +101,14 @@ p.photo-label{
 
 #header-signup{
     text-align: center;
+    font-size: 1.4em;
+    height: 70px;
+    padding-top: 20px;
 }
 
 #form-signup-title{
     margin-left: 30px;
-    size: 2em;
+
 }
 
 #signup-submit > button,#signup-submit > a{
@@ -36,11 +116,12 @@ p.photo-label{
 }
 
 #section-signup{
-    margin: 200px 100px;
+    margin: 30px 0px 0px 30px;
+    padding: 0 !important;
+    float: right;
 }
 
 .black-alert{
-
     color: black;
 }
 
@@ -55,9 +136,29 @@ p.photo-label{
 
 .inputfile + label{
     border-radius: 0px !important;
+    overflow: hidden;
+    word-break: break-all;
 }
 
 #label-file{
     margin-left: 10px;
 }
+
+#agree{
+    display: inline-block;
+}
+
+.container{
+    margin: 0 3% 0 3%;
+    max-width: none;
+}
+
+#label-condidtion{
+    float: left;
+    width: 85%;
+    text-align: left;
+    margin-left: 10px;
+}
+
+
 

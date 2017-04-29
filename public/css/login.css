@@ -4,6 +4,11 @@
 
 }
 
+#forgot a{
+
+    color: #007AFF !important;
+}
+
 .login-form a:hover {
     color: #007aff !important;
 }
