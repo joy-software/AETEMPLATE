@@ -163,8 +163,10 @@ class RegisterController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
 
-        return redirect()->route('register')->with(['message' => "Inscription réussie<br><br> Pour activer votre
-        compte suivez le lien de validation qui vous a été envoyé à l'adresse ". $user->email]);
+        return redirect()->route('register')->with(['message' => "<strong>Inscription réussie</strong><br><br> 
+                                                            <span style='color: black'>Pour activer votre
+                                                            compte suivez le lien de validation qui vous 
+                                                            a été envoyé à l'adresse  $user->email </span>" ]);
 
     }
 }

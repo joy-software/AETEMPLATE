@@ -35,7 +35,7 @@
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
         <div class="alert alert-block ">
-            <strong>{!! \Illuminate\Support\Facades\Session::get('message') !!}</strong>
+            {!! \Illuminate\Support\Facades\Session::get('message') !!}
         </div>
     @else
         <section class="panel col-sm-4 col-md-4 col-lg-4 col-xs-4" id="section-signup">
