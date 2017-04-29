@@ -27,7 +27,7 @@ class AnnuaireController extends Controller
         //$years = $users;
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
-        return view('annuaire/index', ['members'=> $members,'user'=> $user->unreadnotifications()->paginate(6),'nbr_notif' => $notifications]);
+        return view('annuaire/index', ['members'=> $members,'user'=> $user->unreadnotifications,'nbr_notif' => $notifications]);
     }
 
 

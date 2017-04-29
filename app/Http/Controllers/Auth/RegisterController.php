@@ -53,6 +53,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
 
+        // call the verifyCaptcha method to see if Google approves
+        $data['captcha-verified'] = $this->verifyCaptcha($data['g-recaptcha-response']);
+
         $validator = Validator::make($data,
             [
                 'name'               => 'required|max:100|min:2',
@@ -60,8 +63,9 @@ class RegisterController extends Controller
                 'email'                 => 'required|email|unique:users',
                 'password'              => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'photo'               => 'mimes:jpeg,png,jpg|max:5000'
-
+                'photo'               => 'mimes:jpeg,png,jpg|max:5000',
+                'g-recaptcha-response'  => 'required',
+                'captcha-verified'      => 'required|min:1'
             ],
             [
                 'name.required'     => 'Ce champs est obligatoire',
@@ -78,7 +82,10 @@ class RegisterController extends Controller
                 'password_confirmation.required'    => 'Ce champ est obligatoire',
                 'password_confirmation.same'    => 'Ce champ est différent du mot de passe',
                 'photo.mimes' =>  'Les extensions d\'images acceptées sont jpg, jpeg et png',
-                'photo.max'   =>  'La taille maximale de l\'image est de 5 Mo'
+                'photo.max'   =>  'La taille maximale de l\'image est de 5 Mo',
+                'g-recaptcha-response.required' => 'Confirmer que vous n\'êtes pas un robot',
+                'captcha-verified.min'           => 'La Vérification du Recaptcha a échoué'
+
             ]
         );
 

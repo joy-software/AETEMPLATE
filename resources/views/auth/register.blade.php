@@ -17,7 +17,7 @@
     <!--external css-->
     <!-- font icon -->
     <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <link href="../wamp64/www/promovogt.org/resources/assets/karmanta/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
