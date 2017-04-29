@@ -35,22 +35,18 @@
 
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9">
-            <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
+        <div class="alert alert-block">
+            {!!  \Illuminate\Support\Facades\Session::get('message') !!}
         </div>
     @endif
 
     @if (isset($message))
-        <div class="alert alert-block col-lg-9">
-            <strong>{{ $message }}</strong>
+        <div class="alert alert-block">
+            {!! $message !!}
         </div>
     @endif
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+
 
     <form id="login-form"class="login-form" method="post" action="{{ route('activation_key_resend') }}">
         {{ csrf_field() }}

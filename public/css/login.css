@@ -1,3 +1,6 @@
+.login-form{
+    margin: 7% auto !important;
+}
 
 .login-form a {
     color: white !important;
@@ -21,15 +24,6 @@
 }
 
 
-
-div .alert-block {
-
-    margin: 100px 100px 0px 150px;
-    opacity: 100 !important;
-    text-align: center;
-    border: 1px solid #B0B6BE;
-    background: rgba(213,215,222,0.7);
-}
 
 #resend-title {
 
@@ -58,5 +52,18 @@ div .alert-block {
 .black-alert{
 
     color: black;
+}
+
+.alert-block{
+
+    border-radius: 10px;
+    font-size: 1.2em;
+    color: white;
+    background: rgba(255, 0, 2, 0.4) !important;
+    padding: 3%;
+    text-align: center;
+    overflow: auto;
+    border: none !important;
+    margin-top: 7%;
 }
 

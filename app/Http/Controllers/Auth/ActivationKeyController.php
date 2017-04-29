@@ -94,8 +94,10 @@ class ActivationKeyController extends Controller
 
         // redirect to the login page after a successful activation
         return redirect()->route('login')
-            ->with('message', "Félicitation votre compte est activé ! <br>Cependant vous ne pourrez accéder à l'application que lorsque les 
-            membres de Promotvogt valideront votre demande d'adhésion.<br> Un mail vous sera envoyé lorsque votre demande sera acceptée.")
+            ->with('message', "<strong>Félicitation votre compte est activé !</strong> <br>
+                                <span style='color: black'> Cependant vous ne pourrez accéder à l'application que lorsque les 
+                                membres de Promotvogt valideront votre demande d'adhésion.<br> Un mail vous sera envoyé lorsque
+                                 votre demande sera acceptée.</span>")
             ->with('status', 'success');
 
     }
@@ -119,13 +121,13 @@ class ActivationKeyController extends Controller
 
         if (empty($user)) {
             return redirect()->route('activation_key_resend')
-                ->with('message', 'Cet email ne correspond à aucun utilisateur.')
+                ->with('message', 'Cet email ne correspond à aucun utilisateur')
                 ->with('status', 'warning');
         }
 
         if ($user->activated) {
             return redirect()->route('activation_key_resend')
-                ->with('message', 'Cet email est déjà activé.')
+                ->with('message', 'Cet email est déjà activé')
                 ->with('status', 'success');
         }
 
@@ -133,7 +135,7 @@ class ActivationKeyController extends Controller
         $this->queueActivationKeyNotification($user);
 
         return redirect()->route('login')
-            ->with('message', 'Un nouveau lien d\'activation vous a été envoyé. Il est valide pendant une heure.')
+            ->with('message', 'Un nouveau lien d\'activation vous a été envoyé')
             ->with('status', 'success');
     }
 }

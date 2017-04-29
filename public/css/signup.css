@@ -4,7 +4,6 @@
 }
 
 div .alert-block {
-
     margin: 100px 100px 0px 100px;
     opacity: 100 !important;
     text-align: center;
@@ -13,7 +12,6 @@ div .alert-block {
 }
 
 p.photo-label{
-
     text-align: left !important;
     margin-top: 30px !important;
     padding-left: 15px;
@@ -25,10 +23,18 @@ p.photo-label{
     }
 }
 
+
+@media screen and (max-width: 950px) {
+
+    .slogan-signup{
+        font-size: 3.5em !important;
+    }
+}
+
 @media screen and (max-width: 700px) {
 
     #header-signup{
-        font-size: 1.2em !important;
+        font-size: 1.1em !important;
     }
 
     #form-signup-title{
@@ -36,7 +42,17 @@ p.photo-label{
     }
 
     #label-condidtion{
-        width: 80% !important;
+        width: 77% !important;
+    }
+
+    .inputfile + label{
+        width: 100%;
+    }
+    .slogan-signup{
+        font-size: 3em !important;
+    }
+    .alert-block{
+        margin: 15% 4% 0 4% !important;
     }
 }
 
@@ -44,11 +60,16 @@ p.photo-label{
 
     #section-signup{
         margin: 10px 0px 0px 10px !important;
-        width: 50%;
+        width: 48%;
     }
 
     #header-signup{
-        font-size: 1em !important;
+        font-size: 0.9em !important;
+    }
+
+    .slogan-signup{
+        font-size: 2.7em !important;
+        height: 60% !important;
     }
 
 }
@@ -56,19 +77,21 @@ p.photo-label{
 @media screen and (max-width: 550px) {
 
     #header-signup{
-        font-size: 0.9em !important;
+        font-size: 0.8em !important;
         height: 40px !important;
     }
 
-    .inputfile + label{
-        width: 100%;
+    .slogan-signup{
+        font-size: 2.5em !important;
+
     }
+
 }
 
 @media screen and (max-width: 420px) {
 
     #header-signup{
-        font-size: 1em !important;
+        font-size: 0.9em !important;
         height: 40px !important;
         padding-top: 10px !important;
     }
@@ -79,7 +102,11 @@ p.photo-label{
     }
 
     #label-condidtion{
-        width: 83% !important;
+        width: 80% !important;
+    }
+
+    .slogan-signup{
+        display: none!important;
     }
 }
 
@@ -101,9 +128,10 @@ p.photo-label{
 
 #header-signup{
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
     height: 70px;
     padding-top: 20px;
+    font-family: "Book Antiqua";
 }
 
 #form-signup-title{
@@ -155,9 +183,25 @@ p.photo-label{
 
 #label-condidtion{
     float: left;
-    width: 85%;
+    width: 82%;
     text-align: left;
     margin-left: 10px;
+}
+
+.slogan-signup{
+    position: fixed;
+    top: 10%;
+    left: 40px;
+    width: 40%;
+    border-radius: 10px;
+    font-size: 4em;
+    font-family: cursive;
+    color: white;
+    background: rgba(255, 0, 2, 0.3);
+    padding: 3%;
+    text-align: center;
+    height: 70%;
+    overflow: auto;
 }
 
 

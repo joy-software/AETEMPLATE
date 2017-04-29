@@ -34,11 +34,11 @@
 <div class="container">
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block  black-alert">
+        <div class="alert alert-block ">
             <strong>{!! \Illuminate\Support\Facades\Session::get('message') !!}</strong>
         </div>
     @else
-        <section class="panel col-sm-5 col-md-5 col-lg-5 col-xs-5" id="section-signup">
+        <section class="panel col-sm-4 col-md-4 col-lg-4 col-xs-4" id="section-signup">
             <header class="panel-heading" id="header-signup" >
                 <span><i class="icon_pencil-edit"></i></span><span id="form-signup-title">INSCRIVEZ  VOUS</span>
 
@@ -258,7 +258,7 @@
                                         checked
                                     @endif
                                 />
-                                <label id="label-condidtion" for="agree" class="control-label "> Accepter les conditions d'utilisation</label>
+                                <label id="label-condidtion" for="agree" class="control-label "><a href="#">Accepter les conditions d'utilisation</a> </label>
                             </div>
 
                             @if ($errors->has('agree'))
@@ -278,6 +278,13 @@
                 </div>
             </div>
         </section>
+
+        <div class="login-wrap slogan-signup">
+            <span >Promot-vogt</span>
+
+            <span style="color: black; margin-top: 10%; display: inline-block">Beyond limits and time !</span>
+
+        </div>
     @endif
 
 
