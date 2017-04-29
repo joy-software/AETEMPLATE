@@ -55,7 +55,7 @@ class UserTableSeeder extends Seeder
                 'password'=> Hash::make('password'),
                 'promotion'=> rand(1996, 2015),
                 'country'=> $pays[rand(0,3)],
-                'phone'=> 'phoneNumber',
+                'phone'=> '698754231',
                 'statut'=> 'actif',
                 'activated'=> 1,
                 'photo'=> 'default_gent_avatar.png',
@@ -72,7 +72,7 @@ class UserTableSeeder extends Seeder
             'password'=> Hash::make('password'),
             'promotion'=> rand(1996, 2015),
             'country'=> $pays[rand(0,3)],
-            'phone'=> 'phoneNumber',
+            'phone'=> '698756324',
             'statut'=> 'actif',
             'activated'=> 1,
             'photo'=> 'default_gent_avatar.png',
@@ -89,7 +89,7 @@ class UserTableSeeder extends Seeder
             'password'=> Hash::make('password'),
             'promotion'=> rand(1996, 2015),
             'country'=> $pays[rand(0,3)],
-            'phone'=> 'phoneNumber',
+            'phone'=> '678451254',
             'statut'=> 'actif',
             'activated'=> 1,
             'photo'=> 'default_gent_avatar.png',
@@ -98,7 +98,7 @@ class UserTableSeeder extends Seeder
         $user->save();
 
         $compta = new Role();
-        $compta->name         = 'Comptable';
+        $compta->name         = 'comptable';
         $compta->display_name = 'Le comptable du project'; // optional
         $compta->description  = 'La personne en charge des finances du groupe'; // optional
         $compta->save();
@@ -117,7 +117,7 @@ class UserTableSeeder extends Seeder
             'password'=> Hash::make('password'),
             'promotion'=> rand(1996, 2015),
             'country'=> $pays[rand(0,3)],
-            'phone'=> 'phoneNumber',
+            'phone'=> '677854123',
             'statut'=> 'actif',
             'activated'=> 1,
             'photo'=> 'default_gent_avatar.png',
@@ -134,7 +134,7 @@ class UserTableSeeder extends Seeder
             'password'=> Hash::make('password'),
             'promotion'=> rand(1996, 2015),
             'country'=> $pays[rand(0,3)],
-            'phone'=> 'phoneNumber',
+            'phone'=> '696784565',
             'statut'=> 'actif',
             'activated'=> 1,
             'photo'=> 'default_gent_avatar.png',

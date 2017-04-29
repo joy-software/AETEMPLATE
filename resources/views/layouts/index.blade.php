@@ -24,11 +24,11 @@
 
                         <div class="row col-md-offset-1 col-md-10 col-md-offset-1" >
 
-                            <div class="col-md-offset-2 col-md-10 ">
-                                <table id="table_notifications" class="table table-striped table-advance table-responsive "  style="width:100%; margin: auto !important;">
+                            <div class="col-md-offset-2 col-md-10 col-lg-10 col-sm-10">
+                                <table id="table_notifications" class="table table-striped table-advance table-responsive ">
                                     <tbody>
 
-                                    @foreach($user->notifications()->paginate(4) as $notification)
+                                    @foreach($user->notifications()->paginate(6) as $notification)
                                         @if($notification['type']  === 'App\Notifications\IncomingMember')
                                             <tr class='clickable-row' data-href='{{url('group/view_group/'.$notification['data']['id_group'])}}'>
                                                 <td><img src="{{url('/cache/logo/'.$notification['data']['photo_member'])}}"  alt="Photo du "{{$notification['data']['name_member'] }}>
@@ -48,12 +48,12 @@
                                                 <td><img src="{{url('/cache/logo/'.$notification['data']['photo_member'])}}" alt="Photo du "{{$notification['data']['name_member'] }}>
                                                 </td>
                                                 @if($notification['data']['id_group'] == 1)
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient d'intégrer l'association.</td>
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a intégré l'association.</td>
                                                 @else
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient d'intégrer le groupe:
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a intégré le groupe:
                                                         {{$notification['data']['name_group'] }}</td>
                                                 @endif
-                                                <td><img src="{{url('/cache/logo/'.$notification['data']['logo_group'])}}" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_group'] }}></td>
+                                                <td><img src="{{url('/cache/logo/'.$notification['data']['logo_group'])}}"  alt="Photo du "{{$notification['data']['name_group'] }}></td>
                                                 <td></td>
                                             </tr>
                                         @endif
@@ -62,12 +62,12 @@
                                                 <td><img src="{{url('/cache/logo/'.$notification['data']['photo_member'])}}"  alt="Photo du "{{$notification['data']['name_member'] }}>
                                                 </td>
                                                 @if($notification['data']['id_group'] == 1)
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient de publier une annonce dans l'association.</td>
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a publié une annonce dans l'association.</td>
                                                 @else
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient de publier une annonce dans le groupe:
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a publié une annonce dans le groupe:
                                                         {{$notification['data']['name_group'] }}</td>
                                                 @endif
-                                                <td><img src="{{url('/cache/logo/'.$notification['data']['logo_group'])}}" style="height: 8%; width: auto;" alt="Photo du "{{$notification['data']['name_group'] }}></td>
+                                                <td><img src="{{url('/cache/logo/'.$notification['data']['logo_group'])}}"  alt="Photo du "{{$notification['data']['name_group'] }}></td>
                                                 <td></td>
                                             </tr>
                                         @endif
@@ -76,9 +76,9 @@
                                                 <td><img src="{{url('/cache/logo/'.$notification['data']['photo_member'])}}" alt="Photo du "{{$notification['data']['name_member'] }}>
                                                 </td>
                                                 @if($notification['data']['id_group'] == 1)
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient de publier un évènement l'association.</td>
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a publié un évènement l'association.</td>
                                                 @else
-                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} vient de publier un évènement dans le groupe:
+                                                    <td>{{ $notification['data']['name_member'] . ' ' . $notification['data']['surname_member'] }} a publié un évènement dans le groupe:
                                                         {{$notification['data']['name_group'] }}</td>
                                                 @endif
                                                 <td><img src="{{url('/cache/logo/'.$notification['data']['logo_group'])}}"  alt="Photo du "{{$notification['data']['name_group'] }}></td>
@@ -89,7 +89,7 @@
                                     </tbody>
                                 </table>
 
-                                {{$user->notifications()->paginate(4)->links()}}
+                                {{$user->notifications()->paginate(6)->links()}}
                             </div>
 
                         </div>

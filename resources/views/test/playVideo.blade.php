@@ -19,7 +19,7 @@
         player = new YT.Player('player', {
             height: '360',
             width: '640',
-            videoId: 'dQVSX70U3fM',
+            playerVars: {'controls': 0 },
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -31,6 +31,7 @@
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
         event.target.cuePlaylist(['dQVSX70U3fM', 'rY_OAVLVC_E'], 0, 0, 'small');
+        event.target.setLoop(true);
     }
 
     // 5. The API calls this function when the player's state changes.
@@ -41,12 +42,17 @@
 
         if (event.data == YT.PlayerState.ENDED) {
 
-            //event.target.seekTo( 0, true);
-            //event.target.pauseVideo();
+            setTimeout(pauseVideo, 1000);
+
         }
+
+        done = true;
     }
     function stopVideo() {
         player.stopVideo();
+    }
+    function pauseVideo() {
+        player.pauseVideo();
     }
 </script>
 </body>
