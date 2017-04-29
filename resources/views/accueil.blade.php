@@ -76,7 +76,7 @@
                                 <div class="panel-heading text-center">Vos Contributions de ce mois</div>
                                 <div class="panel-content">
 
-
+                                    {!! Form::open(['url'=>'#','method'=>'post']) !!}
                                     @if((!($contributions == null)) && isset($contributions))
                                         <div class="form-group has-success">
                                             <label for="Contribution" class="control-label hidden">Vos Contributions de ce mois</label>
@@ -101,12 +101,12 @@
 
                                         <br/>
                                         <button type="submit" class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</button>
-                                        <form action="VOTRE CALLBACK_URL" method="POST">
+
                                             <script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
                                                     data-receiver-uid={{env('WCU_IDENTIFIANT_MARCHAND')}}
                                                     data-receiver-public-key={{env('WCU_CLE_PUBLIQUE_MARCHAND')}}
                                                     data-transaction-receiver-total-amount="MONTANT_TOTAL_DE_LA_TRANSACTION"
-                                                    data-transaction-receiver-currency="DEVISE_DU_MARCHAND"
+                                                    data-transaction-receiver-currency="{{env('WCU_DEVISE_DU_MARCHAND')}}"
                                                     data-name={{config('app.name')}}
                                                     data-transaction-receiver-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND"
                                                     data-transaction-sender-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT"
@@ -120,11 +120,11 @@
                                                     data-sender-phonenumber="{{$avatar->phone}}">
 
                                             </script>
-                                        </form>
+                                        <!--/form-->
 
                                     @endif
 
-
+                                {!! Form::close() !!}
 
                                 </div>
                             </div>
