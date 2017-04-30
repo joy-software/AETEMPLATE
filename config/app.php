@@ -173,6 +173,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         NotificationChannels\OneSignal\OneSignalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

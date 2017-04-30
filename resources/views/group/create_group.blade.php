@@ -61,18 +61,16 @@
                             @endif
                         {!! Form::open(array('route' => 'post_create_group', 'files' => true)) !!}
                             <div class="form-group">
-                                <label for="name" class="control-label">Nom du groupe (*)</label>
-                                <input name="name" type="text" class="form-control" id="name" placeholder="Entrer le nom du groupe">
-                                <p class="help-block">Min 5 caractères, Maxi 20 caractères</p>
+                                <h4>Nom du groupe (*)</h4>
+                                <input name="name" type="text" class="form-control" id="name" placeholder="Entrer le nom du groupe, Min 5 caractères, Maxi 20 caractères">
                             </div>
                             <div class="form-group">
-                                <label for="logo_group" class="control-label">Logo du groupe</label>
+                                <h4>Logo du groupe</h4>
                                 {!! Form::file('logo', ['class' => 'inputfile', 'id' => 'logo']) !!}
-                                <label for="logo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une image</span></label>
-                                <p class="help-block">Extensions acceptées : jpeg, png (2Mo maxi)</p>
+                                <label for="logo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une image (jpeg ou png maxi 2Mo)</span></label>
                             </div>
                             <div class="form-group">
-                                <label for="description_group" class="control-label">Description du groupe (*)</label> <br>
+                                <h4>Description du groupe (*)</h4>
                                     <textarea name="description_group" id="description_group" class="form-control" cols="30" rows="10" placeholder="Description du groupe"></textarea>
                                 <p class="help-block">Min 10 caractères, Maxi 1000 caractères</p>
                             </div>

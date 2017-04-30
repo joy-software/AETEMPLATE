@@ -26,7 +26,7 @@
 
     <section class="wrapper">
 
-        <div class="col-lg-6">
+        <div class="col-lg-offset-2 col-lg-6">
             <section class="panel">
                 <header class="panel-heading">
                     Editer le groupe
@@ -58,7 +58,7 @@
                     </div>
 
                     {!! Form::submit('Mettre à jour les informations du groupe', ['class' => 'btn btn-primary']) !!}
-
+                    <a class="btn btn-danger" style="margin-left: 30px;" href="/group/search_group"> Annuler </a>
                     {!! Form::close() !!}
 
                 </div>
