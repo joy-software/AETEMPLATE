@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
-    <meta name="author" content="GeeksLabs">
-    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <title>Login Page 2 | Karmanta - Bootstrap 3 Responsive Admin Template</title>
+    <meta name="author" content="LACY 2017">
+    <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
+    <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
+    <title>Inscription | PromotVogt</title>
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
@@ -27,6 +26,7 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <![endif]-->
+    <script src='https://www.google.com/reCAPTCHA/api.js'></script>
 </head>
 
 <body class="login-img3-body">
@@ -268,6 +268,7 @@
                         </span>
                             @endif
                         </div>
+                        <div class="g-reCAPTCHA" data-sitekey="{{ env('SETTINGS_GOOGLE_RECAPTCHA_SITE_KEY') }}"></div>
                         <div class="form-group" >
                             <div class=" col-lg-12" id="signup-submit">
                                 <button  class="btn btn-primary" type="submit">S'inscrire</button>
