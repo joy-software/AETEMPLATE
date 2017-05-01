@@ -4,6 +4,7 @@
 
 $('#alert_notificatoin_bar.dropdown').on('show.bs.dropdown', function(e){
     $('.dropdown-menu').removeClass('invisible');
+
     $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
 });
 
@@ -24,7 +25,8 @@ function markAsRead()
         success: function(data){
 
                 // tout a marché comme sur des roulettes.
-                $("#alert_notificatoin_bar").html(data);
+                $("#notif-toggle").html(data);
+                //alert(data);
         },
         error : function (data) {
             console.log("Erreur lors de la validation. ");
@@ -73,6 +75,8 @@ $(document).ready( function () {
     $('#returnOnTop').click( function() {
         $('html,body').animate({scrollTop: 0}, 'slow');
     });
+
+
 });
 
 $(window).scroll(function() {
@@ -123,7 +127,7 @@ $('#accueil').click(function(){
 });
 
 $('#groupes').click(function(){
-    window.location.href = '/group/view_group/1';
+    window.location.href = '/group';
 
 });
 
@@ -140,7 +144,7 @@ $('#bibliotheque').click(function(){
 });
 
 $('#comptabilite').click(function(){
-    window.location.href = '#';
+    window.location.href = '/comptabilite';
 
 });
 

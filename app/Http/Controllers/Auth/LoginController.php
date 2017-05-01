@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -23,6 +24,21 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+    /**
+     * lockoutTime
+     *
+     * @var
+     */
+    protected $lockoutTime;
+
+    /**
+     * maxLoginAttempts
+     *
+     * @var
+     */
+    protected $maxLoginAttempts;
+
     /**
      * Where to redirect user after login.
      *
@@ -42,6 +58,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
         $this->redirectTo = '/accueil';
+        $this->lockoutTime  = 1;    //lockout for 1 minute (value is in minutes)
+        $this->maxLoginAttempts = 3;    //lockout after 3 attempts
+
 
         $this->rules = [
             'email'                 => 'required|email',
@@ -55,11 +74,22 @@ class LoginController extends Controller
             'password.required'     => 'Le mot de passe est obligatoire',
             'password.min'          => 'Le mot de passe doit contenir au moins six caractères',
             'auth.failed'             => "Email ou mode passe incorrect"
-
         ];
     }
 
 
+    /**
+     * Determine if the user has too many failed login attempts.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function hasTooManyLoginAttempts(Request $request)
+    {
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $this->maxLoginAttempts, $this->lockoutTime
+        );
+    }
 
 
 
@@ -103,5 +133,13 @@ class LoginController extends Controller
             ->withErrors([
                 $this->username() => 'Email ou mot de passe incorrect',
             ]);
+    }
+
+    protected function sendLockoutResponse(Request $request)
+    {
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors([$this->username() => "Nombres de tentatives expirées. 
+               Patientez une minute avant de ressayer."]);
     }
 }

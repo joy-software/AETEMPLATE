@@ -9,6 +9,8 @@
         "barryvdh/laravel-ide-helper": "2.3.*",
         "brotzka/laravel-dotenv-editor": "^2.0",
         "doctrine/dbal": "^2.5",
+        "google/apiclient": "~2.0",
+        "google/reCAPTCHA": "^1.1",
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
         "laravel-notification-channels/onesignal": "^1.0",

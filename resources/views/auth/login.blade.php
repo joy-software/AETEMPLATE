@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
-    <meta name="author" content="GeeksLabs">
-    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="author" content="LACY 2017">
+    <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
+    <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
 
-    <title>Login Page 2 | Karmanta - Bootstrap 3 Responsive Admin Template</title>
+    <title>Connexion | PromotVogt</title>
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
@@ -17,7 +17,6 @@
     <!--external css-->
     <!-- font icon -->
     <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <link href="../wamp64/www/promovogt.org/resources/assets/karmanta/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
@@ -35,16 +34,17 @@
 
 
     @if(\Illuminate\Support\Facades\Session::has('message'))
-        <div class="alert alert-block col-lg-9 black-alert">
-            <strong> {!! \Illuminate\Support\Facades\Session::get('message')  !!}</strong>
+        <div class="alert alert-block ">
+            {!! \Illuminate\Support\Facades\Session::get('message')  !!}
         </div>
     @endif
 
     @if (isset($message))
-        <div class="alert alert-block col-lg-9 black-alert">
-            <strong>{!! $message !!} </strong>
+        <div class="alert alert-block">
+            {!! $message !!}
         </div>
     @endif
+
 
     <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
         {{ csrf_field() }}
@@ -72,7 +72,7 @@
 
             <label class="checkbox">
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
+                <span class="pull-right" id="forgot"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
             </label>
             <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
             <br>

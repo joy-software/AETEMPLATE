@@ -62,7 +62,7 @@ class comptabiliteController extends Controller
             return Redirect::back();
         }
         return view('comptabilite.index',[
-            'user' =>  $this->_user,
+            'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
             'periodes'=> $this->_periodes,
             'motifs'=>$this->_motifs
@@ -75,7 +75,7 @@ class comptabiliteController extends Controller
         }
         $this->load_users_notification_period();
         return view('comptabilite.consult_contribution', [
-            'user'=>$this->_user,
+            'user'=>$this->_user->unreadnotifications,
             'nbr_notif'=>$this->_notifications,
             'periodes'=> $this->_periodes,
             'motifs'=>$this->_motifs
@@ -420,7 +420,7 @@ public function contrib_user($id){
 
     if($count_contrib == 0){
         return view('comptabilite.contrib_user',[
-            'user' =>  $this->_user,
+            'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
             //'periodes'=> $this->_periodes,
             //'motifs'=>$this->_motifs
@@ -445,7 +445,7 @@ public function contrib_user($id){
     }
 
     return view('comptabilite.contrib_user',[
-        'user' =>  $this->_user,
+        'user' =>  $this->_user->unreadnotifications,
         'nbr_notif'=> $this->_notifications,
         'periodes'=>  $periodes,
         'motifs' => $motifs,
