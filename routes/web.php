@@ -31,7 +31,6 @@ Route::get('/profile', [
 Auth::routes();
 
 
-
 $middleware = array_merge(\Config::get('lfm.middlewares'), [
     '\Unisharp\Laravelfilemanager\middlewares\MultiUser',
     '\Unisharp\Laravelfilemanager\middlewares\CreateDefaultFolder'
@@ -181,7 +180,7 @@ Route::post('/group/post_create_group', [
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
     'uses'=>'groupController@view_group',
-    'middleware' => 'group'
+    //'middleware' => 'group'
 ]);
 
 Route::get('/group/meeting_group/{id}', [
@@ -367,3 +366,60 @@ Route::post('/contrib_user_email', [
     'uses'=>'comptabiliteController@contrib_user_email'
 ]);
 
+Route::get('/comptabilite/export_contribution', [
+    'as'=>'export_contribution',
+    'uses'=>'comptabiliteController@export_contribution'
+]);
+Route::get('/comptabilite/del_period_motifs', [
+    'as'=>'del_period_motifs',
+    'uses'=>'comptabiliteController@del_period_motifs'
+]);
+
+/****
+ * Route pour l'administration
+ */
+
+Route::get('/admin', [
+    'as'=>'admin',
+    'uses'=>'adminController@index'
+]);
+
+Route::post('/admin/del_group', [
+    'as'=>'admin_del_group',
+    'uses'=>'adminController@del_group'
+]);
+
+Route::get('/admin/suspen_user/{id}', [
+    'as'=>'admin_suspen_user',
+    'uses'=>'adminController@suspen_user'
+]);
+
+Route::post('/admin/post_suspen_user', [
+    'as'=>'admin_post_suspen_user',
+    'uses'=>'adminController@post_suspen_user'
+]);
+
+Route::post('/admin/post_admin_user', [
+    'as'=>'admin_post_admin_user',
+    'uses'=>'adminController@post_admin_user'
+]);
+
+Route::get('/admin/roles', [
+    'as'=>'admin_roles',
+    'uses'=>'adminController@admin_roles'
+]);
+
+Route::post('/admin/post_role_compta', [
+    'as'=>'post_role_compta',
+    'uses'=>'adminController@post_role_compta'
+]);
+
+Route::post('/admin/post_remove_compta', [
+    'as'=>'post_remove_compta',
+    'uses'=>'adminController@post_remove_compta'
+]);
+
+Route::post('/admin/post_role_admin', [
+    'as'=>'post_role_admin',
+    'uses'=>'adminController@post_role_admin'
+]);

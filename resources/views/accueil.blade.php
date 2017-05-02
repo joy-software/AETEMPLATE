@@ -102,7 +102,7 @@
                                         <br/>
                                         <button type="submit" class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</button>
 
-                                            <script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
+                                            <!--script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
                                                     data-receiver-uid={{env('WCU_IDENTIFIANT_MARCHAND')}}
                                                     data-receiver-public-key={{env('WCU_CLE_PUBLIQUE_MARCHAND')}}
                                                     data-transaction-receiver-total-amount="MONTANT_TOTAL_DE_LA_TRANSACTION"

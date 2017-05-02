@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
-    <meta name="author" content="GeeksLabs">
-    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <meta name="author" content="LACY 2017">
+    <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
+    <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
 
-    <title>Login Page 2 | Karmanta - Bootstrap 3 Responsive Admin Template</title>
+    <title>Connexion | PromotVogt</title>
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
@@ -17,7 +17,6 @@
     <!--external css-->
     <!-- font icon -->
     <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <link href="../wamp64/www/promovogt.org/resources/assets/karmanta/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles -->
     <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />

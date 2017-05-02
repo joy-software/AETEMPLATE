@@ -72,7 +72,7 @@ class ActivationKeyController extends Controller
 
                     $user = Auth::user();
                     $notifications = $user->unreadnotifications()->count();
-                    return redirect()->route('accueil',['user'=> $user->unreadnotifications()->paginate(6),'nbr_notif'=> $notifications]);
+                    return redirect()->route('accueil',['user'=> $user->unreadnotifications,'nbr_notif'=> $notifications]);
                 }
 
             }

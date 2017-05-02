@@ -113,7 +113,7 @@ class HomeController extends Controller
         $contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
-        return view('accueil',['user'=> $user->unreadnotifications()->paginate(6),
+        return view('accueil',['user'=> $user->unreadnotifications,
             'nbr_notif'=> $notifications,
             'nbr_ads_A'=>$nbr_ads,
             'nbr_event_A'=>$nbr_event,
@@ -161,7 +161,7 @@ class HomeController extends Controller
         $notifications = $user->unreadnotifications()->count();
 
         return view('profile/index',[
-            'user'=> $user->unreadnotifications()->paginate(6),
+            'user'=> $user->unreadnotifications,
             'nbr_notif'=> $notifications,
             'nbr_ads'=>$nbr_ads,
             'nbr_event'=>$nbr_event,

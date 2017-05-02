@@ -58,9 +58,11 @@ class comptabiliteController extends Controller
 
     public function index(){
         $this->load_users_notification_period();
-
+        if( ! Auth::user()->hasRole('comptable')){
+            return Redirect::back();
+        }
         return view('comptabilite.index',[
-            'user' =>  $this->_user,
+            'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
             'periodes'=> $this->_periodes,
             'motifs'=>$this->_motifs
@@ -68,9 +70,12 @@ class comptabiliteController extends Controller
     }
 
     public function consult_contribution(){
+        if(! Auth::user()->hasRole('comptable')){
+            return Redirect::back();
+        }
         $this->load_users_notification_period();
         return view('comptabilite.consult_contribution', [
-            'user'=>$this->_user,
+            'user'=>$this->_user->unreadnotifications,
             'nbr_notif'=>$this->_notifications,
             'periodes'=> $this->_periodes,
             'motifs'=>$this->_motifs
@@ -81,7 +86,7 @@ class comptabiliteController extends Controller
      * @param Request $request
      * Cette fonction permet de gerer le paiment des cotisations à partir d'un fichier excel.
      */
-    public function post_contribution_file(Request $request){
+public function post_contribution_file(Request $request){
 
         $messages_validation = [
             'contribution_file.required' => "Vous avez oublié le fichier des contributions, ce fichier est OBLIGATOIRE",
@@ -299,7 +304,6 @@ public function post_motif(Request $request){
 }
 
 
-
 public function post_consult_contribution(Request $request){
 
     $period = $request->get("periode");
@@ -329,7 +333,7 @@ public function post_consult_contribution(Request $request){
        // $message =  "nous sommes déjà présent;";
         $user = User::find($item['user_ID']);
 
-        $message .= "<tr><td><span class='profile-ava'><img alt='' class='simple' src='/" . $user->photo . "' </span> </td>" .
+        $message .= "<tr><td><span class='profile-ava'><img src='". url('cache/logo/'. $user->photo) ."'> </span> </td>" .
                     "<td> ". $user->name ." , ". $user->surname ." </td> " .
                     "<td> ". $user->email .", <br> Tel : ". $user->phone ."</td> " .
                     //"<td> <a class='btn btn-primary btn-contribution' data-toggle='modal' data-target='#modalContribution' id='btn-contrib-". $user->id ."'> Voir ses contributions </a> </td> ".
@@ -386,13 +390,15 @@ public function contrib_user_email(Request $request){
     $count = User::where('email','=', $email)->get()->count();
     if($count == 0){
         return response()->json([
-            'message'=> "<div class=\"alert alert-danger fade in pull-left \"> Aucun membre n'a cette adresse email </div>",
+            'message'=> "<div class=\"alert alert-danger fade in pull-left \"> Aucun membre n'a cette adresse email </div>"
         ]);
     }
     $user = User::where('email','=', $email)->get();
 
-    Redirect::route('contribution_user', ['id' => $user[0]['id']]);
-
+    $message = "Ce membre existe. cliquer sur ce lien pour voir ses contributions <br> <a href='/contrib_user/". $user[0]['id'] ."'> Voir les contributions de ". $user[0]['name'] ." , ". $user[0]['surname'] ."</a>";
+    return response()->json([
+        'message'=> $message
+    ]);
 }
 
 public function contrib_user($id){
@@ -400,7 +406,7 @@ public function contrib_user($id){
     $this->load_users_notification_period();
     $count = User::where('id','=',$id)->count();
 
-    if($id != Auth::id()){
+    if(( ! ($id != Auth::id()) ) && ! (Auth::user()->hasRole('comptable')) ){
         return Redirect::back();
 
     }
@@ -414,7 +420,7 @@ public function contrib_user($id){
 
     if($count_contrib == 0){
         return view('comptabilite.contrib_user',[
-            'user' =>  $this->_user,
+            'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
             //'periodes'=> $this->_periodes,
             //'motifs'=>$this->_motifs
@@ -439,13 +445,50 @@ public function contrib_user($id){
     }
 
     return view('comptabilite.contrib_user',[
-        'user' =>  $this->_user,
+        'user' =>  $this->_user->unreadnotifications,
         'nbr_notif'=> $this->_notifications,
         'periodes'=>  $periodes,
         'motifs' => $motifs,
         'montant'=> $montant,
         'nom_user' => $user->name .' , '. $user->surname,
         'compteur' => $compteur
+    ]);
+
+
+}
+
+public function export_contribution(){
+    if(! Auth::user()->hasRole('comptable')){
+        return Redirect::back();
+    }
+    $this->load_users_notification_period();
+    return view('comptabilite.export_contribution',[
+        'user' =>  $this->_user,
+        'nbr_notif'=> $this->_notifications
+    ]);
+}
+
+public function del_period_motifs(){
+    if(! Auth::user()->hasRole('comptable')){
+        return Redirect::back();
+    }
+    $this->load_users_notification_period();
+    if(period::get()->count() == 0){
+        $periodes = null;
+    }else{
+        $periodes = period::get();
+    }
+    if(motif::get()->count() == 0){
+        $motifs = null;
+    }else{
+        $motifs = motif::get();
+    }
+
+    return view('comptabilite.del_period_motifs',[
+        'user' =>  $this->_user,
+        'nbr_notif'=> $this->_notifications,
+        'periodes'=>  $periodes,
+        'motifs' => $motifs
     ]);
 
 

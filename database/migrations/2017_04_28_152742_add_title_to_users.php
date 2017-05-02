@@ -13,9 +13,9 @@ class AddTitleToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('"users"', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->enum('title', ['Mr','Mme','Mlle','Dr',
-                'Me','Pr','Ing','Fr','Sr'])->after('Mr')->nullable();
+                'Me','Pr','Ing','Fr','Sr'])->after('id')->default('Mr')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddTitleToUsers extends Migration
      */
     public function down()
     {
-        Schema::table('"users"', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropIfExists('title');
         });
     }

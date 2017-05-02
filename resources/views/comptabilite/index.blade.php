@@ -10,30 +10,37 @@
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
 @endsection
-
-@section('sideOption')
-@include('layouts/asideOption', [
-            'classIconOption' => 'icon_house_alt',
-            'optionName' => 'Accueil des contributions',
-            'retractable' => 'false',
-            'link' => url('/comptabilite')
-        ])
-
-@include('layouts/asideOption', [
-        'classIconOption' => 'icon_search',
-        'optionName' => 'Consulter les contributions',
-        'retractable' => 'false',
-        'link' => url('/comptabilite/consult_contribution')
-    ])
-
-@include('layouts/asideOption', [
-        'classIconOption' => 'icon_download',
-        'optionName' => 'Exporter des rapports',
-        'retractable' => 'false',
-        'link' => url('/comptabilite/export_contribution')
-    ])
+@section('title')
+    Gestion de la comptabilité
 @endsection
 
+<?php $rol = "comptable"; ?>
+
+@role($rol)
+@section('sideOption')
+    @include('layouts/asideOption', [
+                'classIconOption' => 'icon_house_alt',
+                'optionName' => 'Accueil des contributions',
+                'retractable' => 'false',
+                'link' => url('/comptabilite')
+            ])
+
+    @include('layouts/asideOption', [
+            'classIconOption' => 'icon_search',
+            'optionName' => 'Consulter les contributions',
+            'retractable' => 'false',
+            'link' => url('/comptabilite/consult_contribution')
+        ])
+
+    @include('layouts/asideOption', [
+            'classIconOption' => 'icon_download',
+            'optionName' => 'Exporter des rapports',
+            'retractable' => 'false',
+            'link' => url('/comptabilite/export_contribution')
+        ])
+
+@endsection
+@endrole
 
 
 @section('content')
