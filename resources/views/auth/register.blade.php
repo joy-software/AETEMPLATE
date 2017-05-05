@@ -26,7 +26,14 @@
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <![endif]-->
-    <script src='https://www.google.com/reCAPTCHA/api.js'></script>
+    <script type="text/javascript">
+        var onloadCallback = function() {
+            grecaptcha.render('g-reCAPTCHA', {
+                'sitekey' : '{{ env('SETTINGS_GOOGLE_RECAPTCHA_SITE_KEY') }}',
+                'type' : 'audio'
+            });
+        };
+    </script>
 </head>
 
 <body class="login-img3-body">
@@ -247,9 +254,22 @@
                                 </span>
                             @endif
                         </div>
-
-
                         <div class="form-group ">
+                            <div id="g-reCAPTCHA" class="col-lg-12"></div>
+                            @if ($errors->has('captcha-verified'))
+
+                                <span class="help-block control-label col-lg-12  text-danger">
+                            <strong>{{ $errors->first('captcha-verified') }}</strong>
+                        </span>
+                            @endif
+             ²               @if ($errors->has('g-recaptcha-response'))
+
+                                <span class="help-block control-label col-lg-12  text-danger">
+                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                        </span>
+                            @endif
+                        </div>
+                         <div class="form-group ">
 
                             <div class="col-lg-12">
 
@@ -268,7 +288,6 @@
                         </span>
                             @endif
                         </div>
-                        <div class="g-reCAPTCHA" data-sitekey="{{ env('SETTINGS_GOOGLE_RECAPTCHA_SITE_KEY') }}"></div>
                         <div class="form-group" >
                             <div class=" col-lg-12" id="signup-submit">
                                 <button  class="btn btn-primary" type="submit">S'inscrire</button>
@@ -276,6 +295,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </section>
@@ -290,7 +310,9 @@
 
 
 </div>
-
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
 
 <script src="{{ asset('karmanta/js/html5shiv.js') }}"></script>
 <script src="{{ asset('karmanta/js/custom.js') }}"></script>
