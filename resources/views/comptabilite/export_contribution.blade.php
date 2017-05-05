@@ -11,11 +11,12 @@
 
 @endsection
 @section('title')
-    Contribution de {{ $nom_user }}
+    Exporter les états des contributions
 @endsection
 
 
 <?php $rol = "comptable"; ?>
+
 @role($rol)
 @section('sideOption')
     @include('layouts/asideOption', [
@@ -49,46 +50,9 @@
 
         <div class="row">
 
-            <div class="col-lg-offset-1 col-lg-10" style="background: white;">
-            <section class="panel">
-                <div class="panel-body progress-panel">
-                    <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
-                            <h1>Contribution de {{ $nom_user }} </h1>
-                        </div>
-                        <div class="col-lg-4">
-                            <span class="pull-right" ><button class="btn btn-primary" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover personal-task">
-                    <tbody>
-                    <?php
-                            if($motifs == null){ //contribution vide
-                                ?>
-                                <tr><td style="text-align: left">Vous n'avez aucune contribution </td></tr>
-                            <?php }
-                            else {
-                                for($i = 0 ; $i < $compteur ; $i++){
-
-                                    ?>
-                                   <tr>
-                                       <td><?php echo $periodes[''. $i .''];?></td>
-
-                                       <td><?php echo $motifs[''.$i.''];?></td>
-
-                                       <td><?php echo $montant[''.$i.''];?></td>
-                                   </tr>
-                        <?php
-                                }
-
-                            }
-                    ?>
-                    </tbody>
-                </table>
-            </section>
+            <div class="col-lg-offset-1 col-lg-10">
+                <h1>Fonctionnalité à venir.</h1>
             </div>
-
         </div>
 
 

@@ -88,6 +88,7 @@
 
                                                 src="{{url("cache/logo/"."users/default_lady_avatar.png")}}"
                                         @endif
+                                                @endif
 
                                      style="width: 50px; height: auto;" >
                                 </span>

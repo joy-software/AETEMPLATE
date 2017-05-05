@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+
+    "content-hash": "7c818f1cebeabeb3b0e1b770d95de98e",
+
     "content-hash": "c7741fb5eab9372cc3a4a9509d60f0e0",
+
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -174,6 +178,49 @@
                 "push"
             ],
             "time": "2017-02-12T20:31:13+00:00"
+<<<<<<< HEAD
+        },
+        {
+            "name": "brotzka/laravel-dotenv-editor",
+            "version": "v2.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Brotzka/laravel-dotenv-editor.git",
+                "reference": "360a86c06450f07d5c9efbf9a2b4462dd0094039"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Brotzka/laravel-dotenv-editor/zipball/360a86c06450f07d5c9efbf9a2b4462dd0094039",
+                "reference": "360a86c06450f07d5c9efbf9a2b4462dd0094039",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Brotzka\\DotenvEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabian Hagen",
+                    "email": "fabianhagen87@gmail.com"
+                }
+            ],
+            "description": "A package for editing the .env file in your Laravel root.",
+            "keywords": [
+                "dotenv",
+                "dotenv-editor",
+                "laravel"
+            ],
+            "time": "2017-03-11T10:41:52+00:00"
+
         },
         {
             "name": "classpreloader/classpreloader",
@@ -731,6 +778,7 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
+
         },
         {
             "name": "firebase/php-jwt",
@@ -963,6 +1011,7 @@
                 "spam"
             ],
             "time": "2017-03-09T18:44:34+00:00"
+
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1637,16 +1686,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.38",
+            "version": "1.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482"
+                "reference": "3828f0b24e2c1918bb362d57a53205d6dc8fde61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
-                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3828f0b24e2c1918bb362d57a53205d6dc8fde61",
+                "reference": "3828f0b24e2c1918bb362d57a53205d6dc8fde61",
                 "shasum": ""
             },
             "require": {
@@ -1716,7 +1765,9 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-04-22T18:59:19+00:00"
+
+            "time": "2017-04-28T10:15:08+00:00"
+
         },
         {
             "name": "maatwebsite/excel",
@@ -2208,6 +2259,7 @@
                 "x509"
             ],
             "time": "2016-10-04T00:57:04+00:00"
+
         },
         {
             "name": "predis/predis",
@@ -2258,6 +2310,7 @@
                 "redis"
             ],
             "time": "2016-06-16T16:22:20+00:00"
+
         },
         {
             "name": "psr/cache",
@@ -2304,6 +2357,7 @@
                 "psr-6"
             ],
             "time": "2016-08-06T20:24:11+00:00"
+>>>>>>> 9ff8bac7118064e32006047b5aa1bf8ea31fe848
         },
         {
             "name": "psr/http-message",
