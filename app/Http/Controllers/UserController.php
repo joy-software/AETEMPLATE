@@ -98,7 +98,7 @@ class UserController extends Controller
        $notifications = $user->unreadnotifications()->count();
 
        return redirect()->back()->with(['success' => 'Modifications réussies',
-           'user'=> $user->unreadnotifications()->paginate(6),
+           'user'=> $user->unreadnotifications,
            'nbr_notif'=> $notifications,
            'nbr_ads'=>$nbr_ads,
            'nbr_event'=>$nbr_event,
@@ -171,7 +171,7 @@ class UserController extends Controller
        $notifications = $user->unreadnotifications()->count();
 
        return redirect()->route('profile')->with(['success' => $message,
-           'user'=> $user->unreadnotifications()->paginate(6),
+           'user'=> $user->unreadnotifications,
            'nbr_notif'=> $notifications,
            'nbr_ads'=>$nbr_ads,
            'nbr_event'=>$nbr_event,
@@ -220,7 +220,9 @@ class UserController extends Controller
    {
        $user = Auth::user();
        $notifications = $user->unreadnotifications()->count();
-       return view('layouts/index',['user' =>  $user,'nbr_notif'=> $notifications]);
+       return view('layouts/index',['user' =>  $user->unreadnotifications,
+           'notifs' =>  $user,
+           'nbr_notif'=> $notifications]);
    }
 
     /**
@@ -229,15 +231,15 @@ class UserController extends Controller
     public function read_notifications()
     {
         $user = Auth::user();
-        foreach ($user->unreadnotifications()->paginate(6)  as $notification) {
+
+        foreach ($user->unreadnotifications  as $notification) {
             $notification->markAsRead();
         }
         $notifications = $user->unreadnotifications()->count();
         $view  = View::make('layouts/Notifications',
             [
                 'classIcon' => 'icon-bell-l',
-                'numberNotification' => $notifications,
-                'notifications' => $user->unreadnotifications()->paginate(6)
+                'numberNotification' => $notifications
             ]);
         return $view->render();
     }
@@ -253,7 +255,7 @@ class UserController extends Controller
             [
                 'classIcon' => 'icon-bell-l',
                 'numberNotification' => $notifications,
-                'notifications' => $user->unreadnotifications()->paginate(6)
+                'notifications' => $user->unreadnotifications
             ]);
         return $view->render();
     }
