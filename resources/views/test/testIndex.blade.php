@@ -1,32 +1,13 @@
 <?php
 
-/**
- * Library Requirements
- *
- * 1. Install composer (https://getcomposer.org)
- * 2. On the command line, change to this directory (api-samples/php)
- * 3. Require the google/apiclient library
- *    $ composer require google/apiclient:~2.0
- */
 
-
-    session_start();
-
-    /*
-     * You can acquire an OAuth 2.0 client ID and client secret from the
-     * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
-     * For more information about using OAuth 2.0 to access Google APIs, please see:
-     * <https://developers.google.com/youtube/v3/guides/authentication>
-     * Please ensure that you have enabled the YouTube Data API for your project.
-     */
-
-    $OAUTH2_CLIENT_ID = '506535558695-obua888g6h3j1qc0m2g6335aon4vscbk.apps.googleusercontent.com';
-    $OAUTH2_CLIENT_SECRET = 'gk5i45Pgb0VZx8rTcKxn-Toy';
+    $OAUTH2_CLIENT_ID = env('OAUTH2_CLIENT_ID');
+    $OAUTH2_CLIENT_SECRET = env('OAUTH2_CLIENT_SECRET');
 
     $client = new Google_Client();
-    //$client->setDeveloperKey('AIzaSyArrY3SL_FTmiMKvNRmcXwy9y5AD5B-wW8');
     $client->setClientId($OAUTH2_CLIENT_ID);
     $client->setClientSecret($OAUTH2_CLIENT_SECRET);
+    $client->setAccessType('offline');
     $client->setScopes('https://www.googleapis.com/auth/youtube');
     $redirect = filter_var('http://assovogt.org/tester', FILTER_SANITIZE_URL);
 
@@ -35,31 +16,39 @@
     // Define an object that will be used to make all API requests.
     $youtube = new Google_Service_YouTube($client);
 
-    // Check if an auth token exists for the required scopes
-    $tokenSessionKey = 'token-' . $client->prepareScopes();
-
     if (isset($_GET['code'])) {
-        if (strval($_SESSION['state']) !== strval($_GET['state'])) {
-            die('The session state did not match.');
-        }
 
         $client->authenticate($_GET['code']);
-        $_SESSION[$tokenSessionKey] = $client->getAccessToken();
+
+        $key = $client->getAccessToken();
+
+        $path = base_path('.env');
+
+        $str = str_replace('GOOGLE_KEY=' . env('GOOGLE_KEY'), 'GOOGLE_KEY=' . json_encode($key), file_get_contents($path));
+
+        if (file_exists($path)) {
+            file_put_contents($path, $str);
+        }
+
         header('Location: ' . $redirect);
+
+        exit;
     }
 
-    if (isset($_SESSION[$tokenSessionKey])) {
-        $client->setAccessToken($_SESSION[$tokenSessionKey]);
+
+    if ($token = json_decode(env('GOOGLE_KEY'), true)) {
+
+        $client->setAccessToken($token);
     }
 
     // Check to ensure that the access token was successfully acquired.
     if ($client->getAccessToken()) {
 
         try {
-            // Execute an API request that lists the streams owned by the user who
-            // authorized the request.
+
             $nextPageToken = '';
             $htmlBody = '<ul>';
+
             do {
                 $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
                     'playlistId' => 'PLorQTUIjuMRa7sFEPbfNWxXvZcZ-LaLRO',
@@ -75,30 +64,29 @@
 
             $htmlBody .= '</ul>';
 
+
         } catch (Google_Service_Exception $e) {
-            $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
+                $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
                 htmlspecialchars($e->getMessage()));
         } catch (Google_Exception $e) {
-            $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
+                $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
                 htmlspecialchars($e->getMessage()));
         }
 
-        $_SESSION[$tokenSessionKey] = $client->getAccessToken();
+        $key =  $client->getAccessToken();
 
-    } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
+        $path = base_path('.env');
 
-        $htmlBody ='<h3>Client Credentials Required</h3>
-                      <p>
-                        You need to set <code>\$OAUTH2_CLIENT_ID</code> and
-                        <code>\$OAUTH2_CLIENT_ID</code> before proceeding.
-                      <p>';
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                'GOOGLE_KEY=' . env('GOOGLE_KEY'), 'GOOGLE_KEY=' . json_encode($key), file_get_contents($path)
+            ));
+        }
 
-    } else {
+
+    }  else {
 
         // If the user hasn't authorized the app, initiate the OAuth flow
-        $state = mt_rand();
-        $client->setState($state);
-        $_SESSION['state'] = $state;
 
         $authUrl = $client->createAuthUrl();
         $htmlBody = "<h3>Authorization Required $authUrl</h3>

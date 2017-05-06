@@ -136,6 +136,22 @@ Route::get('/tester', [
     'uses' => 'HomeController@tester'
 ]);
 
+
+Route::post('/tester/upload', [
+    'as' => 'post_tester_upload',
+    'uses' => 'VideoController@uploadVideo'
+]);
+
+Route::get('/video/get_token', [
+    'as' => 'get_token',
+    'uses' => 'VideoController@getToken'
+]);
+
+Route::get('/google/get_token', [
+    'as' => 'google_get_token',
+    'uses' => 'GoogleController@getToken'
+]);
+
 Route::get('/accueil', [
     'as' => 'accueil',
     'uses' => 'HomeController@index'

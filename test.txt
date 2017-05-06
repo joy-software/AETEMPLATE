@@ -52,5 +52,5 @@ WCU_DEVISE_DU_MARCHAND=XAF
 
 OAUTH2_CLIENT_ID=506535558695-obua888g6h3j1qc0m2g6335aon4vscbk.apps.googleusercontent.com
 OAUTH2_CLIENT_SECRET=gk5i45Pgb0VZx8rTcKxn-Toy
-GOOGLE_TOKEN={"access_token":"ya29.GltCBDdh4xFj7QWosKvHQaMyKLakNLKNt6HgzWYpES2MZF-msAr5tgv8Rt2uZWaFN711fRdu_9X-lmucqUl-1NRgWU5O92BS3HcGG0ITPD1rm4xVu_vuRj-p3zuE","token_type":"Bearer","expires_in":3600,"refresh_token":"1\/8ItZ7ew8xsZPPLo1QomjCAfMH3REclcQvXFb4iKmHbk","created":1494075785}
+GOOGLE_KEY={"access_token":"ya29.Glw7BER17RQKxH3Grx5XCyUsaRljjxO_us_bApv6E_4OFQ53sWLyWsFLkSPZsYFDhU-VZc2fgzg34uCKZXWyhGJQPG3baj6srHndKxnAWQQ7iI7tc-wyOuAAOERXFg","token_type":"Bearer","expires_in":3599,"created":1493491780}{"access_token":"ya29.Glw7BER17RQKxH3Grx5XCyUsaRljjxO_us_bApv6E_4OFQ53sWLyWsFLkSPZsYFDhU-VZc2fgzg34uCKZXWyhGJQPG3baj6srHndKxnAWQQ7iI7tc-wyOuAAOERXFg","token_type":"Bearer","expires_in":3599,"created":1493491780}
 DEVELOPER_KEY=AIzaSyArrY3SL_FTmiMKvNRmcXwy9y5AD5B-wW8
