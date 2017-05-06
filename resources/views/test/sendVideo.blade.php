@@ -26,7 +26,7 @@
             @endif
 
             @if (isset($message))
-                <div class="alert alert-bl col-lg-8">
+                <div class="alert alert-block col-lg-8">
                     {!! $message !!}
                 </div>
             @endif
