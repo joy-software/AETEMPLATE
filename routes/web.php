@@ -120,6 +120,10 @@ Route::group(compact('middleware', 'prefix', 'as'), function () {
     Route::get('/demo', '\Unisharp\Laravelfilemanager\controllers\DemoController@index');
 });
 
+/**
+ * Routes pour le profil
+ */
+
 Route::post('/editProfile', [
     'as' => 'editProfile',
     'uses' => 'UserController@editProfile'
@@ -129,6 +133,10 @@ Route::post('/editCredential', [
     'as' => 'editCredential',
     'uses' => 'UserController@editCredential'
 ]);
+
+/**
+ * Routes pour les videos
+ */
 
 Route::get('/tester', [
     'as' => 'tester',
@@ -141,15 +149,32 @@ Route::post('/tester/upload', [
     'uses' => 'VideoController@uploadVideo'
 ]);
 
-Route::get('/video/get_token', [
-    'as' => 'get_token',
-    'uses' => 'VideoController@getToken'
+Rouge::get('/video/list', [
+    'as' => 'video_list',
+    'uses' => 'VideoController@listVideo'
 ]);
+
+Route::post('/video/upload', [
+    'as' => 'post_video_upload',
+    'uses' => 'VideoController@uploadVideo'
+]);
+
+Route::get('/video/view/{id}', [
+    'as' => 'video_view',
+    'uses' => 'VideoController@viewVideo'
+]);
+
+
+/**
+ * Route pour recupérer les tokens de l'api Google
+ */
 
 Route::get('/google/get_token', [
     'as' => 'google_get_token',
     'uses' => 'GoogleController@getToken'
 ]);
+
+
 
 Route::get('/accueil', [
     'as' => 'accueil',
