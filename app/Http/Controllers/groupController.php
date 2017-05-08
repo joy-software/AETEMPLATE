@@ -26,13 +26,13 @@ use App\Role;
 
 class groupController extends Controller
 {
-   private $_list_group; //c'est la liste des groupes auxquelles j'ai souscrit.
-   private $_users_group; // c'est la liste des users_groups qui est != des groupes.
-   private $_compteur =0; // c'est mon fidèle compteur pour me rassurer des updates.
-   private $_all_group; //Liste de tous les groupes présent dans la bd.
-   private $_id_list_group; //c'est le tableau contenant les id des groupes auxquels j'appartiens.
+   public $_list_group; //c'est la liste des groupes auxquelles j'ai souscrit.
+   public $_users_group; // c'est la liste des users_groups qui est != des groupes.
+   public $_compteur =0; // c'est mon fidèle compteur pour me rassurer des updates.
+   public $_all_group; //Liste de tous les groupes présent dans la bd.
+   public $_id_list_group; //c'est le tableau contenant les id des groupes auxquels j'appartiens.
 
-   private $_statut_group; // c'est un tableau clé valeur. clé = id_groupe, valeur = statut_dans_le_groupe.
+   public $_statut_group; // c'est un tableau clé valeur. clé = id_groupe, valeur = statut_dans_le_groupe.
 
    public function __construct()
 

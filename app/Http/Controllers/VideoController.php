@@ -18,6 +18,11 @@ use Google_Service_YouTube_VideoStatus;
 use Google_Http_MediaFileUpload;
 use Illuminate\Support\Facades\Session;
 use App\Traits\GoogleAuthTrait;
+use App\ads_has_files;
+use App\group;
+use App\files;
+use App\ads;
+use App\User;
 
 
 class VideoController extends Controller
@@ -130,9 +135,25 @@ class VideoController extends Controller
         return Redirect::back();
     }
 
-    public function listVideo(Request $request)
-    {
 
+    public function listVideo(Request $request){
+
+        $id = 8;
+        $groupControl = new groupController();
+        $groupControl->load_group();
+        $groupControl->verification_param($id);
+        $user = Auth::user();
+        $notifications = $user->unreadnotifications()->count();
+
+
+
+
+        return view('video.index',
+            [
+                'list_group'=> $groupControl->_list_group,
+                'user'=> $user->unreadnotifications,
+                'nbr_notif'=> $notifications,
+            ]);
     }
 
     public function viewVideo(Request $resquest)

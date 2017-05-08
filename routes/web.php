@@ -149,7 +149,7 @@ Route::post('/tester/upload', [
     'uses' => 'VideoController@uploadVideo'
 ]);
 
-Rouge::get('/video/list', [
+Route::get('/video/list', [
     'as' => 'video_list',
     'uses' => 'VideoController@listVideo'
 ]);

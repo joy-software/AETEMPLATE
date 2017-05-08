@@ -29,19 +29,20 @@
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
-                    <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
-                    <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
-                    <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
+                    <li><a href="/group/view_group/1"><i class="icon_house_alt"></i> Assemblée générale </a></li>
+                    <li><a href="/group/ads_group/1">Annonces </a></li>
+                    <li><a href="/group/event_group/1">Evènements </a></li>
+                    <li><a href="/group/meeting_group/1">Réunions </a></li>
+                    <li><a href="{{ route('video_list') }}"><strong>Vidéos</strong> </a></li>
+                    <li><a href="/group/ballot_group/1">Scrutin</a></li>
+                    <li><a href="/group/member_group/1">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
 
-        <h1>Liste des Scrutins du groupe d'id = {{$id}}</h1>
+
+
     </section>
 
 @endsection
