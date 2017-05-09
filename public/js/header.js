@@ -92,16 +92,13 @@ retractAsideEffectClick = function(){
     $('#sidebar').css('display', 'none');
     $('#sidebar').css('left', '-250px');
     $('#main-content').css('margin-left', '0px');
-    //$('#sidebar').animate({'left': "-250px"}, 600, function(){$('#sidebar').css('display', 'none')});
-    //$('#main-content').animate({'margin-left': "0px"}, 600, function(){});
 };
 
 expandAsideEffectClick = function(){
     $('#sidebar').css('display', 'block');
     $('#sidebar').css('left', '0px');
     $('#main-content').css('margin-left', '250px');
-    //$('#sidebar').animate({'left': "0px"}, 600, function(){} );
-    //$('#main-content').animate({'margin-left': "250px"}, 600, function(){});
+
 };
 
 slideLeft = function(selectorElement, pixel){
@@ -152,8 +149,8 @@ else
 
 $('#administration').click(function(){
     window.location.href = '/admin';
-
 });
+
 
 $('#logo_home').click(function(){
     window.location.href = "http://www.promotvogt.org";

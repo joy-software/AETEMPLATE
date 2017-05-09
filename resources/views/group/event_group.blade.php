@@ -33,6 +33,7 @@
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}" style="color: #ff2d55!important;">Evènements </a></li>
                     <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
+                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
