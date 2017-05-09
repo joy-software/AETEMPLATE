@@ -56,8 +56,8 @@ class InvitationAccepted extends Notification implements ShouldQueue
         {
 
             return (new MailMessage)
-                ->subject('Accès autorisé à'.config('app.name').'.')
-                ->line( $this->sender['surname'] .' '  .$this->sender['name'].', bienvenue dans la grande famille d\' anciens vogtois'.config('app.name').'.')
+                ->subject('Accès autorisé à '.config('app.name').'.')
+                ->line( $this->sender['surname'] .' '  .$this->sender['name'].', bienvenue dans la grande famille d\' anciens vogtois '.config('app.name').'.')
                 ->line( 'Votre appartenance à notre grande famille a été confirmé par '.$this->validator['surname'] .' '  .$this->validator['name'].'.')
                 ->line('Vous pouvez déjà vous connecter et profiter des nombreuses fonctionnalités du site.')
                 ->line('Pour avoir un aperçu de ce que vous avez manqué, cliquez sur le lien ci-dessous.')

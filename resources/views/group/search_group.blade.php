@@ -105,7 +105,7 @@
 
                             @foreach($all_group as $all_group_el)
                                 <tr>
-                                    <td><img src="{{url('cache/logo/'.$all_group_el->logo)}}" style="height: 15%; width: auto;" alt="Photo du groupe"></td>
+                                    <td><img src="{{url('cache/logo/'.$all_group_el->logo)}}" alt="Photo du groupe"></td>
                                     <td>{{ $all_group_el->name}}</td>
                                     <td>{{ $all_group_el->description}}</td>
                                     <td>

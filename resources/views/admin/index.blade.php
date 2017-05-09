@@ -43,7 +43,9 @@
                 <table class="table table-responsive"  style="margin-bottom : 0px;">
                     <tr>
                         <td><h3>Gestion des groupes</h3></td>
+                        @role($role)
                         <td><?php if($list_group != null) echo $list_group->links(); ?></td>
+                        @endrole()
                     </tr>
                 </table>
                 <div id="message">

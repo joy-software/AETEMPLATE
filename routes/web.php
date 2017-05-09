@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/home', 'HomeController@auth');
+
 
 
 Route::get('/','HomeController@index');
@@ -180,7 +180,7 @@ Route::post('/group/post_create_group', [
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
     'uses'=>'groupController@view_group',
-    //'middleware' => 'group'
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/meeting_group/{id}', [
@@ -373,6 +373,11 @@ Route::get('/comptabilite/export_contribution', [
 Route::get('/comptabilite/del_period_motifs', [
     'as'=>'del_period_motifs',
     'uses'=>'comptabiliteController@del_period_motifs'
+]);
+
+Route::get('/comptabilite/contribution', [
+    'as'=>'contribution',
+    'uses'=> 'comptabiliteController@contribution'
 ]);
 
 /****

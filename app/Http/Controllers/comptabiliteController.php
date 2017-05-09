@@ -54,6 +54,7 @@ class comptabiliteController extends Controller
 
         $this->_user = Auth::user();
         $this->_notifications = $this->_user->unreadnotifications()->count();
+        session(['menu' => 'compta']);
     }
 
     public function index(){
@@ -70,9 +71,9 @@ class comptabiliteController extends Controller
     }
 
     public function consult_contribution(){
-        if(! Auth::user()->hasRole('comptable')){
+      /*  if(! Auth::user()->hasRole('comptable')){
             return Redirect::back();
-        }
+        }//*/
         $this->load_users_notification_period();
         return view('comptabilite.consult_contribution', [
             'user'=>$this->_user->unreadnotifications,
@@ -406,7 +407,7 @@ public function contrib_user($id){
     $this->load_users_notification_period();
     $count = User::where('id','=',$id)->count();
 
-    if(( ! ($id != Auth::id()) ) && ! (Auth::user()->hasRole('comptable')) ){
+    if((($id != Auth::id()) ) && !(Auth::user()->hasRole('comptable')) ){
         return Redirect::back();
 
     }
@@ -422,6 +423,7 @@ public function contrib_user($id){
         return view('comptabilite.contrib_user',[
             'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
+            'id' => $id,
             //'periodes'=> $this->_periodes,
             //'motifs'=>$this->_motifs
             'motifs' => null,
@@ -456,6 +458,23 @@ public function contrib_user($id){
 
 
 }
+
+    public function contribution(){
+
+        $this->load_users_notification_period();
+        $user = Auth::user();
+
+
+        return view('comptabilite.contribution',[
+            'user' =>  $this->_user->unreadnotifications,
+            'nbr_notif'=> $this->_notifications,
+            'periodes'=> $this->_periodes,
+            'motifs'=>$this->_motifs,
+            'avatar' => $user
+        ]);
+
+
+    }
 
 public function export_contribution(){
     if(! Auth::user()->hasRole('comptable')){

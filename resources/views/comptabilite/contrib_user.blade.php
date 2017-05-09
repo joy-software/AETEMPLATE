@@ -4,10 +4,10 @@
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
+    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 @section('title')
@@ -15,8 +15,8 @@
 @endsection
 
 
-<?php $rol = "comptable"; ?>
-@role($rol)
+
+@role("comptable")
 @section('sideOption')
     @include('layouts/asideOption', [
                 'classIconOption' => 'icon_house_alt',
@@ -58,6 +58,9 @@
                         </div>
                         <div class="col-lg-4">
                             <span class="pull-right" ><button class="btn btn-primary" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
+                            @if($id == Auth::id())
+                                <span><button  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </button></span>
+                            @endif
                         </div>
                     </div>
                 </div>

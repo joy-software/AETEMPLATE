@@ -59,7 +59,7 @@ class IncomingMember extends Notification implements ShouldQueue
             return (new MailMessage)
                 ->subject('Un nouvel adhérent')
                 ->line( $this->incomingMember['surname'] .' '  .$this->incomingMember['name'].', se reclame être un ancien vogtois et voudrait
-                 integrer'. config('app.name').'.')
+                 integrer '. config('app.name').'.')
                 ->line('Pouvez-vous confirmer sur honneur qu\'il est un ancien vogtois ?')
                 ->line('Pour valider son adhésion, cliquer sur le boutton ci-dessous.')
                 ->action('Valider son Adhésion', $url)
