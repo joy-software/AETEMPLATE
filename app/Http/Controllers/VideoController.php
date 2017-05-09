@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -16,13 +17,9 @@ use Google_Service_Exception;
 use Google_Exception;
 use Google_Service_YouTube_VideoStatus;
 use Google_Http_MediaFileUpload;
-use Illuminate\Support\Facades\Session;
 use App\Traits\GoogleAuthTrait;
-use App\ads_has_files;
-use App\group;
-use App\files;
-use App\ads;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 
 class VideoController extends Controller
@@ -145,15 +142,78 @@ class VideoController extends Controller
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
 
+        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
+
+            try {
+
+                $nextPageToken = '';
+
+                $result = array();
+                $i = 0;
+
+                do {
+                    $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
+                        'playlistId' => 'PLorQTUIjuMRYlJe0lJUgCOwuq7LGIveZk',
+                        'maxResults' => 50,
+                        'pageToken' => $nextPageToken));
+
+                    foreach ($playlistItemsResponse['items'] as $playlistItem) {
+                        $result[$i]['id'] = $playlistItem['snippet']['resourceId']['videoId'];
+                        $result[$i]['title'] = $playlistItem['snippet']['title'];
+                        $result[$i]['description'] = $playlistItem['snippet']['description'];
+                        $result[$i]['date'] = $playlistItem['snippet']['publishedAt'];
+                        $result[$i]['thumbnails'] = $playlistItem['snippet']['thumbnails']['default']['url'];
+                        $i++;
+                    }
+
+                    $nextPageToken = $playlistItemsResponse['nextPageToken'];
 
 
+                } while ($nextPageToken <> '');
+
+                Redirect::back()->with(['message' => $result]);
+
+            } catch (Google_Service_Exception $e) {
+
+                $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['message' => $htmlBody]);
+
+            } catch (Google_Exception $e) {
+
+                $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['message' => $htmlBody]);
+
+            } catch (\Exception $e) {
+
+                $htmlBody = sprintf('<p>: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['message' => $htmlBody]);
+            }
+
+        });
+
+        $videos = Session::get('message');
+
+        if (is_array($videos)) {
+
+             $videos = ['content' => $videos, 'status' => 'success'];
+
+        } elseif (is_string($videos)) {
+
+            $videos =  ['content' => $videos, 'status' => 'error'];
+
+        } else {
+
+            $videos =  ['content' => $videos, 'status' => 'unknown'];
+        }
 
         return view('video.index',
             [
                 'list_group'=> $groupControl->_list_group,
                 'user'=> $user->unreadnotifications,
                 'nbr_notif'=> $notifications,
+                'videos' => $videos
             ]);
+
     }
 
     public function viewVideo(Request $resquest)

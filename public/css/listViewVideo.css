@@ -1,0 +1,39 @@
+
+tr{
+    cursor: pointer;
+}
+
+.modal-content {
+    width: 600px;
+    margin: auto;
+}
+
+.modal-dialog {
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center;
+}
+
+#button {
+
+    position: fixed;
+    right: 0px;
+    top: 24%;
+    color: #ffffff;
+    font-size: 3em;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#button:hover {
+
+    background: crimson;
+}
+
+.content-player{
+    margin: auto;
+}
+
+#player{
+    margin-top: 20%;
+}
