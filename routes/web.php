@@ -421,6 +421,16 @@ Route::get('/comptabilite/contribution', [
     'uses'=> 'comptabiliteController@contribution'
 ]);
 
+Route::post('/comptabilite/post_contribution_cash',[
+    'as'=>'post_contribution_cash',
+    'uses'=>'comptabiliteController@post_contribution_cash'
+]);
+
+Route::post('/comptabilite/post_contribution_cash/callback',[
+    'as'=>'post_contribution_cash_callback',
+    'uses'=>'comptabiliteController@callback'
+]);
+
 /****
  * Route pour l'administration
  */

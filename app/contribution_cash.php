@@ -25,13 +25,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\contribution wherePeriodID($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution whereUserID($value)
+ * @property string $uid
+ * @property string $token
+ * @property string $provider_name
+ * @property string $confirmation_code
  * @property-read \App\motif $motif
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereConfirmationCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereProviderName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereUid($value)
  */
-class contribution extends Model
+class contribution_cash extends Model
 {
 
-    protected $table = "contribution";
-    protected $fillable = ['amount'];
+    protected $table = "contribution_cash";
+    protected $fillable = ['amount','uid','token','provider_name','confirmation_code'];
     /*****
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *

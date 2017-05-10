@@ -48,7 +48,7 @@ $("#create_contribution_file").on('submit', function (event) {
 
         },
         error : function (response) {
-            $("#div_message").html(response.message);
+            $("#div_message").html(erreur.message);
 
         }
 
@@ -95,7 +95,7 @@ $("#create_contribution").on('submit', function (event) {
 
         },
         error : function (erreur) {
-            $("#div_message").html(response.message);
+            $("#div_message").html(erreur.message);
 
         }
 
@@ -178,7 +178,7 @@ $("#create_motif").on('submit', function (event) {
         },
 
         error : function (erreur) {
-            $("#div_message").html(response.message);
+            $("#div_message").html(erreur.message);
         }
 
     });
@@ -268,3 +268,55 @@ $(".btn-contribution").click(function(){
 
 
 });
+
+/********Script Joy*********/
+var form_create_contribution_cash;
+$("#create_contribution_cash").on('submit', function (event) {
+    event.preventDefault();
+    form_create_contribution_cash = this;
+    var data = new FormData( this );
+
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
+                }
+        });
+
+    $.ajax({
+        url: form_create_contribution_cash['action'],
+        type: form_create_contribution_cash['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        success: function (response) {
+
+            if(response.type === "success" ){
+
+                $("#div_message").html(response.message);
+                $('#email_membre').prop('disabled', true);
+                $('#amount').prop('disabled', true);
+                $('#motif').prop('disabled', true);
+                $('#periode').prop('disabled', true);
+                $('#button_contrib').hide();
+                $('#wecashUp').html(response.body);
+                $('#create_contribution_cash').prop('action','http://promot-vogt.org/comptabilite/post_contribution_cash/callback');
+            }
+            else {
+                $("#div_message").html(response.message);
+
+            }
+
+        },
+        error : function (erreur) {
+            $("#div_message").html(erreur.message);
+
+        }
+
+    });
+});
+
+
+/********End Script Joy*********/

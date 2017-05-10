@@ -100,7 +100,7 @@
                                         </div>
 
                                         <br/>
-                                        <button type="submit" data-toggle="modal" data-target="#ConfirmAction" class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</button>
+                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
 
 
                                         <!--/form-->

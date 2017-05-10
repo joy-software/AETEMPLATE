@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\contribution;
+use App\contribution_cash;
 use App\User;
 use Illuminate\Http\Request;
 use App\period;
@@ -21,6 +22,7 @@ class comptabiliteController extends Controller
     private $_notifications;
     private $_periodes;
     private $_motifs;
+    private $_contribution;
 
     public function __construct()
     {
@@ -244,7 +246,157 @@ public function post_contribution(Request $request){
 
 }
 
-public function post_period(Request $request){
+public function post_contribution_cash(Request $request){
+
+        $email = $request->get('email_membre');
+        $amount = $request->get('amount');
+        $id_motif = $request->get('motif');
+        $id_period = $request->get("periode");
+
+        $user = User::where('email','=', $email)->get();
+
+        if($amount == 0){
+            $message = "<div class=\"alert alert-block alert-danger fade in\">S'il vous plait renseignez le montant, il ne doit pas être vide ou null</div>";
+            return response()->json([
+                'type'=>'error',
+                'message'=> $message
+            ]);
+        }
+
+        if(count($user) == 0){
+            $message = "<div class=\"alert alert-block alert-danger fade in\">Aucun membre ayant l'email : <strong>". $email . "</strong> n'existe </div>";
+            return response()->json([
+                'type'=>'error',
+                'message'=> $message
+            ]);
+        }
+
+        $user = User::where('email','=', $email)->first();
+
+        $count_contrib = contribution_cash::where('user_ID','=',$user['id'])
+            ->where('period_ID','=',$id_period)
+            ->where('motif_ID','=',$id_motif)
+            ->count();
+
+        if($count_contrib != 0){
+            $message = "<div class=\"alert alert-block alert-danger fade in\">Le membre ". $user['name']. " d'email : <strong>". $email . "</strong> a déjà contribué pour cette période et pour le même motif  </div>";
+            return response()->json([
+                'type'=>'error',
+                'message'=> $message
+            ]);
+        }
+
+        $contribution = contribution_cash::create([
+            'amount'=>$amount
+        ]);
+
+        $contribution->period()->associate($id_period);
+        $contribution->users()->associate($user['id']);
+        $contribution->motif()->associate($id_motif);
+        $contribution->save();
+
+        $uid = env('WCU_IDENTIFIANT_MARCHAND');
+        $public_key= env('WCU_CLE_PUBLIQUE_MARCHAND');
+        $currency = env('WCU_DEVISE_DU_MARCHAND');
+        $app_name = config('app.name');
+
+        $message = "<div class=\"alert alert-success fade in\">La cotisation du membre ". $user['name']. " d'email : <strong>". $email . "</strong> est en attente de paiement électronique </div>";
+        $body = "<br>
+        <script async src=\"https://www.wecashup.cloud/live/2-form/js/MobileMoney.js\" class=\"wecashup_button\"
+            data-receiver-uid=\"$uid\"
+            data-receiver-public-key=\"$public_key\"
+            data-transaction-receiver-total-amount=\"$contribution->amount\"
+            data-transaction-receiver-currency=\"$currency\"
+            data-name=\"$app_name\"
+            data-transaction-receiver-reference=\"REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND\"
+            data-transaction-sender-reference=\"REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT\"
+            data-style=\"1\"
+            data-image=\"https://www.wecashup.cloud/live/2-form/img/home.png\"
+            data-cash=\"true\"
+            data-telecom=\"true\"
+            data-m-wallet=\"false\"
+            data-split=\"false\"
+            data-sender-lang=\"fr\"
+            data-sender-phonenumber=\"$user->phone\">
+        </script>
+        <br>";
+        return response()->json([
+            'type'=>'success',
+            'message'=> $message,
+            'body'=>$body
+        ]);
+
+    }
+
+    public function callback(Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST');
+
+        $merchant_uid = 'votre indentiant marchand';
+        $merchant_public_key = 'votre clé publique';
+        $merchant_secret = 'votre clé secrete';
+        $transaction_uid = '';//create an empty transaction_uid
+        $transaction_token  = '';//create an empty transaction_token
+        $transaction_provider_name  = ''; //create an empty transaction_provider_name
+        $transaction_confirmation_code  = ''; //create an empty confirmation code
+        if(isset($_POST['transaction_uid'])){
+            $transaction_uid = $_POST['transaction_uid']; //Get the transaction_uid posted by the payment box
+        }
+        if(isset($_POST['transaction_token'])){
+            $transaction_token  = $_POST['transaction_token']; //Get the transaction_token posted by the payment box
+        }
+        if(isset($_POST['transaction_provider_name'])){
+            $transaction_provider_name  = $_POST['transaction_provider_name']; //Get the transaction_provider_name posted by the payment box
+        }
+        if(isset($_POST['transaction_confirmation_code'])){
+            $transaction_confirmation_code  = $_POST['transaction_confirmation_code']; //Get the transaction_confirmation_code posted by the payment box
+        }
+        $url = 'https://www.wecashup.com/api/v1.0/merchants/'.$merchant_uid.'/transactions/'.$transaction_uid.'/?merchant_public_key='.$merchant_public_key;
+
+        echo $url;
+
+        //Etape 7 : Vous devez completer ce script ici pour Sauvegarder la transaction en cours dans votre base de donnée
+        /* Prévoir une table de transactions à 5 colonnes au moins
+        /  transaction_uid | transaction_confirmation_code| transaction_token| transaction_provider_name | transaction_status */
+        //Etape 8 : Envoi des données au serveur de WeCashUp
+
+        $fields = array(
+            'merchant_secret' => urlencode($merchant_secret),
+            'transaction_token' => urlencode($transaction_token),
+            'transaction_uid' => urlencode($transaction_uid),
+            'transaction_confirmation_code' => urlencode($transaction_confirmation_code),
+            'transaction_provider_name' => urlencode($transaction_provider_name),
+            '_method' => urlencode('PATCH')
+        );
+        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+        rtrim($fields_string, '&');
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POST, count($fields));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        //Etape 9 : Reccupération de la réponse de WeCashUp
+
+        $server_output = curl_exec ($ch);
+
+        echo $server_output;
+
+        curl_close ($ch);
+
+        $data = json_decode($server_output, true);
+
+        if($data['response_status'] =="success"){
+
+            echo '<br><br> response_code : '.$data['response_code'];
+        }else{
+            echo '<br><br> response_code : '.$data['response_code'];
+        }
+    }
+
+    public function post_period(Request $request){
     $mois = $request->get('mois');
     $annee = $request->get('annee');
 

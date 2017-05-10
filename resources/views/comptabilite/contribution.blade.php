@@ -3,11 +3,10 @@
 @section('css')
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    @role("comptable")
+    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    @endrole()
 
 @endsection
 @section('title')
@@ -48,18 +47,25 @@
     <section class="wrapper" id="wrapper-content">
 
 
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10 col-md-10 col-sm-10" id="div_message">
 
+            </div>
+        </div>
             <div  style="background: white;">
 
-
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-lg-offset-5 col-sm-offset-4 col-md-offset-4" >
+                    @if($avatar->hasRole("comptable"))
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-5 col-sm-offset-4 col-md-offset-4" >
+                     @else
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-lg-offset-5 col-sm-offset-4 col-md-offset-4" >
+                    @endif
                         <section class="panel">
                             <header class="panel-heading text-center">
                                 Enregistrer une cotisation
                             </header>
 
                             <div class="list-group">
-                                {!! Form::open(array('route' => 'post_contribution', 'files' => true, 'id'=> 'create_contribution', 'method'=>'post')) !!}
+                                {!! Form::open(array('route' => 'post_contribution_cash', 'id'=> 'create_contribution_cash', 'method'=>'post')) !!}
                                 <a class="list-group-item" style=" background: white;">Entrer l'adresse email du membre :<br><br>
                                     <input type="email" class="form-control" name="email_membre" required id="email_membre" value="{{$avatar->email}}">
                                 </a>
@@ -72,7 +78,7 @@
                                     <?php
                                     if($motifs != null){
                                     ?>
-                                    <select class="form-control" name="motif">
+                                    <select class="form-control" name="motif" id="motif">
                                         <?php foreach($motifs as $motif){
                                         ?>
                                         <option class="form-control" value="<?php echo $motif->id; ?>"> <?php echo $motif->reason; ?> </option>
@@ -95,7 +101,7 @@
                                     <?php
                                     if($periodes != null){
                                     ?>
-                                    <select class="form-control" name="periode">
+                                    <select class="form-control" name="periode" id="periode">
                                         <?php foreach($periodes as $periode){
                                         ?>
                                         <option class="form-control" value="<?php echo $periode->id; ?>"> <?php echo strtoupper($periode->month)." - ".$periode->year; ?> </option>
@@ -111,50 +117,19 @@
                                     }
                                     ?>
                                 </a>
-                                <div class="center col-lg-offset-2 col-md-offset-2 col-sm-offset-2" >
-                                   <br>
-                                    <script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
-                                            data-receiver-uid={{env('WCU_IDENTIFIANT_MARCHAND')}}
-                                                    data-receiver-public-key={{env('WCU_CLE_PUBLIQUE_MARCHAND')}}
-                                                    data-transaction-receiver-total-amount="MONTANT_TOTAL_DE_LA_TRANSACTION"
-                                            data-transaction-receiver-currency="{{env('WCU_DEVISE_DU_MARCHAND')}}"
-                                            data-name={{config('app.name')}}
-                                                    data-transaction-receiver-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND"
-                                            data-transaction-sender-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT"
-                                            data-style="1"
-                                            data-image="https://www.wecashup.cloud/live/2-form/img/home.png"
-                                            data-cash="true"
-                                            data-telecom="true"
-                                            data-m-wallet="false"
-                                            data-split="false"
-                                            data-sender-lang="fr"
-                                            data-sender-phonenumber="{{$avatar->phone}}">
-                                    </script>
+                                <div class="form-group " id="button_contrib">
+                                    <br/>
+                                    <button  id="btn_create_contribution_cash"class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
+                                </div>
+                                <div class="center col-lg-offset-2 col-md-offset-2 col-sm-offset-2" id="wecashUp">
+
                                 </div>
                                 {!! Form::close() !!}
                             </div>
 
                         </section>
                     </div>
-
-
-
-
         </div>
-
-        <div class="modal fade" id="ConfirmAction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body" style="background: white;">
-                        Exemple de modal
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
     </section>
 
 @endsection
@@ -162,21 +137,5 @@
 
 
 @section('script')
-
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
-    <script>
-
-
-        _token = $('input[name=_token]').val();
-        $.ajaxSetup({
-            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-        });
-
-
-
-    </script>
     <script src="{{ asset('js/comptabilite.js') }}"></script>
-
 @endsection
