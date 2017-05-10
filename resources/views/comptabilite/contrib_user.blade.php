@@ -59,7 +59,7 @@
                         <div class="col-lg-4">
                             <span class="pull-right" ><button class="btn btn-primary" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
                             @if($id == Auth::id())
-                                <span><button  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </button></span>
+                                <span><a href="{{url('comptabilite/contribution')}}"  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </a></span>
                             @endif
                         </div>
                     </div>

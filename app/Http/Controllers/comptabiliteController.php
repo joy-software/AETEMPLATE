@@ -589,13 +589,13 @@ public function contrib_user($id){
     $message = " ";
     $compteur = 0;
     foreach( $contrib as $item ){
-        $motif = motif::find($item['id']);
-        $period = period::find($item['id']);
+        $motif = motif::find($item['motif_ID']);
+        $period = period::findOrFail($item['period_ID']);
 
         $motifs[''. $compteur .''] = $motif->reason;
         $periodes[''. $compteur .''] = strtoupper($period->month) . " - " . $period->year;
         $montant['' .$compteur .''] = $item['amount'];
-        $compteur ++;
+        $compteur++;
     }
 
     return view('comptabilite.contrib_user',[
@@ -603,6 +603,7 @@ public function contrib_user($id){
         'nbr_notif'=> $this->_notifications,
         'periodes'=>  $periodes,
         'motifs' => $motifs,
+        'id' => $id,
         'montant'=> $montant,
         'nom_user' => $user->name .' , '. $user->surname,
         'compteur' => $compteur
