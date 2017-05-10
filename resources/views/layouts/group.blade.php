@@ -23,7 +23,7 @@
 
                 </li>
                 <li>
-                    <button class="btn btn-primary btnViewGroup"><a href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a></button>
+                    <a class="btn btn-primary btnViewGroup" href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a>
                 </li>
             </ul>
         </div>

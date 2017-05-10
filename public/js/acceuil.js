@@ -4,3 +4,4 @@
 $("select.form-control").change(function(){
     $("#amount_contribution").val($(this).val());
 });
+

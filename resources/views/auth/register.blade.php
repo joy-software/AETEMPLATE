@@ -262,7 +262,7 @@
                             <strong>{{ $errors->first('captcha-verified') }}</strong>
                         </span>
                             @endif
-             ²               @if ($errors->has('g-recaptcha-response'))
+                           @if ($errors->has('g-recaptcha-response'))
 
                                 <span class="help-block control-label col-lg-12  text-danger">
                             <strong>{{ $errors->first('g-recaptcha-response') }}</strong>

@@ -26,10 +26,11 @@
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
-                    <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
+                    <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
                     <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
+                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
@@ -77,9 +78,9 @@
                 foreach($users as $user){
                     ?>
                 <tr id="tr-user-{{ $user['id'] }}">
-                    <td id="td-image-{{ $user['id'] }}" style="width: 15%;">
+                    <td id="td-image-{{ $user['id'] }}">
                         <span class="profile-ava">
-                           <img alt="" class="simple" style="width : 100%; height : auto;" src="{{url('cache/logo/'.$user['photo'])}}">
+                           <img alt="" class="simple" src="{{url('cache/logo/'.$user['photo'])}}">
                         </span>
                     </td>
 

@@ -96,6 +96,7 @@ class UserController extends Controller
        //$contributions = null;
 
        $notifications = $user->unreadnotifications()->count();
+       session(['menu' => 'accueil']);
 
        return redirect()->back()->with(['success' => 'Modifications réussies',
            'user'=> $user->unreadnotifications,
@@ -169,6 +170,7 @@ class UserController extends Controller
 
        //$contributions = null;
        $notifications = $user->unreadnotifications()->count();
+       session(['menu' => 'accueil']);
 
        return redirect()->route('profile')->with(['success' => $message,
            'user'=> $user->unreadnotifications,
@@ -220,6 +222,7 @@ class UserController extends Controller
    {
        $user = Auth::user();
        $notifications = $user->unreadnotifications()->count();
+       session(['menu' => 'accueil']);
        return view('layouts/index',['user' =>  $user->unreadnotifications,
            'notifs' =>  $user,
            'nbr_notif'=> $notifications]);

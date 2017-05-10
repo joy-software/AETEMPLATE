@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
 
         GroupCreateEvent::class => [
             GroupCreateListener::class,],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\LogSuccessfulLogin',
+        ],
     ];
 
     /**

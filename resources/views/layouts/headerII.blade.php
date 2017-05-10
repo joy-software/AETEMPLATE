@@ -31,8 +31,9 @@
             @include('layouts/menuItem', ['itemName' => 'annuaire', 'link' => "/annuaire"])
             @include('layouts/menuItem', ['itemName' => 'bibliotheque', 'link' => "/filemanager?type=file"])
             @include('layouts/menuItem', ['itemName' => 'comptabilite', 'link' => "/#"])
-            @include('layouts/menuItem', ['itemName' => 'administration', 'link' => "/#"])
-
+         @if( session('role_admin'))
+                @include('layouts/menuItem', ['itemName' => 'administration', 'link' => "/#"])
+            @endif
 
            @include('layouts/menuProfil')
 

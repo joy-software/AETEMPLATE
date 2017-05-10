@@ -158,7 +158,7 @@ function accepter(id_user, id_group){
         success: function(data){
             var rep = data;
             if(rep.type === "success"){
-                alert('le message est : '+rep.message);
+                //alert('le message est : '+rep.message);
                 // tout a marché comme sur des roulettes.
                 if($('#tab_demande tr').length > 1){
                     $("#tr-user-"+id_user+"").hide();

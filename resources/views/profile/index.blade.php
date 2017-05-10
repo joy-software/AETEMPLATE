@@ -193,11 +193,11 @@
                                     <section class="panel">
                                         <div class="panel-body bio-graph-info">
 
-                                                {!! Form::open(
-                                                            array(
-                                                                'route' => 'editProfile',
-                                                                'class' => 'form-horizontal',
-                                                                'files' => true)) !!}
+                                            {!! Form::open(
+                                                        array(
+                                                            'route' => 'editProfile',
+                                                            'class' => 'form-horizontal',
+                                                            'files' => true)) !!}
 
                                                 {{ csrf_field() }}
                                                 <div class="form-group">
