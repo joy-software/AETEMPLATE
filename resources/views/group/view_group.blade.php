@@ -17,6 +17,11 @@
     @include('layouts/asideOptionGenerated')
 @endsection
 
+<style>
+    .project-team, .panel-title, .progress-panel {
+        background: white !important;
+    }
+</style>
 
 
 @section('content')
@@ -37,6 +42,95 @@
             </div>
         </div>
 
+
+        <!--div class="row" style="">
+            <div class="col-lg-offset-1 col-lg-10">
+
+                <ul class="breadcrumb" style="background: white;">
+                    <li><a class="btn btn-primary" id="show_create_ad" ><i class="icon_pencil-edit"></i> <bold> Créer une publication </bold></a></li>
+                </ul>
+
+            </div>
+            id="div_create_ad"
+        </div-->
+        <?php $role_admin= "admin_".$group->id; ?>
+
+        <div class="row" >
+            <section class="panel col-lg-offset-1 col-lg-10">
+                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <section class="panel" >
+                            <header class="panel-heading">
+                                Créer une annonce @role($role_admin) / une réunion @endrole
+                            </header>
+                            <div class="panel-body" style="text-align: center;">
+
+                                <div class="alert alert-block alert-danger fade in" id="message">
+
+                                </div>
+
+                                <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
+                                <textarea cols="10" rows="8" name="description" id="description_create_ad" class="form-control"></textarea>
+                            </div>
+
+                        </section>
+                    </div>
+                    <div class="col-lg-4 well">
+                            Joindre des fichiers <br>
+                        <div class="row" id="span_file1">
+                            <div class="col-lg-9">
+                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
+                                <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+                        <div class="row" id="span_file2">
+                            <div class="col-lg-9">
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
+                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+                        <div class="row" id="span_file3">
+                            <div class="col-lg-9">
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
+                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div>
+
+                        <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
+                            <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
+
+                        @role($role_admin)
+
+                        <p>
+                            <label class="checkbox checkbox-inline">
+                                <input type="checkbox" id="checkbox-even" name="checkbox_even" value="option1"> Publier comme une reunion
+                            </label>
+                        </p>
+                        <p id="p_date_even" style="margin-left: -20px;">
+                            <label class="checkbox checkbox-inline">
+                                Cette reunion est prévue pour le <input name="expiration_date" type="date" id="input_date" class="form-control">
+                            </label>
+                        </p>
+                        @endrole
+                    </div>
+
+                </div>
+                <div class="row col-lg-offset-2 col-lg-2" style="text-align: center; margin-bottom: 5px;">
+                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
+                </div>
+                {!! Form::close() !!}
+            </section>
+        </div>
 
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10" >
@@ -96,7 +190,7 @@
                     <td style="width: 25%">
                         <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn">Accepter</button>
                         <br><br>
-                        <?php $role_admin= "admin_".$group->id; ?>
+
                         @role($role_admin)
                         <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn">Refuser</button>
                         @endrole
@@ -131,93 +225,7 @@
         </section>
         </div>
 
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-8">
-                <div class="list-group">
-                    <a class="btn btn-primary list-group-item active" id="show_create_ad" > Je veux créer une annonce </a>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="div_create_ad" >
-            <section class="panel col-lg-offset-1 col-lg-10">
-                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
-                <div class="row">
-                    <div class="col-lg-8">
-                        <section class="panel" >
-                            <header class="panel-heading">
-                                Créer une annonce / évènement
-                            </header>
-                            <div class="panel-body" style="text-align: center;">
 
-                                <div class="alert alert-block alert-danger fade in" id="message">
-
-                                </div>
-
-                                <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
-                                <textarea cols="10" rows="10" name="description" id="description_create_ad" class="form-control"></textarea>
-                            </div>
-
-                        </section>
-                    </div>
-                    <div class="col-lg-4 well">
-                        <p>
-                            Joindre des fichiers a l'annonce <br>
-                        <div class="row" id="span_file1">
-                                <div class="col-lg-9">
-                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
-                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                                </div>
-                        </div><br>
-                        <div class="row" id="span_file2">
-                            <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
-                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                            </div>
-                            <div class="col-lg-3">
-                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                            </div>
-                        </div><br>
-                        <div class="row" id="span_file3">
-                            <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
-                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                            </div>
-                            <div class="col-lg-3">
-                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                            </div>
-                        </div><br>
-
-                        <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
-                            <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
-                        </p>
-
-                        <p>
-                        <label class="checkbox checkbox-inline">
-                            <input type="checkbox" id="checkbox-even" name="checkbox_even" value="option1"> Publier comme un évènement
-                        </label>
-                        </p>
-                        <p id="p_date_even" style="margin-left: -20px;">
-                        <label class="checkbox checkbox-inline">
-                            Cet évènement sera valide jusqu'en <input name="expiration_date" type="date" id="input_date" class="form-control">
-                        </label>
-                        </p>
-
-                    </div>
-                    <br>
-                </div>
-                <div class="row" style="text-align: center;">
-                    <div class="col-lg-offset-2 col-lg-2">
-                        <p>
-                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer l'annonce</button>
-                        </p>
-                    </div>
-                </div>
-                {!! Form::close() !!}
-            </section>
-        </div>
 
 
 
@@ -225,11 +233,21 @@
           Partie des évènements !!!
       </div-->
 
-    <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
+        <div class="row" >
+            <div class="col-lg-offset-1 col-lg-10">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb" style="background: white;">
+                    <li><a href="#">Evènements et Annonces les plus récentes</a></li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+    <!--div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
         <ul class="breadcrumb" id="menu_group">
             <li><a><h4>Evènement</h4></a></li>
         </ul>
-    </div>
+    </div-->
 
         <?php
 
@@ -335,11 +353,11 @@
             Partie des annoncess !!!!!
         </div-->
 
-        <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
+        <!--div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
             <ul class="breadcrumb" id="menu_group">
                 <li><a><h4>Annonce</h4></a></li>
             </ul>
-        </div>
+        </div-->
 
     <?php
 

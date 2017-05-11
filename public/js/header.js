@@ -67,9 +67,12 @@ $(document).ready(function(){
 Ajouté par le yobiyork
  */
 
+
 $(document).ready( function () {
     // Add return on top button
     $('body').append('<div id="returnOnTop" title="Retour en haut">&nbsp;</div>');
+
+    $('.btn').addClass('disabled');
 
     // On button click, let's scroll up to top
     $('#returnOnTop').click( function() {
@@ -78,6 +81,11 @@ $(document).ready( function () {
 
 
 });
+
+$( window ).on( "load", function () {
+    $('.btn').removeClass('disabled');
+} );
+
 
 $(window).scroll(function() {
     // If on top fade the bouton out, else fade it in
