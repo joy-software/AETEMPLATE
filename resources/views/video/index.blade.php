@@ -74,9 +74,9 @@
                 $videos = $videos['content'];
             ?>
 
-                <div class="alert alert-block ">
+                <!--div class="alert alert-block ">
                     {!! dump(\Illuminate\Support\Facades\Session::getFacadeRoot()) !!}
-                </div>
+                </div-->
 
 
             @if ($status == 'success')
@@ -116,14 +116,14 @@
                                             @if(! (old('accessibility')))
                                                 <option value="" selected>Accéssibilité de la vidéo</option>
                                             @endif
-                                            <option value="public"   @if( old('accessibility') == 'public')
-                                            selected>Publique</option>
+                                            <option value="private"   @if( old('accessibility') == 'private')
+                                            selected>Privée</option>
                                             @else
                                                 >Privée</option>
                                             @endif
 
-                                            <option value="private"   @if( old('accessibility') == 'private')
-                                            selected>Privée</option>
+                                            <option value="public"   @if( old('accessibility') == 'public')
+                                            selected>Publique</option>
                                             @else
                                                 >Publique</option>
                                             @endif
@@ -163,13 +163,16 @@
 
                                     @if ($errors->has('video'))
                                         <span class="help-block control-label col-lg-12  text-danger">
-                                            <strong>{{ $errors->first('photo') }}</strong>
+                                            <strong>{{ $errors->first('video') }}</strong>
                                         </span>
                                     @endif
                                 </div>
 
 
                                 <div class="form-group" >
+
+                                    <span id="msg" class="help-block  col-lg-7  text-danger"> </span>
+
                                     <div class=" col-lg-12" >
                                         <button  class="btn btn-default" id="btnCloseAddVideo" >Fermer</button>
                                         <button  class="btn btn-primary" type="submit" id="btnSubmitAddVideo">Envoyer</button>
@@ -206,7 +209,7 @@
                         </div>
 
 
-                        <button class="btn btn-primary" id="btnAddVideo"><i class="icon_upload"></i><span id="label-file">Ajouter une vidéo</span></button>
+                        <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
 
 
                     </div>

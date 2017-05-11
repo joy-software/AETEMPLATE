@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use View;
@@ -57,7 +58,7 @@ class VideoController extends Controller
 
             if ($request->file('video') == null) {
 
-                return Redirect::back()->with(['message' => 'video is null']);
+                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => 'Vueillez choisir une vidéo']]);
             }
 
             VideoController::videoValidator($request->allFiles())->validate();
@@ -67,7 +68,6 @@ class VideoController extends Controller
                 $snippet = new Google_Service_YouTube_VideoSnippet();
                 $snippet->setTitle($request->get('title'));
                 $snippet->setDescription($request->get('description'));
-                $snippet->setTags(array("tag1", "tag2"));
 
                 $snippet->setCategoryId("22");
 
@@ -82,8 +82,7 @@ class VideoController extends Controller
                 $video->setStatus($status);
 
 
-
-                $chunkSizeBytes = 10 * 1024 * 1024;
+                $chunkSizeBytes =  1024 * 1024;
 
                 // Setting the defer flag to true tells the client to return a request which can be called
                 // with ->execute(); instead of making the API call immediately.
@@ -104,13 +103,17 @@ class VideoController extends Controller
                 $media->setFileSize($request->file('video')->getSize());
 
                 // Read the media file and upload it chunk by chunk.
+                $report = array(); $i = 0;
                 $status = false;
                 $handle = $request->file('video')->openFile('rb');
                 while (!$status && !$handle->eof()) {
                     $chunk = $handle->fread($chunkSizeBytes);
                     $status = $media->nextChunk($chunk);
+                    $report[$i] = $status;
+                    $i++;
                 }
 
+                Session::set('report', $report);
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $client->setDefer(false);
 
@@ -123,8 +126,17 @@ class VideoController extends Controller
                 $resourceId->setKind('youtube#video');
 
                 $playlistItemSnippet = new Google_Service_YouTube_PlaylistItemSnippet();
+                $accessibility = $request->get('accessibility');
 
-                $playlistItemSnippet->setPlaylistId('PLorQTUIjuMRYlJe0lJUgCOwuq7LGIveZk');
+                if ($accessibility == 'private') {
+
+                    $playlistItemSnippet->setPlaylistId(env('PRIVATE_PLAYLIST_VIDEO'));
+
+                } elseif ($accessibility == 'public') {
+
+                    $playlistItemSnippet->setPlaylistId(env('PUBLIC_PLAYLIST_VIDEO'));
+                }
+
                 $playlistItemSnippet->setResourceId($resourceId);
 
                 $playlistItem = new Google_Service_YouTube_PlaylistItem();
@@ -133,7 +145,7 @@ class VideoController extends Controller
                 $playlistItemResponse = $youtube->playlistItems->insert('snippet,contentDetails', $playlistItem, array());
 
 
-                return Redirect::back()->with(['message' => $htmlBody]);
+                return Redirect::back()->with(['message' => ['type' => 'success', 'message' => 'Vidéo Ajoutée avec succès']]);
 
             } catch (Google_Service_Exception $e) {
                 $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
@@ -143,11 +155,11 @@ class VideoController extends Controller
                     htmlspecialchars($e->getMessage()));
             }
 
-            return Redirect::back()->with(['message' => $htmlBody]);
+            return Redirect::back()->with(['message' => ['type' => 'error', 'message' => $htmlBody]]);
 
         });
 
-        return Redirect::back();
+        return response()->json(Session::get('message'));
     }
 
 
