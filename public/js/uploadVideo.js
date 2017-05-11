@@ -8,6 +8,7 @@ $('#btnCloseAddVideo').click(function(event){
 
     $('#msg').css('display', 'none');
     $('#addVideoAction').css('display', 'none');
+    $('#upload-form input').val('');
 
 });
 
