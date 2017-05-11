@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Traits\reCaptchaTrait;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
     use ActivationKeyTrait;
+    use reCaptchaTrait;
 
     /**
      * Where to redirect user after registration.

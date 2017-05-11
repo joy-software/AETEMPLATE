@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html>
-<body>
-<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-<div id="player"></div>
 
-<script>
+/*
+Créer un évènement se déclenchant lors du clic sur une ligne d'un tableau présentant des vidéos
+ */
+
+$('tr.clickable').click(function () {
+
+    console.log($(this).attr('id'));
+
+    $('#ConfirmAction').css('display', 'block').css('opacity', '1').css('background', 'rgba(0,0,0,0.7)');
+
+    player.loadVideoById({'videoId': $(this).attr('id')});
+
+});
+
+$('#button').click(function () {
+
+    $('#ConfirmAction').css('display', 'none');
+    player.stopVideo();
+})
+
+
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -15,11 +30,11 @@
     // 3. This function creates an <iframe> (and YouTube player)
     //    after the API code downloads.
     var player;
+
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '360',
-            width: '640',
-            videoId: 'OZBl97Ps5NE',
+            height: '50%',
+            width: '50%',
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -30,32 +45,32 @@
 
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
-        //event.target.cuePlaylist(['OZBl97Ps5NE'], 0, 0, 'small');
+
         event.target.setLoop(true);
     }
 
     // 5. The API calls this function when the player's state changes.
     //    The function indicates that when playing a video (state=1),
     //    the player should play for six seconds and then stop.
-    var done = false;
+
     function onPlayerStateChange(event) {
 
         if (event.data == YT.PlayerState.ENDED) {
 
-
-            //setTime(0);
-            setTimeout(pauseVideo, 1000);
-
+            player.seekTo(0, true);
         }
 
-        done = true;
     }
+
     function stopVideo() {
+
         player.stopVideo();
     }
+
     function pauseVideo() {
+
         player.pauseVideo();
     }
-</script>
-</body>
-</html>
+
+
+

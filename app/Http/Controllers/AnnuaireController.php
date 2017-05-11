@@ -21,6 +21,7 @@ class AnnuaireController extends Controller
 
     public function index()
     {
+        session(['menu' => 'annuaire']);
         $members =DB::table('users')->where('id','!=',1)->get();
        // $years = DB::table('users')->groupBy('promotion')->get();
 

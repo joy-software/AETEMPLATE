@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/home', 'HomeController@auth');
+
 
 
 Route::get('/','HomeController@index');
@@ -120,6 +120,10 @@ Route::group(compact('middleware', 'prefix', 'as'), function () {
     Route::get('/demo', '\Unisharp\Laravelfilemanager\controllers\DemoController@index');
 });
 
+/**
+ * Routes pour le profil
+ */
+
 Route::post('/editProfile', [
     'as' => 'editProfile',
     'uses' => 'UserController@editProfile'
@@ -130,10 +134,47 @@ Route::post('/editCredential', [
     'uses' => 'UserController@editCredential'
 ]);
 
+/**
+ * Routes pour les videos
+ */
+
 Route::get('/tester', [
     'as' => 'tester',
     'uses' => 'HomeController@tester'
 ]);
+
+
+Route::post('/tester/upload', [
+    'as' => 'post_tester_upload',
+    'uses' => 'VideoController@uploadVideo'
+]);
+
+Route::get('/video/list', [
+    'as' => 'video_list',
+    'uses' => 'VideoController@listVideo'
+]);
+
+Route::post('/video/upload', [
+    'as' => 'post_video_upload',
+    'uses' => 'VideoController@uploadVideo'
+]);
+
+Route::get('/video/view/{id}', [
+    'as' => 'video_view',
+    'uses' => 'VideoController@viewVideo'
+]);
+
+
+/**
+ * Route pour recupérer les tokens de l'api Google
+ */
+
+Route::get('/google/get_token', [
+    'as' => 'google_get_token',
+    'uses' => 'GoogleController@getToken'
+]);
+
+
 
 Route::get('/accueil', [
     'as' => 'accueil',
@@ -180,7 +221,7 @@ Route::post('/group/post_create_group', [
 Route::get('/group/view_group/{id}', [
     'as'=>'view_group',
     'uses'=>'groupController@view_group',
-    //'middleware' => 'group'
+    'middleware' => 'group'
 ]);
 
 Route::get('/group/meeting_group/{id}', [
@@ -373,6 +414,21 @@ Route::get('/comptabilite/export_contribution', [
 Route::get('/comptabilite/del_period_motifs', [
     'as'=>'del_period_motifs',
     'uses'=>'comptabiliteController@del_period_motifs'
+]);
+
+Route::get('/comptabilite/contribution', [
+    'as'=>'contribution',
+    'uses'=> 'comptabiliteController@contribution'
+]);
+
+Route::post('/comptabilite/post_contribution_cash',[
+    'as'=>'post_contribution_cash',
+    'uses'=>'comptabiliteController@post_contribution_cash'
+]);
+
+Route::post('/comptabilite/post_contribution_cash/callback',[
+    'as'=>'post_contribution_cash_callback',
+    'uses'=>'comptabiliteController@callback'
 ]);
 
 /****
