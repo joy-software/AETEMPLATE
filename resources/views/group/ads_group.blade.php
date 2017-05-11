@@ -30,7 +30,7 @@
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
-                    <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
+                    <li><a href="/group/ads_group/{{ $group->id }}" style="color: #ff2d55!important;">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
                     <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
                     <li><a href="{{ route('video_list') }}">Vidéos </a></li>

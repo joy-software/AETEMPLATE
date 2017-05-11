@@ -87,10 +87,6 @@ $(window).scroll(function() {
         $('#returnOnTop').fadeIn();
 });
 
-colorMenuEffectClick = function(idMenu){
-    $('#accueil > a, #groupes > a, #annuaire > a, #bibliotheque > a, #comptabilite > a, #administration > a').css('color', '#8E8E93');
-    $(idMenu + ' > a').css('color', '#007AFF');
-};
 
 retractAsideEffectClick = function(){
     $('#sidebar').css('display', 'none');
@@ -141,13 +137,23 @@ $('#bibliotheque').click(function(){
 });
 
 $('#comptabilite').click(function(){
+if(compta == false)
+{
+    window.location.href = '/contrib_user/'+userId;
+}
+else
+{
     window.location.href = '/comptabilite';
-
+}
 });
 
 $('#administration').click(function(){
     window.location.href = '/admin';
+});
 
+
+$('#logo_home').click(function(){
+    window.location.href = "http://www.promotvogt.org";
 });
 
 /**

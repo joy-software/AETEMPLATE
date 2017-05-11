@@ -26,6 +26,7 @@ class adminController extends Controller
     public function load_users_notification(){
         $this->_user = Auth::user();
         $this->_notifications = $this->_user->unreadnotifications()->count();
+        session(['menu' => 'admin']);
     }
 
     public function index (){
@@ -48,10 +49,11 @@ class adminController extends Controller
 
         $user_aut = Auth::user();
         $compteur = 0;
+
         foreach ($list_role as $item) {
             if( ($user_aut->hasRole($item['name'])) ){
                 //echo $item['name'];
-                $list_group[] = group::where('id', '=', $item['group_ID'])->first();
+                $list_group[$compteur] = group::where('id', '=', $item['group_ID'])->first();
                 $compteur++;
             }
         }
@@ -284,7 +286,7 @@ class adminController extends Controller
         if($count_user == 0){
             return Redirect::back();
         }
-
+        $this->load_users_notification();
         $group = group::find($id_group);
 
         if( ($count_user == 1) && ( Auth::user()->hasRole('admin_'. $id_group))){

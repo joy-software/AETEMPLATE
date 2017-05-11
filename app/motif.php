@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\motif whereReason($value)
  * @method static \Illuminate\Database\Query\Builder|\App\motif whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\contribution[] $contribution
  */
 class motif extends Model
 {

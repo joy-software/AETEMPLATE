@@ -53,10 +53,10 @@ class groupController extends Controller
         $this->_users_group = null;
         $this->_all_group = null;
 
-        $groups = array();
+      /*  $groups = array();
         if (!session()->has('group')) {
             session(['group' =>  $groups]);
-        }
+        }//*/
 
 
         $this->_all_group = DB::table('group')->get();
@@ -73,11 +73,12 @@ class groupController extends Controller
             $this->_id_list_group[$this->_compteur] = $this->_list_group[$this->_compteur]['id'];
             //$this->_statut_group[''.$this->_id_list_group[$this->_compteur].''] = $element->statut;
 
-            if(!array_has(session('group'),$this->_compteur))
+           /* if(!array_has(session('group'),$this->_compteur))
             {
                session()->push('group',$element['group_ID']);
-            }
+            }//*/
             $this->_compteur++;
+            session(['menu' => 'groupe']);
 
         }
 
@@ -666,7 +667,7 @@ class groupController extends Controller
             return redirect()->back();
         }
 
-        $id_users = DB::table('usergroup')->select('user_id')->where('group_ID','=',$id)->get();
+        $id_users = DB::table('usergroup')->select('user_id')->where('group_ID','=',$id)->where('user_id','!=',1)->get();
 
         $tab_user_membre[]=null;
         $compt =0;

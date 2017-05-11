@@ -110,9 +110,11 @@ class HomeController extends Controller
 
 
         /***End Loading ***/
-        $contributions = null;
+       // $contributions = null;
 
         $notifications = $user->unreadnotifications()->count();
+        session(['menu' => 'accueil']);
+
         return view('accueil',['user'=> $user->unreadnotifications,
             'nbr_notif'=> $notifications,
             'nbr_ads_A'=>$nbr_ads,
@@ -130,11 +132,9 @@ class HomeController extends Controller
             'nbr_mem_group'=>$nbr_mem_group]);
     }
 
-    public function auth()
-    {
-        return view('auth/lagin');
-    }
+
     public function profile(Request $request){
+        session(['menu' => 'accueil']);
         $user = Auth::user();
         $nbr_event = 0;
         $nbr_ads = 0;
@@ -168,11 +168,10 @@ class HomeController extends Controller
             'nbr_mem'=>$nbr_mem]);
     }
 
+
     public function tester(){
         return view('test/playVideo');
     }
-
-
 
 }
 

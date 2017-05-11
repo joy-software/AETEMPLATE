@@ -100,26 +100,9 @@
                                         </div>
 
                                         <br/>
-                                        <button type="submit" class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</button>
+                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
 
-                                            <!--script async src="https://www.wecashup.cloud/live/2-form/js/MobileMoney.js" class="wecashup_button"
-                                                    data-receiver-uid={{env('WCU_IDENTIFIANT_MARCHAND')}}
-                                                    data-receiver-public-key={{env('WCU_CLE_PUBLIQUE_MARCHAND')}}
-                                                    data-transaction-receiver-total-amount="MONTANT_TOTAL_DE_LA_TRANSACTION"
-                                                    data-transaction-receiver-currency="{{env('WCU_DEVISE_DU_MARCHAND')}}"
-                                                    data-name={{config('app.name')}}
-                                                    data-transaction-receiver-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND"
-                                                    data-transaction-sender-reference="REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT"
-                                                    data-style="1"
-                                                    data-image="https://www.wecashup.cloud/live/2-form/img/home.png"
-                                                    data-cash="true"
-                                                    data-telecom="true"
-                                                    data-m-wallet="false"
-                                                    data-split="false"
-                                                    data-sender-lang="fr"
-                                                    data-sender-phonenumber="{{$avatar->phone}}">
 
-                                            </script>
                                         <!--/form-->
 
                                     @endif

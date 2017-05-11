@@ -30,7 +30,7 @@
                     <tbody>
                     <?php if($list_users == null) { ?>
                         <tr>
-                            <td>Il n'y a pas de membre dans ce groupe </td>
+                            <td>Il n'y a pas d'autres membres dans ce groupe </td>
                         </tr>
                     <?php } else {
 

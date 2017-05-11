@@ -36,7 +36,7 @@
                     <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
                     <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}" style="color: #ff2d55!important;">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -117,11 +117,12 @@
                             <td>
 
                                 <?php $role_admin= "admin_".$id_group; $_is_admin = false;?>
-
+                                @if(Auth::id() == $member->id)
                                 @role($role_admin)
                                 <?php $_is_admin = true; ?>
                                     <span class="badge bg-success">Vous êtes administrateur</span>
                                 @endrole
+                                    @endif
 
                             </td>
 
