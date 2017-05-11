@@ -19,6 +19,7 @@
         player = new YT.Player('player', {
             height: '360',
             width: '640',
+            videoId: 'OZBl97Ps5NE',
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
@@ -29,7 +30,7 @@
 
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
-        event.target.cuePlaylist(['OZBl97Ps5NE'], 0, 0, 'small');
+        //event.target.cuePlaylist(['OZBl97Ps5NE'], 0, 0, 'small');
         event.target.setLoop(true);
     }
 

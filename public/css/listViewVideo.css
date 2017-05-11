@@ -6,34 +6,42 @@ tr{
 .modal-content {
     width: 600px;
     margin: auto;
+    height: 100%;
 }
 
 .modal-dialog {
     width: 100% !important;
     margin: 0 !important;
     text-align: center;
+    height: 100%;
 }
 
-#button {
+.close {
 
     position: fixed;
     right: 0px;
     top: 24%;
-    color: #ffffff;
+    color: white !important;
     font-size: 3em;
     padding-left: 7px;
     padding-right: 7px;
 }
 
-#button:hover {
+.close:hover {
 
-    background: crimson;
+    background: red;
 }
 
 .content-player{
     margin: auto;
+    height: 100%;
 }
 
 #player{
     margin-top: 20%;
+
+}
+
+th{
+    text-align: center;
 }

@@ -13,19 +13,22 @@ use Google_Client;
 use Google_Service_YouTube;
 use Google_Service_YouTube_Video;
 use Google_Service_YouTube_VideoSnippet;
+use Google_Service_YouTube_PlaylistItem;
+use Google_Service_YouTube_PlaylistItemSnippet;
 use Google_Service_Exception;
 use Google_Exception;
 use Google_Service_YouTube_VideoStatus;
 use Google_Http_MediaFileUpload;
 use App\Traits\GoogleAuthTrait;
-use App\User;
-use Illuminate\Support\Facades\DB;
+
+
 
 
 class VideoController extends Controller
 {
 
     use GoogleAuthTrait;
+
 
     public function __construct()
     {
@@ -62,8 +65,8 @@ class VideoController extends Controller
             try{
 
                 $snippet = new Google_Service_YouTube_VideoSnippet();
-                $snippet->setTitle("seconde video");
-                $snippet->setDescription("second test d'upload");
+                $snippet->setTitle($request->get('title'));
+                $snippet->setDescription($request->get('description'));
                 $snippet->setTags(array("tag1", "tag2"));
 
                 $snippet->setCategoryId("22");
@@ -71,12 +74,13 @@ class VideoController extends Controller
                 // Set the video's status to "public". Valid statuses are "public",
                 // "private" and "unlisted".
                 $status = new Google_Service_YouTube_VideoStatus();
-                $status->privacyStatus = "public";
+                $status->privacyStatus = "unlisted";
 
                 // Associate the snippet and status objects with a new video resource.
                 $video = new Google_Service_YouTube_Video();
                 $video->setSnippet($snippet);
                 $video->setStatus($status);
+
 
 
                 $chunkSizeBytes = 10 * 1024 * 1024;
@@ -112,8 +116,22 @@ class VideoController extends Controller
 
                 $htmlBody = "<h3>Video Uploaded</h3><ul>";
                 $htmlBody .= sprintf('<li>%s (%s)</li>', $status['snippet']['title'], $status['id']);
-
                 $htmlBody .= '</ul>';
+
+                $resourceId = new \Google_Service_YouTube_ResourceId();
+                $resourceId->setVideoId($status['id']);
+                $resourceId->setKind('youtube#video');
+
+                $playlistItemSnippet = new Google_Service_YouTube_PlaylistItemSnippet();
+
+                $playlistItemSnippet->setPlaylistId('PLorQTUIjuMRYlJe0lJUgCOwuq7LGIveZk');
+                $playlistItemSnippet->setResourceId($resourceId);
+
+                $playlistItem = new Google_Service_YouTube_PlaylistItem();
+                $playlistItem->setSnippet($playlistItemSnippet);
+
+                $playlistItemResponse = $youtube->playlistItems->insert('snippet,contentDetails', $playlistItem, array());
+
 
                 return Redirect::back()->with(['message' => $htmlBody]);
 
@@ -171,27 +189,28 @@ class VideoController extends Controller
 
                 } while ($nextPageToken <> '');
 
-                Redirect::back()->with(['message' => $result]);
+                Redirect::back()->with(['result' => $result]);
 
             } catch (Google_Service_Exception $e) {
 
                 $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
-                Redirect::back()->with(['message' => $htmlBody]);
+                Redirect::back()->with(['result' => $htmlBody]);
 
             } catch (Google_Exception $e) {
 
                 $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
-                Redirect::back()->with(['message' => $htmlBody]);
+                Redirect::back()->with(['result' => $htmlBody]);
 
             } catch (\Exception $e) {
 
                 $htmlBody = sprintf('<p>: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
-                Redirect::back()->with(['message' => $htmlBody]);
+                Redirect::back()->with(['result' => $htmlBody]);
             }
 
         });
 
-        $videos = Session::get('message');
+        $videos = Session::get('result');
+
 
         if (is_array($videos)) {
 
