@@ -33,10 +33,8 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
                     <li><a href="{{ route('video_list') }}">Vidéos </a></li>
-                    <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -113,8 +111,11 @@
                         @role($role_admin)
 
                         <p>
+                            <label class="checkbox checkbox-inline" style="margin-left: 10px;">
+                                <input type="checkbox" id="checkbox-live" name="checkbox_live">Ajouter le live
+                            </label>
                             <label class="checkbox checkbox-inline">
-                                <input type="checkbox" id="checkbox-even" name="checkbox_even" value="option1"> Publier comme une reunion
+                                <input type="checkbox" id="checkbox-even" name="checkbox_even" > Publier comme une reunion
                             </label>
                         </p>
                         <p id="p_date_even" style="margin-left: -20px;">
@@ -230,7 +231,7 @@
 
 
 
-        <!--div>
+      <!--div>
           Partie des évènements !!!
       </div-->
 
@@ -238,7 +239,7 @@
             <div class="col-lg-offset-1 col-lg-10">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" style="background: white;">
-                    <li><a href="#">Evènements et Annonces les plus récentes</a></li>
+                    <h4>Reunions et Annonces les plus récentes</h4>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -263,17 +264,17 @@
 
         <div class="row" id="evenement{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
-                <div class="panel-body progress-panel">
-                    <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
+                <div>
+                    <div class="row panel-primary panel-heading" style="background-color: #dff8e3;" >
+                        <div class="col-lg-6 task-progress pull-left">
                             <span class="pull-left">
                                 <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'] )}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
-                        <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span> <br><br>
-                            <span class="badge bg-warning"><?php $std2 = $event->expiration_date; echo $std2; ?></span>
+                        <div class="col-lg-6" style="font-weight:bold;">
+                            Reunion prévue pour le <?php $std = $event->expiration_date; echo $std; ?>
+                            <!--span class="badge bg-success"><?php //$std2 = $event->created_at; echo $std2->toRfc850String(); ?></span--> <br><br>
                         </div>
                     </div>
                 </div>
@@ -323,7 +324,7 @@
                                     }
                                 }
                             }
-                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cet évènement </span>
+                            else{  ?> <span class="badge bg-info">Aucun fichier pour cette reunion</span>
                             <?php
                             }
                             }
@@ -342,7 +343,7 @@
         ?>
         <div class="row" id="evenement0" >
             <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
-                        <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
+                        <a class="list-group-item active">Ce groupe n'a aucune reunion programmée</a>
             </section>
         </div>
 
@@ -374,18 +375,18 @@
 
         <div class="row" id="annonce{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
-                <div class="panel-body progress-panel">
-                    <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
+                <div >
+                    <div class="row panel-primary panel-heading" >
+                        <div class="col-lg-6 task-progress pull-left">
                             <span class="pull-left">
                                 <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $ad->id .'']['photo'] )}}">
                               </span>
 
-                            <?php ?>
+                            {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
 
                         </div>
-                        <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $ad->created_at; echo $std->toRfc850String(); ?></span>
+                        <div class="col-lg-6">
+                           Publiée le <?php $std = $ad->created_at; echo $std->toRfc850String(); ?>
                         </div>
                     </div>
                 </div>
@@ -435,7 +436,7 @@
                                             }
                                         }
                                     }
-                                    else{  ?> <span class="badge bg-warning">Aucun fichier pour cette annonce</span>
+                                    else{  ?> <span class="badge bg-info">Aucun fichier pour cette annonce</span>
                                         <?php
                                    } ?>
 

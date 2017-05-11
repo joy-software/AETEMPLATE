@@ -810,7 +810,7 @@ class groupController extends Controller
             if($date_expiration->isPast()){
                 return response()->json([
                     'type'=>'error',
-                    'message'=> "La date indiquée pour l'évènement est déjà passée. Vérifier la date s'il vous plait"]);
+                    'message'=> "La date indiquée pour la reunion est déjà passée. Vérifier la date s'il vous plait"]);
             }
         }
 
@@ -880,6 +880,11 @@ class groupController extends Controller
         $group = group::find($request->id_group);
         $ads->user()->associate(Auth::user());
         $ads->group()->associate($group);
+        $live = $request->checkbox_live;
+        if($live){
+            //BAYOI MET TON CODE ICI.
+        }
+
         $ads->save();
         if($file1 != null){
             $file1->save();
