@@ -119,9 +119,9 @@
                                 </a>
                                 <div class="form-group " id="button_contrib">
                                     <br/>
-                                    <button  id="btn_create_contribution_cash"class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
+                                    <button  id="btn_create_contribution_cash" class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
                                 </div>
-                                <div class="center col-lg-offset-2 col-md-offset-2 col-sm-offset-2" id="wecashUp">
+                                <div class="text-center  " id="wecashUp">
 
                                 </div>
                                 {!! Form::close() !!}

@@ -6,8 +6,10 @@ namespace App\Http\Controllers;
 use App\contribution;
 use App\contribution_cash;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\period;
+use Response;
 use Validator;
 use App\motif;
 use Redirect;
@@ -286,7 +288,7 @@ public function post_contribution_cash(Request $request){
             ]);
         }
 
-        $contribution = contribution_cash::create([
+       /* $contribution = contribution_cash::create([
             'amount'=>$amount
         ]);
 
@@ -294,32 +296,25 @@ public function post_contribution_cash(Request $request){
         $contribution->users()->associate($user['id']);
         $contribution->motif()->associate($id_motif);
         $contribution->save();
-
+*/
         $uid = env('WCU_IDENTIFIANT_MARCHAND');
         $public_key= env('WCU_CLE_PUBLIQUE_MARCHAND');
         $currency = env('WCU_DEVISE_DU_MARCHAND');
         $app_name = config('app.name');
 
         $message = "<div class=\"alert alert-success fade in\">La cotisation du membre ". $user['name']. " d'email : <strong>". $email . "</strong> est en attente de paiement électronique </div>";
-        $body = "<br>
-        <script async src=\"https://www.wecashup.cloud/live/2-form/js/MobileMoney.js\" class=\"wecashup_button\"
-            data-receiver-uid=\"$uid\"
-            data-receiver-public-key=\"$public_key\"
-            data-transaction-receiver-total-amount=\"$contribution->amount\"
-            data-transaction-receiver-currency=\"$currency\"
-            data-name=\"$app_name\"
-            data-transaction-receiver-reference=\"REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_MARCHAND\"
-            data-transaction-sender-reference=\"REFERENCE_DE_LA_TRANSACTION_CHEZ_LE_CLIENT\"
-            data-style=\"1\"
-            data-image=\"https://www.wecashup.cloud/live/2-form/img/home.png\"
-            data-cash=\"true\"
-            data-telecom=\"true\"
-            data-m-wallet=\"false\"
-            data-split=\"false\"
-            data-sender-lang=\"fr\"
-            data-sender-phonenumber=\"$user->phone\">
-        </script>
-        <br>";
+        $body = "
+          <!--form id=\"formmomo\" method=\"GET\" action=\"https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml\" target=\"_top\">
+	<input type=\"hidden\" name=\"idbouton\" value=\"2\" autocomplete=\"off\">
+	<input type=\"hidden\" name=\"typebouton\" value=\"PAIE\" autocomplete=\"off\">
+	<input class=\"momo mount\" type=\"hidden\" placeholder=\"\" name=\"_amount\" value=\"\" id=\"montant\" autocomplete=\"off\">
+        <input class=\"momo host\" type=\"hidden\" placeholder=\"\" name=\"_tel\" value=\"677036382\" autocomplete=\"off\">
+        <input class=\"momo pwd\" placeholder=\"Please enter your password\" name=\"_clP\" value=\"\" autocomplete=\"off\" type=\"hidden\">
+	<input type=\"hidden\" name=\"_email\" value=\"admpromot@gmail.com\" autocomplete=\"off\">
+        <input type=\"image\" id=\"Button_Image\" src=\"https://developer.mtn.cm/OnlineMomoWeb/console/uses/itg_img/buttons/MOMO_buy_now_EN.jpg\" style=\"width : 250px; height: 100px;\" border=\"0\" name=\"submit\" alt=\"OnloneMomo, le réflexe sécurité pour payer en ligne\" autocomplete=\"off\">      
+        </form--> 
+        <button   href=\"#\" id=\"momobutton\" class='btn btn-default' style='margin-top: 10px; margin-bottom: 10px' type='submit'><img  id=\"Button_Image\" src=\"https://developer.mtn.cm/OnlineMomoWeb/console/uses/itg_img/buttons/MOMO_buy_now_EN.jpg\" 
+        style=\"width : 250px; height: 100px;\"   alt=\"OnloneMomo, le réflexe sécurité pour payer en ligne\" ></button>";
         return response()->json([
             'type'=>'success',
             'message'=> $message,
@@ -330,69 +325,48 @@ public function post_contribution_cash(Request $request){
 
     public function callback(Request $request)
     {
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Methods: GET, POST');
+        $user = Auth::user();
+        $amount=100;
+        $client = new Client();
+        $uri = "https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml?idbouton=2&typebouton=PAIE&_amount=".$amount.
+            "&_tel=677036382&_clP=&_email=admpromot@gmail.com";
+        //echo $uri;
+        $result = $client->request('GET',$uri);
+        /*$result = $client->request('GET',$uri, [
+                'idbouton' => '2',
+                'typebouton' => 'PAIE',
+                '_amount ' => $request->get('amount'),
+                '_tel' => $user->phone,
+                '_clP' => "",
+                '_email' => 'admpromot@gmail.com'
+        ]);//*/
+        //$response = $request->send();
 
-        $merchant_uid = 'votre indentiant marchand';
-        $merchant_public_key = 'votre clé publique';
-        $merchant_secret = 'votre clé secrete';
-        $transaction_uid = '';//create an empty transaction_uid
-        $transaction_token  = '';//create an empty transaction_token
-        $transaction_provider_name  = ''; //create an empty transaction_provider_name
-        $transaction_confirmation_code  = ''; //create an empty confirmation code
-        if(isset($_POST['transaction_uid'])){
-            $transaction_uid = $_POST['transaction_uid']; //Get the transaction_uid posted by the payment box
-        }
-        if(isset($_POST['transaction_token'])){
-            $transaction_token  = $_POST['transaction_token']; //Get the transaction_token posted by the payment box
-        }
-        if(isset($_POST['transaction_provider_name'])){
-            $transaction_provider_name  = $_POST['transaction_provider_name']; //Get the transaction_provider_name posted by the payment box
-        }
-        if(isset($_POST['transaction_confirmation_code'])){
-            $transaction_confirmation_code  = $_POST['transaction_confirmation_code']; //Get the transaction_confirmation_code posted by the payment box
-        }
-        $url = 'https://www.wecashup.com/api/v1.0/merchants/'.$merchant_uid.'/transactions/'.$transaction_uid.'/?merchant_public_key='.$merchant_public_key;
+        //$body = json_decode($result->getBody()->getContents());
+        //echo $body;
+        $body = $result->getBody();
+        //$json = $this->utf8_encode_deep($body);
+        //$data = $this->utf8_encode_deep($body);
+        $response = json_decode($body->getContents());
+        //return Response::json(json_decode($body->getContents(), true));
+        return "".$response->OpComment;
+    }
 
-        echo $url;
+    function utf8_encode_deep(&$input) {
+        if (is_string($input)) {
+            $input = utf8_encode($input);
+        } else if (is_array($input)) {
+            foreach ($input as &$value) {
+                self::utf8_encode_deep($value);
+            }
 
-        //Etape 7 : Vous devez completer ce script ici pour Sauvegarder la transaction en cours dans votre base de donnée
-        /* Prévoir une table de transactions à 5 colonnes au moins
-        /  transaction_uid | transaction_confirmation_code| transaction_token| transaction_provider_name | transaction_status */
-        //Etape 8 : Envoi des données au serveur de WeCashUp
+            unset($value);
+        } else if (is_object($input)) {
+            $vars = array_keys(get_object_vars($input));
 
-        $fields = array(
-            'merchant_secret' => urlencode($merchant_secret),
-            'transaction_token' => urlencode($transaction_token),
-            'transaction_uid' => urlencode($transaction_uid),
-            'transaction_confirmation_code' => urlencode($transaction_confirmation_code),
-            'transaction_provider_name' => urlencode($transaction_provider_name),
-            '_method' => urlencode('PATCH')
-        );
-        foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        rtrim($fields_string, '&');
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POST, count($fields));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        //Etape 9 : Reccupération de la réponse de WeCashUp
-
-        $server_output = curl_exec ($ch);
-
-        echo $server_output;
-
-        curl_close ($ch);
-
-        $data = json_decode($server_output, true);
-
-        if($data['response_status'] =="success"){
-
-            echo '<br><br> response_code : '.$data['response_code'];
-        }else{
-            echo '<br><br> response_code : '.$data['response_code'];
+            foreach ($vars as $var) {
+                self::utf8_encode_deep($input->$var);
+            }
         }
     }
 
@@ -589,13 +563,13 @@ public function contrib_user($id){
     $message = " ";
     $compteur = 0;
     foreach( $contrib as $item ){
-        $motif = motif::find($item['id']);
-        $period = period::find($item['id']);
+        $motif = motif::find($item['motif_ID']);
+        $period = period::findOrFail($item['period_ID']);
 
         $motifs[''. $compteur .''] = $motif->reason;
         $periodes[''. $compteur .''] = strtoupper($period->month) . " - " . $period->year;
         $montant['' .$compteur .''] = $item['amount'];
-        $compteur ++;
+        $compteur++;
     }
 
     return view('comptabilite.contrib_user',[
@@ -603,6 +577,7 @@ public function contrib_user($id){
         'nbr_notif'=> $this->_notifications,
         'periodes'=>  $periodes,
         'motifs' => $motifs,
+        'id' => $id,
         'montant'=> $montant,
         'nom_user' => $user->name .' , '. $user->surname,
         'compteur' => $compteur

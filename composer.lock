@@ -178,7 +178,7 @@
                 "push"
             ],
             "time": "2017-02-12T20:31:13+00:00"
-<<<<<<< HEAD
+
         },
         {
             "name": "brotzka/laravel-dotenv-editor",
@@ -2357,7 +2357,7 @@
                 "psr-6"
             ],
             "time": "2016-08-06T20:24:11+00:00"
->>>>>>> 9ff8bac7118064e32006047b5aa1bf8ea31fe848
+
         },
         {
             "name": "psr/http-message",
