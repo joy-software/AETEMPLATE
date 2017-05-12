@@ -41,11 +41,11 @@ class VideoController extends Controller
 
         $validator = Validator::make($data,
             [
-                'video'               => 'mimes:mp4|max:5000',
+                'video'               => 'mimes:mp4,3gpp,mov,avi|max:500000',
             ],
             [
                 'video.mimes'     => 'Les extensions d\'images acceptées sont mp4',
-                'video.max'       => 'La taille de la vidéo ne doit pas excéder 5 Mo',
+                'video.max'       => 'La taille de la vidéo ne doit pas excéder 500 Mo',
             ]
         );
 
@@ -58,7 +58,7 @@ class VideoController extends Controller
 
             if ($request->file('video') == null) {
 
-                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => 'Vueillez choisir une vidéo']]);
+                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => 'Veuillez choisir une vidéo']]);
             }
 
             VideoController::videoValidator($request->allFiles())->validate();
@@ -82,7 +82,7 @@ class VideoController extends Controller
                 $video->setStatus($status);
 
 
-                $chunkSizeBytes =  1024 * 1024;
+                $chunkSizeBytes =  10 * 1024 * 1024;
 
                 // Setting the defer flag to true tells the client to return a request which can be called
                 // with ->execute(); instead of making the API call immediately.
@@ -165,7 +165,7 @@ class VideoController extends Controller
 
     public function listVideo(Request $request){
 
-        $id = 8;
+        $id = 1;
         $groupControl = new groupController();
         $groupControl->load_group();
         $groupControl->verification_param($id);
@@ -183,7 +183,7 @@ class VideoController extends Controller
 
                 do {
                     $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
-                        'playlistId' => 'PLorQTUIjuMRYlJe0lJUgCOwuq7LGIveZk',
+                        'playlistId' => env('PRIVATE_PLAYLIST_VIDEO'),
                         'maxResults' => 50,
                         'pageToken' => $nextPageToken));
 

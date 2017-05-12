@@ -33,8 +33,10 @@
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @if ($group->id == 1)
+                        <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
+                        <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @endif
                     <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
                     <li><a href="/group/member_group/{{ $group->id }}" style="color: #ff2d55!important;">Membres </a></li>
                 </ul>

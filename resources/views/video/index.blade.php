@@ -178,7 +178,10 @@
                                         <button  class="btn btn-primary" type="submit" id="btnSubmitAddVideo">Envoyer</button>
 
                                     </div>
+                                    <div id="progress-div"><span id="percent">0 %</span><div id="progress-bar"></div></div>
+                                    <div id="loader-icon" style="display: none"><img src="{{url('/img/LoaderIcon.gif')}}" /></div>
                                 </div>
+
 
                             </form>
 
@@ -208,12 +211,11 @@
 
                         </div>
 
-
-                        <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
-
+                        @role('admin_1')
+                            <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
+                        @endrole
 
                     </div>
-
 
                     <table id="table_resultats" class="table table-striped table-advance table-hover table-responsive "  style="width:97%; margin: auto !important;">
 
