@@ -13,6 +13,7 @@ $('#btnCloseAddVideo').click(function(event){
     $('#progress-div').hide();
     $('#progress-bar').css('width', '0%');
     $('#percent').text('0%');
+    $('#label-file').text('Choisissez une vidéo');
 
 });
 
@@ -61,7 +62,6 @@ $("#upload-form").on('submit', function (event) {
 
                     if (percentComplete === 100) {
                         $('#progress-div').hide();
-                        $('#btnSubmitAddVideo').prop('disabled', false);
                         $('#loader-icon').show();
                     }
 

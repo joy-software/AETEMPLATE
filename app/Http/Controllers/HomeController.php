@@ -169,7 +169,11 @@ class HomeController extends Controller
     }
 
 
-    public function tester(){
+    public function testerlive(){
+        return view('test/createLive');
+    }
+
+    public function testerplay(){
         return view('test/playVideo');
     }
 
