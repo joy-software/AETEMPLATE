@@ -17,6 +17,7 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
+    <script src="{{ asset('js/kar.js') }}"></script>
     <![endif]-->
     <script type="text/javascript">
         var onloadCallback = function() {
@@ -306,7 +307,6 @@
         async defer>
 </script>
 
-<script src="{{ asset('js/kar.js') }}"></script>
 <script src="{{asset('assets/js/site.js')}}"></script>
 <script src="{{ asset('assets/js/upload.js') }}"></script>
 

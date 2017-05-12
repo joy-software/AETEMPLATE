@@ -3,9 +3,9 @@
 @section('css')
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
     @role("comptable")
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
     @endrole()
 
 @endsection
@@ -131,5 +131,5 @@
 
 
 @section('script')
-    <script src="{{ asset('js/comptabilite.js') }}"></script>
+    <script src="{{ asset('assets/js/comptabilite.js') }}"></script>
 @endsection

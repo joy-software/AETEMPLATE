@@ -14,7 +14,10 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
 
-
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/kar.js') }}"></script>
+    <![endif]-->
 </head>
 
 <body class="login-img3-body">
@@ -61,7 +64,7 @@
 
 </div>
 
-<script src="{{ asset('js/kar.js') }}"></script>
+
 <script src="{{asset('assets/js/site.js')}}"></script>
 </body>
 </html>

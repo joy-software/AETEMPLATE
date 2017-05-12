@@ -3,18 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site des anciens élèves du Collège Vogt">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="LACY 2017">
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
     <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
 
     <title>Connexion | PromotVogt</title>
 
-    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <!-- bootstrap theme -->
+    <link href="{{ asset('karmanta/css/bootstrap-theme.css') }}" rel="stylesheet"/>
+    <!--external css-->
+    <!-- font icon -->
+    <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
+    <!-- Custom styles -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
 
-
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/kar.js') }}"></script>
+    <![endif]-->
 </head>
 
 <body class="login-img3-body">
@@ -73,7 +84,13 @@
 </div>
 
 
-<script src="{{ asset('js/kar.js') }}"></script>
 <script src="{{asset('assets/js/site.js')}}"></script>
+
+
+
+
+
+
+
 </body>
 </html>

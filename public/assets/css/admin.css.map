@@ -1,0 +1,1 @@
+{"version":3,"sources":["admin.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA","file":"admin.css","sourcesContent":["#div_config > div > section > .value:hover{\r\n    color : greenyellow;\r\n}\r\n"]}
