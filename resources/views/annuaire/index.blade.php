@@ -155,7 +155,7 @@
                                 <td>{{ $member->profession}}</td>
                                 <td>{{ $member->country}}</td>
                                 <td>{{ $member->phone}}</td>
-                                <td>{{ $member->email}}</td>
+                                <td>{{ $member->email}} <br> <?php echo "<a href='/contrib_user/$member->id'>Voir ses contributions</a>"; ?></td>
 
                             </tr>
                             @endforeach
