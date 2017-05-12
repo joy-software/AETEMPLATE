@@ -5,9 +5,9 @@
 
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 

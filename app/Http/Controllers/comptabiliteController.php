@@ -329,7 +329,7 @@ public function post_contribution_cash(Request $request){
         $amount=100;
         $client = new Client();
         $uri = "https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml?idbouton=2&typebouton=PAIE&_amount=".$amount.
-            "&_tel=677036382&_clP=&_email=admpromot@gmail.com";
+            "&_tel=677634574&_clP=&_email=admpromot@gmail.com";
         //echo $uri;
         $result = $client->request('GET',$uri);
         /*$result = $client->request('GET',$uri, [
