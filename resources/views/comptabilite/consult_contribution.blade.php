@@ -3,10 +3,8 @@
 @section('css')
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
 @endsection
 
@@ -31,12 +29,6 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
-    @include('layouts/asideOption', [
-            'classIconOption' => 'icon_download',
-            'optionName' => 'Exporter des rapports',
-            'retractable' => 'false',
-            'link' => url('/comptabilite/export_contribution')
-        ])
 
 @endsection
 
@@ -198,9 +190,6 @@
 
 @section('script')
 
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script>
 
 

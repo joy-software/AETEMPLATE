@@ -76,7 +76,10 @@
                     <tbody>
                     <tr>
                         <td style="text-align: justify;">
-                            {{ $event->description }}
+                            {{ $event->description }} <br>
+                            <?php if($event->broadcast != null) {
+                                echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                            }?>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +120,7 @@
                             }
                             }
                             }
-                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cet évènement </span>
+                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cette reunion </span>
                             <?php
                             }
 
@@ -143,7 +146,7 @@
         ?>
         <div class="row" id="evenement0" >
             <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
-                <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
+                <a class="list-group-item active">Ce groupe n'a aucun aucune reunion</a>
             </section>
         </div>
 

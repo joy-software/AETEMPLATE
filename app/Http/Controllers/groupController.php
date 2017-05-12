@@ -1112,6 +1112,10 @@ class groupController extends Controller
         $this->verification_param($id_group);
         $group_associate = group::find($id_group);
         $nom_groupe = $group_associate->name;
+        if($id_group == 1){
+            Session::flash('message', "Le groupe ".$nom_groupe ." ne peut pas être supprimé, c'est le groupe principal");
+            return redirect()->route('search_group');
+        }
 
         $id_users = DB::table('usergroup')->select('id')->where('group_ID','=',$id_group)->get();
 

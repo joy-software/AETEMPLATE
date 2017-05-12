@@ -232,24 +232,13 @@
 
 
       <!--div>
-          Partie des évènements !!!
+          Annonces et évènements les plus récents.
       </div-->
-
-        <div class="row" >
-            <div class="col-lg-offset-1 col-lg-10">
-                <!--breadcrumbs start -->
-                <ul class="breadcrumb" style="background: white;">
-                    <h4>Reunions et Annonces les plus récentes</h4>
-                </ul>
-                <!--breadcrumbs end -->
+        <!--div class="col-lg-offset-1 col-lg-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Reunions et Annonces les plus récentes</div>
             </div>
-        </div>
-
-    <!--div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
-        <ul class="breadcrumb" id="menu_group">
-            <li><a><h4>Evènement</h4></a></li>
-        </ul>
-    </div-->
+        </div-->
 
         <?php
 
@@ -283,7 +272,10 @@
                     <tbody>
                     <tr>
                         <td style="text-align: justify;">
-                            {{ $event->description }}
+                            {{ $event->description }} <br>
+                            <?php if($event->broadcast != null) {
+                               echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                            }?>
                         </td>
                     </tr>
                     <tr>

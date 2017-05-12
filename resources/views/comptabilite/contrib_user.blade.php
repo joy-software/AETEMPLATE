@@ -3,15 +3,13 @@
 @section('css')
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
     <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 @section('title')
-    Contribution de {{ $nom_user }}
+    Contribution de {{ $nom_user }}, Promot-Vogt
 @endsection
 
 
@@ -46,12 +44,27 @@
 @section('content')
 
     <section class="wrapper" id="wrapper-content">
+        <div class="row">
+            <div class="col-lg-offset-1 col-lg-10" >
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb" style="background: white;">
+                    <li><a id="btn-return-search-contrib" href="/accueil"><i class="icon_house_alt"></i> Aller l'accueil </a></li>
+                    @role('comptable')
+                    <li><a id="btn-return-search-contrib" href="/annuaire"></i> Aller à l'annuaire </a></li>
+                    <li><a id="btn-return-search-contrib" href="/comptabilite/consult_contribution"></i> Retourner au filtre des contributions </a></li>
+                    @endrole
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
 
         <div class="row">
 
             <div class="col-lg-offset-1 col-lg-10" style="background: white;">
+
             <section class="panel">
                 <div class="panel-body progress-panel">
+
                     <div class="row">
                         <div class="col-lg-8 task-progress pull-left">
                             <h1>Contribution de {{ $nom_user }} </h1>
@@ -59,7 +72,7 @@
                         <div class="col-lg-4">
                             <span class="pull-right" ><button class="btn btn-primary" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
                             @if($id == Auth::id())
-                                <span><a href="{{url('comptabilite/contribution')}}"  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </a></span>
+                                <span><a id="btn-contrib" href="{{url('comptabilite/contribution')}}"  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </a></span>
                             @endif
                         </div>
                     </div>
@@ -102,10 +115,6 @@
 
 
 @section('script')
-
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script>
 
 
