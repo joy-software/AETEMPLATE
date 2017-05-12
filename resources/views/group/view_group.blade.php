@@ -57,6 +57,10 @@
         <?php $role_admin= "admin_".$group->id; ?>
 
         <div class="row" >
+            @if (Session::get('special_message'))
+
+
+            @endif
             <section class="panel col-lg-offset-1 col-lg-10">
                 {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
                 <div class="row">
@@ -276,7 +280,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                               echo "<button class='btn btn-primary' id=''>Voir la reunion en live</button>";
                             }?>
                         </td>
                     </tr>
