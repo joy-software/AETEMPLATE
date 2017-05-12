@@ -253,11 +253,11 @@
 
             @elseif ($status == 'error')
 
-                <p class="alert-block ">Une erreur connue est intervenue lors du processus</p>
+                {!! $videos !!}
 
             @elseif ($status == 'unknown')
 
-                <p class="alert-block ">Une erreur inconnue est intervenue lors du processus</p>
+                <p class="alert-block ">{!! dump($videos) !!}</p>
 
             @endif
 
@@ -270,13 +270,7 @@
 @endsection
 
 @section('script')
-    <script>
 
-            urlViewVideo = "<?php echo route('video_view', 5) ?>";
-            csrfToken = '<?php echo csrf_token() ?>';
-
-
-    </script>
     <script src="{{ asset('js/group.js') }}"></script>
     <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>

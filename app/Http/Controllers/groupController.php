@@ -881,11 +881,15 @@ class groupController extends Controller
         $ads->user()->associate(Auth::user());
         $ads->group()->associate($group);
         $live = $request->checkbox_live;
-        if($live){
-            //BAYOI MET TON CODE ICI.
-        }
 
         $ads->save();
+
+        if($live && $request->checkbox_even){
+
+            $videoController = new VideoController();
+            $videoController->addBroadcast($request);
+        }
+
         if($file1 != null){
             $file1->save();
         }
