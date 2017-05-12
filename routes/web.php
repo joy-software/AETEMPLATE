@@ -156,7 +156,8 @@ Route::get('/video/list', [
 
 Route::post('/video/upload', [
     'as' => 'post_video_upload',
-    'uses' => 'VideoController@uploadVideo'
+    'uses' => 'VideoController@uploadVideo',
+    'middleware' => 'role:admin_1'
 ]);
 
 Route::get('/video/view/{id}', [

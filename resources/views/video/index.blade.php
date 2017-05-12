@@ -37,10 +37,8 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/1"><i class="icon_house_alt"></i> Assemblée générale </a></li>
                     <li><a href="/group/ads_group/1">Annonces </a></li>
-                    <li><a href="/group/event_group/1">Evènements </a></li>
                     <li><a href="/group/meeting_group/1">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}"><strong>Vidéos</strong> </a></li>
-                    <li><a href="/group/ballot_group/1">Scrutin</a></li>
+                    <li><a href="{{ route('video_list') }}"><span style="color: red">Vidéos</span> </a></li>
                     <li><a href="/group/member_group/1">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -74,9 +72,7 @@
                 $videos = $videos['content'];
             ?>
 
-                <!--div class="alert alert-block ">
-                    {!! dump(\Illuminate\Support\Facades\Session::getFacadeRoot()) !!}
-                </div-->
+
 
 
             @if ($status == 'success')
@@ -176,8 +172,10 @@
                                     <div class=" col-lg-12" >
                                         <button  class="btn btn-default" id="btnCloseAddVideo" >Fermer</button>
                                         <button  class="btn btn-primary" type="submit" id="btnSubmitAddVideo">Envoyer</button>
-
+                                        <span id="loader-icon" style="display: none"><img src="{{url('/img/LoaderIcon.gif')}}" /></span>
                                     </div>
+
+                                    <div id="progress-div"><span id="percent">0 %</span><div id="progress-bar"></div></div>
                                 </div>
 
                             </form>
@@ -208,12 +206,11 @@
 
                         </div>
 
-
-                        <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
-
+                        @role('admin_1')
+                            <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
+                        @endrole
 
                     </div>
-
 
                     <table id="table_resultats" class="table table-striped table-advance table-hover table-responsive "  style="width:97%; margin: auto !important;">
 
