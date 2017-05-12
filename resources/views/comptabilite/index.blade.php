@@ -3,9 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/comptabilite.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
 @endsection
 @section('title')
@@ -289,6 +289,6 @@
 
     </script>
 
-    <script src="{{ asset('js/comptabilite.js') }}"></script>
+    <script src="{{ asset('assets/js/comptabilite.js') }}"></script>
 
 @endsection

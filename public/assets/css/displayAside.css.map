@@ -1,0 +1,1 @@
+{"version":3,"sources":["displayAside.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"displayAside.css","sourcesContent":["#sidebar{\r\n    display: block;\r\n    left: 0px;\r\n\r\n}\r\n\r\n#main-content{\r\n    margin-left: 250px;\r\n}"]}

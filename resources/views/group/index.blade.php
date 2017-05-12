@@ -3,8 +3,8 @@
 
 @section('css')
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet"/>
 
 @endsection
 
@@ -96,6 +96,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/acceuil.js') }}"></script>
+    <script src="{{ asset('assets/js/acceuil.js') }}"></script>
 
 @endsection

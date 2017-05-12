@@ -3,9 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -94,6 +94,6 @@
 
     </script>
 
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('assets/js/admin.js') }}"></script>
 
 @endsection

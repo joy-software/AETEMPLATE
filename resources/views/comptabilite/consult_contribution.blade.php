@@ -2,10 +2,10 @@
 
 @section('css')
 
-    <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/comptabilite.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
+    <link href="{{ asset('assets/css/print.css') }}" rel="stylesheet" media="print">
 @endsection
 
 @section('title')
@@ -159,28 +159,7 @@
             </div>
 
         </div>
-        <!--div class="row">
-                <!-- Modal ->
-                <div class="modal fade" id="modalContribution" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div class="modal-body" style="background: white;">
-                                bonjour ceci est juste un test rien de comopliqué.
-                               <table class="table table-responsive">
-                                   <tbody id="tbody_contrib">
 
-                                   </tbody>
-                               </table>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            </div>
-                        </div><!-- /.modal-content ->
-                    </div><!-- /.modal-dialog ->
-                </div><!-- /.modal ->
-        </div -->
 
     </section>
 
@@ -202,6 +181,6 @@
 
     </script>
 
-    <script src="{{ asset('js/comptabilite.js') }}"></script>
+    <script src="{{ asset('assets/js/comptabilite.js') }}"></script>
 
 @endsection
