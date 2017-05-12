@@ -4,10 +4,8 @@
 @section('css')
 
     <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+
     <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
 
@@ -34,7 +32,9 @@
                     <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
                     <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @if($group->id == 1)
+                        <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -232,24 +232,13 @@
 
 
       <!--div>
-          Partie des évènements !!!
+          Annonces et évènements les plus récents.
       </div-->
-
-        <div class="row" >
-            <div class="col-lg-offset-1 col-lg-10">
-                <!--breadcrumbs start -->
-                <ul class="breadcrumb" style="background: white;">
-                    <h4>Reunions et Annonces les plus récentes</h4>
-                </ul>
-                <!--breadcrumbs end -->
+        <!--div class="col-lg-offset-1 col-lg-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Reunions et Annonces les plus récentes</div>
             </div>
-        </div>
-
-    <!--div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
-        <ul class="breadcrumb" id="menu_group">
-            <li><a><h4>Evènement</h4></a></li>
-        </ul>
-    </div-->
+        </div-->
 
         <?php
 
@@ -283,7 +272,10 @@
                     <tbody>
                     <tr>
                         <td style="text-align: justify;">
-                            {{ $event->description }}
+                            {{ $event->description }} <br>
+                            <?php if($event->broadcast != null) {
+                               echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                            }?>
                         </td>
                     </tr>
                     <tr>
@@ -472,10 +464,6 @@
 
 
 @section('script')
-
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
 <script>
 
@@ -487,12 +475,10 @@
     group.logo = '{{ $group->logo }}';
     group.user_ID = '{{ $group->user_ID }}';
 
-
     _token = $('input[name=_token]').val();
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
-
 
 
 </script>

@@ -81,7 +81,7 @@ trait GoogleAuthTrait
             $htmlBody = "<h3>Autorisation réquise</h3>
                 <p>Vous devez <a href=\"$authUrl\">autoriser l'accès</a> avant de continuer.<p>";
 
-            return Redirect::back()->with(['message' => $htmlBody]);
+            return Redirect::back()->with(['result' => $htmlBody]);
         }
     }
 

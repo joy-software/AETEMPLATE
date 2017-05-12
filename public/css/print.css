@@ -5,6 +5,12 @@
 .header {
     display: none;
 }
+#btn-contrib{
+    display: none;
+}
+#btn-return-search-contrib{
+    display: none;
+}
 
 #aside{
     display: none;

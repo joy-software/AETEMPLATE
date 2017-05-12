@@ -39,5 +39,35 @@ button{
     float: left;
 }
 
+#progress-div{
+
+    background: black;
+    display: none;
+    text-align: center;
+    width: 50%;
+    margin-top: 10px;
+    margin-left: 17px
+}
+
+#progress-bar{
+    background: #2ac845;
+    height: 20px;
+    width: 0%;
+    color: white;
+}
+
+#percent{
+    position: fixed;
+    left: 39%;
+    color: white;
+}
+
+#loader-icon{
+    float: left;
+}
+
+#loader-icon img{
+    width: 50px;
+}
 
 

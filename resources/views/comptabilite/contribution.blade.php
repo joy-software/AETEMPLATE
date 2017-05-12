@@ -31,12 +31,6 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
-    @include('layouts/asideOption', [
-            'classIconOption' => 'icon_download',
-            'optionName' => 'Exporter des rapports',
-            'retractable' => 'false',
-            'link' => url('/comptabilite/export_contribution')
-        ])
 
 @endsection
 @endrole

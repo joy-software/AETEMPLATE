@@ -41,11 +41,17 @@ class VideoController extends Controller
 
         $validator = Validator::make($data,
             [
-                'video'               => 'mimes:mp4|max:5000',
+                'video'               => 'required|mimes:mp4,3gpp,mov,avi|max:500000',
+                'title'          => 'required',
+                'description'    => 'required',
+
             ],
             [
                 'video.mimes'     => 'Les extensions d\'images acceptées sont mp4',
-                'video.max'       => 'La taille de la vidéo ne doit pas excéder 5 Mo',
+                'video.max'       => 'La taille de la vidéo ne doit pas excéder 500 Mo',
+                'video.required'  => 'Veuillez choisir une vidéo',
+                'title.required'  => 'Le champ "titre" est obligatoire',
+                'description.required'     => 'Le champ "description" est obligatoire',
             ]
         );
 
@@ -56,12 +62,17 @@ class VideoController extends Controller
     {
         $this->execute('http://assovogt.org/tester', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
 
-            if ($request->file('video') == null) {
+            $validator = VideoController::videoValidator($request->all());
 
-                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => 'Vueillez choisir une vidéo']]);
+            if (! $validator->passes()) {
+                $error = "";
+                foreach ($validator->errors()->all() as $err){
+                    $error .= $err;
+                    $error .= '<br>';
+                }
+
+                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => $error]]);
             }
-
-            VideoController::videoValidator($request->allFiles())->validate();
 
             try{
 
@@ -103,23 +114,17 @@ class VideoController extends Controller
                 $media->setFileSize($request->file('video')->getSize());
 
                 // Read the media file and upload it chunk by chunk.
-                $report = array(); $i = 0;
                 $status = false;
                 $handle = $request->file('video')->openFile('rb');
                 while (!$status && !$handle->eof()) {
                     $chunk = $handle->fread($chunkSizeBytes);
                     $status = $media->nextChunk($chunk);
-                    $report[$i] = $status;
-                    $i++;
+
                 }
 
-                Session::set('report', $report);
+
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $client->setDefer(false);
-
-                $htmlBody = "<h3>Video Uploaded</h3><ul>";
-                $htmlBody .= sprintf('<li>%s (%s)</li>', $status['snippet']['title'], $status['id']);
-                $htmlBody .= '</ul>';
 
                 $resourceId = new \Google_Service_YouTube_ResourceId();
                 $resourceId->setVideoId($status['id']);
@@ -159,20 +164,23 @@ class VideoController extends Controller
 
         });
 
-        return response()->json(Session::get('message'));
+        $message = Session::get('message');
+        Session::set('message', null);
+
+        return response()->json($message);
     }
 
 
     public function listVideo(Request $request){
 
-        $id = 8;
+        $id = 1;
         $groupControl = new groupController();
         $groupControl->load_group();
         $groupControl->verification_param($id);
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
 
-        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
+        $this->execute('http://assovogt.org/video/list', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
 
             try {
 
@@ -183,7 +191,7 @@ class VideoController extends Controller
 
                 do {
                     $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
-                        'playlistId' => 'PLorQTUIjuMRYlJe0lJUgCOwuq7LGIveZk',
+                        'playlistId' => env('PRIVATE_PLAYLIST_VIDEO'),
                         'maxResults' => 50,
                         'pageToken' => $nextPageToken));
 
@@ -247,9 +255,110 @@ class VideoController extends Controller
 
     }
 
-    public function viewVideo(Request $resquest)
+    public function addBroadcast(Request $request)
     {
 
+        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
+
+            try {
+                // Create an object for the liveBroadcast resource's snippet. Specify values
+                // for the snippet's title, scheduled start time, and scheduled end time.
+                $broadcastSnippet = new \Google_Service_YouTube_LiveBroadcastSnippet();
+                $broadcastSnippet->setTitle('On va voir');
+                $broadcastSnippet->setScheduledStartTime('2017-05-12T14:00:00.000Z');
+                $broadcastSnippet->setScheduledEndTime('2017-05-12T15:30:00.000Z');
+
+
+                // Create an object for the liveBroadcast resource's status, and set the
+                // broadcast's status to "private".
+                $status = new \Google_Service_YouTube_LiveBroadcastStatus();
+                $status->setPrivacyStatus('public');
+
+
+                // Create the API request that inserts the liveBroadcast resource.
+                $broadcastInsert = new \Google_Service_YouTube_LiveBroadcast();
+                $broadcastInsert->setSnippet($broadcastSnippet);
+                $broadcastInsert->setStatus($status);
+                $broadcastInsert->setKind('youtube#liveBroadcast');
+
+
+                // Execute the request and return an object that contains information
+                // about the new broadcast.
+                $broadcastsResponse = $youtube->liveBroadcasts->insert('snippet,status',
+                    $broadcastInsert, array());
+
+                // Create an object for the liveStream resource's snippet. Specify a value
+                // for the snippet's title.
+                $streamSnippet = new \Google_Service_YouTube_LiveStreamSnippet();
+                $streamSnippet->setTitle('Premier test');
+
+                // Create an object for content distribution network details for the live
+                // stream and specify the stream's format and ingestion type.
+                $cdn = new \Google_Service_YouTube_CdnSettings();
+                $cdn->setFormat("480p");
+                //$cdn->setIngestionType('rtmp://a.rtmp.youtube.com/live2');
+
+
+                // Create the API request that inserts the liveStream resource.
+                $streamInsert = new \Google_Service_YouTube_LiveStream();
+                $streamInsert->setSnippet($streamSnippet);
+                $streamInsert->setCdn($cdn);
+                $streamInsert->setKind('youtube#liveStream');
+
+
+                // Execute the request and return an object that contains information
+                // about the new stream.
+                $streamsResponse = $youtube->liveStreams->insert('snippet,cdn',
+                    $streamInsert, array());
+
+                // Bind the broadcast to the live stream.
+                $bindBroadcastResponse = $youtube->liveBroadcasts->bind(
+                    $broadcastsResponse['id'],'id,contentDetails',
+                    array(
+                        'streamId' => $streamsResponse['id'],
+                    ));
+
+                /*$htmlBody .= "<h3>Added Broadcast</h3><ul>";
+                $htmlBody .= sprintf('<li>%s published at %s (%s)</li>',
+                    $broadcastsResponse['snippet']['title'],
+                    $broadcastsResponse['snippet']['publishedAt'],
+                    $broadcastsResponse['id']);
+                $htmlBody .= '</ul>';
+
+                $htmlBody .= "<h3>Added Stream</h3><ul>";
+                $htmlBody .= sprintf('<li>%s (%s)</li>',
+                    $streamsResponse['snippet']['title'],
+                    $streamsResponse['id']);
+                $htmlBody .= '</ul>';
+
+                $htmlBody .= "<h3>Bound Broadcast</h3><ul>";
+                $htmlBody .= sprintf('<li>Broadcast (%s) was bound to stream (%s).</li>',
+                    $bindBroadcastResponse['id'],
+                    $bindBroadcastResponse['contentDetails']['boundStreamId']);
+                $htmlBody .= '</ul>';*/
+
+                return Redirect::back()->with(['result' => array_merge($broadcastsResponse, $streamsResponse)]);
+
+            } catch (Google_Service_Exception $e) {
+                $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['result' => $htmlBody]);
+            } catch (Google_Exception $e) {
+                $htmlBody = sprintf('<p>An client error occurred: <code>%s</code></p>',
+                    htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['result' => $htmlBody]);
+            } catch (\Exception $e) {
+
+                $htmlBody = sprintf('<p>: <code>%s</code></p>', htmlspecialchars($e->getMessage()));
+                Redirect::back()->with(['result' => $htmlBody]);
+            }
+
+
+        });
+
+        return Redirect::back();
+
     }
+
 
 }

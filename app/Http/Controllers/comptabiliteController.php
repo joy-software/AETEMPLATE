@@ -522,7 +522,7 @@ public function contrib_user_email(Request $request){
     }
     $user = User::where('email','=', $email)->get();
 
-    $message = "Ce membre existe. cliquer sur ce lien pour voir ses contributions <br> <a href='/contrib_user/". $user[0]['id'] ."'> Voir les contributions de ". $user[0]['name'] ." , ". $user[0]['surname'] ."</a>";
+    $message = "cliquer sur ce lien pour voir ses contributions <br> <a href='/contrib_user/". $user[0]['id'] ."'> Voir les contributions de ". $user[0]['name'] ." , ". $user[0]['surname'] ."</a>";
     return response()->json([
         'message'=> $message
     ]);

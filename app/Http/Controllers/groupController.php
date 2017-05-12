@@ -881,11 +881,15 @@ class groupController extends Controller
         $ads->user()->associate(Auth::user());
         $ads->group()->associate($group);
         $live = $request->checkbox_live;
-        if($live){
-            //BAYOI MET TON CODE ICI.
-        }
 
         $ads->save();
+
+        if($live && $request->checkbox_even){
+
+            $videoController = new VideoController();
+            $videoController->addBroadcast($request);
+        }
+
         if($file1 != null){
             $file1->save();
         }
@@ -1112,6 +1116,10 @@ class groupController extends Controller
         $this->verification_param($id_group);
         $group_associate = group::find($id_group);
         $nom_groupe = $group_associate->name;
+        if($id_group == 1){
+            Session::flash('message', "Le groupe ".$nom_groupe ." ne peut pas être supprimé, c'est le groupe principal");
+            return redirect()->route('search_group');
+        }
 
         $id_users = DB::table('usergroup')->select('id')->where('group_ID','=',$id_group)->get();
 
