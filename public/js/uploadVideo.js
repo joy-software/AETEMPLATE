@@ -61,8 +61,8 @@ $("#upload-form").on('submit', function (event) {
 
                     if (percentComplete === 100) {
                         $('#progress-div').hide();
-                        //$('#btnSubmitAddVideo').prop('disabled', false);
-                        //$('#msg').text('Vidéo ajoutée avec succès').show();
+                        $('#btnSubmitAddVideo').prop('disabled', false);
+                        $('#loader-icon').show();
                     }
 
                 }
@@ -77,24 +77,27 @@ $("#upload-form").on('submit', function (event) {
 
             if(response.type === "success" ){
 
+                $('#loader-icon').hide();
                 $('#msg').removeClass('text-danger').addClass('text-success');
-                $('#msg').text(response.message);
+                $('#msg').html(response.message);
                 $('#msg').css('display', 'block').css('color', 'green');
                 $('#btnSubmitAddVideo').prop('disabled', false);
 
             }
             else {
 
+                $('#loader-icon').hide();
                 $('#msg').removeClass('text-success').addClass('text-danger');
-                $('#msg').text(response.message);
+                $('#msg').html(response.message);
                 $('#msg').css('display', 'block');
 
             }
 
         },
         error : function (erreur) {
+            $('#loader-icon').hide();
             $('#msg').removeClass('text-success').addClass('text-danger');
-            $('#msg').text(response.message);
+            $('#msg').html(response.message);
             $('#msg').css('display', 'block');
         }
 

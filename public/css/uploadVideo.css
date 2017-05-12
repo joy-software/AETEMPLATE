@@ -62,4 +62,12 @@ button{
     color: white;
 }
 
+#loader-icon{
+    float: left;
+}
+
+#loader-icon img{
+    width: 50px;
+}
+
 

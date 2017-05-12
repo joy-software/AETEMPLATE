@@ -41,11 +41,17 @@ class VideoController extends Controller
 
         $validator = Validator::make($data,
             [
-                'video'               => 'mimes:mp4,3gpp,mov,avi|max:500000',
+                'video'               => 'required|mimes:mp4,3gpp,mov,avi|max:500000',
+                'title'          => 'required',
+                'description'    => 'required',
+
             ],
             [
                 'video.mimes'     => 'Les extensions d\'images acceptées sont mp4',
                 'video.max'       => 'La taille de la vidéo ne doit pas excéder 500 Mo',
+                'video.required'  => 'Veuillez choisir une vidéo',
+                'title.required'  => 'Le champ "titre" est obligatoire',
+                'description.required'     => 'Le champ "description" est obligatoire',
             ]
         );
 
@@ -56,12 +62,17 @@ class VideoController extends Controller
     {
         $this->execute('http://assovogt.org/tester', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
 
-            if ($request->file('video') == null) {
+            $validator = VideoController::videoValidator($request->all());
 
-                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => 'Veuillez choisir une vidéo']]);
+            if (! $validator->passes()) {
+                $error = "";
+                foreach ($validator->errors()->all() as $err){
+                    $error .= $err;
+                    $error .= '<br>';
+                }
+
+                return Redirect::back()->with(['message' => ['type' => 'error', 'message' => $error]]);
             }
-
-            VideoController::videoValidator($request->allFiles())->validate();
 
             try{
 
@@ -82,7 +93,7 @@ class VideoController extends Controller
                 $video->setStatus($status);
 
 
-                $chunkSizeBytes =  10 * 1024 * 1024;
+                $chunkSizeBytes =  1024 * 1024;
 
                 // Setting the defer flag to true tells the client to return a request which can be called
                 // with ->execute(); instead of making the API call immediately.
@@ -103,23 +114,17 @@ class VideoController extends Controller
                 $media->setFileSize($request->file('video')->getSize());
 
                 // Read the media file and upload it chunk by chunk.
-                $report = array(); $i = 0;
                 $status = false;
                 $handle = $request->file('video')->openFile('rb');
                 while (!$status && !$handle->eof()) {
                     $chunk = $handle->fread($chunkSizeBytes);
                     $status = $media->nextChunk($chunk);
-                    $report[$i] = $status;
-                    $i++;
+
                 }
 
-                Session::set('report', $report);
+
                 // If you want to make other calls after the file upload, set setDefer back to false
                 $client->setDefer(false);
-
-                $htmlBody = "<h3>Video Uploaded</h3><ul>";
-                $htmlBody .= sprintf('<li>%s (%s)</li>', $status['snippet']['title'], $status['id']);
-                $htmlBody .= '</ul>';
 
                 $resourceId = new \Google_Service_YouTube_ResourceId();
                 $resourceId->setVideoId($status['id']);
@@ -159,7 +164,10 @@ class VideoController extends Controller
 
         });
 
-        return response()->json(Session::get('message'));
+        $message = Session::get('message');
+        Session::set('message', null);
+
+        return response()->json($message);
     }
 
 
