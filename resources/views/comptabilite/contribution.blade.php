@@ -10,7 +10,7 @@
 
 @endsection
 @section('title')
-    Contribuer | Promot-Vogt
+    Contribuer | Promot Vogt
 @endsection
 
 

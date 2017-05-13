@@ -6,9 +6,10 @@
     <link href="{{ asset('assets/css/annuaire.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/table.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
+@endsection
 
-
-
+@section('title')
+    Annuaire de PROMOT VOGT
 @endsection
 
 @section('content')

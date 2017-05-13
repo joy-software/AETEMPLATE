@@ -32,7 +32,18 @@
     <link href="{{-- asset('karmanta/css/style.css') --}}" rel="stylesheet">
     <link href="{{-- asset('karmanta/css/style-responsive.css') --}}" rel="stylesheet" />
     <link href="{{-- asset('css/app.css') --}}" rel="stylesheet"-->
-
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "{{env('ONESIGNAL_APP_ID')}}",
+            autoRegister: false,
+            notifyButton: {
+                enable: true /* Set to false to hide */
+            }
+        }]);
+    </script>
 
 @yield('css')
 

@@ -79,6 +79,13 @@ elixir((mix) => {
         '../../../public/css/print.css'
     ], 'public/assets/css/print.css')
     .styles([
+        '../../../public/css/listViewVideo.css'
+    ], 'public/assets/css/listViewVideo.css')
+    .styles([
+        '../../../public/css/uploadVideo.css'
+    ], 'public/assets/css/uploadVideo.css')
+
+    .styles([
         '../../../public/css/deleteAside.css'
     ], 'public/assets/css/deleteAside.css')
     .styles([
@@ -134,6 +141,12 @@ elixir((mix) => {
     .scripts([
         '../../../public/js/acceuil.js'
     ], 'public/assets/js/acceuil.js')
+    .scripts([
+        '../../../public/js/listViewVideo.js'
+    ], 'public/assets/js/listViewVideo.js')
+    .scripts([
+        '../../../public/js/uploadVideo.js'
+    ], 'public/assets/js/uploadVideo.js')
     .scripts([
         '../../../public/js/comptabilite.js'
     ], 'public/assets/js/comptabilite.js');

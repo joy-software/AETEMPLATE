@@ -5,8 +5,10 @@
 
     <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
+@endsection
 
-
+@section('title')
+    Invitation au groupe {{ $group->name }}
 @endsection
 
 @section('sideOption')
