@@ -807,11 +807,11 @@ class groupController extends Controller
             list($year, $month, $days) = explode("-", $date);
 
             $date_expiration = Carbon::create($year, $month, $days, 0);
-            if($date_expiration->isPast()){
+            /*if($date_expiration->isPast()){
                 return response()->json([
                     'type'=>'error',
-                    'message'=> "La date indiquée pour l'évènement est déjà passée. Vérifier la date s'il vous plait"]);
-            }
+                    'message'=> "La date indiquée pour la reunion est déjà passée. Vérifier la date s'il vous plait"]);
+            }*/
         }
 
         $ads->type = $type;
@@ -880,7 +880,19 @@ class groupController extends Controller
         $group = group::find($request->id_group);
         $ads->user()->associate(Auth::user());
         $ads->group()->associate($group);
+        $live = $request->checkbox_live;
+
         $ads->save();
+
+        if($live && $request->checkbox_even){
+
+            $videoController = new VideoController();
+            Session::set('special_message' ,$videoController->addBroadcast($request, $ads));
+        } else {
+
+            Session::set('special_message' ,['live' => $live, 'meeting' => $request->checkbox_even]);
+        }
+
         if($file1 != null){
             $file1->save();
         }
@@ -1107,6 +1119,10 @@ class groupController extends Controller
         $this->verification_param($id_group);
         $group_associate = group::find($id_group);
         $nom_groupe = $group_associate->name;
+        if($id_group == 1){
+            Session::flash('message', "Le groupe ".$nom_groupe ." ne peut pas être supprimé, c'est le groupe principal");
+            return redirect()->route('search_group');
+        }
 
         $id_users = DB::table('usergroup')->select('id')->where('group_ID','=',$id_group)->get();
 

@@ -3,13 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -17,6 +13,11 @@
     @include('layouts/asideOptionGenerated')
 @endsection
 
+<style>
+    .project-team, .panel-title, .progress-panel {
+        background: white !important;
+    }
+</style>
 
 
 @section('content')
@@ -28,16 +29,125 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
-                    <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
+                    @if($group->id == 1)
+                        <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
 
+        <div class="row">
+            <div class="modal fade" id="live-meeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <button id="button" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="content-player">
+                        <div id="player"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!--div class="row" style="">
+            <div class="col-lg-offset-1 col-lg-10">
+
+                <ul class="breadcrumb" style="background: white;">
+                    <li><a class="btn btn-primary" id="show_create_ad" ><i class="icon_pencil-edit"></i> <bold> Créer une publication </bold></a></li>
+                </ul>
+
+            </div>
+            id="div_create_ad"
+        </div-->
+        <?php $role_admin= "admin_".$group->id; ?>
+
+
+        <div class="row" >
+            @if (Session::get('special_message'))
+
+
+            @endif
+            <section class="panel col-lg-offset-1 col-lg-10">
+                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <section class="panel" >
+                            <header class="panel-heading">
+                                Créer une annonce @role($role_admin) / une réunion @endrole
+                            </header>
+                            <div class="panel-body" style="text-align: center;">
+
+                                <div class="alert alert-block alert-danger fade in" id="message">
+
+                                </div>
+
+                                <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
+                                <textarea cols="10" rows="8" name="description" id="description_create_ad" class="form-control"></textarea>
+                            </div>
+
+                        </section>
+                    </div>
+                    <div class="col-lg-4 well">
+                            Joindre des fichiers <br>
+                        <div class="row" id="span_file1">
+                            <div class="col-lg-9">
+                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
+                                <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+                        <div class="row" id="span_file2">
+                            <div class="col-lg-9">
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
+                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div><br>
+                        <div class="row" id="span_file3">
+                            <div class="col-lg-9">
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
+                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                            </div>
+                            <div class="col-lg-3">
+                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                            </div>
+                        </div>
+
+                        <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
+                            <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
+
+                        @role($role_admin)
+
+                        <p>
+                            <label class="checkbox checkbox-inline" style="margin-left: 10px;">
+                                <input type="checkbox" id="checkbox-live" name="checkbox_live">Ajouter le live
+                            </label>
+                            <label class="checkbox checkbox-inline">
+                                <input type="checkbox" id="checkbox-even" name="checkbox_even" > Publier comme une reunion
+                            </label>
+                        </p>
+                        <p id="p_date_even" style="margin-left: -20px;">
+                            <label class="checkbox checkbox-inline">
+                                Cette reunion est prévue pour le <input name="expiration_date" type="date" id="input_date" class="form-control">
+                            </label>
+                        </p>
+                        @endrole
+                    </div>
+
+                </div>
+                <div class="row col-lg-offset-2 col-lg-2" style="text-align: center; margin-bottom: 5px;">
+                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
+                </div>
+                {!! Form::close() !!}
+            </section>
+        </div>
 
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10" >
@@ -97,7 +207,7 @@
                     <td style="width: 25%">
                         <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn">Accepter</button>
                         <br><br>
-                        <?php $role_admin= "admin_".$group->id; ?>
+
                         @role($role_admin)
                         <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn">Refuser</button>
                         @endrole
@@ -132,105 +242,18 @@
         </section>
         </div>
 
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-8">
-                <div class="list-group">
-                    <a class="btn btn-primary list-group-item active" id="show_create_ad" > Je veux créer une annonce </a>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="div_create_ad" >
-            <section class="panel col-lg-offset-1 col-lg-10">
-                {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
-                <div class="row">
-                    <div class="col-lg-8">
-                        <section class="panel" >
-                            <header class="panel-heading">
-                                Créer une annonce / évènement
-                            </header>
-                            <div class="panel-body" style="text-align: center;">
-
-                                <div class="alert alert-block alert-danger fade in" id="message">
-
-                                </div>
-
-                                <input type="text" class="hidden" value="{{ $group->id }}" name="id_group">
-                                <textarea cols="10" rows="10" name="description" id="description_create_ad" class="form-control"></textarea>
-                            </div>
-
-                        </section>
-                    </div>
-                    <div class="col-lg-4 well">
-                        <p>
-                            Joindre des fichiers a l'annonce <br>
-                        <div class="row" id="span_file1">
-                                <div class="col-lg-9">
-                                    <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
-                                    <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                                </div>
-                                <div class="col-lg-3">
-                                    <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                                </div>
-                        </div><br>
-                        <div class="row" id="span_file2">
-                            <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
-                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                            </div>
-                            <div class="col-lg-3">
-                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                            </div>
-                        </div><br>
-                        <div class="row" id="span_file3">
-                            <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
-                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
-                            </div>
-                            <div class="col-lg-3">
-                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
-                            </div>
-                        </div><br>
-
-                        <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
-                            <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
-                        </p>
-
-                        <p>
-                        <label class="checkbox checkbox-inline">
-                            <input type="checkbox" id="checkbox-even" name="checkbox_even" value="option1"> Publier comme un évènement
-                        </label>
-                        </p>
-                        <p id="p_date_even" style="margin-left: -20px;">
-                        <label class="checkbox checkbox-inline">
-                            Cet évènement sera valide jusqu'en <input name="expiration_date" type="date" id="input_date" class="form-control">
-                        </label>
-                        </p>
-
-                    </div>
-                    <br>
-                </div>
-                <div class="row" style="text-align: center;">
-                    <div class="col-lg-offset-2 col-lg-2">
-                        <p>
-                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer l'annonce</button>
-                        </p>
-                    </div>
-                </div>
-                {!! Form::close() !!}
-            </section>
-        </div>
 
 
 
-        <!--div>
-          Partie des évènements !!!
+
+      <!--div>
+          Annonces et évènements les plus récents.
       </div-->
-
-    <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
-        <ul class="breadcrumb" id="menu_group">
-            <li><a><h4>Evènement</h4></a></li>
-        </ul>
-    </div>
+        <!--div class="col-lg-offset-1 col-lg-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Reunions et Annonces les plus récentes</div>
+            </div>
+        </div-->
 
         <?php
 
@@ -245,17 +268,17 @@
 
         <div class="row" id="evenement{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
-                <div class="panel-body progress-panel">
-                    <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
+                <div>
+                    <div class="row panel-primary panel-heading" style="background-color: #dff8e3;" >
+                        <div class="col-lg-6 task-progress pull-left">
                             <span class="pull-left">
                                 <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'] )}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
-                        <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span> <br><br>
-                            <span class="badge bg-warning"><?php $std2 = $event->expiration_date; echo $std2; ?></span>
+                        <div class="col-lg-6" style="font-weight:bold;">
+                            Reunion prévue pour le <?php $std = $event->expiration_date; echo $std; ?>
+                            <!--span class="badge bg-success"><?php //$std2 = $event->created_at; echo $std2->toRfc850String(); ?></span--> <br><br>
                         </div>
                     </div>
                 </div>
@@ -264,7 +287,11 @@
                     <tbody>
                     <tr>
                         <td style="text-align: justify;">
-                            {{ $event->description }}
+                            {{ $event->description }} <br>
+                            <?php if($event->broadcast != null) {
+                               echo "<button class='btn btn-primary' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+
+                            }?>
                         </td>
                     </tr>
                     <tr>
@@ -305,7 +332,7 @@
                                     }
                                 }
                             }
-                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cet évènement </span>
+                            else{  ?> <span class="badge bg-info">Aucun fichier pour cette reunion</span>
                             <?php
                             }
                             }
@@ -324,7 +351,7 @@
         ?>
         <div class="row" id="evenement0" >
             <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
-                        <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
+                        <a class="list-group-item active">Ce groupe n'a aucune reunion programmée</a>
             </section>
         </div>
 
@@ -336,11 +363,11 @@
             Partie des annoncess !!!!!
         </div-->
 
-        <div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
+        <!--div class="row col-lg-offset-1 col-lg-10" style="text-align: center;">
             <ul class="breadcrumb" id="menu_group">
                 <li><a><h4>Annonce</h4></a></li>
             </ul>
-        </div>
+        </div-->
 
     <?php
 
@@ -356,18 +383,18 @@
 
         <div class="row" id="annonce{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
-                <div class="panel-body progress-panel">
-                    <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
+                <div >
+                    <div class="row panel-primary panel-heading" >
+                        <div class="col-lg-6 task-progress pull-left">
                             <span class="pull-left">
                                 <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $ad->id .'']['photo'] )}}">
                               </span>
 
-                            <?php ?>
+                            {{ $tab_users[''.$ad->id .'']['name'] }} , {{ $tab_users[''. $ad->id .'']['surname'] }}
 
                         </div>
-                        <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $ad->created_at; echo $std->toRfc850String(); ?></span>
+                        <div class="col-lg-6">
+                           Publiée le <?php $std = $ad->created_at; echo $std->toRfc850String(); ?>
                         </div>
                     </div>
                 </div>
@@ -417,7 +444,7 @@
                                             }
                                         }
                                     }
-                                    else{  ?> <span class="badge bg-warning">Aucun fichier pour cette annonce</span>
+                                    else{  ?> <span class="badge bg-info">Aucun fichier pour cette annonce</span>
                                         <?php
                                    } ?>
 
@@ -453,11 +480,8 @@
 
 
 @section('script')
-
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
+    <script src="{{ asset('js/view_meeting.js') }}" ></script>
 <script>
 
     var group = new Object();
@@ -468,16 +492,14 @@
     group.logo = '{{ $group->logo }}';
     group.user_ID = '{{ $group->user_ID }}';
 
-
     _token = $('input[name=_token]').val();
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
     });
 
 
-
 </script>
 
-    <script src="{{ asset('js/group.js') }}"></script>
+    <script src="{{ asset('assets/js/group.js') }}"></script>
 
 @endsection

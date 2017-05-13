@@ -143,6 +143,11 @@ Route::get('/tester', [
     'uses' => 'HomeController@tester'
 ]);
 
+Route::get('/tester/play', [
+    'as' => 'tester',
+    'uses' => 'HomeController@testerplay'
+]);
+
 
 Route::post('/tester/upload', [
     'as' => 'post_tester_upload',
@@ -156,13 +161,21 @@ Route::get('/video/list', [
 
 Route::post('/video/upload', [
     'as' => 'post_video_upload',
-    'uses' => 'VideoController@uploadVideo'
+    'uses' => 'VideoController@uploadVideo',
+    'middleware' => 'role:admin_1'
 ]);
 
-Route::get('/video/view/{id}', [
-    'as' => 'video_view',
-    'uses' => 'VideoController@viewVideo'
+Route::post('/video/addLive', [
+    'as' => 'video_live',
+    'uses' => 'VideoController@addBroadcast'
 ]);
+
+Route::get('/tester/live', [
+    'as' => 'test_live',
+    'uses' => 'HomeController@testerlive'
+]);
+
+
 
 
 /**

@@ -1,0 +1,1 @@
+{"version":3,"sources":["acceuil.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"acceuil.js","sourcesContent":["/**\r\n * Created by hp on 22/04/2017.\r\n */\r\n$(\"select.form-control\").change(function(){\r\n    $(\"#amount_contribution\").val($(this).val());\r\n});\r\n\r\n"]}

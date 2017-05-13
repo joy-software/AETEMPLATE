@@ -3,11 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -84,10 +82,6 @@
 
 
 @section('script')
-
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script>
 
 
@@ -100,6 +94,6 @@
 
     </script>
 
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('assets/js/admin.js') }}"></script>
 
 @endsection

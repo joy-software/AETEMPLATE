@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="{{ asset('karmanta/index.html') }}" class="logo">Promo<span>Vogt</span> <span class="lite">.org</span></a>
+    <a href="" class="logo"  id="logo_home">Promo<span>Vogt</span> <span class="lite">.org</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -30,9 +30,9 @@
             @include('layouts/menuItem', ['itemName' => 'groupes', 'link' => "/group"])
             @include('layouts/menuItem', ['itemName' => 'annuaire', 'link' => "/annuaire"])
             @include('layouts/menuItem', ['itemName' => 'bibliotheque', 'link' => "/filemanager?type=file"])
-            @include('layouts/menuItem', ['itemName' => 'comptabilite', 'link' => "/#"])
-         @if( session('role_admin'))
-                @include('layouts/menuItem', ['itemName' => 'administration', 'link' => "/#"])
+            @include('layouts/menuItem', ['itemName' => 'comptabilite', 'link' => "/comptabilite"])
+            @if( session('role_admin') == "true")
+                @include('layouts/menuItem', ['itemName' => 'administration', 'link' => "/admin"])
             @endif
 
            @include('layouts/menuProfil')

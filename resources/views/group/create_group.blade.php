@@ -3,15 +3,11 @@
 
 @section('css')
 
-    <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
 @endsection
 
 @section('sideOption')
@@ -97,9 +93,8 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/group.js') }}"></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/upload.js') }}"></script>
+    <script src="{{ asset('assets/js/group.js') }}"></script>
+
+    <script src="{{ asset('assets/js/upload.js') }}"></script>
 
 @endsection

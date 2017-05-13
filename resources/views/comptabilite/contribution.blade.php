@@ -3,9 +3,9 @@
 @section('css')
 
     <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
     @role("comptable")
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
     @endrole()
 
 @endsection
@@ -31,12 +31,6 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
-    @include('layouts/asideOption', [
-            'classIconOption' => 'icon_download',
-            'optionName' => 'Exporter des rapports',
-            'retractable' => 'false',
-            'link' => url('/comptabilite/export_contribution')
-        ])
 
 @endsection
 @endrole
@@ -119,9 +113,9 @@
                                 </a>
                                 <div class="form-group " id="button_contrib">
                                     <br/>
-                                    <button  id="btn_create_contribution_cash"class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
+                                    <button  id="btn_create_contribution_cash" class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
                                 </div>
-                                <div class="center col-lg-offset-2 col-md-offset-2 col-sm-offset-2" id="wecashUp">
+                                <div class="text-center  " id="wecashUp">
 
                                 </div>
                                 {!! Form::close() !!}
@@ -137,5 +131,5 @@
 
 
 @section('script')
-    <script src="{{ asset('js/comptabilite.js') }}"></script>
+    <script src="{{ asset('assets/js/comptabilite.js') }}"></script>
 @endsection

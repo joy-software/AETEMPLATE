@@ -2,10 +2,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet">
+
 
 @endsection
 

@@ -3,13 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -31,10 +27,10 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}" style="color: #ff2d55!important;">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
-                    <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}"  style="color: #ff2d55!important;">Reunions </a></li>
+                    @if($group->id == 1)
+                        <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
                 </ul>
                 <!--breadcrumbs end -->
@@ -43,7 +39,7 @@
 
         <div class="row">
             <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
-                <a class="list-group-item active">Evènements du groupe {{ $group->name }}</a>
+                <a class="list-group-item active">Reunions du groupe {{ $group->name }}</a>
             </section>
         </div>
 
@@ -59,17 +55,16 @@
 
         <div class="row" id="evenement{{ $compteur }}">
             <section class="panel col-lg-offset-2 col-lg-8">
-                <div class="panel-body progress-panel">
+                <div class="panel panel-primary progress-panel">
                     <div class="row">
-                        <div class="col-lg-8 task-progress pull-left">
+                        <div class="col-lg-6 task-progress pull-left">
                             <span class="pull-left">
                                 <img style="width : 50px; height: auto;" class="simple" src="{{ url('cache/logo/'.$tab_users[''. $event->id .'']['photo'])}}">
                                 {{ $tab_users[''.$event->id .'']['name'] }} , {{ $tab_users[''. $event->id .'']['surname'] }}
                                 </span>
                         </div>
-                        <div class="col-lg-4">
-                            <span class="badge bg-success"><?php $std = $event->created_at; echo $std->toRfc850String(); ?></span> <br><br>
-                            <span class="badge bg-warning"><?php $std2 = $event->expiration_date; echo $std2; ?></span>
+                        <div class="col-lg-6">
+                            Reunion prévue pour le <?php $std = $event->expiration_date; echo $std; ?>
                         </div>
                     </div>
                 </div>
@@ -78,7 +73,10 @@
                     <tbody>
                     <tr>
                         <td style="text-align: justify;">
-                            {{ $event->description }}
+                            {{ $event->description }} <br>
+                            <?php if($event->broadcast != null) {
+                                echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                            }?>
                         </td>
                     </tr>
                     <tr>
@@ -119,7 +117,7 @@
                             }
                             }
                             }
-                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cet évènement </span>
+                            else{  ?> <span class="badge bg-warning">Aucun fichier pour cette reunion </span>
                             <?php
                             }
 
@@ -145,7 +143,7 @@
         ?>
         <div class="row" id="evenement0" >
             <section class="panel col-lg-offset-2 col-lg-8" style="background-color: #3097D1">
-                <a class="list-group-item active">Ce groupe n'a aucun evènement</a>
+                <a class="list-group-item active">Ce groupe n'a aucun aucune reunion</a>
             </section>
         </div>
 
@@ -159,8 +157,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/group.js') }}"></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/group.js') }}"></script>
 
 @endsection

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="description" content="Promot-Vogt Espace Memebre">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="{{ asset('karmanta/img/favicon.png') }}">
@@ -22,25 +22,35 @@
     <!--external css-->
     <!-- font icon -->
     <!-- font icon -->
-    <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"-->
+    <!--link href="{{-- asset('karmanta/css/elegant-icons-style.css') --}}" rel="stylesheet" />
 
 
-    <!-- Custom styles -->
-    <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <link href="{{-- asset('karmanta/css/style.css') --}}" rel="stylesheet">
+    <link href="{{-- asset('karmanta/css/style-responsive.css') --}}" rel="stylesheet" />
+    <link href="{{-- asset('css/app.css') --}}" rel="stylesheet"-->
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "{{env('ONESIGNAL_APP_ID')}}",
+            autoRegister: false,
+            notifyButton: {
+                enable: true /* Set to false to hide */
+            }
+        }]);
+    </script>
 
 @yield('css')
 
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/header.css') }}" rel="stylesheet">
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
-    <script src="{{ asset('karmanta/js/html5shiv.js') }}"></script>
-    <script src="{{ asset('karmanta/js/respond.min.js') }}"></script>
-    <script src="{{ asset('karmanta/js/lte-ie7.js') }}"></script>
-
-
+    <script src="{{ asset('js/kar.js') }}"></script>
 
     <![endif]-->
 </head>
@@ -75,12 +85,9 @@
 
 @yield('script')
 
-<script src="{{ asset('karmanta/js/jquery.scrollTo.min.js') }}"></script>
-<script src="{{ asset('karmanta/js/jquery.nicescroll.js') }}"></script>
-<script src="{{ asset('karmanta/js/scripts.js') }}"></script>
+<script src="{{ asset('public/assets/js/kar3.js') }}"></script>
 
-<script src="{{ asset('js/header.js') }}"></script>
-<!--script src="{{--asset('js/app.js')--}}"></script-->
+
 <script>
 
     //knob

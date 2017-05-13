@@ -20,8 +20,6 @@ $('#button').click(function () {
 })
 
 
-
-
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -35,8 +33,8 @@ $('#button').click(function () {
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '360',
-            width: '640',
+            height: '50%',
+            width: '50%',
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange

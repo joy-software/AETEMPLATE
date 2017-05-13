@@ -3,13 +3,10 @@
 
 @section('css')
 
-    <link href="{{ asset('css/annuaire.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/annuaire.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/table.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
 
 @endsection
@@ -155,7 +152,7 @@
                                 <td>{{ $member->profession}}</td>
                                 <td>{{ $member->country}}</td>
                                 <td>{{ $member->phone}}</td>
-                                <td>{{ $member->email}}</td>
+                                <td>{{ $member->email}} <br> <?php echo "<a href='/contrib_user/$member->id'>Voir ses contributions</a>"; ?></td>
 
                             </tr>
                             @endforeach
@@ -173,8 +170,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/annuaire.js') }}"></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/annuaire.js') }}"></script>
+    <script src="{{ asset('assets/js/table.js') }}"></script>
 
 @endsection

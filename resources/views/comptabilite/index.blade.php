@@ -3,11 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/comptabilite.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/comptabilite.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
 @endsection
 @section('title')
@@ -32,12 +30,6 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
-    @include('layouts/asideOption', [
-            'classIconOption' => 'icon_download',
-            'optionName' => 'Exporter des rapports',
-            'retractable' => 'false',
-            'link' => url('/comptabilite/export_contribution')
-        ])
 
 @endsection
 @endrole
@@ -285,9 +277,6 @@
 
 @section('script')
 
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/collapse.js') }}"></script>
     <script>
 
 
@@ -300,6 +289,6 @@
 
     </script>
 
-    <script src="{{ asset('js/comptabilite.js') }}"></script>
+    <script src="{{ asset('assets/js/comptabilite.js') }}"></script>
 
 @endsection

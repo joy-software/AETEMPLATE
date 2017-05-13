@@ -3,13 +3,9 @@
 
 @section('css')
 
-    <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -30,13 +26,15 @@
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
-                    <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
+                    <li><a href="/group/view_group/{{ $group->id }}" ><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Evènements </a></li>
-                    <li><a href="/group/meeting_group/{{ $group->id }}">Réunions </a></li>
-                    <li><a href="{{ route('video_list') }}">Vidéos </a></li>
-                    <li><a href="/group/ballot_group/{{$group->id }}">Scrutin</a></li>
-                    <li><a href="/group/member_group/{{ $group->id }}" style="color: #ff2d55!important;">Membres </a></li>
+                    <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
+                    @if($group->id == 1)
+                        <li><a href="{{ route('video_list') }}">Vidéos </a></li>
+                    @endif
+                    <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
+                    <li><a href="/group/member_group/{{ $group->id }}"  style="color: #ff2d55!important;">Membres </a></li>
+
                 </ul>
                 <!--breadcrumbs end -->
             </div>
@@ -141,8 +139,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/group.js') }}"></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/group.js') }}"></script>
 
 @endsection

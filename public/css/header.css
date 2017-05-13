@@ -10,7 +10,7 @@ Ajouté par le yobiyork
 /* Return on top */
 #returnOnTop {
     background: url("/img/return_on_top.png") no-repeat;
-    bottom: 1%;
+    bottom: 10%;
     cursor: pointer;
     display: none;
     filter: alpha(opacity = 50); /* IE < 8 */
