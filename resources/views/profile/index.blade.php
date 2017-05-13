@@ -4,6 +4,8 @@
 
     <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/upload.css') }}" rel="stylesheet"/>
 
 
 @endsection
@@ -421,6 +423,7 @@
 
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/upload.js') }}"></script>
+    <script src="{{ asset('js/header.js') }}"></script>
 
 @endsection
 

@@ -1,22 +1,35 @@
 <header class="header white-bg">
-    <div class="toggle-nav">
-        <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
-    </div>
 
-    <!--logo start-->
-    <a href="" class="logo"  id="logo_home">Promo<span>Vogt</span> <span class="lite">.org</span></a>
-    <!--logo end-->
 
-    <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-            <li>
-                <form class="navbar-form">
-                    <input class="form-control" placeholder="Search" type="text">
-                </form>
-            </li>
+    <div class="toggle-nav containers">
+        <i class="icon_menu toggle-menus"></i>
+
+        <a href="" class="logo"  id="logo_home">Promo<span>Vogt</span> <span class="lite">.org</span></a>
+
+        <ul class="navs">
+
+            @include('layouts/menuItem', ['itemName' => 'accueil_tog', 'link' => "/accueil" ])
+            @include('layouts/menuItem', ['itemName' => 'groupes_tog', 'link' => "/group"])
+            @include('layouts/menuItem', ['itemName' => 'annuaire_tog', 'link' => "/annuaire"])
+            @include('layouts/menuItem', ['itemName' => 'bibliotheque_tog', 'link' => "/filemanager?type=file"])
+            @include('layouts/menuItem', ['itemName' => 'comptabilite_tog', 'link' => "/comptabilite"])
+            @if( session('role_admin') == "true")
+                @include('layouts/menuItem', ['itemName' => 'administration_tog', 'link' => "/admin"])
+            @endif
+
+            @include('layouts/menuNotification',
+             [
+                'idElement' => 'alert_notificatoin_bar',
+                'classIcon' => 'icon-bell-l',
+                'numberNotification' => $nbr_notif,
+                'notifications' => $user
+             ])
+
+            @include('layouts/menuProfil')
+
+
         </ul>
-        <!--  search form end -->
+
     </div>
 
 
@@ -42,10 +55,6 @@
                 'numberNotification' => $nbr_notif,
                 'notifications' => $user
              ])
-
-
-
-
 
            @include('layouts/menuProfil')
 
