@@ -3,18 +3,14 @@
 
 @section('css')
 
-    <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.foundation.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/table.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
     <link href="{{ asset('css/listViewVideo.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/register.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/upload.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/uploadVideo.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/uploadVideo.css') }}" rel="stylesheet">
 
 
 @endsection
@@ -271,11 +267,10 @@
 
 @section('script')
 
-    <script src="{{ asset('js/group.js') }}"></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('js/dataTables.bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/listViewVideo.js') }}"></script>
-    <script src="{{ asset('js/uploadVideo.js') }}"></script>
-    <script src="{{ asset('js/upload.js') }}"></script>
+    <script src="{{ asset('assets/js/group.js') }}"></script>
+    <script src="{{ asset('assets/js/table.js') }}"></script>
+    <script src="{{ asset('assets/js/listViewVideo.js') }}"></script>
+    <script src="{{ asset('assets/js/uploadVideo.js') }}"></script>
+    <script src="{{ asset('assets/js/upload.js') }}"></script>
 
 @endsection

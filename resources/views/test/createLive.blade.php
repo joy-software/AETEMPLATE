@@ -5,16 +5,11 @@
 
 <head>
     <title>Create live</title>
-    <link rel="stylesheet" href="{{asset('css/upload.css')}}">
-    <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{asset('assets/css/upload.css')}}">
+    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet"/>
 
-    <link href="{{ asset('karmanta/css/bootstrap-theme.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <link href="../wamp64/www/assovogt.org/resources/assets/karmanta/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-
-    <link href="{{ asset('karmanta/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -60,7 +55,7 @@
 
 </form>
 
-<script src="{{asset('js/upload.js')}}"></script>
+<script src="{{asset('assets/js/upload.js')}}"></script>
 
 </body>
 </html>
