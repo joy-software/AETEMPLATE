@@ -807,11 +807,11 @@ class groupController extends Controller
             list($year, $month, $days) = explode("-", $date);
 
             $date_expiration = Carbon::create($year, $month, $days, 0);
-            if($date_expiration->isPast()){
+            /*if($date_expiration->isPast()){
                 return response()->json([
                     'type'=>'error',
                     'message'=> "La date indiquée pour la reunion est déjà passée. Vérifier la date s'il vous plait"]);
-            }
+            }*/
         }
 
         $ads->type = $type;
@@ -887,7 +887,10 @@ class groupController extends Controller
         if($live && $request->checkbox_even){
 
             $videoController = new VideoController();
-            $videoController->addBroadcast($request);
+            Session::set('special_message' ,$videoController->addBroadcast($request, $ads));
+        } else {
+
+            Session::set('special_message' ,['live' => $live, 'meeting' => $request->checkbox_even]);
         }
 
         if($file1 != null){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ads;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -255,24 +256,25 @@ class VideoController extends Controller
 
     }
 
-    public function addBroadcast(Request $request)
+    public function addBroadcast(Request $request, ads $ads)
     {
 
-        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
+        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request, $ads){
 
             try {
                 // Create an object for the liveBroadcast resource's snippet. Specify values
                 // for the snippet's title, scheduled start time, and scheduled end time.
                 $broadcastSnippet = new \Google_Service_YouTube_LiveBroadcastSnippet();
-                $broadcastSnippet->setTitle('On va voir');
-                $broadcastSnippet->setScheduledStartTime('2017-05-12T14:00:00.000Z');
-                $broadcastSnippet->setScheduledEndTime('2017-05-12T15:30:00.000Z');
+                $expirationDate = date('Y-m-d', strtotime($ads->expiration_date)) . ' 00:00:00';
+                $broadcastSnippet->setTitle('Réunion du ' . date('d-m-Y', strtotime($ads->expiration_date)));
+                $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime($expirationDate . ' + 27 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 27 hour')) . '.000Z');
 
+                $broadcastSnippet->setScheduledEndTime(date('Y-m-d', strtotime($expirationDate . ' + 30 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 30 hour')) . '.000Z');
 
                 // Create an object for the liveBroadcast resource's status, and set the
                 // broadcast's status to "private".
                 $status = new \Google_Service_YouTube_LiveBroadcastStatus();
-                $status->setPrivacyStatus('public');
+                $status->setPrivacyStatus('unlisted');
 
 
                 // Create the API request that inserts the liveBroadcast resource.
@@ -287,7 +289,10 @@ class VideoController extends Controller
                 $broadcastsResponse = $youtube->liveBroadcasts->insert('snippet,status',
                     $broadcastInsert, array());
 
-                // Create an object for the liveStream resource's snippet. Specify a value
+                $ads->broadcast = $broadcastsResponse['id'];
+                $ads->save();
+
+                /*// Create an object for the liveStream resource's snippet. Specify a value
                 // for the snippet's title.
                 $streamSnippet = new \Google_Service_YouTube_LiveStreamSnippet();
                 $streamSnippet->setTitle('Premier test');
@@ -337,7 +342,7 @@ class VideoController extends Controller
                     $bindBroadcastResponse['contentDetails']['boundStreamId']);
                 $htmlBody .= '</ul>';*/
 
-                return Redirect::back()->with(['result' => array_merge($broadcastsResponse, $streamsResponse)]);
+                return Redirect::back()->with(['result' => $broadcastsResponse]);
 
             } catch (Google_Service_Exception $e) {
                 $htmlBody = sprintf('<p>A service error occurred: <code>%s</code></p>',
@@ -356,9 +361,19 @@ class VideoController extends Controller
 
         });
 
-        return Redirect::back();
+        $result = Session::get('result');
+        //$id = $result['id'];
+        //Session::set('result', null);
 
+        if(is_array($result)) {
+
+            //$ads->broadcast = $id;
+            //$ads->save();
+
+            return array_merge(['id' => 'ou la la'], $result);
+        }
+
+        return $result;
     }
-
 
 }

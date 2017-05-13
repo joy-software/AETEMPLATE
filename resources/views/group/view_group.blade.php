@@ -39,6 +39,18 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="modal fade" id="live-meeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <button id="button" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="content-player">
+                        <div id="player"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
 
         <!--div class="row" style="">
             <div class="col-lg-offset-1 col-lg-10">
@@ -52,7 +64,12 @@
         </div-->
         <?php $role_admin= "admin_".$group->id; ?>
 
+
         <div class="row" >
+            @if (Session::get('special_message'))
+
+
+            @endif
             <section class="panel col-lg-offset-1 col-lg-10">
                 {!! Form::open(array('route' => 'post_ads','files'=>true, 'id'=> 'create_ad', 'method'=>'post')) !!}
                 <div class="row">
@@ -272,7 +289,8 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                               echo "<button class='btn btn-primary' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+
                             }?>
                         </td>
                     </tr>
@@ -463,6 +481,7 @@
 
 @section('script')
     <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
+    <script src="{{ asset('js/view_meeting.js') }}" ></script>
 <script>
 
     var group = new Object();
