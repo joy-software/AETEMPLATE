@@ -266,8 +266,17 @@ class VideoController extends Controller
                 // for the snippet's title, scheduled start time, and scheduled end time.
                 $broadcastSnippet = new \Google_Service_YouTube_LiveBroadcastSnippet();
                 $expirationDate = date('Y-m-d', strtotime($ads->expiration_date)) . ' 00:00:00';
+
+                if(date('d-m-Y', time()) == date('d-m-Y', strtotime($ads->expiration_date))) {
+
+                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime(time() . ' + 8 hour')) . 'T' . date('H:i:s', strtotime(time() . ' + 8 hour')) . '.000Z');
+
+                } else {
+
+                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime($expirationDate . ' + 14 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 14 hour')) . '.000Z');
+                }
+
                 $broadcastSnippet->setTitle('Réunion du ' . date('d-m-Y', strtotime($ads->expiration_date)));
-                $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime($expirationDate . ' + 27 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 27 hour')) . '.000Z');
 
                 $broadcastSnippet->setScheduledEndTime(date('Y-m-d', strtotime($expirationDate . ' + 30 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 30 hour')) . '.000Z');
 

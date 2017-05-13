@@ -13,6 +13,10 @@
     @include('layouts/asideOptionGenerated')
 @endsection
 
+@section('title')
+    Bienvenu dans {{ $group->name }}
+@endsection
+
 <style>
     .project-team, .panel-title, .progress-panel {
         background: white !important;

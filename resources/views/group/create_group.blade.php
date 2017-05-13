@@ -10,6 +10,10 @@
     <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
 @endsection
 
+@section('title')
+   Créer un groupe
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 @endsection

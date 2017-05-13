@@ -166,7 +166,49 @@ $('#logo_home').click(function(){
 
 /**
  * Actions performed after a click on logout link
+ *
  */
+
+/*
+ * Actions performed after a click on the menu item
+ */
+
+$('#accueil_tog').click(function(){
+    window.location.href = '/accueil';
+
+});
+
+$('#groupes_tog').click(function(){
+    window.location.href = '/group';
+
+});
+
+$('#annuaire_tog').click(function(){
+
+    window.location.href = '/annuaire';
+
+
+});
+
+$('#bibliotheque_tog').click(function(){
+    window.location.href = '/filemanager?type=file';
+
+});
+
+$('#comptabilite_tog').click(function(){
+    if(compta == false)
+    {
+        window.location.href = '/contrib_user/'+userId;
+    }
+    else
+    {
+        window.location.href = '/comptabilite';
+    }
+});
+
+$('#administration_tog').click(function(){
+    window.location.href = '/admin';
+});
 
 
 
@@ -176,6 +218,14 @@ $('#logout-link').click(function(event){
     $('#logout-form').submit();
 });
 
-/**
- * Actions performed after a clic on sign up button from login form
- */
+
+
+
+$('.toggle-nav').off();
+
+
+$(".toggle-menus").click(function(e) {
+    e.preventDefault();
+    $(".navs").toggle();
+});
+

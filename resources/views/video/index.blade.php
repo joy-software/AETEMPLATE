@@ -15,6 +15,10 @@
 
 @endsection
 
+@section('title')
+    Vidéos des reunions
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 

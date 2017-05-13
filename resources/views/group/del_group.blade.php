@@ -10,6 +10,10 @@
 
 @endsection
 
+@section('title')
+    Suppression du groupe {{ $group->name }}
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 

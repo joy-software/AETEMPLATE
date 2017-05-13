@@ -9,6 +9,9 @@
 
 @endsection
 
+@section('title')
+Gestion des groupes et les rôles comptes et administrateurs
+@endsection
 
 @section('content')
 
@@ -18,14 +21,6 @@
         <div class="row " id="div_config" >
             <div class="col-lg-offset-1 col-lg-10" style="background: white; text-align: center;" >
                 <table class="table table-responsive">
-                    <!--tr>
-                        <td><a class="btn btn-primary" href="#" style="width: 50%;">Publier une reunion</a></td>
-                    </tr>
-
-                    <tr>
-                        <td><a class="btn btn-primary" href="#" style="width: 50%;">Modifier les configurations</a></td>
-                    </tr-->
-
                     <tr>
                         <td><a class="btn btn-primary" href="/admin/roles" style="width: 50%;">Ajouter des comptables et administrateurs</a></td>
                     </tr>
