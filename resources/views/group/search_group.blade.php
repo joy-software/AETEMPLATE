@@ -10,6 +10,10 @@
 
 @endsection
 
+@section('title')
+    Rechercher des groupes
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 @endsection

@@ -9,6 +9,9 @@
 
 @endsection
 
+@section('title')
+    Suspendre des membres
+@endsection
 
 @section('content')
 

@@ -8,6 +8,9 @@
 
 @endsection
 
+@section('title')
+    Gestion des droits des membres
+@endsection
 
 @section('content')
 

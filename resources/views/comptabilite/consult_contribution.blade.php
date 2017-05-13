@@ -9,7 +9,7 @@
 @endsection
 
 @section('title')
-    Contributions
+    Rechercher et consulter des contributions
 @endsection
 
 

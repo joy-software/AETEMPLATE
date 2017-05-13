@@ -8,6 +8,10 @@
 
 @endsection
 
+@section('title')
+    Vos groupes dans PROMOT VOGT
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 

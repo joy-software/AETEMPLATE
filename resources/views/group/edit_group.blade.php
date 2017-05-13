@@ -9,6 +9,10 @@
 
 @endsection
 
+@section('title')
+    Modifier le groupe {{ $group->name }}
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 
