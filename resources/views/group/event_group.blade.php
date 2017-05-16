@@ -9,6 +9,10 @@
 
 @endsection
 
+@section('title')
+    Reunion du groupe {{ $group->name }}
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 

@@ -9,6 +9,10 @@
 
 @endsection
 
+@section('title')
+    Annonces du groupe {{ $group->name }}
+@endsection
+
 @section('sideOption')
     @include('layouts/asideOptionGenerated')
 
