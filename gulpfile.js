@@ -114,10 +114,16 @@ elixir((mix) => {
         '../../../public/karmanta/js/jquery.scrollTo.min.js',
         '../../../public/karmanta/js/jquery.nicescroll.js',
         '../../../public/karmanta/js/scripts.js',
+        '../../../public/js/header.js'
     ], 'public/assets/js/kar3.js')
     .scripts([
         '../../../public/js/app.js',
-        '../../../public/assets/js/kar2.js'
+        '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
+        '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
+        '../../../public/karmanta/js/jquery.scrollTo.min.js',
+        '../../../public/karmanta/js/jquery.nicescroll.js',
+        '../../../public/karmanta/js/scripts.js',
+        '../../../public/js/header.js'
     ], 'public/assets/js/site.js')
     .scripts([
         '../../../public/js/admin.js'
