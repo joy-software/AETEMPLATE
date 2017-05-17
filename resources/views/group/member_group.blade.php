@@ -36,7 +36,6 @@
                     @if($group->id == 1)
                         <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     @endif
-                    <li><a href="/group/ballot_group/{{$group->id}}">Scrutin</a></li>
                     <li><a href="/group/member_group/{{ $group->id }}"  style="color: #ff2d55!important;">Membres </a></li>
 
                 </ul>
