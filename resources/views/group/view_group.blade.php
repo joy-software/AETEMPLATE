@@ -7,6 +7,7 @@
     <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
 
+
 @endsection
 
 @section('sideOption')
