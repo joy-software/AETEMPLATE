@@ -1,1 +1,9 @@
-#create_period,#tab_resultat{display:none}
+#create_period{
+    display: none;
+}
+
+#tab_resultat{
+    display: none;
+}
+
+/*# sourceMappingURL=comptabilite.css.map */

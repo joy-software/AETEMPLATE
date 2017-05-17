@@ -72,7 +72,7 @@ $(document).ready( function () {
     // Add return on top button
     $('body').append('<div id="returnOnTop" title="Retour en haut">&nbsp;</div>');
 
-    $('.btn').addClass('disabled');
+    //$('.btn').addClass('disabled');
 
     // On button click, let's scroll up to top
     $('#returnOnTop').click( function() {
@@ -83,7 +83,7 @@ $(document).ready( function () {
 });
 
 $( window ).on( "load", function () {
-    $('.btn').removeClass('disabled');
+   //$('.btn').removeClass('disabled');
 } );
 
 
