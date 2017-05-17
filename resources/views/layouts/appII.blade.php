@@ -82,10 +82,15 @@
 <!-- nice scroll -->
 
 
+<script>
+    var userId = {!! json_encode( Auth::id()) !!};
+    var compta = {!! session('role_compt') !!};
 
+</script>
 @yield('script')
 
-<script src="{{ asset('public/assets/js/kar3.js') }}"></script>
+
+<script src="{{ asset('assets/js/kar3.js') }}"></script>
 
 
 <script>

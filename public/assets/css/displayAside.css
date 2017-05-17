@@ -1,1 +1,10 @@
-#sidebar{display:block;left:0}#main-content{margin-left:250px}
+#sidebar{
+    display: block;
+    left: 0px;
+
+}
+
+#main-content{
+    margin-left: 250px !important;
+}
+/*# sourceMappingURL=displayAside.css.map */
