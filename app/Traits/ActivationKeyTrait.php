@@ -9,6 +9,7 @@ use App\User;
 use App\ActivationKey;
 use App\usergroup;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Notifications\ActivationKeyCreatedNotification;
 
@@ -97,8 +98,7 @@ trait ActivationKeyTrait
         $usergroup->save();
         //fin
 
-        $id_users = usergroup::select('user_id')->where('group_id', '=',1)
-            ->where('statut','=','actif')
+        $id_users = DB::table('role_user')->select('user_id')->where('role_id', '=',2)
             ->where('user_id','!=',$userToActivate->id)->get();
 
         foreach ($id_users as $id_user)

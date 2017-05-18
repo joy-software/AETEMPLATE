@@ -39,6 +39,9 @@ class groupTableSeeder extends Seeder
         $user = \App\User::find(2);
         $user->attachRole($admin);
 
+        $user = \App\User::find(3);
+        $user->attachRole($admin);
+
         $group = new group([
             'name'=> 'Laboratoire de Cybersécurité',
             'description' =>'Le groupe des stagiaires du Lacy',

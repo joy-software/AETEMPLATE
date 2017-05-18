@@ -9,6 +9,9 @@
 
 @endsection
 
+@section('title')
+    Accueil | PromotVogt
+@endsection
 
 
 

@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\ads whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\ads whereUserID($value)
  * @mixin \Eloquent
+ * @property string $broadcast
+ * @method static \Illuminate\Database\Query\Builder|\App\ads whereBroadcast($value)
  */
 class ads extends Model
 {
