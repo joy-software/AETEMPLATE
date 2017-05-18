@@ -153,7 +153,7 @@
                                 <td>{{ $member->profession}}</td>
                                 <td>{{ $member->country}}</td>
                                 <td>{{ $member->phone}}</td>
-                                <td>{{ $member->email}} <br> <?php echo "<a href='/contrib_user/$member->id'>Voir ses contributions</a>"; ?></td>
+                                <td>{{ $member->email}} <br> <?php $role_comptable = "comptable"; ?>@role($role_comptable) <?php echo "<a href='/contrib_user/$member->id'>Voir ses contributions</a>"; ?> @endrole</td>
 
                             </tr>
                             @endforeach
