@@ -97,7 +97,7 @@
                                 </td>
 
                                 <td style="text-align: center;">
-                                    <button class="btn btn-primary" type="submit"> Chercher </button>
+                                    <button class="btn btn-primary disabled" type="submit"> Chercher </button>
                                 </td>
                                 {!! Form::close() !!}
                             </tr>
@@ -152,7 +152,7 @@
                                 <td id="message_contrib_email"></td>
                             </tr>
                             <tr>
-                                <td style="text-align: center;"><button class="btn btn-primary">Chercher le membre</button></td>
+                                <td style="text-align: center;"><button class="btn btn-primary disabled">Chercher le membre</button></td>
                             </tr>
                             {!! Form::close() !!}
                         </table>

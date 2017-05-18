@@ -79,7 +79,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                                echo "<button class='btn btn-primary'>Voir la reunion en live</button>";
+                                echo "<button class='btn btn-primary disabled'>Voir la reunion en live</button>";
                             }?>
                         </td>
                     </tr>

@@ -78,13 +78,12 @@ $(document).ready( function () {
     $('#returnOnTop').click( function() {
         $('html,body').animate({scrollTop: 0}, 'slow');
     });
-
+    $('.btn').removeClass('disabled');
 
 });
 
-$( window ).on( "load", function () {
-   //$('.btn').removeClass('disabled');
-} );
+
+
 
 
 $(window).scroll(function() {
@@ -161,7 +160,7 @@ $('#administration').click(function(){
 
 
 $('#logo_home').click(function(){
-    window.location.href = "http://www.promotvogt.org";
+    window.location.href = "https://promotvogt.org";
 });
 
 /**

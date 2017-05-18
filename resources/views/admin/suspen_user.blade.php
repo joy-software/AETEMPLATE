@@ -22,7 +22,7 @@
                 <table class="table-responsive table">
                     <tr>
                         <td><label style="font-size: 1.5em;">Suspendre des membres de <strong>" {{ $group->name }} "</strong></label></td>
-                        <td><a class="btn btn-primary" href="/admin/">Aller à l'accueil de l'administration</a></td>
+                        <td><a class="btn btn-primary disabled" href="/admin/">Aller à l'accueil de l'administration</a></td>
                     </tr>
                 </table>
 
@@ -43,7 +43,7 @@
                             <td id="td_<?php echo $item['id']; ?>"> <?php echo $item['name']. " , " . $item['surname']; ?> </td>
                             <td> Promotion : <?php echo $item['promotion']. " <br>Email : ". $item['email'] . " <br> Tel : " . $item['phone']; ?> </td>
                             <td> <?php if($roles[''.$item['id']. ''] == null) { ?>
-                                <button class="btn btn-danger btn-suspen" id="user_suspen_<?php echo $item['id']?>">Suspendre</button> | <button class="btn btn-primary btn-admin" id="user_admin_<?php echo $item['id'];?>">Le definir Administrateur</button>
+                                <button class="btn btn-danger btn-suspen disabled" id="user_suspen_<?php echo $item['id']?>">Suspendre</button> | <button class="btn btn-primary btn-admin disabled" id="user_admin_<?php echo $item['id'];?>">Le definir Administrateur</button>
                                 <?php }
                                 else{ echo $roles[''.$item['id']. '']; }
                                 ?>

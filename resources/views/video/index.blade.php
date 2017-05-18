@@ -152,7 +152,7 @@
 
                                     <div class="">
                                         {!! Form::file('video', ['class' => 'inputfile', 'id' => 'video']) !!}
-                                        <label id="label-video" for="video" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une video</span></label>
+                                        <label id="label-video" for="video" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez une video</span></label>
                                     </div>
 
                                     <p class="control-label photo-label ">Extensions acceptées : mp4 (1Go maxi)</p>
@@ -170,8 +170,8 @@
                                     <span id="msg" class="help-block  col-lg-7  text-danger"> </span>
 
                                     <div class=" col-lg-12" >
-                                        <button  class="btn btn-default" id="btnCloseAddVideo" >Fermer</button>
-                                        <button  class="btn btn-primary" type="submit" id="btnSubmitAddVideo">Envoyer</button>
+                                        <button  class="btn btn-default disabled" id="btnCloseAddVideo" >Fermer</button>
+                                        <button  class="btn btn-primary disabled" type="submit" id="btnSubmitAddVideo">Envoyer</button>
                                         <span id="loader-icon" style="display: none"><img src="{{url('/img/LoaderIcon.gif')}}" /></span>
                                     </div>
 
@@ -207,7 +207,7 @@
                         </div>
 
                         @role('admin_1')
-                            <button class="btn btn-primary" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
+                            <button class="btn btn-primary disabled" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
                         @endrole
 
                     </div>

@@ -7,21 +7,23 @@
     <meta name="author" content="LACY 2017">
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
     <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        // rename myToken as you like
+        window.Laravel ={!! json_encode([
+              'csrfToken' => csrf_token(),
+        ]) !!};
+        var userId = {!! json_encode( Auth::id()) !!};
+
+    </script>
 
     <title>Connexion | PromotVogt</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="{{ asset('karmanta/css/bootstrap.min.css') }}" rel="stylesheet"/>
-    <!-- bootstrap theme -->
-    <link href="{{ asset('karmanta/css/bootstrap-theme.css') }}" rel="stylesheet"/>
-    <!--external css-->
-    <!-- font icon -->
-    <link href="{{ asset('karmanta/css/elegant-icons-style.css') }}" rel="stylesheet" />
-    <!-- Custom styles -->
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('karmanta/css/style-responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
 
+    <!-- Custom styles -->
+    <link href="{{ asset('assets/css/site2.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
     <script src="{{ asset('js/kar.js') }}"></script>
@@ -74,9 +76,9 @@
                 <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
                 <span class="pull-right" id="forgot"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
             </label>
-            <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            <button id="login-button" class="btn btn-primary btn-lg btn-block disabled" type="submit">Login</button>
             <br>
-            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block" >Signup</a>
+            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block disabled" >Signup</a>
         </div>
     </form>
 
