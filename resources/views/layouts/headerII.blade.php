@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="" class="logo"  id="logo_home">Promo<span>Vogt</span> <span class="lite">.org</span></a>
+    <a href="" class="logo"  id="logo_home">Promot<span>Vogt</span> <span class="lite">.org</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">

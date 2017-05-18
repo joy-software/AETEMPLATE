@@ -274,8 +274,14 @@ var form_create_contribution_cash;
 $("#create_contribution_cash").on('submit', function (event) {
     event.preventDefault();
     form_create_contribution_cash = this;
+    //alert(form_create_contribution_cash['action']);
     var data = new FormData( this );
-
+    $("#btn_create_contribution_cash").prop('disabled',true);
+    $('#email_membre').prop('disabled', true);
+    $('#amount').prop('disabled', true);
+    $('#motif').prop('disabled', true);
+    $('#periode').prop('disabled', true);
+    $("#div_message1").hide();
     $.ajaxSetup(
         {
             headers:
@@ -292,20 +298,39 @@ $("#create_contribution_cash").on('submit', function (event) {
         dataType : 'json',
         data: data,
         success: function (response) {
+            $("#momobutton").prop('disabled',false);
 
             if(response.type === "success" ){
-
                 $("#div_message").html(response.message);
-                $('#email_membre').prop('disabled', true);
-                $('#amount').prop('disabled', true);
-                $('#motif').prop('disabled', true);
-                $('#periode').prop('disabled', true);
-                $('#button_contrib').hide();
-                $('#wecashUp').html(response.body);
+                $('#phone1').removeClass('hidden');
+                 $('#button_contrib').hide();
+                $('#wecashUp').removeClass('hidden');
                 $('#create_contribution_cash').prop('action','http://promot-vogt.org/comptabilite/post_contribution_cash/callback');
+                if(response.data === "bon")
+                {
+                    $('#email_membre').prop('disabled', false);
+                    $('#amount').prop('disabled', false);
+                    $('#motif').prop('disabled', false);
+                    $('#periode').prop('disabled', false);
+                    $("#div_message1").show();
+                    $("#div_message1").html(response.message);
+                }
             }
             else {
                 $("#div_message").html(response.message);
+                if(response.type === "fail" ){
+                    $("#div_message1").show();
+                    $("#div_message1").html(response.message);
+                    $('#amount').prop('disabled', false);
+                }
+                else {
+                    $("#btn_create_contribution_cash").prop('disabled',false);
+                    $('#email_membre').prop('disabled', false);
+                    $('#amount').prop('disabled', false);
+                    $('#motif').prop('disabled', false);
+                    $('#periode').prop('disabled', false);
+                }
+
 
             }
 
@@ -321,54 +346,79 @@ $("#create_contribution_cash").on('submit', function (event) {
 $("#momobutton").on('click', function (event) {
         event.preventDefault();
         console.log('yep big big');
-        alert('ok partenaire');
-        var form_create_contribution_cash;
-        form_create_contribution_cash = $("#create_contribution_cash");
-        var data = new FormData( this );
+        $('#email_membre').prop('disabled', false);
+        $('#amount').prop('disabled', false);
+        $('#motif').prop('disabled', false);
+        $('#periode').prop('disabled', false);
+        //$('#ConfirmAction').modal('show');
+         $(".modal-title").html("<i class=\"icon_plus_alt2\" style='text-align: center'></i> MoMo Confirmation");
+        $(".modal-body").html("<h4>MoMo Confirmation</h4>" + "<br> " +
+            "<span style='text-align: justify;'>"+ "Bien vouloir saisir <span style='color = #802717'>*126#</span> et autoriser la transaction " +
+            "<span style='color = #802717'>Mobile Money Online</span> en cours d'un montant de " +$('#amount').val()+
+            " </p>" +
+            " <button class='btn btn-success' style='text-align: center' onclick=\"$('#ConfirmAction').modal('toggle');\">Compris</button> </p>");
+    /*$('#ConfirmAction').on('show', function() {
+        // remove previous timeouts if it's opened more than once.
+            clearTimeout(myModalTimeout);
+        // hide it after a minute
+            myModalTimeout = setTimeout(function() {
+                $('#ConfirmAction').modal('hide');
+            }, 5000);
+        });//*/
 
-        $.ajaxSetup(
-            {
-                headers:
-                    {
-                        'X-CSRF-Token': $('input[name="_token"]').val()
-                    }
-            });
-        console.log('yep big ');
-        $.ajax({
-            url: '/comptabilite/post_contribution_cash/callback',
-            type: form_create_contribution_cash['method'],
-            contentType: false, // obligatoire pour de l'upload
-            processData: false, // obligatoire pour de l'upload,
-            dataType : 'json',
-            data: data,
-            success: function (response) {
-                /*
-                if(response.type === "success" ){
+        $('#ConfirmAction').modal('show');
 
-                    $("#div_message").html(response.message);
-                    $('#email_membre').prop('disabled', true);
-                    $('#amount').prop('disabled', true);
-                    $('#motif').prop('disabled', true);
-                    $('#periode').prop('disabled', true);
-                    $('#button_contrib').hide();
-                    $('#wecashUp').html(response.body);
-                    $('#create_contribution_cash').prop('action','http://promot-vogt.org/comptabilite/post_contribution_cash/callback');
+        $("#momobutton").prop('disable',true);
+        $("#create_contribution_cash").submit();
+
+});
+
+var form_post_config_momo;
+$("#post_config_momo").on('submit', function (event) {
+    event.preventDefault();
+    form_post_config_momo = this;
+    //alert(form_create_contribution_cash['action']);
+    var data = new FormData( this );
+    $("#btn_post_config_momo").prop('disabled',true);
+    $('#email_membre').prop('disabled', true);
+    $('#password').prop('disabled', true);
+
+    $.ajaxSetup(
+        {
+            headers:
+                {
+                    'X-CSRF-Token': $('input[name="_token"]').val()
                 }
-                else {
-                    $("#div_message").html(response.message);
+        });
 
-                }/*/
-                alert (response);
+    $.ajax({
+        url: form_post_config_momo['action'],
+        type: form_post_config_momo['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        success: function (response) {
 
-            },
-            error : function (erreur) {
-                $("#div_message").html(erreur);
-                //$("#div_message").html(erreur.message);
-
+            if(response.type === "success" ){
+                $("#div_message").html(response.message);
+                $("#btn_post_config_momo").prop('disabled',false);
+                $('#email_membre').prop('disabled', false);
+                $('#password').prop('disabled', false);
+            }
+            else {
+                $("#div_message").html(response.message);
             }
 
-        });
+        },
+        error : function (erreur) {
+            $("#div_message").html(erreur.message);
+
+        }
+
+    });
 });
+
 
 
 /********End Script Joy*********/

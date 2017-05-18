@@ -29,6 +29,13 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
+    @include('layouts/asideOption', [
+           'classIconOption' => 'icon_mobile',
+           'optionName' => 'Config Paiement Mobile',
+           'retractable' => 'false',
+           'link' => url('/comptabilite/config_momo')
+       ])
+
 
 @endsection
 
