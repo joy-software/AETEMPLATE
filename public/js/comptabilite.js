@@ -305,7 +305,7 @@ $("#create_contribution_cash").on('submit', function (event) {
                 $('#phone1').removeClass('hidden');
                  $('#button_contrib').hide();
                 $('#wecashUp').removeClass('hidden');
-                $('#create_contribution_cash').prop('action','/post_contribution_cash/callback');
+                $('#create_contribution_cash').prop('action',response.url);
                 if(response.data === "bon")
                 {
                     $('#email_membre').prop('disabled', false);

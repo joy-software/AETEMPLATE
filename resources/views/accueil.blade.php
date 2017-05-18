@@ -102,7 +102,7 @@
                                         </div>
 
                                         <br/>
-                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
+                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block disabled" style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
 
 
                                         <!--/form-->
