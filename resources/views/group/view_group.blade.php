@@ -33,8 +33,8 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
                     @if($group->id == 1)
+                        <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
                         <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
@@ -127,7 +127,10 @@
                         <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
                             <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
 
-                        @role($role_admin)
+                        <?php if($group->id == 1) {
+                        $admin_1 = "admin_1"; ?>
+
+                        @role($admin_1)
 
                         <p>
                             <label class="checkbox checkbox-inline" style="margin-left: 10px;">
@@ -143,6 +146,7 @@
                             </label>
                         </p>
                         @endrole
+                        <?php } ?>
                     </div>
 
                 </div>
@@ -152,6 +156,10 @@
                 {!! Form::close() !!}
             </section>
         </div>
+
+        <?php
+        if(($group->id == 1 && \Entrust::hasRole($admin_1)) || ($group->id != 1)) {
+        ?>
 
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10" >
@@ -181,13 +189,14 @@
                 </div>
             </div>
             <br>
+
             <section id="section_demande"  style="display: none;" class="well" >
                 <table id="tab_demande" class="table table-hover personal-task table-responsive ">
                 <tbody>
 
                 <?php
 
-                if($users != null){
+                if($users != null ){
 
                 foreach($users as $user){
                     ?>
@@ -246,6 +255,10 @@
         </section>
         </div>
 
+        <?php
+            }
+            ?>
+
 
 
 
@@ -261,7 +274,7 @@
 
         <?php
 
-        if($events != null){
+        if($events != null && $group->id == 1){
         $compteur =0;
         foreach ($events as $event) {
         $compteur++;

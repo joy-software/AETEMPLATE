@@ -492,3 +492,5 @@ Route::post('/admin/post_role_admin', [
     'as'=>'post_role_admin',
     'uses'=>'adminController@post_role_admin'
 ]);
+
+Route::get('/remerciement', ['uses'=>'remerciementController@index']);
