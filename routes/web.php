@@ -444,6 +444,16 @@ Route::post('/comptabilite/post_contribution_cash/callback',[
     'uses'=>'comptabiliteController@callback'
 ]);
 
+Route::get('/comptabilite/config_momo',[
+    'as'=>'config_momo',
+    'uses'=>'comptabiliteController@config_momo'
+]);
+
+Route::post('/comptabilite/config_momo',[
+    'as'=>'post_config_momo',
+    'uses'=>'comptabiliteController@post_config_momo'
+]);
+
 /****
  * Route pour l'administration
  */

@@ -25,21 +25,20 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\contribution wherePeriodID($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution whereUserID($value)
- * @property string $uid
- * @property string $token
- * @property string $provider_name
- * @property string $confirmation_code
- * @property-read \App\motif $motif
- * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereConfirmationCode($value)
- * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereProviderName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereToken($value)
- * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereUid($value)
+ * @property string $ProcessingNumber
+ * @property string $SenderNumber
+ * @property string $ReceiverNumber
+ * @property string $TransactionID
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereProcessingNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereSenderNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereReceiverNumber($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereTransactionID($value)
  */
 class contribution_cash extends Model
 {
 
     protected $table = "contribution_cash";
-    protected $fillable = ['amount','uid','token','provider_name','confirmation_code'];
+    protected $fillable = ['amount','ProcessingNumber','SenderNumber','ReceiverNumber','TransactionID'];
     /*****
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      *

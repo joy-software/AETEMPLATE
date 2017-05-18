@@ -49,7 +49,7 @@ class ActivationKeyCreatedNotification extends Notification implements ShouldQue
             ->line('Vous devez activer votre compte pour continuer à utiliser nos services.')
             ->line('Cliquer sur le boutton ci-dessous pour l\'activer')
             ->action('Activer votre compte', $route)
-            ->line('Merci pour votre collaboration '. config('app.name'));
+            ->line('Merci pour votre collaboration !!');
     }
 
     /**

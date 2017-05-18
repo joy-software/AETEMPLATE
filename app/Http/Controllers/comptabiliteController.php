@@ -9,7 +9,6 @@ use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\period;
-use Response;
 use Validator;
 use App\motif;
 use Redirect;
@@ -288,37 +287,12 @@ public function post_contribution_cash(Request $request){
             ]);
         }
 
-       /* $contribution = contribution_cash::create([
-            'amount'=>$amount
-        ]);
-
-        $contribution->period()->associate($id_period);
-        $contribution->users()->associate($user['id']);
-        $contribution->motif()->associate($id_motif);
-        $contribution->save();
-*/
-        $uid = env('WCU_IDENTIFIANT_MARCHAND');
-        $public_key= env('WCU_CLE_PUBLIQUE_MARCHAND');
-        $currency = env('WCU_DEVISE_DU_MARCHAND');
-        $app_name = config('app.name');
 
         $message = "<div class=\"alert alert-success fade in\">La cotisation du membre ". $user['name']. " d'email : <strong>". $email . "</strong> est en attente de paiement électronique </div>";
-        $body = "
-          <!--form id=\"formmomo\" method=\"GET\" action=\"https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml\" target=\"_top\">
-	<input type=\"hidden\" name=\"idbouton\" value=\"2\" autocomplete=\"off\">
-	<input type=\"hidden\" name=\"typebouton\" value=\"PAIE\" autocomplete=\"off\">
-	<input class=\"momo mount\" type=\"hidden\" placeholder=\"\" name=\"_amount\" value=\"\" id=\"montant\" autocomplete=\"off\">
-        <input class=\"momo host\" type=\"hidden\" placeholder=\"\" name=\"_tel\" value=\"677036382\" autocomplete=\"off\">
-        <input class=\"momo pwd\" placeholder=\"Please enter your password\" name=\"_clP\" value=\"\" autocomplete=\"off\" type=\"hidden\">
-	<input type=\"hidden\" name=\"_email\" value=\"admpromot@gmail.com\" autocomplete=\"off\">
-        <input type=\"image\" id=\"Button_Image\" src=\"https://developer.mtn.cm/OnlineMomoWeb/console/uses/itg_img/buttons/MOMO_buy_now_EN.jpg\" style=\"width : 250px; height: 100px;\" border=\"0\" name=\"submit\" alt=\"OnloneMomo, le réflexe sécurité pour payer en ligne\" autocomplete=\"off\">      
-        </form--> 
-        <button   href=\"#\" id=\"momobutton\" class='btn btn-default' style='margin-top: 10px; margin-bottom: 10px' type='submit'><img  id=\"Button_Image\" src=\"https://developer.mtn.cm/OnlineMomoWeb/console/uses/itg_img/buttons/MOMO_buy_now_EN.jpg\" 
-        style=\"width : 250px; height: 100px;\"   alt=\"OnloneMomo, le réflexe sécurité pour payer en ligne\" ></button>";
+
         return response()->json([
             'type'=>'success',
-            'message'=> $message,
-            'body'=>$body
+            'message'=> $message
         ]);
 
     }
@@ -326,49 +300,104 @@ public function post_contribution_cash(Request $request){
     public function callback(Request $request)
     {
         $user = Auth::user();
-        $amount=100;
+        $email = $request->get('email_membre');
+        $id_motif = $request->get('motif');
+        $id_period = $request->get("periode");
+        $amount = $request->get('amount');
+        $phone = $request->get('phone');
         $client = new Client();
         $uri = "https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml?idbouton=2&typebouton=PAIE&_amount=".$amount.
-            "&_tel=677634574&_clP=&_email=admpromot@gmail.com";
+            "&_tel=".$phone."&_clP=".env('MERCHAND_PASSWORD')."&_email=".env('MERCHAND_EMAIL');
         //echo $uri;
         $result = $client->request('GET',$uri);
-        /*$result = $client->request('GET',$uri, [
-                'idbouton' => '2',
-                'typebouton' => 'PAIE',
-                '_amount ' => $request->get('amount'),
-                '_tel' => $user->phone,
-                '_clP' => "",
-                '_email' => 'admpromot@gmail.com'
-        ]);//*/
-        //$response = $request->send();
 
-        //$body = json_decode($result->getBody()->getContents());
-        //echo $body;
         $body = $result->getBody();
-        //$json = $this->utf8_encode_deep($body);
-        //$data = $this->utf8_encode_deep($body);
         $response = json_decode($body->getContents());
-        //return Response::json(json_decode($body->getContents(), true));
-        return "".$response->OpComment;
-    }
 
-    function utf8_encode_deep(&$input) {
-        if (is_string($input)) {
-            $input = utf8_encode($input);
-        } else if (is_array($input)) {
-            foreach ($input as &$value) {
-                self::utf8_encode_deep($value);
+
+        $message = "";
+        $type="success";
+        $momo = "euille";
+        if(($response->StatusDesc == "General failure."))
+        {
+            $message = "<div class=\"alert alert-danger fade in\">La paiement en ligne avec le numéro ". "<strong>". $phone. "</strong>"." a échoué."
+            ." Votre numéro est invalide ou le crédit dans votre compte est inférieur à la somme exigée.</div>";
+            $type="fail";
+        }
+        else {
+            if(($response->StatusDesc == null))
+            {
+                $message = "<div class=\"alert alert-danger fade in\">La paiement en ligne avec le numéro ". "<strong>". $phone. "</strong>"." a échoué.".
+                    " Erreur de Connexion ou délai d'attente dépassé.</div>";
+                $type="fail";
             }
+            else{
 
-            unset($value);
-        } else if (is_object($input)) {
-            $vars = array_keys(get_object_vars($input));
+                $contribution = contribution_cash::create([
+                    'amount'=>$amount
+                ]);
 
-            foreach ($vars as $var) {
-                self::utf8_encode_deep($input->$var);
+                $contribution->period()->associate($id_period);
+                $contribution->users()->associate($user['id']);
+                $contribution->motif()->associate($id_motif);
+                $contribution->ProcessingNumber = $response->ProcessingNumber ;
+                $contribution->SenderNumber = $response->SenderNumber;
+                $contribution->ReceiverNumber = $response->ReceiverNumber;
+                $contribution->TransactionID = $response->TransactionID;
+                $contribution->save();
+
+                $contribution = contribution::create([
+                    'amount'=>$amount
+                ]);
+
+                $contribution->period()->associate($id_period);
+                $contribution->users()->associate($user['id']);
+                $contribution->motif()->associate($id_motif);
+                $contribution->save();//*/
+                $momo = "bon";
+                $message = "<div class=\"alert alert-success fade in\">La paiement en ligne avec le numéro ". "<strong>". $phone. "</strong>"." a été effectué avec succès .</div>";
             }
         }
+
+
+        return response()->json([
+            'type'=>$type,
+            'message'=> $message,
+            'data' => $momo,
+        ]);
     }
+
+
+    public function post_config_momo(Request $request)
+    {
+        $email = $request->get('email_membre');
+        $password = $request->get('password');
+
+        $path = base_path('.env');
+
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                'MERCHAND_EMAIL='.env('MERCHAND_EMAIL'), 'MERCHAND_EMAIL='.$email, file_get_contents($path)
+            ));
+        }
+
+        if (file_exists($path)) {
+            file_put_contents($path, str_replace(
+                'MERCHAND_PASSWORD='.env('MERCHAND_PASSWORD'), 'MERCHAND_PASSWORD='.$password, file_get_contents($path)
+            ));
+        }
+
+        $type="success";
+        $message = "<div class=\"alert alert-success fade in\">Les nouveaux paramètres ont été enregistré avec succès: ". "<strong> Email: ".$email ."</strong>. </div>";
+
+        return response()->json([
+            'type'=>$type,
+            'message'=> $message,
+        ]);
+
+    }
+
+
 
     public function post_period(Request $request){
     $mois = $request->get('mois');
@@ -593,6 +622,23 @@ public function contrib_user($id){
 
 
         return view('comptabilite.contribution',[
+            'user' =>  $this->_user->unreadnotifications,
+            'nbr_notif'=> $this->_notifications,
+            'periodes'=> $this->_periodes,
+            'motifs'=>$this->_motifs,
+            'avatar' => $user
+        ]);
+
+
+    }
+
+    public function config_momo(){
+
+        $this->load_users_notification_period();
+        $user = Auth::user();
+
+
+        return view('comptabilite.config',[
             'user' =>  $this->_user->unreadnotifications,
             'nbr_notif'=> $this->_notifications,
             'periodes'=> $this->_periodes,

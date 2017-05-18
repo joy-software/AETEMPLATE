@@ -16,10 +16,10 @@ class CreateContributionCashTable extends Migration
         Schema::create('contribution_cash', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amount');
-            $table->string('uid')->nullable();
-            $table->string('token')->nullable();
-            $table->string('provider_name')->nullable();
-            $table->string('confirmation_code')->nullable();
+            $table->string('ProcessingNumber')->nullable();
+            $table->string('SenderNumber')->nullable();
+            $table->string('ReceiverNumber')->nullable();
+            $table->string('TransactionID')->nullable();
             $table->timestamps();
     
       $table->integer('user_ID')->unsigned();

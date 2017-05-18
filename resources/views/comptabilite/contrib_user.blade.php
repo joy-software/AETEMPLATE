@@ -34,6 +34,13 @@
         ])
 
     @include('layouts/asideOption', [
+           'classIconOption' => 'icon_mobile',
+           'optionName' => 'Config Paiement Mobile',
+           'retractable' => 'false',
+           'link' => url('/comptabilite/config_momo')
+       ])
+
+    @include('layouts/asideOption', [
             'classIconOption' => 'icon_download',
             'optionName' => 'Exporter des rapports',
             'retractable' => 'false',
