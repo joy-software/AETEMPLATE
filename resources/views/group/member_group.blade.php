@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-lg-5">
                             <span class="profile-ava pull-right">
-                            <a href="{{route('view_group',$id_group)}}" class="btn btn-primary">Aller à l'accueil du groupe</a>
+                            <a href="{{route('view_group',$id_group)}}" class="btn btn-primary disabled">Aller à l'accueil du groupe</a>
                             </span>
 
                         </div>

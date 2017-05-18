@@ -55,7 +55,7 @@
                                             ]) !!}
 
                                     <input type="hidden" name="id_group" value="{{$group->id}}">
-                                            {!! Form::submit('Envoyer une demande d\'adhésion a ce groupe', ['class' => 'btn btn-primary']) !!}
+                                            {!! Form::submit('Envoyer une demande d\'adhésion a ce groupe', ['class' => 'btn btn-primary disabled']) !!}
                                         {!! Form::close() !!}
 
                                 </div>

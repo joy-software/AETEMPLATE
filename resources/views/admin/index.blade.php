@@ -22,7 +22,7 @@ Gestion des groupes et les rôles comptes et administrateurs
             <div class="col-lg-offset-1 col-lg-10" style="background: white; text-align: center;" >
                 <table class="table table-responsive">
                     <tr>
-                        <td><a class="btn btn-primary" href="/admin/roles" style="width: 50%;">Ajouter des comptables et administrateurs</a></td>
+                        <td><a class="btn btn-primary disabled" href="/admin/roles" style="width: 50%;">Ajouter des comptables et administrateurs</a></td>
                     </tr>
                 </table>
             </div>
@@ -53,7 +53,7 @@ Gestion des groupes et les rôles comptes et administrateurs
                 <tr id="tr_<?php echo $item['id']; ?>">
                     <td id="td_<?php echo $item['id']; ?>"><?php echo $item['name']; ?></td>
                     <td><p style="text-align: justify;"> <?php echo $item['description']; ?> </p></td>
-                    <td><a class="btn btn-primary" href="/admin/suspen_user/<?php echo $item['id']; ?>" >Gerer les membres</a> | <a class="btn btn-danger btn-del" id="group<?php echo $item['id']; ?>" class="btn-del-group">Supprimer ce groupe </a> </td>
+                    <td><a class="btn btn-primary disabled" href="/admin/suspen_user/<?php echo $item['id']; ?>" >Gerer les membres</a> | <a class="btn btn-danger btn-del disabled" id="group<?php echo $item['id']; ?>" class="btn-del-group disabled">Supprimer ce groupe </a> </td>
                 </tr>
 
                 <?php } }

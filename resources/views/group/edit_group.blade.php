@@ -57,8 +57,8 @@
                         {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
                     </div>
 
-                    {!! Form::submit('Mettre à jour les informations du groupe', ['class' => 'btn btn-primary']) !!}
-                    <a class="btn btn-danger" style="margin-left: 30px;" href="/group/search_group"> Annuler </a>
+                    {!! Form::submit('Mettre à jour les informations du groupe', ['class' => 'btn btn-primary disabled']) !!}
+                    <a class="btn btn-danger disabled" style="margin-left: 30px;" href="/group/search_group"> Annuler </a>
                     {!! Form::close() !!}
 
                 </div>

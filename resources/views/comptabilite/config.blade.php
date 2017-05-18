@@ -76,7 +76,7 @@
 
                                 <div class="form-group " id="button_contrib">
                                     <br/>
-                                    <button  id="btn_post_config_momo" class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Enregistrer</button>
+                                    <button  id="btn_post_config_momo" class="btn btn-compose center-block disabled" style="width:100px;background-color: #ff2d55!important;" >Enregistrer</button>
                                 </div>
                                 {!! Form::close() !!}
                             </div>

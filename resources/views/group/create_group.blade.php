@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <h4>Logo du groupe</h4>
                                 {!! Form::file('logo', ['class' => 'inputfile', 'id' => 'logo']) !!}
-                                <label for="logo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une image (jpeg ou png maxi 2Mo)</span></label>
+                                <label for="logo" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez une image (jpeg ou png maxi 2Mo)</span></label>
                             </div>
                             <div class="form-group">
                                 <h4>Description du groupe (*)</h4>
@@ -83,7 +83,7 @@
                                 </div>
                             @endif
 
-                            <button type="submit" style="width: 80%; margin-left: 10%;" class="btn btn-primary">Créer le groupe</button>
+                            <button type="submit" style="width: 80%; margin-left: 10%;" class="btn btn-primary disabled">Créer le groupe</button>
                         {!! Form::close() !!}
 
 
