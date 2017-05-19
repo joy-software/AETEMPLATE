@@ -293,7 +293,7 @@ public function post_contribution_cash(Request $request){
         return response()->json([
             'type'=>'success',
             'message'=> $message,
-            'url'=> ''.url('/post_contribution_cash/callback'),
+            'url'=> ''.url('/comptabilite/post_contribution_cash/callback'),
         ]);
 
     }
