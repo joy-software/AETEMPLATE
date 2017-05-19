@@ -12,7 +12,7 @@ use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 use NotificationChannels\OneSignal\OneSignalWebButton;
 
-class IncomingMember extends Notification implements ShouldQueue
+class IncomingMember extends Notification
 {
     use Queueable;
 
@@ -129,8 +129,5 @@ class IncomingMember extends Notification implements ShouldQueue
         }
     }
 
-    public function routeNotificationForOneSignal()
-    {
-        return $this->incomingMember['id'];
-    }
+
 }

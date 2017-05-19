@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\OneSignal\OneSignalChannel;
 
 
-class NewAnnouncement extends Notification implements  ShouldQueue
+class NewAnnouncement extends Notification
 {
     use Queueable;
 

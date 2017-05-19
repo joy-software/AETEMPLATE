@@ -86,21 +86,27 @@ class HomeController extends Controller
 
       if($period_id != null)
       {
-          $contribut = contribution::where('period_ID','=',$period_id->id)->get();
-          foreach ($contribut as $contrib)
-          {
-              $motif = motif::find($contrib->motif_ID);
-              // $contributions[$compteur]['motif'] = ;
-              // $contributions[$compteur]['amount'] = $contrib->amount;
+          $contribut = contribution::where('period_ID','=',$period_id->id)->where('user_ID','=',$user->id)->get()->count();
 
-              //'$contribution[\'motif\']}}' .'=>'. '$contribution[\'amount\']'
-              $contributions[$contrib->amount] = $motif->reason;
-              if($compteur == 0)
+          if($contribut > 0)
+          {
+              $contribut = contribution::where('period_ID','=',$period_id->id)->where('user_ID','=',$user->id)->get();
+              foreach ($contribut as $contrib)
               {
-                  $amount = $contrib->amount;
+                  $motif = motif::find($contrib->motif_ID);
+                  // $contributions[$compteur]['motif'] = ;
+                  // $contributions[$compteur]['amount'] = $contrib->amount;
+
+                  //'$contribution[\'motif\']}}' .'=>'. '$contribution[\'amount\']'
+                  $contributions[$contrib->amount] = $motif->reason;
+                  if($compteur == 0)
+                  {
+                      $amount = $contrib->amount;
+                  }
+                  $compteur++;
               }
-              $compteur++;
           }
+
       }
       else
       {

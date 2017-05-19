@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use NotificationChannels\OneSignal\OneSignalChannel;
 
-class NewEvent extends Notification implements  ShouldQueue
+class NewEvent extends Notification
 {
     use Queueable;
 
