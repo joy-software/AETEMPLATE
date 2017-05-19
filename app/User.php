@@ -78,4 +78,14 @@ class User extends Authenticatable
     {
         return $this->email;
     }
+
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForOneSignal()
+    {
+        return $this->id;
+    }
 }
