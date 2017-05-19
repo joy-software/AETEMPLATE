@@ -6,8 +6,6 @@ use App\period;
 use App\usergroup;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Auth;
 
 class LogSuccessfulLogin

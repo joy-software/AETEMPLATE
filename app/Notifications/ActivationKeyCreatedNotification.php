@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ActivationKeyCreatedNotification extends Notification implements ShouldQueue
+class ActivationKeyCreatedNotification extends Notification
 {
     use Queueable;
 

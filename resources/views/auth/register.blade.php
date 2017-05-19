@@ -8,10 +8,22 @@
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
     <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
 
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        // rename myToken as you like
+        window.Laravel ={!! json_encode([
+              'csrfToken' => csrf_token(),
+        ]) !!};
+        var userId = {!! json_encode( Auth::id()) !!};
+
+    </script>
+
     <title>Inscription | PromotVogt</title>
 
 
-    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="{{ asset('assets/css/site2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/signup.css') }}" rel="stylesheet" />
 
@@ -236,7 +248,7 @@
 
                             <div class="col-lg-4 col-xs-12">
                                 {!! Form::file('photo', ['class' => 'form-control col-lg-4  inputfile', 'id' => 'photo']) !!}
-                                <label for="photo" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
+                                <label for="photo" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez une photo</span></label>
                             </div>
 
                             <p class="control-label photo-label ">Extensions acceptées : jpg, jpeg, png (2Mo maxi)</p>
@@ -283,8 +295,8 @@
                         </div>
                         <div class="form-group" >
                             <div class=" col-lg-12" id="signup-submit">
-                                <button  class="btn btn-primary" type="submit">S'inscrire</button>
-                                <a class="btn btn-default" type="button" href="{{ route('login') }}">Fermer</a>
+                                <button  class="btn btn-primary disabled" type="submit">S'inscrire</button>
+                                <a class="btn btn-default disabled" type="button" href="{{ route('login') }}">Fermer</a>
                             </div>
                         </div>
                     </form>

@@ -4,8 +4,7 @@
 
 @section('css')
 
-    <link href="{{ asset('css/deleteAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/avatar.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/deleteAside.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -103,7 +102,7 @@
                                         </div>
 
                                         <br/>
-                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block " style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
+                                        <a href="{{url('comptabilite/contribution')}}" type="submit"  class="btn btn-compose center-block disabled" style="background-color: #ff2d55!important;">Contribuer pour ce mois</a>
 
 
                                         <!--/form-->
@@ -141,6 +140,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/acceuil.js') }}"></script>
+    <script src="{{ asset('assets/js/acceuil.js') }}"></script>
 
 @endsection

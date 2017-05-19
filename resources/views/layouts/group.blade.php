@@ -23,7 +23,7 @@
 
                 </li>
                 <li>
-                    <a class="btn btn-primary btnViewGroup" href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a>
+                    <a class="btn btn-primary btnViewGroup disabled" href="{{url('/group/view_group/'.$id_group)}}" style="color: white;">Voir</a>
                 </li>
             </ul>
         </div>

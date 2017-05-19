@@ -7,12 +7,21 @@
     <meta name="author" content="LACY 2017">
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
     <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        // rename myToken as you like
+        window.Laravel ={!! json_encode([
+              'csrfToken' => csrf_token(),
+        ]) !!};
+        var userId = {!! json_encode( Auth::id()) !!};
+
+    </script>
 
     <title>Activation | PromotVogt</title>
 
 
 
-    <link href="{{ asset('assets/css/site.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/site2.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet" />
 
@@ -58,7 +67,7 @@
             @endif
 
 
-            <button id="login-button" class="btn btn-primary btn-lg btn-block" type="submit">Envoyer</button>
+            <button id="login-button" class="btn btn-primary btn-lg btn-block disabled" type="submit">Envoyer</button>
 
         </div>
     </form>

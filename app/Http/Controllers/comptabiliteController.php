@@ -292,7 +292,8 @@ public function post_contribution_cash(Request $request){
 
         return response()->json([
             'type'=>'success',
-            'message'=> $message
+            'message'=> $message,
+            'url'=> ''.url('/comptabilite/post_contribution_cash/callback'),
         ]);
 
     }
@@ -307,7 +308,7 @@ public function post_contribution_cash(Request $request){
         $phone = $request->get('phone');
         $client = new Client();
         $uri = "https://developer.mtn.cm/OnlineMomoWeb/faces/transaction/transactionRequest.xhtml?idbouton=2&typebouton=PAIE&_amount=".$amount.
-            "&_tel=".$phone."&_clP=".env('MERCHAND_PASSWORD')."&_email=".env('MERCHAND_EMAIL');
+            "&_tel=".$phone."&_clP=&_email=".env('MERCHAND_EMAIL');
         //echo $uri;
         $result = $client->request('GET',$uri);
 

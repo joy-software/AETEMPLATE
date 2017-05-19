@@ -98,29 +98,29 @@
                             Joindre des fichiers <br>
                         <div class="row" id="span_file1">
                             <div class="col-lg-9">
-                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
-                                <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file1" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file1" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div><br>
                         <div class="row" id="span_file2">
                             <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
-                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file2" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file2" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div><br>
                         <div class="row" id="span_file3">
                             <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
-                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file3" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file3" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div>
 
@@ -151,7 +151,7 @@
 
                 </div>
                 <div class="row col-lg-offset-2 col-lg-2" style="text-align: center; margin-bottom: 5px;">
-                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
+                            <button class="btn btn-primary disabled" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
                 </div>
                 {!! Form::close() !!}
             </section>
@@ -171,8 +171,8 @@
                     <div class="col-lg-4">
                         <?php if($users != null){
                             ?>
-                        <button  class="btn btn-primary pull-right" type="button"  id="show_demande">Afficher les demandes</button>
-                        <button id="hide_demande" class="btn btn-primary pull-right hidden" >Cacher les demandes</button>
+                        <button  class="btn btn-primary pull-right disabled" type="button"  id="show_demande">Afficher les demandes</button>
+                        <button id="hide_demande" class="btn btn-primary pull-right hidden >Cacher les demandes</button>
                         <br>
                         <?php
                             } else {
@@ -218,11 +218,11 @@
                         </p>
                     </td>
                     <td style="width: 25%">
-                        <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn">Accepter</button>
+                        <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn disabled">Accepter</button>
                         <br><br>
 
                         @role($role_admin)
-                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn">Refuser</button>
+                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn disabled">Refuser</button>
                         @endrole
                     </td>
 
@@ -306,7 +306,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+                               echo "<button class='btn btn-primary disabled' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
 
                             }?>
                         </td>
@@ -497,8 +497,8 @@
 
 
 @section('script')
-    <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
-    <script src="{{ asset('js/view_meeting.js') }}" ></script>
+    <script src="{{ asset('assets/js/upload.js') }}" rel="stylesheet"></script>
+    <script src="{{ asset('assets/js/view_meeting.js') }}" ></script>
 <script>
 
     var group = new Object();
@@ -516,7 +516,7 @@
 
 
 </script>
-
+    <script src="{{ asset('assets/js/table.js') }}"></script>
     <script src="{{ asset('assets/js/group.js') }}"></script>
 
 @endsection

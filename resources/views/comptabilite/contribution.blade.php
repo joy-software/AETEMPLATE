@@ -123,7 +123,7 @@
                                 </a>
                                 <div class="form-group " id="button_contrib">
                                     <br/>
-                                    <button  id="btn_create_contribution_cash" class="btn btn-compose center-block " style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
+                                    <button  id="btn_create_contribution_cash" class="btn btn-compose center-block disabled" style="width:100px;background-color: #ff2d55!important;" >Contribuer</button>
                                 </div>
                                 <div class="text-center hidden" id="wecashUp" >
                                     <button   href="#" id="momobutton" class='btn btn-default' style='margin-top: 10px; margin-bottom: 10px' type='submit'><img

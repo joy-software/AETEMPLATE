@@ -58,10 +58,10 @@
             <div class="col-lg-offset-1 col-lg-10" >
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" style="background: white;">
-                    <li><a id="btn-return-search-contrib" href="/accueil"><i class="icon_house_alt"></i> Aller l'accueil </a></li>
+                    <li><a id="btn-return-search-contrib " href="/accueil"><i class="icon_house_alt"></i> Aller l'accueil </a></li>
                     @role('comptable')
-                    <li><a id="btn-return-search-contrib" href="/annuaire"></i> Aller à l'annuaire </a></li>
-                    <li><a id="btn-return-search-contrib" href="/comptabilite/consult_contribution"></i> Retourner au filtre des contributions </a></li>
+                    <li><a id="btn-return-search-contrib " href="/annuaire"></i> Aller à l'annuaire </a></li>
+                    <li><a id="btn-return-search-contrib " href="/comptabilite/consult_contribution"></i> Retourner au filtre des contributions </a></li>
                     @endrole
                 </ul>
                 <!--breadcrumbs end -->
@@ -80,9 +80,9 @@
                             <h1>Contribution de {{ $nom_user }} </h1>
                         </div>
                         <div class="col-lg-4">
-                            <span class="pull-right" ><button class="btn btn-primary" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
+                            <span class="pull-right" ><button class="btn btn-primary disabled" id="imprimer_contrib" onclick="window.print();">Imprimer mes contributions </button></span>
                             @if($id == Auth::id())
-                                <span><a id="btn-contrib" href="{{url('comptabilite/contribution')}}"  class="btn btn-danger " style="background-color: #ff2d55!important;">Contribuer </a></span>
+                                <span><a id="btn-contrib" href="{{url('comptabilite/contribution')}}"  class="btn btn-danger disabled " style="background-color: #ff2d55!important;">Contribuer </a></span>
                             @endif
                         </div>
                     </div>
