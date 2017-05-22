@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereSenderNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereReceiverNumber($value)
  * @method static \Illuminate\Database\Query\Builder|\App\contribution_cash whereTransactionID($value)
+ * @property-read \App\motif $motif
  */
 class contribution_cash extends Model
 {

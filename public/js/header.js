@@ -233,7 +233,7 @@ $(".toggle-menus").click(function(e) {
 /*********One Signal********/
 function PromotOneSignal (userId) {
 
-    alert("C'est bon l'ami");
+    console.log("C'est bon l'ami"+userId);
 
     $.ajaxSetup(
         {
