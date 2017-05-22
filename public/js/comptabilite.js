@@ -303,7 +303,7 @@ $("#create_contribution_cash").on('submit', function (event) {
             if(response.type === "success" ){
                 $("#div_message").html(response.message);
                 $('#phone1').removeClass('hidden');
-                 $('#button_contrib').hide();
+                $('#button_contrib').hide();
                 $('#wecashUp').removeClass('hidden');
                 $('#create_contribution_cash').prop('action',response.url);
                 if(response.data === "bon")

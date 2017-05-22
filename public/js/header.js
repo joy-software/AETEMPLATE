@@ -10,13 +10,14 @@ $('#alert_notificatoin_bar.dropdown').on('show.bs.dropdown', function(e){
 
 // ADD SLIDEUP ANIMATION TO DROPDOWN-MENU
 $('#alert_notificatoin_bar.dropdown').on('hide.bs.dropdown', function(e){
-    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
     markAsRead();
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+
 });
 
 function markAsRead()
 {
-   // alert('we are inside');
+   console.log('we are inside');
    $.ajax({
         url: '/notifications',
         type: "post",
@@ -228,3 +229,41 @@ $(".toggle-menus").click(function(e) {
     $(".navs").toggle();
 });
 
+
+/*********One Signal********/
+OneSignal.push(function() {
+    OneSignal.on('subscriptionChange', function(isSubscribed) {
+        if (isSubscribed) {
+            // The user is subscribed
+            //   Either the user subscribed for the first time
+            //   Or the user was subscribed -> unsubscribed -> subscribed
+            OneSignal.getUserId( function(userId) {
+                $.ajaxSetup(
+                    {
+                        headers:
+                            {
+                                'X-CSRF-Token': $('input[name="_token"]').val()
+                            }
+                    });
+
+                $.ajax({
+                    url: '/oneSignal',
+                    type: 'post',
+                    contentType: false, // obligatoire pour de l'upload
+                    processData: false, // obligatoire pour de l'upload,
+                    dataType : 'json',
+                    data: {'_token':_token, 'userId': userId},
+                    success: function (response) {
+                        console.log('response :' +response)
+                    },
+                    error : function (erreur) {
+                        console.log('erreur :' +erreur)
+                    }
+
+                });
+            });
+        }
+    });
+});
+
+/*********End One Signal********/
