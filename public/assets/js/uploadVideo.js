@@ -1,1 +1,109 @@
-$("#btnAddVideo").click(function(s){$("#addVideoAction").css("display","block").css("opacity","1").css("background","rgba(0,0,0,0.7)")}),$("#btnCloseAddVideo").click(function(s){$("#msg").css("display","none"),$("#addVideoAction").css("display","none"),$("#upload-form input").css("background","white").val(""),$("#upload-form textarea").css("background","white").val(""),$("#progress-div").hide(),$("#progress-bar").css("width","0%"),$("#percent").text("0%"),$("#label-file").text("Choisissez une vidéo")}),$(".inputfile").change(function(s){$("#msg").css("display","none")});var formUploadVideo=null;$("#upload-form").on("submit",function(s){s.preventDefault(),formUploadVideo=this;var e=new FormData(this);$("#btnSubmitAddVideo").prop("disabled",!0),$("#progress-div").show(),$.ajaxSetup({headers:{"X-CSRF-Token":$('input[name="_token"]').val()}}),$.ajax({url:formUploadVideo.action,type:formUploadVideo.method,contentType:!1,processData:!1,dataType:"json",data:e,resetForm:!0,xhr:function(){var s=new window.XMLHttpRequest;return s.upload.addEventListener("progress",function(s){if(s.lengthComputable){var e=s.loaded/s.total;e=parseInt(100*e),$("#progress-bar").css("width",e+"%"),$("#percent").text(e+"%"),100===e&&($("#progress-div").hide(),$("#loader-icon").show())}},!1),s},success:function(s){"success"===s.type?($("#loader-icon").hide(),$("#msg").removeClass("text-danger").addClass("text-success"),$("#msg").html(s.message),$("#msg").css("display","block").css("color","green"),$("#btnSubmitAddVideo").prop("disabled",!1)):($("#loader-icon").hide(),$("#msg").removeClass("text-success").addClass("text-danger"),$("#msg").html(s.message),$("#msg").css("display","block"))},error:function(s){$("#loader-icon").hide(),$("#msg").removeClass("text-success").addClass("text-danger"),$("#msg").html(response.message),$("#msg").css("display","block")}})});
+
+$('#btnAddVideo').click(function(event){
+
+    $('#addVideoAction').css('display', 'block').css('opacity', '1').css('background', 'rgba(0,0,0,0.7)');
+});
+
+$('#btnCloseAddVideo').click(function(event){
+
+    $('#msg').css('display', 'none');
+    $('#addVideoAction').css('display', 'none');
+    $('#upload-form input').css('background', 'white').val('');
+    $('#upload-form textarea').css('background', 'white').val('');
+    $('#progress-div').hide();
+    $('#progress-bar').css('width', '0%');
+    $('#percent').text('0%');
+    $('#label-file').text('Choisissez une vidéo');
+
+});
+
+$('.inputfile').change(function (event) {
+   $('#msg').css('display', 'none');
+});
+
+var formUploadVideo = null;
+
+$("#upload-form").on('submit', function (event) {
+
+    event.preventDefault();
+    formUploadVideo = this;
+    var data = new FormData( this );
+    $('#btnSubmitAddVideo').prop('disabled', true);
+    $('#progress-div').show();
+
+    $.ajaxSetup(
+    {
+        headers:
+            {
+                'X-CSRF-Token': $('input[name="_token"]').val()
+            }
+    });
+
+    $.ajax({
+        url: formUploadVideo['action'],
+        type: formUploadVideo['method'],
+        contentType: false, // obligatoire pour de l'upload
+        processData: false, // obligatoire pour de l'upload,
+        dataType : 'json',
+        data: data,
+        resetForm: true,
+
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+
+            xhr.upload.addEventListener("progress", function(evt) {
+                if (evt.lengthComputable) {
+                    var percentComplete = evt.loaded / evt.total;
+                    percentComplete = parseInt(percentComplete * 100);
+                    console.log(percentComplete);
+
+                    $('#progress-bar').css('width', percentComplete + '%');
+                    $('#percent').text(percentComplete + '%');
+
+                    if (percentComplete === 100) {
+                        $('#progress-div').hide();
+                        $('#loader-icon').show();
+                    }
+
+                }
+            }, false);
+
+            return xhr;
+        },
+
+        success: function (response) {
+
+            console.log(response.message);
+
+            if(response.type === "success" ){
+
+                $('#loader-icon').hide();
+                $('#msg').removeClass('text-danger').addClass('text-success');
+                $('#msg').html(response.message);
+                $('#msg').css('display', 'block').css('color', 'green');
+                $('#btnSubmitAddVideo').prop('disabled', false);
+
+            }
+            else {
+
+                $('#loader-icon').hide();
+                $('#msg').removeClass('text-success').addClass('text-danger');
+                $('#msg').html(response.message);
+                $('#msg').css('display', 'block');
+
+            }
+
+        },
+        error : function (erreur) {
+            $('#loader-icon').hide();
+            $('#msg').removeClass('text-success').addClass('text-danger');
+            $('#msg').html(response.message);
+            $('#msg').css('display', 'block');
+        }
+
+    });
+
+});
+
+
+//# sourceMappingURL=uploadVideo.js.map
