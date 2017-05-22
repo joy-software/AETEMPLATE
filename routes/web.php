@@ -276,8 +276,7 @@ Route::get('/group/edit_group/{id}', [
 ]);
 Route::post('/group/valid_edit_group',[
     'as'=> 'valid_edit_group',
-    'uses'=>'groupController@valid_edit_group',
-    'middleware' => 'group'
+    'uses'=>'groupController@valid_edit_group'
     ]);
 Route::get('/group/edit_group', 'groupController@search_group');
 Route::get('/group/valid_edit_group', 'groupController@search_group');
@@ -286,8 +285,7 @@ Route::get('/group/valid_edit_group', 'groupController@search_group');
 //demander une invitation à un groupe.
 Route::get('/group/invitation_group/{id}', [
     'as'=>'invitation_group',
-    'uses'=>'groupController@invitation_group',
-    'middleware' => 'group'
+    'uses'=>'groupController@invitation_group'
 ]);
 Route::get('/group/invitation_group', 'groupController@search_group');
 Route::post('/group/valid_invitation_group', [
