@@ -231,9 +231,10 @@ $(".toggle-menus").click(function(e) {
 
 
 /*********One Signal********/
-function PromotOneSignal (userId) {
-
-    console.log("C'est bon l'ami"+userId);
+function PromotOneSignal (playerId) {
+    console.log('notificaitions');
+    console.log("C'est bon l'ami"+playerId);
+    console.log("ok passons");
 
     $.ajaxSetup(
         {
@@ -249,7 +250,7 @@ function PromotOneSignal (userId) {
         contentType: false, // obligatoire pour de l'upload
         processData: false, // obligatoire pour de l'upload,
         dataType : 'json',
-        data: {'_token':_token, 'userId': userId},
+        data: {'_token':_token, 'userId': playerId},
         success: function (response) {
             console.log('response :' +response)
         },
