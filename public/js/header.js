@@ -232,10 +232,6 @@ $(".toggle-menus").click(function(e) {
 
 /*********One Signal********/
 function PromotOneSignal (playerId) {
-    alert('notificaitions');
-    alert("C'est bon l'ami"+playerId);
-    alert("C'est bon l'ami"+playerId);
-    alert("ok passons");
 
     $.ajaxSetup(
         {

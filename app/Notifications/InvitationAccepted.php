@@ -40,7 +40,7 @@ class InvitationAccepted extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail',OneSignalChannel::class];
+        return ['mail'];
     }
 
     /**

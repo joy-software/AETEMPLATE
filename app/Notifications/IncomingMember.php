@@ -40,7 +40,7 @@ class IncomingMember extends Notification
     public function via($notifiable)
     {
        // return ['database','broadcast',OneSignalChannel::class];
-        return ['mail','database','broadcast',OneSignalChannel::class];
+        return ['mail','database',OneSignalChannel::class];
 
     }
 
@@ -109,7 +109,7 @@ class IncomingMember extends Notification
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
-                        ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
                         ->url($url)
                 );
         }
@@ -123,7 +123,7 @@ class IncomingMember extends Notification
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
-                        ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
                         ->url($url)
                 );
         }
