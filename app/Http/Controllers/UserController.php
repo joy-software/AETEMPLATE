@@ -262,4 +262,16 @@ class UserController extends Controller
             ]);
         return $view->render();
     }
+
+    public function oneSignal(Request $request)
+    {
+        $playerId = $request->get('userId');
+
+        $user = Auth::user();
+
+        $user->playerId = $playerId;
+        $user->save();
+
+        return "tout est correct. OS save";
+    }
 }

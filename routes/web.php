@@ -503,4 +503,9 @@ Route::post('/admin/post_role_admin', [
     'uses'=>'adminController@post_role_admin'
 ]);
 
-Route::get('/remerciement', ['uses'=>'remerciementController@index']);
+Route::post('/oneSignal', [
+    'as'=>'oneSignal',
+    'uses'=>'UserController@oneSignal'
+]);
+
+Route::get('/remerciements', ['uses'=>'remerciementController@index']);

@@ -172,6 +172,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         NotificationChannels\OneSignal\OneSignalServiceProvider::class,
+       // Berkayk\OneSignal\OneSignalServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
@@ -236,6 +237,7 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        //'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
     ],
 
 ];

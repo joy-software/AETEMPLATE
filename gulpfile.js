@@ -22,10 +22,12 @@ elixir((mix) => {
         '../../../public/css/header.css',
         '../../../public/karmanta/css/elegant-icons-style.css',
         '../../../public/karmanta/assets/font-awesome/css/font-awesome.css',
+        '../../../public/karmanta/css/line-icons.css',
     ], 'public/assets/css/site.css')
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css',
         '../../../public/karmanta/assets/font-awesome/css/font-awesome.css',
+        '../../../public/karmanta/css/line-icons.css',
     ], 'public/assets/css/site1.css')
     .styles([
         '../../../public/karmanta/css/bootstrap.min.css',
@@ -51,9 +53,7 @@ elixir((mix) => {
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
 
-    .styles([
-        '../../../public/karmanta/css/line-icons.css'
-    ], 'public/assets/css/line-icons.css')
+
 
     .styles([
         '../../../public/karmanta/css/style.css',
@@ -69,9 +69,7 @@ elixir((mix) => {
     .styles([
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
-    .styles([
-        '../../../public/karmanta/css/style.css'
-    ], 'public/assets/css/style.css')
+
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css'
     ], 'public/assets/css/elegant-icons-style.css')
