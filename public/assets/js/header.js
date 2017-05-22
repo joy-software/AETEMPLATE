@@ -248,10 +248,10 @@ function PromotOneSignal (playerId) {
     $.ajax({
         url: '/oneSignal',
         type: 'post',
-        contentType: false, // obligatoire pour de l'upload
-        processData: false, // obligatoire pour de l'upload,
-        dataType : 'json',
-        data: {'_token':_token, 'userId': playerId},
+        //contentType: false, // obligatoire pour de l'upload
+        //processData: false, // obligatoire pour de l'upload,
+        //dataType : 'json',
+        data: {'_token':_token, userId: playerId},
         success: function (response) {
             console.log('response :' +response)
         },
