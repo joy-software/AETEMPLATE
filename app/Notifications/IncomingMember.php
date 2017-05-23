@@ -97,14 +97,14 @@ class IncomingMember extends Notification
 
     public function toOneSignal($notifiable)
     {
-        $site = config(app.url);
+        $site = env('APP_URL');
         $url = url('group/view_group/'.$this->group['id']);
         if ($this->group['id'] === 1)
         {
 
             return OneSignalMessage::create()
                 ->subject("Un nouvel adhérent")
-                ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ."se reclame comme étant un ancien vogtois.")
+                ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ." se reclame comme étant un ancien vogtois.")
                 ->url($site)
                 ->webButton(
                     OneSignalWebButton::create('link-1')

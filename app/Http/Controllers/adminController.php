@@ -302,7 +302,7 @@ class adminController extends Controller
         }
 
         $user_group = usergroup::where('group_ID', '=',$id_group)
-                            ->where('statut','!=','suspendu')
+                            ->where('statut','!=','attente')
                             ->get();
         $list_users = null;
         $roles = null;

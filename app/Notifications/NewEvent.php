@@ -62,14 +62,14 @@ class NewEvent extends Notification
 
     public function toOneSignal($notifiable)
     {
-        $site = config(app.url);
-        $url = url('group/view_group/'.$this->group['id']);
+        $site = env('APP_URL');
+        $url = url('group/event_group/'.$this->group['id']);
         if ($this->group['id'] === 1)
         {
 
             return OneSignalMessage::create()
                 ->subject("Un nouvel adhérent")
-                ->body($this->sender['name'] . ' '.$this->sender['surname'] ."a publié une réunion dans l'association.")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." a publié une réunion dans l'association.")
                 ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
                 ->url($site)
                 ->webButton(
@@ -84,7 +84,7 @@ class NewEvent extends Notification
 
             return OneSignalMessage::create()
                 ->subject($this->group['name'].": Une nouvelle demande d'adhésion")
-                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." \"vient de publier une réunion dans  le groupe: ". $this->group['name'])
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." vient de publier une réunion dans  le groupe: ". $this->group['name'])
                 ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
                 ->url($site)
                 ->webButton(

@@ -235,7 +235,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        foreach ($user->unreadnotifications  as $notification) {
+        foreach ($user->unreadnotifications()  as $notification) {
             $notification->markAsRead();
         }
         $notifications = $user->unreadnotifications()->count();
