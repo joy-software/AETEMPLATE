@@ -6,7 +6,7 @@
     <meta name="description" content="Promot-Vogt Espace Memebre">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="{{ asset('karmanta/img/favicon.png') }}">
+    <link rel="shortcut icon" href={!! url('cache/original/PVlogo.jpeg') !!}>
     <script>
         // rename myToken as you like
         window.Laravel ={!! json_encode([
@@ -30,8 +30,25 @@
             autoRegister: true,
             notifyButton: {
                 enable: true /* Set to false to hide */
+            },
+            welcomeNotification: {
+                "title": "PromotVogt Notifications",
+                "message": "Thanks for subscribing!",
+                // "url": "" /* Leave commented for the notification to not open a window on Chrome and Firefox (on Safari, it opens to your webpage) */
             }
         }]);
+        OneSignal.push(function() {
+            OneSignal.on('subscriptionChange', function(isSubscribed) {
+                if (isSubscribed) {
+                    // The user is subscribed
+                    //   Either the user subscribed for the first time
+                    //   Or the user was subscribed -> unsubscribed -> subscribed
+                    OneSignal.getUserId( function(userId) {
+                        PromotOneSignal(userId);
+                    });
+                }
+            });
+        });
     </script>
 
 @yield('css')
@@ -72,7 +89,6 @@
 
 
 <script>
-    var userId = {!! json_encode( Auth::id()) !!};
     var compta = {!! session('role_compt') !!};
 
 </script>

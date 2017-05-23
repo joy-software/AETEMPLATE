@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Notifications\AccountApproved;
 use App\period;
 use App\usergroup;
 use Carbon\Carbon;
@@ -63,6 +64,7 @@ class LogSuccessfulLogin
             }
             $compteur++;
         }
+        $user->notify(new AccountApproved($user));
 
         $now = Carbon::now();
         $period_month = $now->month;

@@ -6,7 +6,7 @@
     <meta name="description" content="Site des anciens élèves du Collège Vogt">
     <meta name="author" content="LACY 2017">
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
-    <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
+    <link rel="shortcut icon" href={!! url('cache/original/PVlogo.jpeg') !!}>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         // rename myToken as you like

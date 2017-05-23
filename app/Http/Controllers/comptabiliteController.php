@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\contribution;
 use App\contribution_cash;
+use App\Notifications\Payment;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -347,6 +348,8 @@ public function post_contribution_cash(Request $request){
                 $contribution->TransactionID = $response->TransactionID;
                 $contribution->save();
 
+                $user->notify(new Payment($contribution));
+
                 $contribution = contribution::create([
                     'amount'=>$amount
                 ]);
@@ -357,6 +360,8 @@ public function post_contribution_cash(Request $request){
                 $contribution->save();//*/
                 $momo = "bon";
                 $message = "<div class=\"alert alert-success fade in\">La paiement en ligne avec le numéro ". "<strong>". $phone. "</strong>"." a été effectué avec succès .</div>";
+
+
             }
         }
 

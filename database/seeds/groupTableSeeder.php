@@ -44,27 +44,5 @@ class groupTableSeeder extends Seeder
 
         $user = \App\User::find(4);
         $user->attachRole($admin);
-
-        $group = new group([
-            'name'=> 'Laboratoire de Cybersécurité',
-            'description' =>'Le groupe des stagiaires du Lacy',
-            'user_ID' => 2,
-            'logo' => 'default.png'
-        ]);
-        $group->save();
-
-        /**on le role de administrateur pour Lacy****/
-        $admin = new Role();
-        $admin->name         = 'admin_2';
-        $admin->display_name = 'User Administrator of LACY group'; // optional
-        $admin->description  = 'User is allowed to manage and edit other users'; // optional
-        $admin->group_ID  = 2; // optional
-        $admin->save();
-        $permission =  \App\Permission::find(1);
-        $admin->attachPermission($permission);
-
-        //on attache le rôle admin au créateur du groupe
-        $user = \App\User::find(2);
-        $user->attachRole($admin);
     }
 }

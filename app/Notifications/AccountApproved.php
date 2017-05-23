@@ -13,14 +13,16 @@ class AccountApproved extends Notification
 {
     use Queueable;
 
+    public $sender;
+
     /**
      * Create a new notification instance.
-     *
+     *@param $sender  user, the person to whom the email will be send
      * @return void
      */
-    public function __construct()
+    public function __construct(User $sender)
     {
-        //
+        $this->sender = $sender;
     }
 
     public function via($notifiable)
@@ -30,15 +32,17 @@ class AccountApproved extends Notification
 
     public function toOneSignal($notifiable)
     {
-        return OneSignalMessage::create()
-            ->subject("Your joy account was approved!")
-            ->body("Click here to see details.")
-            ->url('http://onesignal.com')
-            ->webButton(
-                OneSignalWebButton::create('link-1')
-                    ->text('Click here')
-                   ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
-                    ->url('http://laravel.com')
-            );
+        $site = config(app.url);
+        $url = url('/accueil');
+            return OneSignalMessage::create()
+                ->subject("Acceuil | PromotVogt")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] .", nous sommes ravis de vous revoir.")
+                ->url($site)
+                ->webButton(
+                    OneSignalWebButton::create('link-1')
+                        ->text('Cliquez ici')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
+                        ->url($url)
+                );
     }
 }

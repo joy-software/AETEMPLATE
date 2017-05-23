@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\OneSignal\OneSignalMessage;
+use NotificationChannels\OneSignal\OneSignalWebButton;
 
 class NewEvent extends Notification
 {
@@ -36,7 +38,7 @@ class NewEvent extends Notification
      */
     public function via($notifiable)
     {
-        return ['database','broadcast',OneSignalChannel::class];
+        return ['database',OneSignalChannel::class];
     }
 
 
@@ -56,5 +58,41 @@ class NewEvent extends Notification
             'logo_group' => $this->group['logo'],
             'id_group' => $this->group['id'],
         ];
+    }
+
+    public function toOneSignal($notifiable)
+    {
+        $site = config(app.url);
+        $url = url('group/view_group/'.$this->group['id']);
+        if ($this->group['id'] === 1)
+        {
+
+            return OneSignalMessage::create()
+                ->subject("Un nouvel adhérent")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ."a publié une réunion dans l'association.")
+                ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
+                ->url($site)
+                ->webButton(
+                    OneSignalWebButton::create('link-1')
+                        ->text('Cliquez ici')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
+                        ->url($url)
+                );
+        }
+        else
+        {
+
+            return OneSignalMessage::create()
+                ->subject($this->group['name'].": Une nouvelle demande d'adhésion")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." \"vient de publier une réunion dans  le groupe: ". $this->group['name'])
+                ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
+                ->url($site)
+                ->webButton(
+                    OneSignalWebButton::create('link-1')
+                        ->text('Cliquez ici')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
+                        ->url($url)
+                );
+        }
     }
 }
