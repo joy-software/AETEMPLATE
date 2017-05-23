@@ -6,7 +6,7 @@
     <meta name="description" content="Promot-Vogt Espace Memebre">
     <meta name="author" content="GeeksLabs">
     <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-    <link rel="shortcut icon" href="{{ asset('karmanta/img/favicon.png') }}">
+    <link rel="shortcut icon" href={!! url('cache/original/PVlogo.jpeg') !!}>
     <script>
         // rename myToken as you like
         window.Laravel ={!! json_encode([

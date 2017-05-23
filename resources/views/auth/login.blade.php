@@ -6,14 +6,14 @@
     <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
     <meta name="author" content="LACY 2017">
     <meta name="keyword" content="Promo-vogt, alumni, anciens, vogtois, anciens vogtois">
-    <link rel="shortcut icon" href={!! url('cache/original/'."img/favicon.png") !!}>
+    <link rel="shortcut icon" href={!! url('cache/original/PVlogo.jpeg') !!}>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
         // rename myToken as you like
         window.Laravel ={!! json_encode([
               'csrfToken' => csrf_token(),
         ]) !!};
-        var userId = {!! json_encode( Auth::id()) !!};
+
 
     </script>
 
