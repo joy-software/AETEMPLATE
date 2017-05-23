@@ -36,4 +36,6 @@ Liste des contributions consult_contribution
 #div_consult_contrib{
     display: none;
 }
-/*# sourceMappingURL=print.css.map */
+#aside{display:none; }
+#main-content{margin-left:0px !important;}
+#menu_contrib_user{display: none}
