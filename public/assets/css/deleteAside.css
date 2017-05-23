@@ -1,1 +1,9 @@
-#sidebar{display:none;left:-250px}#main-content{margin-left:0}
+#sidebar{
+    display: none;
+    left: -250px;
+}
+
+#main-content{
+    margin-left: 0px;
+}
+/*# sourceMappingURL=deleteAside.css.map */
