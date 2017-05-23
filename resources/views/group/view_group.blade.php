@@ -56,16 +56,7 @@
         </div>
 
 
-        <!--div class="row" style="">
-            <div class="col-lg-offset-1 col-lg-10">
-
-                <ul class="breadcrumb" style="background: white;">
-                    <li><a class="btn btn-primary" id="show_create_ad" ><i class="icon_pencil-edit"></i> <bold> Créer une publication </bold></a></li>
-                </ul>
-
-            </div>
-            id="div_create_ad"
-        </div-->
+     
         <?php $role_admin= "admin_".$group->id; ?>
 
 
@@ -172,7 +163,7 @@
                         <?php if($users != null){
                             ?>
                         <button  class="btn btn-primary pull-right disabled" type="button"  id="show_demande">Afficher les demandes</button>
-                        <button id="hide_demande" class="btn btn-primary pull-right hidden >Cacher les demandes</button>
+                        <button id="hide_demande" class="btn btn-primary pull-right hidden ">Cacher les demandes</button>
                         <br>
                         <?php
                             } else {
