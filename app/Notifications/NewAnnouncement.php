@@ -8,9 +8,11 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\OneSignal\OneSignalChannel;
+use NotificationChannels\OneSignal\OneSignalMessage;
+use NotificationChannels\OneSignal\OneSignalWebButton;
 
 
-class NewAnnouncement extends Notification implements  ShouldQueue
+class NewAnnouncement extends Notification
 {
     use Queueable;
 
@@ -36,7 +38,7 @@ class NewAnnouncement extends Notification implements  ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database','broadcast',OneSignalChannel::class];
+        return ['database',OneSignalChannel::class];
     }
 
 
@@ -56,5 +58,41 @@ class NewAnnouncement extends Notification implements  ShouldQueue
             'logo_group' => $this->group['logo'],
             'id_group' => $this->group['id'],
         ];
+    }
+
+    public function toOneSignal($notifiable)
+    {
+        $site = $site = env('APP_URL');
+        $url = url('group/ads_group/'.$this->group['id']);
+        if ($this->group['id'] === 1)
+        {
+
+            return OneSignalMessage::create()
+                ->subject("Un nouvel adhérent")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." a publié une annonce dans l'association.")
+                ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
+                ->url($site)
+                ->webButton(
+                    OneSignalWebButton::create('link-1')
+                        ->text('Cliquez ici')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
+                        ->url($url)
+                );
+        }
+        else
+        {
+
+            return OneSignalMessage::create()
+                ->subject($this->group['name'].": Une nouvelle demande d'adhésion")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." vient de publier une annonce dans  le groupe: ". $this->group['name'])
+                ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
+                ->url($site)
+                ->webButton(
+                    OneSignalWebButton::create('link-1')
+                        ->text('Cliquez ici')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
+                        ->url($url)
+                );
+        }
     }
 }

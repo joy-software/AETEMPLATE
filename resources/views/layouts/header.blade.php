@@ -4,7 +4,7 @@
     <div class="toggle-nav containers">
         <i class="icon_menu toggle-menus"></i>
 
-        <a href="" class="logo"  id="logo_home">Promo<span>Vogt</span> <span class="lite">.org</span></a>
+        <a href="" class="logo icon-"  id="logo_home">Promot<span>Vogt</span> <span class="lite">.org</span></a>
 
         <ul class="navs">
 

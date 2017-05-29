@@ -276,8 +276,7 @@ Route::get('/group/edit_group/{id}', [
 ]);
 Route::post('/group/valid_edit_group',[
     'as'=> 'valid_edit_group',
-    'uses'=>'groupController@valid_edit_group',
-    'middleware' => 'group'
+    'uses'=>'groupController@valid_edit_group'
     ]);
 Route::get('/group/edit_group', 'groupController@search_group');
 Route::get('/group/valid_edit_group', 'groupController@search_group');
@@ -286,8 +285,7 @@ Route::get('/group/valid_edit_group', 'groupController@search_group');
 //demander une invitation à un groupe.
 Route::get('/group/invitation_group/{id}', [
     'as'=>'invitation_group',
-    'uses'=>'groupController@invitation_group',
-    'middleware' => 'group'
+    'uses'=>'groupController@invitation_group'
 ]);
 Route::get('/group/invitation_group', 'groupController@search_group');
 Route::post('/group/valid_invitation_group', [
@@ -444,6 +442,16 @@ Route::post('/comptabilite/post_contribution_cash/callback',[
     'uses'=>'comptabiliteController@callback'
 ]);
 
+Route::get('/comptabilite/config_momo',[
+    'as'=>'config_momo',
+    'uses'=>'comptabiliteController@config_momo'
+]);
+
+Route::post('/comptabilite/config_momo',[
+    'as'=>'post_config_momo',
+    'uses'=>'comptabiliteController@post_config_momo'
+]);
+
 /****
  * Route pour l'administration
  */
@@ -492,3 +500,10 @@ Route::post('/admin/post_role_admin', [
     'as'=>'post_role_admin',
     'uses'=>'adminController@post_role_admin'
 ]);
+
+Route::post('/oneSignal', [
+    'as'=>'oneSignal',
+    'uses'=>'UserController@oneSignal'
+]);
+
+Route::get('/remerciements', ['uses'=>'remerciementController@index']);

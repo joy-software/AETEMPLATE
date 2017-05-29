@@ -30,6 +30,13 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
+    @include('layouts/asideOption', [
+           'classIconOption' => 'icon_mobile',
+           'optionName' => 'Config Paiement Mobile',
+           'retractable' => 'false',
+           'link' => url('/comptabilite/config_momo')
+       ])
+
 
 @endsection
 @endrole
@@ -103,7 +110,7 @@
                         </li>
 
                         <li class="list-group-item" style="text-align: center">
-                        <?php if($periodes != null) { ?> <button type="submit" id="btn_charger_contribution" class="btn btn-primary">Charger les contributions</button> <?php }?></li>
+                        <?php if($periodes != null) { ?> <button type="submit" id="btn_charger_contribution" class="btn btn-primary disabled">Charger les contributions</button> <?php }?></li>
                         {!! Form::close() !!}
                     </ul>
                 </section>
@@ -168,7 +175,7 @@
                             }
                             ?>
                         </a>
-                        <a class="list-group-item" style="background: white;" style="text-align: center;"> <button class="btn btn-primary">Valider sa contribution </button> </a>
+                        <a class="list-group-item" style="background: white;" style="text-align: center;"> <button class="btn btn-primary disabled">Valider sa contribution </button> </a>
                         {!! Form::close() !!}
                     </div>
 
@@ -201,7 +208,7 @@
                          ?>
 
                         <a class="list-group-item"  style="text-align: center; background: white;">
-                            <button class="btn btn-primary" id="btn_add_period">Ajouter une période</button>
+                            <button class="btn btn-primary disabled" id="btn_add_period">Ajouter une période</button>
 
                         </a>
 
@@ -225,7 +232,7 @@
                                 <br>
                                 <input type="number" placeholder="Entrer l'année" class="form-control" name="annee" id="annee" required>
                                 <br>
-                                <button type="submit" class="btn btn-success">Créer la période</button> <button class="btn btn-warning" id="btn_annuler_create_period">Annuler</button>
+                                <button type="submit" class="btn btn-success disabled">Créer la période</button> <button class="btn btn-warning disabled" id="btn_annuler_create_period">Annuler</button>
                             </a>
                             {!! Form::close() !!}
                     </div>
@@ -259,7 +266,7 @@
                          <a class="list-group-item" style="background: #f7f7f7; ">
                              Créer un nouveau motif : <br><br>
                              <input type="text" name="motif" id="input_motif" class="form-control" placeholder="Entrer le nom du nouveau motif" required><br>
-                             <button class="btn btn-primary" type="submit">Créer un nouveau motif</button>
+                             <button class="btn btn-primary disabled" type="submit">Créer un nouveau motif</button>
                          </a>
                             {!! Form::close() !!}
 

@@ -12,7 +12,7 @@ use NotificationChannels\OneSignal\OneSignalChannel;
 use NotificationChannels\OneSignal\OneSignalMessage;
 use NotificationChannels\OneSignal\OneSignalWebButton;
 
-class IncomingMember extends Notification implements ShouldQueue
+class IncomingMember extends Notification
 {
     use Queueable;
 
@@ -40,7 +40,7 @@ class IncomingMember extends Notification implements ShouldQueue
     public function via($notifiable)
     {
        // return ['database','broadcast',OneSignalChannel::class];
-        return ['mail','database','broadcast',OneSignalChannel::class];
+        return ['mail','database',OneSignalChannel::class];
 
     }
 
@@ -97,19 +97,19 @@ class IncomingMember extends Notification implements ShouldQueue
 
     public function toOneSignal($notifiable)
     {
-        $site = config(app.url);
+        $site = env('APP_URL');
         $url = url('group/view_group/'.$this->group['id']);
         if ($this->group['id'] === 1)
         {
 
             return OneSignalMessage::create()
                 ->subject("Un nouvel adhérent")
-                ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ."se reclame comme étant un ancien vogtois.")
+                ->body($this->incomingMember['name'] . ' '.$this->incomingMember['surname'] ." se reclame comme étant un ancien vogtois.")
                 ->url($site)
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
-                        ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
                         ->url($url)
                 );
         }
@@ -123,14 +123,11 @@ class IncomingMember extends Notification implements ShouldQueue
                 ->webButton(
                     OneSignalWebButton::create('link-1')
                         ->text('Cliquez ici')
-                        ->icon('https://upload.wikimedia.org/wikipedia/commons/4/4f/Laravel_logo.png')
+                        ->icon('https://member.promotvogt.org/cache/logo/PVlogo.jpeg')
                         ->url($url)
                 );
         }
     }
 
-    public function routeNotificationForOneSignal()
-    {
-        return $this->incomingMember['id'];
-    }
+
 }

@@ -7,7 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Role;
 
-class GroupCreateListener implements ShouldQueue
+class GroupCreateListener
 {
     /**
      * Create the event listener.

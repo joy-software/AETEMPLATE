@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class InvitationAccepted extends Notification implements ShouldQueue
+class InvitationAccepted extends Notification
 {
     use Queueable;
 
@@ -40,7 +40,7 @@ class InvitationAccepted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail',OneSignalChannel::class];
+        return ['mail'];
     }
 
     /**

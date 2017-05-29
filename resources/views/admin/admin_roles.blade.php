@@ -20,7 +20,7 @@
             <div class="col-lg-offset-1 col-lg-10" style="background: white;">
                 <table class="table-responsive table" style="margin-bottom : 0px;">
                     <tr>
-                        <td><a class="btn btn-primary" href="/admin/">Aller a l'accueil de l'administration</a></td>
+                        <td><a class="btn btn-primary disabled" href="/admin/">Aller a l'accueil de l'administration</a></td>
                         <td><?php if($list_users!= null) echo $list_users->links(); ?></td>
                     </tr>
                 </table>

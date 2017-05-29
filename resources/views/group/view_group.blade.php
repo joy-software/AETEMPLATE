@@ -34,8 +34,8 @@
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}" style="color: #ff2d55!important;"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
                     @if($group->id == 1)
+                        <li><a href="/group/event_group/{{ $group->id }}">Reunions </a></li>
                         <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
@@ -99,36 +99,39 @@
                             Joindre des fichiers <br>
                         <div class="row" id="span_file1">
                             <div class="col-lg-9">
-                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile">
-                                <label for="file1" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file1" id="file1" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file1" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file1" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file1" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div><br>
                         <div class="row" id="span_file2">
                             <div class="col-lg-9">
-                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile">
-                                <label for="file2" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file2" id="file2" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file2" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file2" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file2" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div><br>
                         <div class="row" id="span_file3">
                             <div class="col-lg-9">
-                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile">
-                                <label for="file3" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
+                                <input type="file" name="file3" id="file3" class="form-control btn btn-primary inputfile disabled">
+                                <label for="file3" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez un fichier</span></label>
                             </div>
                             <div class="col-lg-3">
-                                <a id="del_file3" class="btn btn-danger"><i class="icon_close_alt2"></i></a>
+                                <a id="del_file3" class="btn btn-danger disabled"><i class="icon_close_alt2"></i></a>
                             </div>
                         </div>
 
                         <!--div id="span_file2"><input type="file" name="file2" id="file2"  class="form-control btn btn-primary"> <br> </div>
                             <div-- id="span_file3"><input type="file" name="file3" id="file3"  class="form-control btn btn-primary"> </div-->
 
-                        @role($role_admin)
+                        <?php if($group->id == 1) {
+                        $admin_1 = "admin_1"; ?>
+
+                        @role($admin_1)
 
                         <p>
                             <label class="checkbox checkbox-inline" style="margin-left: 10px;">
@@ -144,15 +147,20 @@
                             </label>
                         </p>
                         @endrole
+                        <?php } ?>
                     </div>
 
                 </div>
                 <div class="row col-lg-offset-2 col-lg-2" style="text-align: center; margin-bottom: 5px;">
-                            <button class="btn btn-primary" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
+                            <button class="btn btn-primary disabled" id="btn-create-ads" style="width: 250px;">Créer la publication</button>
                 </div>
                 {!! Form::close() !!}
             </section>
         </div>
+
+        <?php
+        if(($group->id == 1 && \Entrust::hasRole($admin_1)) || ($group->id != 1)) {
+        ?>
 
         <div class="row">
             <section class="panel col-lg-offset-1 col-lg-10" >
@@ -164,8 +172,8 @@
                     <div class="col-lg-4">
                         <?php if($users != null){
                             ?>
-                        <button  class="btn btn-primary pull-right" type="button"  id="show_demande">Afficher les demandes</button>
-                        <button id="hide_demande" class="btn btn-primary pull-right hidden" >Cacher les demandes</button>
+                        <button  class="btn btn-primary pull-right disabled" type="button"  id="show_demande">Afficher les demandes</button>
+                        <button id="hide_demande" class="btn btn-primary pull-right hidden >Cacher les demandes</button>
                         <br>
                         <?php
                             } else {
@@ -182,13 +190,14 @@
                 </div>
             </div>
             <br>
+
             <section id="section_demande"  style="display: none;" class="well" >
                 <table id="tab_demande" class="table table-hover personal-task table-responsive ">
                 <tbody>
 
                 <?php
 
-                if($users != null){
+                if($users != null ){
 
                 foreach($users as $user){
                     ?>
@@ -210,11 +219,11 @@
                         </p>
                     </td>
                     <td style="width: 25%">
-                        <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn">Accepter</button>
+                        <button style="width:80%;" id="btn-accept-{{ $user['id'] }}"  data-toggle="modal" data-target="#ConfirmAction" class="btn btn-primary send-btn disabled">Accepter</button>
                         <br><br>
 
                         @role($role_admin)
-                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn">Refuser</button>
+                        <button style="width:80%;"  id="btn-refuse-{{ $user['id'] }}" class="btn btn-danger refuse-btn disabled">Refuser</button>
                         @endrole
                     </td>
 
@@ -247,6 +256,10 @@
         </section>
         </div>
 
+        <?php
+            }
+            ?>
+
 
 
 
@@ -262,7 +275,7 @@
 
         <?php
 
-        if($events != null){
+        if($events != null && $group->id == 1){
         $compteur =0;
         foreach ($events as $event) {
         $compteur++;
@@ -294,7 +307,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+                               echo "<button class='btn btn-primary disabled' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
 
                             }?>
                         </td>
@@ -485,8 +498,8 @@
 
 
 @section('script')
-    <script src="{{ asset('js/upload.js') }}" rel="stylesheet"></script>
-    <script src="{{ asset('js/view_meeting.js') }}" ></script>
+    <script src="{{ asset('assets/js/upload.js') }}" rel="stylesheet"></script>
+    <script src="{{ asset('assets/js/view_meeting.js') }}" ></script>
 <script>
 
     var group = new Object();
@@ -504,7 +517,7 @@
 
 
 </script>
-
+    <script src="{{ asset('assets/js/table.js') }}"></script>
     <script src="{{ asset('assets/js/group.js') }}"></script>
 
 @endsection

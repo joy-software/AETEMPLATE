@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $table='users';
 
     protected $fillable = [
+        'playerId',
         'name',
         'surname',
         'sex',
@@ -78,4 +79,16 @@ class User extends Authenticatable
     {
         return $this->email;
     }
+
+    /**
+     * Route notifications for the OneSignal channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForOneSignal()
+    {
+        return $this->playerId;
+    }
+
+
 }

@@ -22,13 +22,19 @@ elixir((mix) => {
         '../../../public/css/header.css',
         '../../../public/karmanta/css/elegant-icons-style.css',
         '../../../public/karmanta/assets/font-awesome/css/font-awesome.css',
-        '../../../public/karmanta/css/style-responsive.css',
+        '../../../public/karmanta/css/line-icons.css',
     ], 'public/assets/css/site.css')
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css',
         '../../../public/karmanta/assets/font-awesome/css/font-awesome.css',
-        '../../../public/karmanta/css/style-responsive.css'
+        '../../../public/karmanta/css/line-icons.css',
     ], 'public/assets/css/site1.css')
+    .styles([
+        '../../../public/karmanta/css/bootstrap.min.css',
+        '../../../public/karmanta/css/bootstrap-theme.css',
+        '../../../public/karmanta/css/elegant-icons-style.css',
+        '../../../public/karmanta/assets/font-awesome/css/font-awesome.css',
+    ], 'public/assets/css/site2.css')
     .styles([
         '../../../public/css/login.css'
     ], 'public/assets/css/login.css')
@@ -46,8 +52,12 @@ elixir((mix) => {
     .styles([
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
+
+
+
     .styles([
-        '../../../public/karmanta/css/style.css'
+        '../../../public/karmanta/css/style.css',
+        '../../../public/karmanta/css/style-responsive.css',
     ], 'public/assets/css/style.css')
 
     .styles([
@@ -59,9 +69,7 @@ elixir((mix) => {
     .styles([
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
-    .styles([
-        '../../../public/karmanta/css/style.css'
-    ], 'public/assets/css/style.css')
+
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css'
     ], 'public/assets/css/elegant-icons-style.css')
@@ -104,7 +112,6 @@ elixir((mix) => {
     ], 'public/js/kar.js')
     .scripts([
         '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
-        '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
         '../../../public/karmanta/js/jquery.scrollTo.min.js',
         '../../../public/karmanta/js/jquery.nicescroll.js',
         '../../../public/karmanta/js/scripts.js',
@@ -118,7 +125,6 @@ elixir((mix) => {
     ], 'public/assets/js/kar3.js')
     .scripts([
         '../../../public/js/app.js',
-        '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
         '../../../public/karmanta/js/jquery-ui-1.9.2.custom.min.js',
         '../../../public/karmanta/js/jquery.scrollTo.min.js',
         '../../../public/karmanta/js/jquery.nicescroll.js',
@@ -148,11 +154,20 @@ elixir((mix) => {
         '../../../public/js/acceuil.js'
     ], 'public/assets/js/acceuil.js')
     .scripts([
+        '../../../public/js/app.js'
+    ], 'public/assets/js/app.js')
+    .scripts([
         '../../../public/js/listViewVideo.js'
     ], 'public/assets/js/listViewVideo.js')
     .scripts([
         '../../../public/js/uploadVideo.js'
     ], 'public/assets/js/uploadVideo.js')
+    .scripts([
+        '../../../public/js/header.js'
+    ], 'public/assets/js/header.js')
+        .scripts([
+            '../../../public/js/view_meeting.js'
+        ], 'public/assets/js/view_meeting.js')
     .scripts([
         '../../../public/js/comptabilite.js'
     ], 'public/assets/js/comptabilite.js');

@@ -30,6 +30,9 @@ class UserTableSeeder extends Seeder
             'country'=> 'Cameroun',
             'phone'=> '00237123456789',
             'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'default_gent_avatar.png',
+            'description' => 'je suis un demarreur'
         ]);
         $user->save();
 
@@ -52,6 +55,7 @@ class UserTableSeeder extends Seeder
             ]);
         $user->save();
 
+
         $user = new User([
             'name'=> 'Joy',
             'surname' =>'Jedidja',
@@ -66,6 +70,23 @@ class UserTableSeeder extends Seeder
             'activated'=> 1,
             'photo'=> 'default_gent_avatar.png',
             'description' => 'je suis un demarreur',
+        ]);
+        $user->save();
+
+        $user = new User([
+            'name'=> 'Ateba',
+            'surname' =>'Armand',
+            'sex' => 'M',
+            'profession' => 'ART Cameroun',
+            'email' => 'kofficam2004@yahoo.fr',
+            'password'=> Hash::make('password'),
+            'promotion'=> 1984,
+            'country'=> "Cameroun",
+            'phone'=> '696938978',
+            'statut'=> 'actif',
+            'activated'=> 1,
+            'photo'=> 'default_gent_avatar.png',
+            'description' => 'Je suis un ancien du collège Vogt',
         ]);
         $user->save();
 

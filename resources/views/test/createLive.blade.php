@@ -40,7 +40,7 @@
 
     <div class="col-lg-4">
         {!! Form::file('video', ['class' => 'form-control col-lg-4 inputfile', 'id' => 'video']) !!}
-        <label for="video" class="btn btn-primary"><i class="icon_upload"></i><span id="label-file">Choisissez une </span></label>
+        <label for="video" class="btn btn-primary disabled"><i class="icon_upload"></i><span id="label-file">Choisissez une </span></label>
     </div>
 
 </div>
@@ -48,7 +48,7 @@
 
 <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
-        <button id="profileButton" type="submit" class="btn btn-primary">Enregistrer</button>
+        <button id="profileButton" type="submit" class="btn btn-primary disabled">Enregistrer</button>
 
     </div>
 </div>

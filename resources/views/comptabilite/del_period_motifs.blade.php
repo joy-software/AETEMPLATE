@@ -29,6 +29,13 @@
             'link' => url('/comptabilite/consult_contribution')
         ])
 
+    @include('layouts/asideOption', [
+           'classIconOption' => 'icon_mobile',
+           'optionName' => 'Config Paiement Mobile',
+           'retractable' => 'false',
+           'link' => url('/comptabilite/config_momo')
+       ])
+
 @endsection
 @endrole
 
@@ -61,7 +68,7 @@
                         <tr>
                             <td> <?php echo strtoupper($item['month']) . " - ".$item['year']; ?> </td>
                             <td>
-                                <button class="btn btn-primary del-period" id="btn-del-period-<?php echo $item['id'] ?>">Supprimer</button>
+                                <button class="btn btn-primary del-period disabled" id="btn-del-period-<?php echo $item['id'] ?>">Supprimer</button>
                             </td>
                         </tr>
                     <?php }
@@ -94,7 +101,7 @@
                     <tr>
                         <td> <?php echo $item['reason']; ?> </td>
                         <td>
-                            <button class="btn btn-primary del-motif" id="btn-del-motif-<?php echo $item['id'] ?>">Supprimer</button>
+                            <button class="btn btn-primary del-motif disabled" id="btn-del-motif-<?php echo $item['id'] ?>">Supprimer</button>
                         </td>
                     </tr>
                     <?php }

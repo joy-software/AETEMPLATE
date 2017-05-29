@@ -60,7 +60,7 @@
                                         ]) !!}
 
                                     <input type="hidden" name="id_group" value="{{$group->id}}" style="margin-right: 50px;">
-                                    <a href="{{route('search_group')}}" class="btn btn-primary">Annuler</a>
+                                    <a href="{{route('search_group')}}" class="btn btn-primary disabled">Annuler</a>
                                     {!! Form::submit('Supprimer ce groupe', ['class' => 'btn btn-danger']) !!}
                                     {!! Form::close() !!}
 

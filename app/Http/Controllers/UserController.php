@@ -235,7 +235,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        foreach ($user->unreadnotifications  as $notification) {
+        foreach ($user->unreadnotifications()  as $notification) {
             $notification->markAsRead();
         }
         $notifications = $user->unreadnotifications()->count();
@@ -261,5 +261,17 @@ class UserController extends Controller
                 'notifications' => $user->unreadnotifications
             ]);
         return $view->render();
+    }
+
+    public function oneSignal(Request $request)
+    {
+        $playerId = $request->get('userId');
+
+        $user = Auth::user();
+
+        $user->playerId = $playerId;
+        $user->save();
+
+        return "tout est correct. OS save";
     }
 }

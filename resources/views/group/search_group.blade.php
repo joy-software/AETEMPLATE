@@ -114,8 +114,8 @@
                                         <?php $role_admin= "admin_".$all_group_el->id; $_is_admin = false;?>
                                         @role($role_admin)
                                             <?php $_is_admin = true; ?>
-                                        <a class="btn btn-danger" href="{{ route('del_group', $all_group_el->id) }}">Supprimer</a> |
-                                        <a class="btn btn-success" href="{{ route('edit_group', $all_group_el->id) }}">Editer</a>
+                                        <a class="btn btn-danger disabled" href="{{ route('del_group', $all_group_el->id) }}">Supprimer</a> |
+                                        <a class="btn btn-success disabled" href="{{ route('edit_group', $all_group_el->id) }}">Editer</a>
                                         @endrole
                                         <?php
 
@@ -139,7 +139,7 @@
                                             else {
                                                 //Alors il n'est pas du groupe.
                                                 ?>
-                                            <a class="btn btn-primary" href="{{ route('invitation_group', $all_group_el->id) }}">Adhérer à ce groupe</a>
+                                            <a class="btn btn-primary disabled" href="{{ route('invitation_group', $all_group_el->id) }}">Adhérer à ce groupe</a>
                                             <?php }
                                              }
 
