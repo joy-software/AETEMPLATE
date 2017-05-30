@@ -253,11 +253,24 @@
 
             @elseif ($status == 'error')
 
-                {!! $videos !!}
+                @if(Session::get('role_admin') == 'true')
+
+                    @role('admin_1')
+
+                        {!! $videos !!}
+                    @endrole
+
+                @else
+
+                    <br>
+                    <p style="margin-left: 10px; font-size: 1.2em">Veuillez contacter l'administrateur de l'application pour activer cette fonctionnalité</p>
+                    <br>
+
+                @endif
 
             @elseif ($status == 'unknown')
 
-                <p class="alert-block ">{!! dump($videos) !!}</p>
+                <p class="alert-block ">Désolé, une erreur inatendue est survenue. Veuillez contacter l'administrateur pour qu'elle soit corrigée.</p>
 
             @endif
 

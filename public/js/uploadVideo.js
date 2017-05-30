@@ -90,6 +90,7 @@ $("#upload-form").on('submit', function (event) {
                 $('#msg').removeClass('text-success').addClass('text-danger');
                 $('#msg').html(response.message);
                 $('#msg').css('display', 'block');
+                $('#btnSubmitAddVideo').prop('disabled', false);
 
             }
 
@@ -99,6 +100,7 @@ $("#upload-form").on('submit', function (event) {
             $('#msg').removeClass('text-success').addClass('text-danger');
             $('#msg').html(response.message);
             $('#msg').css('display', 'block');
+            $('#btnSubmitAddVideo').prop('disabled', false);
         }
 
     });

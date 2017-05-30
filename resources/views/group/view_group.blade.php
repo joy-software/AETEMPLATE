@@ -57,16 +57,6 @@
         </div>
 
 
-        <!--div class="row" style="">
-            <div class="col-lg-offset-1 col-lg-10">
-
-                <ul class="breadcrumb" style="background: white;">
-                    <li><a class="btn btn-primary" id="show_create_ad" ><i class="icon_pencil-edit"></i> <bold> Créer une publication </bold></a></li>
-                </ul>
-
-            </div>
-            id="div_create_ad"
-        </div-->
         <?php $role_admin= "admin_".$group->id; ?>
 
 
@@ -262,17 +252,6 @@
 
 
 
-
-
-      <!--div>
-          Annonces et évènements les plus récents.
-      </div-->
-        <!--div class="col-lg-offset-1 col-lg-10">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Reunions et Annonces les plus récentes</div>
-            </div>
-        </div-->
-
         <?php
 
         if($events != null && $group->id == 1){
@@ -307,7 +286,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary disabled' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+                               echo "<button class='btn btn-primary disabled'  id='btnLive' data-toggle='modal' data-target='#live-meeting'><span id='" . $event->broadcast . "' > Voir la reunion</span></button>";
 
                             }?>
                         </td>

@@ -79,7 +79,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                                echo "<button class='btn btn-primary disabled'>Voir la reunion en live</button>";
+                                echo "<button class='btn btn-primary disabled'><span id='" . $event->broadcast . "' > <a href='https://www.youtube.com/watch?v=$event->broadcast' target='_blank' style='color: white'>Voir la reunion</a></span></button>";
                             }?>
                         </td>
                     </tr>
@@ -162,5 +162,6 @@
 
 @section('script')
     <script src="{{ asset('assets/js/group.js') }}"></script>
+    <script src="{{ asset('assets/js/view_meeting.js') }}" ></script>
 
 @endsection

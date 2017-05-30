@@ -17,13 +17,7 @@
                 @include('layouts/menuItem', ['itemName' => 'administration_tog', 'link' => "/admin"])
             @endif
 
-            @include('layouts/menuNotification',
-             [
-                'idElement' => 'alert_notificatoin_bar',
-                'classIcon' => 'icon-bell-l',
-                'numberNotification' => $nbr_notif,
-                'notifications' => $user
-             ])
+            @include('layouts/menuItem', ['itemName' => 'notifications_tog', 'link' => "/notifications"])
 
             @include('layouts/menuProfil')
 

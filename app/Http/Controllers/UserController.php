@@ -223,6 +223,7 @@ class UserController extends Controller
        $user = Auth::user();
        $notifications = $user->unreadnotifications()->count();
        session(['menu' => 'accueil']);
+
        return view('layouts/index',['user' =>  $user->unreadnotifications,
            'notifs' =>  $user,
            'nbr_notif'=> $notifications]);

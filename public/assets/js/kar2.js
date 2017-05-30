@@ -242,7 +242,6 @@ function markAsRead()
    $.ajax({
         url: '/notifications',
         type: "post",
-        dataType: 'html',
         data:{'_token':_token},
         success: function(data){
 
@@ -429,6 +428,10 @@ $('#comptabilite_tog').click(function(){
 
 $('#administration_tog').click(function(){
     window.location.href = '/admin';
+});
+
+$('#notifications_tog').click(function(){
+    window.location.href = '/notifications';
 });
 
 
