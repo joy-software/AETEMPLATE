@@ -270,6 +270,7 @@ $("#file2").change(function () {
 });
 
 $("#file3").change(function () {
+
     if($("#file3").val()==''){
         $("#file3").removeClass('btn-success').addClass('btn-primary');
         if($("#file2").val()=='') {
@@ -296,6 +297,8 @@ $("#create_ad").on('submit', function (event) {
                 }
         });
 
+    $("#btn-create-ads").addClass("disabled");
+
     $.ajax({
         url: form_create_ad['action'],
         type: form_create_ad['method'],
@@ -314,12 +317,15 @@ $("#create_ad").on('submit', function (event) {
                 $("#description_create_ad").val("");
                 $("#message").html("<strong>"+response.message+"</strong>");
                 $("#message").show();
+
+                $("#btn-create-ads").removeClass("disabled").addClass("enabled");
             }
             else {
 
                 $("#message").removeClass('alert-success').addClass('alert-danger');
                 $("#message").html("<strong>"+response.message+"</strong>");
                 $("#message").show();
+                $("#btn-create-ads").removeClass("disabled").addClass("enabled");
             }
             //console.log("Reponse = "+response.responseJSON.success);
             //console.log(response);
@@ -327,6 +333,7 @@ $("#create_ad").on('submit', function (event) {
         error : function (erreur) {
             $("#message").removeClass('alert-success').addClass('alert-danger');
             $("#message").html("<strong>"+erreur+"</strong>");
+            $("#btn-create-ads").removeClass("disabled").addClass("enabled");
         }
 
     });
