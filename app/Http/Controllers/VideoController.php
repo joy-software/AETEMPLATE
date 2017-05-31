@@ -181,7 +181,7 @@ class VideoController extends Controller
         $user = Auth::user();
         $notifications = $user->unreadnotifications()->count();
 
-        $this->execute('http://assovogt.org/video/list', function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
+        $this->execute(Redirect::back()->getTargetUrl(), function(Google_Client $client, Google_Service_YouTube $youtube) use($request){
 
             try {
 

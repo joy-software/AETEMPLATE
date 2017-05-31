@@ -4,6 +4,8 @@ $('#btnCloseAddVideo').click(function(event){
     $('#msg').css('display', 'none');
     $('#addVideoAction').css('display', 'none');
     $('.modal-backdrop').css('display', 'none');
+    $('.modal-backdrop').remove();
+    $('#btnAddVideo').click();
     $('#upload-form input').css('background', 'white').val('');
     $('#upload-form textarea').css('background', 'white').val('');
     $('#progress-div').hide();
@@ -78,6 +80,13 @@ $("#upload-form").on('submit', function (event) {
                 $('#msg').html(response.message);
                 $('#msg').css('display', 'block').css('color', 'green');
                 $('#btnSubmitAddVideo').prop('disabled', false);
+
+                $('#upload-form input').css('background', 'white').val('');
+                $('#upload-form textarea').css('background', 'white').val('');
+                $('#progress-div').hide();
+                $('#progress-bar').css('width', '0%');
+                $('#percent').text('0%');
+                $('#label-file').text('Choisissez une vidéo');
 
             }
             else {

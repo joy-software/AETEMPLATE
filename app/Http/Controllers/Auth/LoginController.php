@@ -102,7 +102,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()->back()->with(['message' => "Accès impossible : compte non validé. Pour accéder à l'application
-                                            suivez le lien de validation qui vous a été envoyé par mail à l'addresse $user->email."]);
+                                            suivez le lien de validation qui vous a été envoyé par mail à l'addresse $user->email.z"]);
 
         }
 
