@@ -163,7 +163,7 @@
                         <?php if($users != null){
                             ?>
                         <button  class="btn btn-primary pull-right disabled" type="button"  id="show_demande">Afficher les demandes</button>
-                        <button id="hide_demande" class="btn btn-primary pull-right hidden ">Cacher les demandes</button>
+                        <button id="hide_demande" class="btn btn-primary pull-right hidden">Cacher les demandes</button>
                         <br>
                         <?php
                             } else {
@@ -343,7 +343,7 @@
                             else{  ?> <span class="badge bg-info">Aucun fichier pour cette reunion</span>
                             <?php
                             }
-                            }
+
 
                             ?>
                         </td>
@@ -353,6 +353,11 @@
 
             </section>
         </div>
+        <?php
+
+        }
+
+        ?>
         <?php
         }
         else {

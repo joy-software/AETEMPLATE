@@ -1,4 +1,4 @@
-<li class="dropdown">
+<li class="dropdown dropdown active">
 
     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
