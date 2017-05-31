@@ -68,7 +68,7 @@
             <header class="panel-heading">
                 <div class="row">
                     <div class="col-md-offset-3 col-md-6 col-md-offset-3 center">
-                        <label>Liste des vidéos</label>
+                        <label style="font-size: 1.5em; text-align: center">Liste des vidéos</label>
 
                         <br>
                     </div>
