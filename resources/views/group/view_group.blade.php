@@ -74,7 +74,6 @@
             </div>
         </div>
 
-
         <?php $role_admin= "admin_".$group->id; ?>
 
 
@@ -359,6 +358,11 @@
 
             </section>
         </div>
+        <?php
+
+        }
+
+        ?>
         <?php
         }
         }

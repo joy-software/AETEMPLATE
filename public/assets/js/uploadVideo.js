@@ -111,6 +111,3 @@ $("#upload-form").on('submit', function (event) {
     });
 
 });
-
-
-//# sourceMappingURL=uploadVideo.js.map

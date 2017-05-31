@@ -2,6 +2,8 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
+require('laravel-elixir-minify-html');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -174,13 +176,14 @@ elixir((mix) => {
     .scripts([
         '../../../public/js/comptabilite.js'
     ], 'public/assets/js/comptabilite.js');
-
+	mix.html('storage/framework/views/*', 'storage/framework/views/', 
+	{collapseWhitespace: true, removeAttributeQuotes: true, removeComments: true, minifyJS: true});
 
 });
 
-
 var htmlmin = require('gulp-htmlmin');
 var gulp = require('gulp');
+
 
 gulp.task('compress', function() {
     var opts = {
@@ -194,5 +197,4 @@ gulp.task('compress', function() {
         .pipe(htmlmin(opts))
         .pipe(gulp.dest('./storage/framework/views/'));
 });
-
 
