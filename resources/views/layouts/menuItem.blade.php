@@ -15,7 +15,7 @@
                     @if((session('menu') === 'accueil') && ($itemName === 'accueil' || $itemName === 'accueil_tog'))
                         <a data-toggle="dropdown" style="color: #007AFF" href="{{ $link }}">
                     @else
-                        <a data-toggle="dropdown" class="" href="{{ $link }}">
+                        <a data-toggle="dropdown"  class="" href="{{ $link }}">
                     @endif
                 @endif
             @endif
@@ -35,7 +35,10 @@
                 Comptabilite
             @elseif($itemName === 'administration' || $itemName === 'administration_tog')
                 Administration
+            @elseif($itemName === 'notifications' || $itemName === 'notifications_tog')
+                Notifications
             @endif
+
         </span>
     </a>
 </li>

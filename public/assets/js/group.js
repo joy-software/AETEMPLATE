@@ -30,7 +30,7 @@ function cacher_afficher_adhesion() {
 }
 
 /*
-ici c'est la confirmation.
+ ici c'est la confirmation.
  */
 
 $('#show_create_ad').click(cacher_afficher_tab_resultat);
@@ -47,7 +47,7 @@ function cacher_afficher_tab_resultat(){
 }
 
 $('.refuse-btn').click(function(){
-   var chaine = this.id;
+    var chaine = this.id;
     if(chaine.indexOf("btn-refuse-",0) != 0){
         alert("les informations sont incorrectes");
     }
@@ -76,7 +76,7 @@ $('.refuse-btn').click(function(){
                 // tout a marché comme sur des roulettes.
                 if($('#tab_demande tr').length > 1){
                     $("#tr-user-"+id_user+"").hide();
-                  }
+                }
                 else{
                     $("#section_demande").hide();
                     $("#hide_demande").hide();
@@ -121,7 +121,7 @@ $('.send-btn').click(function () {
     }
     var id_user = chaine.substring(11,chaine.length);
     if(isNaN(id_user)){
-       //ce n'est pas un nombre, il a encore triché. il faut arreter la requete
+        //ce n'est pas un nombre, il a encore triché. il faut arreter la requete
     }
 
     var id_group = group.id;
@@ -216,12 +216,12 @@ var bool_file1  = false;
 var bool_file2 = false;
 var bool_file3 = false;
 /*
-$("#span_file2").hide();
-$("#span_file3").hide();
-*/
+ $("#span_file2").hide();
+ $("#span_file3").hide();
+ */
 $("#del_file1").click(function () {
-   $("#file1").val('');
-   $("#file1").change();
+    $("#file1").val('');
+    $("#file1").change();
 });
 
 $("#del_file2").click(function () {
@@ -270,6 +270,7 @@ $("#file2").change(function () {
 });
 
 $("#file3").change(function () {
+
     if($("#file3").val()==''){
         $("#file3").removeClass('btn-success').addClass('btn-primary');
         if($("#file2").val()=='') {
@@ -296,6 +297,8 @@ $("#create_ad").on('submit', function (event) {
                 }
         });
 
+    $("#btn-create-ads").addClass("disabled");
+
     $.ajax({
         url: form_create_ad['action'],
         type: form_create_ad['method'],
@@ -314,12 +317,15 @@ $("#create_ad").on('submit', function (event) {
                 $("#description_create_ad").val("");
                 $("#message").html("<strong>"+response.message+"</strong>");
                 $("#message").show();
+
+                $("#btn-create-ads").removeClass("disabled").addClass("enabled");
             }
             else {
 
                 $("#message").removeClass('alert-success').addClass('alert-danger');
                 $("#message").html("<strong>"+response.message+"</strong>");
                 $("#message").show();
+                $("#btn-create-ads").removeClass("disabled").addClass("enabled");
             }
             //console.log("Reponse = "+response.responseJSON.success);
             //console.log(response);
@@ -327,6 +333,7 @@ $("#create_ad").on('submit', function (event) {
         error : function (erreur) {
             $("#message").removeClass('alert-success').addClass('alert-danger');
             $("#message").html("<strong>"+erreur+"</strong>");
+            $("#btn-create-ads").removeClass("disabled").addClass("enabled");
         }
 
     });
@@ -334,11 +341,11 @@ $("#create_ad").on('submit', function (event) {
 
 
 /*
-$("#show_demande").click(function(){
+ $("#show_demande").click(function(){
 
-});
+ });
 
-/***** filtrage de la database //*/
+ /***** filtrage de la database //*/
 
 function filterGlobal () {
     $('#table_resultats').DataTable().search(
@@ -380,4 +387,6 @@ $(document).ready(function() {
         filterColumn( $(this).parents('tr').attr('data-column') );
     } );
 } );
+//# sourceMappingURL=group.js.map
+
 //# sourceMappingURL=group.js.map

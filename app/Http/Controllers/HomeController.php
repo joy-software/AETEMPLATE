@@ -176,7 +176,29 @@ class HomeController extends Controller
 
 
     public function testerlive(){
-        return view('test/createLive');
+
+        $ads = new \stdClass();
+
+        $ads->expiration_date = date('Y-m-d H:i:s', time());
+
+        $expirationDate = date('Y-m-d', strtotime($ads->expiration_date)) . ' 00:00:00';
+
+        if(date('d-m-Y', time()) == date('d-m-Y', strtotime($ads->expiration_date))) {
+
+            $starTime = date('Y-m-d', strtotime(date('Y-m-d H:i:s', time()) . ' + 8 hour')) . 'T' . date('H:i:s', strtotime(date('Y-m-d H:i:s', time()) . ' + 8 hour')) . '.000Z';
+
+        } else {
+
+            $starTime = date('Y-m-d', strtotime($expirationDate . ' + 14 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 14 hour')) . '.000Z';
+        }
+
+
+        $endTime = date('Y-m-d', strtotime($expirationDate . ' + 30 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 30 hour')) . '.000Z';
+
+        //$endTime = date('Y-m-d H:i:s', time());
+        //$starTime = date('Y-m-d H:i:s', time());
+
+        return view('test/createLive')->with(['result' => \Redirect::back()->getTargetUrl()]);
     }
 
     public function testerplay(){

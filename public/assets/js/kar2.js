@@ -242,7 +242,6 @@ function markAsRead()
    $.ajax({
         url: '/notifications',
         type: "post",
-        dataType: 'html',
         data:{'_token':_token},
         success: function(data){
 
@@ -301,6 +300,9 @@ $(document).ready( function () {
         $('html,body').animate({scrollTop: 0}, 'slow');
     });
     $('.btn').removeClass('disabled');
+
+    $('.wrapper').css('margin-top', $('.header').css('height'));
+    $('ul.sidebar-menu').css('margin-top', $('.header').css('height'));
 
 });
 
@@ -390,10 +392,6 @@ $('#logo_home').click(function(){
  *
  */
 
-/*
- * Actions performed after a click on the menu item
- */
-
 $('#accueil_tog').click(function(){
     window.location.href = '/accueil';
 
@@ -429,6 +427,10 @@ $('#comptabilite_tog').click(function(){
 
 $('#administration_tog').click(function(){
     window.location.href = '/admin';
+});
+
+$('#notifications_tog').click(function(){
+    window.location.href = '/notifications';
 });
 
 
@@ -479,5 +481,7 @@ function PromotOneSignal (playerId) {
 }
 
 /*********End One Signal********/
+
+
 
 //# sourceMappingURL=kar2.js.map

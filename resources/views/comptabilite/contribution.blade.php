@@ -47,6 +47,24 @@
 
     <section class="wrapper " id="wrapper-content">
 
+        @role('comptable')
+            <div  id = "inline-aside" style="display: none" class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+
+
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/comptabilite" ><i class="icon_house_alt"></i> Accueil des contributions </a></li>
+                    <li><a href="/comptabilite/consult_contribution" ><i class="icon_search"></i> Consulter les contributions </a></li>
+                    <li><a href="/comptabilite/config_momo" ><i class="icon_mobile"></i> Config Paiement Mobile </a></li>
+
+
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div >
+        @endrole
+
 
         <div class="row">
             <div class="col-lg-offset-1 col-lg-10 col-md-10 col-sm-10" id="div_message">

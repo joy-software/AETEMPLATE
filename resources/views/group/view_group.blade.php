@@ -7,6 +7,7 @@
     <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
 
+
 @endsection
 
 @section('sideOption')
@@ -27,6 +28,24 @@
 @section('content')
 
     <section class="wrapper">
+        <div  id = "inline-aside" class="row" style="display: none">
+            <div class="col-lg-12">
+
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/search_group" ><i class="icon_search"></i> Rechercher un groupe </a></li>
+                    <li><a href="/group/create_group" ><i class="icon_pencil-edit"></i> Créer un groupe </a></li>
+
+                    @if($list_group != null)
+                        @foreach($list_group as $list_group_el)
+
+                            <li><a href="/group/view_group/{{$list_group_el['id']}}" id={{$list_group_el['id']}}><i class="icon_house_alt"></i> {{$list_group_el['name']}}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div >
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -55,8 +74,6 @@
             </div>
         </div>
 
-
-     
         <?php $role_admin= "admin_".$group->id; ?>
 
 
@@ -252,17 +269,6 @@
 
 
 
-
-
-      <!--div>
-          Annonces et évènements les plus récents.
-      </div-->
-        <!--div class="col-lg-offset-1 col-lg-10">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Reunions et Annonces les plus récentes</div>
-            </div>
-        </div-->
-
         <?php
 
         if($events != null && $group->id == 1){
@@ -297,7 +303,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                               echo "<button class='btn btn-primary disabled' data-toggle='modal' data-target='#live-meeting' id='btnLive'><span id='" . $event->broadcast . "' > Voir la reunion en live</span></button>";
+                               echo "<button class='btn btn-primary disabled'  id='btnLive' data-toggle='modal' data-target='#live-meeting'><span id='" . $event->broadcast . "' > Voir la reunion</span></button>";
 
                             }?>
                         </td>
@@ -344,7 +350,6 @@
                             <?php
                             }
 
-
                             ?>
                         </td>
                     </tr>
@@ -359,6 +364,7 @@
 
         ?>
         <?php
+        }
         }
         else {
         ?>

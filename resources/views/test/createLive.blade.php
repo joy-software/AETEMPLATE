@@ -30,7 +30,7 @@
 
 {!! Form::open(
     array(
-        'route' => 'video_live',
+        'route' => 'test_live',
         'class' => 'form-horizontal',
         )) !!}
 

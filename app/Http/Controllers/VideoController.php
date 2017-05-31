@@ -48,7 +48,7 @@ class VideoController extends Controller
 
             ],
             [
-                'video.mimes'     => 'Les extensions d\'images acceptées sont mp4',
+                'video.mimes'     => 'Les extensions d\'images acceptées sont mp4, 3gpp, mov et avi',
                 'video.max'       => 'La taille de la vidéo ne doit pas excéder 500 Mo',
                 'video.required'  => 'Veuillez choisir une vidéo',
                 'title.required'  => 'Le champ "titre" est obligatoire',
@@ -259,7 +259,7 @@ class VideoController extends Controller
     public function addBroadcast(Request $request, ads $ads)
     {
 
-        $this->execute('http://assovogt.org/annuaire', function(Google_Client $client, Google_Service_YouTube $youtube) use($request, $ads){
+        $this->execute(Redirect::back()->getTargetUrl(), function(Google_Client $client, Google_Service_YouTube $youtube) use($request, $ads){
 
             try {
                 // Create an object for the liveBroadcast resource's snippet. Specify values
@@ -269,16 +269,16 @@ class VideoController extends Controller
 
                 if(date('d-m-Y', time()) == date('d-m-Y', strtotime($ads->expiration_date))) {
 
-                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime(time() . ' + 8 hour')) . 'T' . date('H:i:s', strtotime(time() . ' + 8 hour')) . '.000Z');
+                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime(date('Y-m-d H:i:s', time()) . ' + 35 minutes')) . 'T' . date('H:i:s', strtotime(date('Y-m-d H:i:s', time()) . ' + 35 minutes')) . '.000Z');
 
                 } else {
 
-                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime($expirationDate . ' + 14 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 14 hour')) . '.000Z');
+                    $broadcastSnippet->setScheduledStartTime( date('Y-m-d', strtotime($expirationDate . ' + 7 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 7 hour')) . '.000Z');
                 }
 
                 $broadcastSnippet->setTitle('Réunion du ' . date('d-m-Y', strtotime($ads->expiration_date)));
 
-                $broadcastSnippet->setScheduledEndTime(date('Y-m-d', strtotime($expirationDate . ' + 30 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 30 hour')) . '.000Z');
+                $broadcastSnippet->setScheduledEndTime(date('Y-m-d', strtotime($expirationDate . ' + 23 hour')) . 'T' . date('H:i:s', strtotime($ads->expiration_date . ' + 23 hour')) . '.000Z');
 
                 // Create an object for the liveBroadcast resource's status, and set the
                 // broadcast's status to "private".
@@ -301,55 +301,6 @@ class VideoController extends Controller
                 $ads->broadcast = $broadcastsResponse['id'];
                 $ads->save();
 
-                /*// Create an object for the liveStream resource's snippet. Specify a value
-                // for the snippet's title.
-                $streamSnippet = new \Google_Service_YouTube_LiveStreamSnippet();
-                $streamSnippet->setTitle('Premier test');
-
-                // Create an object for content distribution network details for the live
-                // stream and specify the stream's format and ingestion type.
-                $cdn = new \Google_Service_YouTube_CdnSettings();
-                $cdn->setFormat("480p");
-                //$cdn->setIngestionType('rtmp://a.rtmp.youtube.com/live2');
-
-
-                // Create the API request that inserts the liveStream resource.
-                $streamInsert = new \Google_Service_YouTube_LiveStream();
-                $streamInsert->setSnippet($streamSnippet);
-                $streamInsert->setCdn($cdn);
-                $streamInsert->setKind('youtube#liveStream');
-
-
-                // Execute the request and return an object that contains information
-                // about the new stream.
-                $streamsResponse = $youtube->liveStreams->insert('snippet,cdn',
-                    $streamInsert, array());
-
-                // Bind the broadcast to the live stream.
-                $bindBroadcastResponse = $youtube->liveBroadcasts->bind(
-                    $broadcastsResponse['id'],'id,contentDetails',
-                    array(
-                        'streamId' => $streamsResponse['id'],
-                    ));
-
-                /*$htmlBody .= "<h3>Added Broadcast</h3><ul>";
-                $htmlBody .= sprintf('<li>%s published at %s (%s)</li>',
-                    $broadcastsResponse['snippet']['title'],
-                    $broadcastsResponse['snippet']['publishedAt'],
-                    $broadcastsResponse['id']);
-                $htmlBody .= '</ul>';
-
-                $htmlBody .= "<h3>Added Stream</h3><ul>";
-                $htmlBody .= sprintf('<li>%s (%s)</li>',
-                    $streamsResponse['snippet']['title'],
-                    $streamsResponse['id']);
-                $htmlBody .= '</ul>';
-
-                $htmlBody .= "<h3>Bound Broadcast</h3><ul>";
-                $htmlBody .= sprintf('<li>Broadcast (%s) was bound to stream (%s).</li>',
-                    $bindBroadcastResponse['id'],
-                    $bindBroadcastResponse['contentDetails']['boundStreamId']);
-                $htmlBody .= '</ul>';*/
 
                 return Redirect::back()->with(['result' => $broadcastsResponse]);
 
@@ -371,13 +322,8 @@ class VideoController extends Controller
         });
 
         $result = Session::get('result');
-        //$id = $result['id'];
-        //Session::set('result', null);
 
         if(is_array($result)) {
-
-            //$ads->broadcast = $id;
-            //$ads->save();
 
             return array_merge(['id' => 'ou la la'], $result);
         }

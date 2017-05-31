@@ -20,11 +20,12 @@ tr{
 
     position: fixed;
     right: 0px;
-    top: 24%;
+    top: 0%;
     color: white !important;
     font-size: 3em;
-    padding-left: 7px;
-    padding-right: 7px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-bottom: 5px !important;
 }
 
 .close:hover {
@@ -38,7 +39,7 @@ tr{
 }
 
 #player{
-    margin-top: 20%;
+    margin-top: 5%;
 
 }
 

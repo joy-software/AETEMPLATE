@@ -411,14 +411,6 @@
 
 @endsection
 
-
-<script>
-
-    //knob
-    $(".knob").knob();
-
-</script>
-
 @section('script')
 
     <script src="{{ asset('js/profile.js') }}"></script>
