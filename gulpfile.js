@@ -2,6 +2,8 @@ const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 
+require('laravel-elixir-minify-html');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -69,6 +71,9 @@ elixir((mix) => {
     .styles([
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
+    .styles([
+       '../../../public/css/register.css'
+    ], 'public/assets/css/register.css')
 
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css'
@@ -171,8 +176,25 @@ elixir((mix) => {
     .scripts([
         '../../../public/js/comptabilite.js'
     ], 'public/assets/js/comptabilite.js');
-
+	mix.html('storage/framework/views/*', 'storage/framework/views/', 
+	{collapseWhitespace: true, removeAttributeQuotes: true, removeComments: true, minifyJS: true});
 
 });
 
+var htmlmin = require('gulp-htmlmin');
+var gulp = require('gulp');
+
+
+gulp.task('compress', function() {
+    var opts = {
+        collapseWhitespace:    true,
+        removeAttributeQuotes: true,
+        removeComments:        true,
+        minifyJS:              true
+    };
+
+    return gulp.src('./storage/framework/views/*')
+        .pipe(htmlmin(opts))
+        .pipe(gulp.dest('./storage/framework/views/'));
+});
 

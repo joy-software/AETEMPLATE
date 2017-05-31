@@ -5,9 +5,6 @@ Créer un évènement se déclenchant lors du clic sur une ligne d'un tableau pr
 
 $('tr.clickable').click(function () {
 
-    console.log($(this).attr('id'));
-
-    $('#ConfirmAction').css('display', 'block').css('opacity', '1').css('background', 'rgba(0,0,0,0.7)');
 
     player.loadVideoById({'videoId': $(this).attr('id')});
 

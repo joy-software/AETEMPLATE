@@ -26,6 +26,24 @@
 
     <section class="wrapper">
 
+        <div  id = "inline-aside" style="display: none" class="row">
+            <div class="col-lg-12">
+
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/search_group" ><i class="icon_search"></i> Rechercher un groupe </a></li>
+                    <li><a href="/group/create_group" ><i class="icon_pencil-edit"></i> Créer un groupe </a></li>
+
+                    @if($list_group != null)
+                        @foreach($list_group as $list_group_el)
+
+                            <li><a href="/group/view_group/{{$list_group_el['id']}}" id={{$list_group_el['id']}}><i class="icon_house_alt"></i> {{$list_group_el['name']}}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div >
+
         <div class="col-lg-offset-2 col-lg-6">
             <section class="panel">
                 <header class="panel-heading">

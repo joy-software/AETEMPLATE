@@ -61,14 +61,14 @@ class InformOthersInvitationAccepted extends Notification
 
     public function toOneSignal($notifiable)
     {
-        $site = config(app.url);
+        $site = env('APP_URL');
         $url = url('group/view_group/'.$this->group['id']);
         if ($this->group['id'] === 1)
         {
 
             return OneSignalMessage::create()
                 ->subject("Un nouvel adhérent")
-                ->body($this->sender['name'] . ' '.$this->sender['surname'] ."vient d'intégrer l'association.")
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." vient d'intégrer l'association.")
                 ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
                 ->url($site)
                 ->webButton(
@@ -83,7 +83,7 @@ class InformOthersInvitationAccepted extends Notification
 
             return OneSignalMessage::create()
                 ->subject($this->group['name'].": Une nouvelle demande d'adhésion")
-                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." \"vient d'intégrer le groupe: ". $this->group['name'])
+                ->body($this->sender['name'] . ' '.$this->sender['surname'] ." vient d'intégrer le groupe: ". $this->group['name'])
                 ->icon('https://member.promotvogt.org/cache/logo/'.$this->sender['photo'])
                 ->url($site)
                 ->webButton(

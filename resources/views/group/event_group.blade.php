@@ -25,14 +25,47 @@
 
 
     <section class="wrapper">
+
+        <div class="row">
+            <div class="modal fade" id="live-meeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <button id="button" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <div class="content-player" style="height: 600px">
+                        <div id="player"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div  id = "inline-aside" style="display: none" class="row">
+            <div class="col-lg-12">
+
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/search_group" ><i class="icon_search"></i> Rechercher un groupe </a></li>
+                    <li><a href="/group/create_group" ><i class="icon_pencil-edit"></i> Créer un groupe </a></li>
+
+                    @if($list_group != null)
+                        @foreach($list_group as $list_group_el)
+
+                            <li><a href="/group/view_group/{{$list_group_el['id']}}" id={{$list_group_el['id']}}><i class="icon_house_alt"></i> {{$list_group_el['name']}}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div >
+
+
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb" id="menu_group">
                     <li><a href="/group/view_group/{{ $group->id }}"><i class="icon_house_alt"></i> {{ $group->name }} </a></li>
                     <li><a href="/group/ads_group/{{ $group->id }}">Annonces </a></li>
-                    <li><a href="/group/event_group/{{ $group->id }}"  style="color: #ff2d55!important;">Reunions </a></li>
                     @if($group->id == 1)
+                    <li><a href="/group/event_group/{{ $group->id }}"  style="color: #ff2d55!important;">Reunions </a></li>
+
                         <li><a href="{{ route('video_list') }}">Vidéos </a></li>
                     @endif
                     <li><a href="/group/member_group/{{ $group->id }}">Membres </a></li>
@@ -79,7 +112,7 @@
                         <td style="text-align: justify;">
                             {{ $event->description }} <br>
                             <?php if($event->broadcast != null) {
-                                echo "<button class='btn btn-primary disabled'>Voir la reunion en live</button>";
+                                echo "<button id='btnLive' class='btn btn-primary disabled' data-toggle='modal' data-target='#live-meeting'><span id='" . $event->broadcast . "' > Voir la reunion</span></button>";
                             }?>
                         </td>
                     </tr>
@@ -162,5 +195,6 @@
 
 @section('script')
     <script src="{{ asset('assets/js/group.js') }}"></script>
+    <script src="{{ asset('assets/js/view_meeting.js') }}" ></script>
 
 @endsection

@@ -90,7 +90,7 @@
 
 <script>
     var compta = {!! session('role_compt') !!};
-
+    var userId = {!! Auth::id() !!};
 </script>
 @yield('script')
 

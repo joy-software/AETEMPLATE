@@ -37,11 +37,11 @@ class Payment extends Notification
 
     public function toOneSignal($notifiable)
         {
-            $site = config(app.url);
+            $site = env('APP_URL');
             $url = url('comptabilite');
              return OneSignalMessage::create()
                     ->subject("Paiement effectué avec succès")
-                    ->body($this->sender['amount'] ."FCFA ont été reçu par paiement mobile pour votre compte".
+                    ->body($this->sender['amount'] ." FCFA ont été reçu par paiement mobile pour votre compte".
                     "en provenance du numéro: ".$this->sender['SenderNumber'] )
                     ->url($site)
                     ->webButton(

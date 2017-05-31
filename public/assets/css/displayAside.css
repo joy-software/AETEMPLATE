@@ -1,1 +1,1 @@
-#sidebar{display:block;left:0}#main-content{margin-left:250px!important}
+#sidebar{display:block;left:0}#main-content{margin-left:250px!important}@media screen and (max-width:768px){#main-content{margin-left:0!important}#sidebar{display:none;left:-250px}#inline-aside{display:block!important}}

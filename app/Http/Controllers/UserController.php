@@ -223,6 +223,7 @@ class UserController extends Controller
        $user = Auth::user();
        $notifications = $user->unreadnotifications()->count();
        session(['menu' => 'accueil']);
+
        return view('layouts/index',['user' =>  $user->unreadnotifications,
            'notifs' =>  $user,
            'nbr_notif'=> $notifications]);
@@ -235,7 +236,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        foreach ($user->unreadnotifications  as $notification) {
+        foreach ($user->unreadnotifications()  as $notification) {
             $notification->markAsRead();
         }
         $notifications = $user->unreadnotifications()->count();
