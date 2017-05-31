@@ -6,7 +6,7 @@
     <link href="{{ asset('assets/css/group.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/table.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/displayAside.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/listViewVideo.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/listViewVideo.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/register.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/upload.css') }}" rel="stylesheet">
@@ -31,6 +31,25 @@
 
 
     <section class="wrapper">
+        <div  id = "inline-aside" style="display: none" class="row">
+            <div class="col-lg-12">
+                <!--breadcrumbs start -->
+
+
+                <ul class="breadcrumb" id="menu_group">
+                    <li><a href="/group/search_group" ><i class="icon_search"></i> Rechercher un groupe </a></li>
+                    <li><a href="/group/create_group" ><i class="icon_pencil-edit"></i> Créer un groupe </a></li>
+
+                    @if($list_group != null)
+                        @foreach($list_group as $list_group_el)
+
+                            <li><a href="/group/view_group/".{{$list_group_el['id']}} id=$list_group_el['id']><i class="icon_house_alt"></i> {{$list_group_el['name']}}</a></li>
+                        @endforeach
+                    @endif
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div >
         <div class="row">
             <div class="col-lg-12">
                 <!--breadcrumbs start -->
@@ -207,7 +226,7 @@
                         </div>
 
                         @role('admin_1')
-                            <button class="btn btn-primary disabled" id="btnAddVideo"><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
+                            <button class="btn btn-primary disabled" id="btnAddVideo" data-toggle='modal' data-target='#addVideoAction'><i class="icon_plus"></i><span id="label-file">Ajouter une vidéo</span></button>
                         @endrole
 
                     </div>
@@ -236,7 +255,7 @@
                         <tbody>
 
                         @foreach($videos as $video)
-                            <tr id="{{$video['id']}}" class="clickable">
+                            <tr id="{{$video['id']}}" class="clickable" data-toggle='modal' data-target='#ConfirmAction'>
                                 <td style="width: 20%"><img alt="miniature" src="{{ $video['thumbnails'] }} " style="width: 100%; height: 100%"></td>
                                 <td style="width: 27%">{{ $video['title'] }}</td>
                                 <td style="width: 28%">{{ $video['description'] }}</td>
@@ -257,7 +276,11 @@
 
                     @role('admin_1')
 
-                        {!! $videos !!}
+                        <div style="margin-left: 10px; font-size: 1.2em">
+                            {!! $videos !!}
+                        </div>
+
+
                     @endrole
 
                 @else
@@ -270,7 +293,7 @@
 
             @elseif ($status == 'unknown')
 
-                <p class="alert-block ">Désolé, une erreur inatendue est survenue. Veuillez contacter l'administrateur pour qu'elle soit corrigée.</p>
+                <p class="alert-block " style="margin-left: 10px; font-size: 1.2em">Désolé, une erreur inatendue est survenue. Veuillez contacter l'administrateur pour qu'elle soit corrigée.</p>
 
             @endif
 

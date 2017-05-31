@@ -1,7 +1,8 @@
-<header class="header white-bg">
+<header class="header white-bg" id="header">
 
 
     <div class="toggle-nav containers">
+
         <i class="icon_menu toggle-menus"></i>
 
         <a href="" class="logo icon-"  id="logo_home">Promot<span>Vogt</span> <span class="lite">.org</span></a>

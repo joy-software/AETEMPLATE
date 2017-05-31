@@ -1,13 +1,9 @@
 
-$('#btnAddVideo').click(function(event){
-
-    $('#addVideoAction').css('display', 'block').css('opacity', '1').css('background', 'rgba(0,0,0,0.7)');
-});
-
 $('#btnCloseAddVideo').click(function(event){
 
     $('#msg').css('display', 'none');
     $('#addVideoAction').css('display', 'none');
+    $('.modal-backdrop').css('display', 'none');
     $('#upload-form input').css('background', 'white').val('');
     $('#upload-form textarea').css('background', 'white').val('');
     $('#progress-div').hide();

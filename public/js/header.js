@@ -80,6 +80,9 @@ $(document).ready( function () {
     });
     $('.btn').removeClass('disabled');
 
+    $('.wrapper').css('margin-top', $('.header').css('height'));
+    $('ul.sidebar-menu').css('margin-top', $('.header').css('height'));
+
 });
 
 
@@ -166,10 +169,6 @@ $('#logo_home').click(function(){
 /**
  * Actions performed after a click on logout link
  *
- */
-
-/*
- * Actions performed after a click on the menu item
  */
 
 $('#accueil_tog').click(function(){
@@ -261,3 +260,5 @@ function PromotOneSignal (playerId) {
 }
 
 /*********End One Signal********/
+
+

@@ -17,8 +17,6 @@ $('#btnLive').click(function () {
 
     console.log($('#btnLive span').attr('id'));
 
-    //$('#live-meeting').css('display', 'block').css('opacity', '1').css('background', 'rgba(0,0,0,0.7)');
-
     player.loadVideoById({'videoId': $('#btnLive span').attr('id')});
 
 });
@@ -41,7 +39,7 @@ var player;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '75%',
+        height: '65%',
         width: '100%',
         events: {
             'onReady': onPlayerReady,

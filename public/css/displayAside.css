@@ -19,4 +19,8 @@
         left: -250px;
     }
 
+    #inline-aside{
+        display: block !important;
+    }
+
 }

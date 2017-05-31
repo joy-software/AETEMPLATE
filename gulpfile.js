@@ -69,6 +69,9 @@ elixir((mix) => {
     .styles([
         '../../../public/css/signup.css'
     ], 'public/assets/css/signup.css')
+    .styles([
+       '../../../public/css/register.css'
+    ], 'public/assets/css/register.css')
 
     .styles([
         '../../../public/karmanta/css/elegant-icons-style.css'
@@ -173,6 +176,23 @@ elixir((mix) => {
     ], 'public/assets/js/comptabilite.js');
 
 
+});
+
+
+var htmlmin = require('gulp-htmlmin');
+var gulp = require('gulp');
+
+gulp.task('compress', function() {
+    var opts = {
+        collapseWhitespace:    true,
+        removeAttributeQuotes: true,
+        removeComments:        true,
+        minifyJS:              true
+    };
+
+    return gulp.src('./storage/framework/views/*')
+        .pipe(htmlmin(opts))
+        .pipe(gulp.dest('./storage/framework/views/'));
 });
 
 

@@ -50,8 +50,15 @@
 
     <form id="login-form"class="login-form" method="post" action="{{ route('login') }}">
         {{ csrf_field() }}
+
         <div class="login-wrap">
-            <p class="login-img"><i class="icon_lock_alt"></i></p>
+
+            <p class="login-img"><img src="{{url('cache/logo/PVlogo.jpeg')}}" alt="logo" style="margin-right: 10px"/></p>
+
+            <div style="text-align: center; margin-bottom: 10px" class="center-block">
+                <a href="https://promotvogt.org" class="logo center-block icon-"  id="logo_home"  style="text-align:center !important; float: none !important; margin: auto; color:white !important;">Promot<span>Vogt</span> <span class="lite">.org</span></a>
+            </div>
+
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_profile"></i></span>
                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
@@ -73,12 +80,12 @@
             @endif
 
             <label class="checkbox">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Remember me
-                <span class="pull-right" id="forgot"> <a href="{{ url('/password/reset') }}"> Forgot Password?</a></span>
+                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} value="remember-me"> Se souvenir de moi
+                <span class="pull-right" id="forgot"> <a href="{{ url('/password/reset') }}"> Mot de passe oublié?</a></span>
             </label>
-            <button id="login-button" class="btn btn-primary btn-lg btn-block disabled" type="submit">Login</button>
+            <button id="login-button" class="btn btn-primary btn-lg btn-block disabled" type="submit">S'identifier</button>
             <br>
-            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block disabled" >Signup</a>
+            <a href="{{ route('register') }}"id="signup-button" class="btn btn-info btn-lg btn-block disabled" >S'inscrire</a>
         </div>
     </form>
 
